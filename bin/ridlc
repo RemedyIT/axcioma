@@ -1,0 +1,33 @@
+#!/bin/sh
+
+if [ -x "$RIDL_RUBY" ]; then
+  $RIDL_RUBY -x $0 $@
+else
+  /usr/bin/env ruby -x $0 $@
+fi
+
+exit $?
+
+#!ruby
+#---------------------------------
+#---------------------------------
+$: << (ENV['RIDL_ROOT'] || File.join(ENV['TAOX11_BASE_ROOT'] || File.join(File.dirname(__FILE__), '..'), 'ridl', 'lib'))
+
+_ridlrc = []
+if File.readable?(File.join(File.dirname(__FILE__), '..', '.ridlrc'))
+  _ridlrc << File.expand_path(File.join(File.dirname(__FILE__), '..', '.ridlrc'))
+end
+ENV['RIDLRC'] = (ENV['RIDLRC'] || '').split(File::PATH_SEPARATOR).unshift(*_ridlrc).join(File::PATH_SEPARATOR)
+
+require 'ridl/ridl'
+
+if RUBY_VERSION.to_f < 2.0
+  STDERR.puts("ERROR: Your ruby version should be >= 2.0")
+  exit (false)
+end
+
+if __FILE__ == $0
+
+  IDL.run
+
+end

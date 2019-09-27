@@ -1,0 +1,169 @@
+include::_{backend}_settings.adoc[]
+
+= BRIX11
+
+This document describes the options and features of BRIX11.
+
+BRIX11 (Buildtool for Remedy's IDL to X11) is a scaffolding tool which
+can help you generate new X11 projects or build existing X11 tests and
+examples. BRIX11 configures your development environment for you so you
+do not have to bother with environment settings. BRIX11 is a living,
+breathing, changing project.
+
+BRIX11 is pluggable framework which allows us to extend and enhance
+BRIX11 in the future. We think for the better!
+
+BRIX11 is self-documented. So to learn how
+to use BRIX11 you use BRIX11 (more precisely the _help_ command).
+
+This document now describes the most important options and commands
+which you need to learn how to use BRIX11.
+
+== Usage of brix11
+
+`brix11 [general options] [command [command options] [command arguments]]`
+
+`brix11` can be found in the `bin` directory of the package root
+(typically `taox11_<version>/bin`). If you want to use `brix11` without
+having to specify the full path you could add the `bin` directory to
+your path.
+
+The most important options and commands are:
+
+`brix11 -h`::
+ This displays usage information with an overview of the general
+ options.
+
+`brix11 -L`::
+ This shows a list of the existing commands and their purpose.
+
+`brix11 -l`::
+ This shows a list of the existing command collections.
+
+`brix11 help`::
+ This displays a page with comprehensive usage information on BRIX11.
+
+`brix11 help command`::
+ This displays a page with comprehensive usage information on the
+ specified BRIX11 command.
+
+For more details of the commands listed above see the descriptions below
+or use +
+ `brix11 help` or `brix11 help command`. Every effort has been made to
+make BRIX11 self-documented so using the help pages you should be able
+to resolve if not all of your questions.
+
+=== General options
+
+Executing `brix11 -h` will display the following information:
+
+----------------------------------------------------------------------------------------------------------------------------
+BRIX11 pluggable scaffolding tool 1.1.0
+Copyright (c) 2014-2019 Remedy IT Expertise BV, The Netherlands
+
+Usage: brix11 [general options] command [options] [command [options] [...]
+
+--- [General options] ---
+
+    -I, --include=PATH               Adds search path for Brix collections.
+                                     Default: loaded from ~/.brix11rc and/or ./.brix11rc
+    -t, --type=TYPE[:COMPILER]       Defines project type used with optional compiler selection.
+                                     Use --show-types to list available project types and active default.
+        --show-types                 List available project types (with compiler options) and active default
+        --add-templates=PATH         Add a template library basepath to be evaluated before standard brix templates.
+    -E, --environment                Environment settings overrule BRIX11 (like RIDL_ROOT, ACE_ROOT, TAOX11_BASE_ROOT etc.).
+                                     Default: off
+    -D, --define=VARIABLE            Define an additional environment variable for BRIX11 commands.
+                                     Separate (optional) value by '=' like VAR=VAL. By default value will be '1'.
+                                     Supports \$VAR and \${VAR}-form variable expansion.
+    -x, --crossbuild                 Define crossbuild configuration for BRIX11 commands.
+                                     Requires definition of X11_HOST_ROOT and X11_TARGET_ROOT environment variables.
+
+    -c, --config=BRIX11RC            Load config from BRIX11RC file.
+                                     Default:  ~/.brix11rc and/or ./.brix11rc
+        --write-config=[BRIX11RC]    Write config to file and exit.
+                                     Default: ./.brix11rc
+        --show-config=[BRIX11RC]     Print specified or active config and exit.
+                                     Default: active configuration
+
+    -l, --list-collections           List available brix collections and exit.
+    -L, --list=[all]                 List available brix (for selected collection) and exit.
+                                     Also list collections of overridden entries if 'all' specified.
+        --scope=COLLECTION           Defines collection scope for filtering commands.
+                                     Default: no scope
+
+    -V, --version                    Show version information and exit.
+
+    -f, --force                      Force all tasks to run even if their dependencies do not require them to.
+                                     Default: off
+    -n, --dryrun                     Perform dry run (no destructive/persistent actions).
+                                     Default: off
+    -v, --verbose                    Run with increased verbosity level. Repeat to increase more.
+                                     Default: 1
+    -q, --quiet                      Run silent (verbosity 0).
+                                     Default: 1
+    -C, --capture=FILENAME           Capture command output to file FILENAME.
+                                     Default:  do not capture output.
+    -h, --help                       Show this help message.
+                                     Use 'brix11 command -h' to show command (option specific) help.
+----------------------------------------------------------------------------------------------------------------------------
+
+=== Command list
+
+Executing `brix11 -L` will display the list of available commands:
+
+---------------------------------------------------------------------------------------------------------------
+BRIX11 pluggable scaffolding tool 1.1.0
+Copyright (c) 2014-2019 Remedy IT Expertise BV, The Netherlands
+
+
+  Command                                            | Description
+  ---------------------------------------------------------------------------------------------
+  bootstrap (common)                                 | Bootstrap the project.
+  configure (common)                                 | Configure the project.
+  environment (common)                               | Print BRIX11 environment settings for development.
+  execute (common)                                   | Execute a process in the brix11 environment.
+  generate build|bld|make (common)                   | Run MPC to generate build files.
+  generate client (taox11)                           | Generate C++ source code for CORBA client main.
+  generate documentation (common)                    | Generate documentation from ASCIIDoctor sources.
+  generate idl (taox11)                              | Generate IDL definitions for CORBA project.
+  generate mpc (taox11)                              | Generate MPC project file for CORBA project.
+  generate runner|script (taox11)                    | Generate test runner script for CORBA project.
+  generate servant|svt (taox11)                      | Generate C++ source + header for CORBA servant implementation.
+  generate server|srv (taox11)                       | Generate C++ source code for CORBA server main.
+  generate test|project|prj (taox11)                 | Generate a CORBA (test) project for TAOX11.
+  help (common)                                      | Show help (documentation) for brix11 (command).
+  make|build (common)                                | Make (build) the project.
+  run list (taox11)                                  | Run an auto_run_test regression test list.
+  run test|script (taox11)                           | Run test runner script for project.
+
+  '*' marks command entries that override (possibly extending) identically named commands in other collections.
+  Use '-Lall' to show the names of overridden collections in this list.'
+  Use '--scope=' to exclusively list or execute commands from the specified collection.
+---------------------------------------------------------------------------------------------------------------
+
+=== Collection list
+
+Executing `brix11 -l` will display the list of available command
+collections:
+
+---------------------------------------------------------------
+BRIX11 pluggable scaffolding tool 1.1.0
+Copyright (c) 2014-2019 Remedy IT Expertise BV, The Netherlands
+
+  Collection      | Description
+  ----------------------------------------------------------
+  common          | BRIX11 Common brix collection
+  taox11          | BRIX11 TAOX11 brix collection
+---------------------------------------------------------------
+
+== Environment variables
+
+It is possible, instead of using the general option '-v' to set the verbosity level, to set
+the verbosity level with the environment variable `BRIX11_VERBOSE=n`, with n is `1,2,3,..`.
+
+In order to set the verbosity level to 2 you can use on Linux +
+`export BRIX11_VERBOSE=2`
+
+And on Windows you can use +
+`set BRIX11_VERBOSE=2`

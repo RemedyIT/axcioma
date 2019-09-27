@@ -1,0 +1,67 @@
+#
+# configure setup for ACE&TAO
+#
+
+configure :acetao do
+
+  # This is also a trigger for configuring ace/config.h
+  # (and include/makeinclude/platform_macros.GNU
+  #  for GNU make platforms).
+  # Prebuilt installations should not provide this file
+  # so reconfiguration of ACE & TAO is skipped and other
+  # configuration files will only be updated, not rewritten.
+
+  dependencies do
+
+    optional :ssl do
+      environment :sslroot do
+        name 'SSL_ROOT'
+        description 'SSL root folder'
+        default :libroot
+      end
+      file '${SSL_ROOT}/include/openssl/ssl.h'
+      library_path '${SSL_ROOT}/${:DLL_DIR}'
+    end
+
+    optional :bzip2 do
+      environment :bzip2root do
+        name 'BZIP2_ROOT'
+        description 'BZip2 root folder'
+        default :libroot
+      end
+      file '${BZIP2_ROOT}/include/bzlib.h'
+      library_path '${BZIP2_ROOT}/${:DLL_DIR}'
+    end
+
+    optional :zlib do
+      environment :zlibroot do
+        name 'ZLIB_ROOT'
+        description 'Zlib root folder'
+        default :libroot
+      end
+      file '${ZLIB_ROOT}/include/zlib.h'
+      library_path '${ZLIB_ROOT}/${:DLL_DIR}'
+    end
+
+  end
+
+  mpc do
+    include %w{$MPC_ROOT/config $ACE_ROOT/bin/MakeProjectCreator/config}
+
+    mwc_include %w{
+      $(ACE_ROOT)/ace
+      $(ACE_ROOT)/apps/gperf/src
+      $(TAO_ROOT)/TAO_IDL
+      $(TAO_ROOT)/tao
+      $(TAO_ROOT)/orbsvcs/orbsvcs/CosNaming.mpc
+      $(TAO_ROOT)/orbsvcs/orbsvcs/CosNaming_Serv.mpc
+      $(TAO_ROOT)/orbsvcs/orbsvcs/CosNaming_Skel.mpc
+      $(TAO_ROOT)/orbsvcs/Naming_Service
+      $(TAO_ROOT)/orbsvcs/orbsvcs/Svc_Utils.mpc
+      $(TAO_ROOT)/orbsvcs/tests/Simple_Naming
+      $(TAO_ROOT)/utils/catior/catior.mpc
+    }
+    mwc_include :dancex11 => '$(ACE_ROOT)/protocols/ace/INet'
+  end
+
+end

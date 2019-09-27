@@ -1,0 +1,53 @@
+Please use the PRF form below to submit bug reports, problem reports,
+etc. to Remedy IT
+
+In both cases paste this PRF without all explanatory text in brackets
+into the issue.
+
+Please be as descriptive as possible. This helps us to identify the
+problem better.
+
+8<----------8<----------8<----------8<----------8<----------8<----------8<----
+
+    TAOX11 VERSION:
+        1.7.1
+
+    HOST MACHINE and OPERATING SYSTEM:
+        <HOST OS>
+
+    TARGET MACHINE and OPERATING SYSTEM, if different from HOST:
+    COMPILER NAME AND VERSION (AND PATCHLEVEL):
+        <TARGET OS>
+
+    THE OUTPUT OF: `ruby -v && brix11 env && brix11 -- configure --print-config`
+
+    AREA/CLASS/EXAMPLE AFFECTED:
+    [What example failed?  What module failed to compile?]
+        <AFFECTED PARTS>
+
+    DOES THE PROBLEM AFFECT:
+        COMPILATION?
+        LINKING?
+        EXECUTION?
+        OTHER (please specify)?
+    [Please indicate whether TAOX11, your application, or both are affected]
+    [Please perform a `brix11 make -r` before submitting an issue]
+        <AFFECTED AREA>
+
+    SYNOPSIS:
+    [Brief description of the problem]
+        <SYNOPSIS>
+
+    DESCRIPTION:
+    [Detailed description of the problem.  Please explain what your program
+    does to get to the error state]
+        <DETAILED DESCRIPTION>
+
+    REPEAT BY:
+    [What you did to get the error; include test program or session
+    transcript if at all possible]
+        <HOW TO REPEAT>
+
+    SAMPLE FIX/WORKAROUND:
+    [If available]
+        <WORKAROUND>

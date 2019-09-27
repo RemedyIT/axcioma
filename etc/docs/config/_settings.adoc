@@ -1,0 +1,12 @@
+:toc: left
+:toclevels: 6
+:docinfo1:
+:last-update-label!:
+:source-highlighter: coderay
+:prewrap!:
+
+:gxx: g++
+:cxx11: C++11
+
+:parent_dir: dir/../..
+:xref_docs_root: pass:a[dir/../{docs_root}]

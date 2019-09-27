@@ -1,0 +1,75 @@
+= Building AXCIOMA or TAOX11
+
+This is the main repository for https://www.axcioma.com[AXCIOMA] and https://taox11.remedy.nl[TAOX11]. It contains the bootstrap tooling to obtain AXCIOMA or TAOX11 and generate the necessary configuration using BRIX11.
+
+== Prerequisites
+
+Before bootstrapping AXCIOMA make sure you have installed the following prerequisites
+
+[cols="<,<",options="header",]
+|=========================================
+|Prerequisite |Package name
+|ruby 2.0 or newer|ruby
+|perl version 5.10 or newer |perl
+|git |git
+|gcc version 4.7 or newer |gcc
+|g++ version 4.7 or newer |gcc-c++
+|xerces-c++ version 3.0 or newer |xerces-c
+|GNU make version 3.81 or newer |make
+|GNU Bash|bash
+|=========================================
+
+== Build steps
+
+After cloning this repository to your local system you need to
+
+. Bootstrap
+. Configure
+. Generate
+. Compile
+
+This can be done all together by executing the following commands
+
+ bin/brix11 bootstrap
+ bin/brix11 configure
+ bin/brix11 gen build workspace.mwc
+ bin/brix11 make
+
+For all commands additional help is available by executing `bin/brix11 help _command_`.
+
+== Bootstrap
+
+AXCIOMA is the default target for bootstrapping. This can be done by executing
+
+ bin/brix11 bootstrap
+
+TAOX11 can be specified as optional target, which is done using
+
+ bin/brix11 bootstrap taox11
+
+== Configure
+
+The configure step generates the necessary configuration files for the specified target (execute `bin/brix11 help configure' for more details). The configure step is performed by executing
+
+ bin/brix11 configure
+
+Configure doesn't use your current environment, when you want configure to use your current environment use `bin/brix11 -E configure`. As alternative you can specify configuration variables as argument to configure, for example `-W nddshome=$HOME/NDDS/rti_connext_dds-5.2.3 -W nddsarch=x64Linux3gcc4.8.2` to specify the RTI Connext DDS home and architecture.
+
+== Generate build artifacts
+
+The generate step will generate the necessary build infrastructure to compile the core of the target.
+
+ bin/brix11 gen build workspace.mwc
+
+== Compile
+
+The compile step will compile the core of the target with the default compiler for your platform
+
+ bin/brix11 make
+
+== Generate user documentation
+
+User documentation can be generated using ASCIIDoctor using
+
+ bin/brix11 generate documentation
+

@@ -1,0 +1,6 @@
+include::_settings.adoc[]
+
+:linkcss:
+:stylesdir: pass:a[{stylesheets_root}]
+:stylesheet: remedy.css
+:icons: font
