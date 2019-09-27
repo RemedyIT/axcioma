@@ -73,3 +73,5 @@ User documentation can be generated using ASCIIDoctor using
 
  bin/brix11 generate documentation
 
+After generation the documentation can be found under `docs/html`. A good place to start reading is the `getting_started.html`
+document (either under `docs/html/ciaox11` for the full AXCIOMA framework or `docs/html/taox11` for TAOX11).
