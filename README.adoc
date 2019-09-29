@@ -1,6 +1,8 @@
 = Building AXCIOMA or TAOX11
 
-This is the main repository for https://www.axcioma.com[AXCIOMA] and https://taox11.remedy.nl[TAOX11]. It contains the bootstrap tooling to obtain AXCIOMA or TAOX11 and generate the necessary configuration using BRIX11.
+This is the main repository for https://www.axcioma.com[AXCIOMA] and https://taox11.remedy.nl[TAOX11].
+It contains the bootstrap tooling to obtain AXCIOMA or TAOX11 and to generate the necessary
+configuration using BRIX11.
 
 == Prerequisites
 
