@@ -42,7 +42,7 @@ For all commands additional help is available by executing `bin/brix11 help _com
 
 == Bootstrap
 
-AXCIOMA is the default target for bootstrapping. This can be done by executing
+AXCIOMA is the default target for bootstrapping. The bootstrap command will clone all dependent git repositories to their expected location. This can be done by executing
 
  bin/brix11 bootstrap
 
@@ -56,11 +56,11 @@ The configure step generates the necessary configuration files for the specified
 
  bin/brix11 configure
 
-Configure doesn't use your current environment, when you want configure to use your current environment use `bin/brix11 -E configure`. As alternative you can specify configuration variables as argument to configure, for example `-W nddshome=$HOME/NDDS/rti_connext_dds-5.2.3 -W nddsarch=x64Linux3gcc4.8.2` to specify the RTI Connext DDS home and architecture.
+NOTE: Configure doesn't use your current environment, when you want configure to use your current environment use `bin/brix11 -E configure`. As alternative you can specify configuration variables as argument to configure, for example `-W nddshome=$HOME/NDDS/rti_connext_dds-5.2.3 -W nddsarch=x64Linux3gcc4.8.2` to specify the RTI Connext DDS home and architecture.
 
 == Generate build artifacts
 
-The generate step will generate the necessary build infrastructure to compile the core of the target.
+The generate step will generate the necessary build infrastructure using https://github.com/DOCGroup/MPC[MPC] to compile the core of the target.
 
  bin/brix11 gen build workspace.mwc
 
@@ -77,4 +77,4 @@ User documentation can be generated using ASCIIDoctor using
  bin/brix11 generate documentation
 
 After generation the documentation can be found under `docs/html`. A good place to start reading is the `getting_started.html`
-document (either under `docs/html/ciaox11` for the full AXCIOMA framework or `docs/html/taox11` for TAOX11).
+document (either under `docs/html/ciaox11` for AXCIOMA or `docs/html/taox11` for TAOX11).
