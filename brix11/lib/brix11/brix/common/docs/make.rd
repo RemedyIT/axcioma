@@ -83,4 +83,4 @@ print the version of make
 > brix11 -t vs2015 make hello
 
 Makes the hello project, runs msbuild for the 'hello.sln' in the current directory with /maxcpucount:3 (assuming
-BRIX11_NUMBER_OF_PROCESSORS <= nnumber of cpu cores in computer).
+BRIX11_NUMBER_OF_PROCESSORS <= number of cpu cores in computer).
