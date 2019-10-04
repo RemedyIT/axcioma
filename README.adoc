@@ -72,7 +72,7 @@ The compile step will compile the core of the target with the default compiler f
 
 == Generate user documentation
 
-User documentation can be generated using ASCIIDoctor using
+User documentation can be generated using https://asciidoctor.org/[Asciidoctor] using
 
  bin/brix11 generate documentation
 
