@@ -9,6 +9,7 @@
 #--------------------------------------------------------------------
 
 require 'pathname'
+require 'time'
 
 module BRIX11
 
@@ -23,23 +24,12 @@ module BRIX11
           def backup_file(fpath)
             # do we have anything to backup?
             if File.exist?(fpath)
+              # Define the backup filename with current date/time as file extension
+              backup_file = fpath + '.' + Time.now.strftime('%Y%m%d%H%M%S')
               # remove any existing backup file
-              File.delete(fpath+'.org') if File.exist?(fpath+'.org')
+              File.delete(backup_file) if File.exist?(backup_file)
               # rename file to backup
-              File.rename(fpath, fpath+'.org')
-              true
-            else
-              false
-            end
-          end
-
-          def revert_file(fpath)
-            # check if backup exists
-            if File.exist?(fpath+'.org')
-              # remove file if exists
-              File.delete(fpath) if File.exist?(fpath)
-              # rename backup
-              File.rename(fpath+'.org', fpath)
+              File.rename(fpath, backup_file)
               true
             else
               false
