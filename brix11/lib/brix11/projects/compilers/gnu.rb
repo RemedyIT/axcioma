@@ -5,7 +5,6 @@
 # @brief   GNU compiler handler for brix11
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 
 module BRIX11

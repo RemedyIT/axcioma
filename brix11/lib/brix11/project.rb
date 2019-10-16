@@ -5,7 +5,6 @@
 # @brief   MPC project type support for scaffolding tool brix11
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'brix11/system'
 require 'brix11/process'
