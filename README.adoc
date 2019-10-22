@@ -1,6 +1,6 @@
 = Building AXCIOMA or TAOX11
 
-This is the main repository for https://www.axcioma.com[AXCIOMA] and https://taox11.remedy.nl[TAOX11].
+This is the main repository for https://www.axcioma.org[AXCIOMA] and https://www.taox11.org[TAOX11].
 AXCIOMA and TAOX11 are created and maintained by https://www.remedy.nl[Remedy IT].
 This repository contains the bootstrap tooling to obtain AXCIOMA or TAOX11 and to generate the necessary
 configuration using link:brix11/docs/src/brix11.adoc[BRIX11].
