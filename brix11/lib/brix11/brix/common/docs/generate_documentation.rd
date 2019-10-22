@@ -21,6 +21,6 @@ common
  == Description
 
 Generate documentation from ASCIIDoctor sources into the 'docs' directory. To install
-ASCIIDoctor as gem run the following command
+ASCIIDoctor with coderay support as gem run the following command
 
-$ gem install asciidoctor
+$ gem install asciidoctor coderay
