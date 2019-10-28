@@ -5,7 +5,6 @@
 # @brief   BRIX11 Command loader/registry and mixin
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'optparse'
 require 'brix11/project'

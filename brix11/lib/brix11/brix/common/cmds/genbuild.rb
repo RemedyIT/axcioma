@@ -6,7 +6,6 @@
 #          examples of taox11
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
-# Chamber of commerce Rotterdam nr.276339, The Netherlands
 #--------------------------------------------------------------------
 require 'brix11/command'
 
