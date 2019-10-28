@@ -1,3 +1,5 @@
+image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=http://scoreboard.axcioma.org]
+
 = Building AXCIOMA or TAOX11
 
 This is the main repository for https://www.axcioma.org[AXCIOMA] and https://www.taox11.org[TAOX11].
