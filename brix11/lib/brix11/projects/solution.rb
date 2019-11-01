@@ -381,9 +381,6 @@ module BRIX11
       ID = 'vs2017'
       DESCRIPTION = 'Microsoft Visual Studio 2017 solutions'
       COMPILERS = Hash[
-        #vc14: MSBuildVC14x64,
-        #vc14x64: MSBuildVC14x64,
-        #vc14x32: MSBuildVC14x32,
         vc141: MSBuildVC141x64,
         vc141x64: MSBuildVC141x64,
         vc141x32: MSBuildVC141x32
