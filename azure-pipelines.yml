@@ -49,7 +49,7 @@ jobs:
     displayName: git clone dependent repositories
   - powershell: |
       bin/brix11 -E configure -w workspace -b 64
-    displayName: Run brix11 configure
+    displayName: Run brix11 configure --type=gnuace
   - powershell: |
       bin/brix11 env
       bin/brix11 configure -w workspace -P
