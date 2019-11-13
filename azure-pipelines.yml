@@ -41,8 +41,6 @@ jobs:
   - powershell: |
       git clone --depth 1 git://github.com/DOCGroup/ACE_TAO.git $(ACE_ROOT)
       git clone --depth 1 git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
-#      git clone --depth 1 git://github.com/RemedyIT/dancex11.git $(DANCEX11_ROOT)
-#      git clone --depth 1 git://github.com/RemedyIT/ciaox11.git $(CIAOX11_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/taox11.git $(TAOX11_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
     displayName: git clone dependent repositories
@@ -50,3 +48,5 @@ jobs:
       cd $(TAOX11_ROOT) && bin/brix11 configure -w workspace -b 64 -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
     displayName: Run brix11 configure
 
+#      git clone --depth 1 git://github.com/RemedyIT/dancex11.git $(DANCEX11_ROOT)
+#      git clone --depth 1 git://github.com/RemedyIT/ciaox11.git $(CIAOX11_ROOT)
