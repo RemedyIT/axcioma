@@ -58,7 +58,7 @@ jobs:
       bin/brix11 gen build workspace.mwc
     displayName: Run brix11 gen build
   - powershell: |
-      bin/brix11 make -N -d
+      bin/brix11 -v -v -v -v make -N -d
     displayName: Run brix11 make
 
       # bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
