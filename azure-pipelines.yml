@@ -52,6 +52,17 @@ jobs:
   - powershell: |
       bin/brix11 configure -w workspace -b 64 -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
     displayName: Run brix11 configure
+  - powershell: |
+      bin/brix11 gen build workspace.mwc
+      bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
+    displayName: Run brix11 gen build
+  - powershell: |
+      bin/brix11 make -N -d
+      bin/brix11 make -N -d $(TAOX11_ROOT)/examples
+      bin/brix11 make -N -d $(TAOX11_ROOT)/orbsvcs/tests
+      bin/brix11 make -N -d $(TAOX11_ROOT)/tests
+    displayName: Run brix11 make
+
 
 #      git clone --depth 1 git://github.com/RemedyIT/dancex11.git $(DANCEX11_ROOT)
 #      git clone --depth 1 git://github.com/RemedyIT/ciaox11.git $(CIAOX11_ROOT)
