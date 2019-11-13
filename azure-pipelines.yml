@@ -4,6 +4,7 @@ variables:
    MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
    TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
    RIDL_ROOT: $(Build.SourcesDirectory)/ridl
+   TAOX11_BASE_ROOT: $(Build.SourcesDirectory)
    TAOX11_ROOT: $(Build.SourcesDirectory)/taox11
    CIAOX11_ROOT: $(Build.SourcesDirectory)/ciaox11
    DANCEX11_ROOT: $(Build.SourcesDirectory)/dancex11
