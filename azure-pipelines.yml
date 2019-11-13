@@ -20,7 +20,7 @@ resources:
 jobs:
 - job: Linux
   pool:
-    vmImage: ubuntu-latest
+    vmImage: ubuntu-18.04
   strategy:
     matrix:
       GCC48:
@@ -45,7 +45,7 @@ jobs:
       git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      cd $(TAOX11_ROOT) && bin/brix11 configure -w workspace -b 64 -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
+      bin/brix11 configure -w workspace -b 64 -W aceroot=$(ACE_ROOT) -W taoroot=$(TAO_ROOT) -W mpcroot=$(MPC_ROOT)
     displayName: Run brix11 configure
 
 #      git clone --depth 1 git://github.com/RemedyIT/dancex11.git $(DANCEX11_ROOT)
