@@ -48,8 +48,8 @@ jobs:
       git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      bin/brix11 -E configure -w workspace -b 64
-    displayName: Run brix11 configure --type=gnuace
+      bin/brix11 -E configure -w workspace -b 64 -t gnuace
+    displayName: Run brix11 configure
   - powershell: |
       bin/brix11 env
       bin/brix11 configure -w workspace -P
