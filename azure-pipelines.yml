@@ -6,8 +6,9 @@
  #  DANCEX11_ROOT: $(Build.SourcesDirectory)/dancex11
 
 variables:
+   DOC_ROOT: $(Build.SourcesDirectory)/ACE
    ACE_ROOT: $(Build.SourcesDirectory)/ACE/ACE
-   MPC_ROOT: $(Build.SourcesDirectory)/MPC
+   MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
    TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
    TAOX11_ROOT: $(Build.SourcesDirectory)/taox11
    RIDL_ROOT: $(Build.SourcesDirectory)/ridl
@@ -44,7 +45,7 @@ jobs:
       sudo apt-get --yes install libxerces-c-dev libssl-dev $(PackageDeps)
     displayName: install system package dependencies
   - powershell: |
-      git clone --depth 1 git://github.com/DOCGroup/ACE_TAO.git $(ACE_ROOT)
+      git clone --depth 1 git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
       git clone --depth 1 git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/taox11.git $(TAOX11_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
