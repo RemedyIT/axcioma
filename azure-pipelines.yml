@@ -16,6 +16,7 @@ resources:
 
 jobs:
 - job: Linux
+  timeoutInMinutes: 120
   pool:
     vmImage: ubuntu-18.04
   strategy:
