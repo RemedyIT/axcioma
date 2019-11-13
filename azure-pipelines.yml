@@ -7,7 +7,7 @@
 
 variables:
    ACE_ROOT: $(Build.SourcesDirectory)/ACE/ACE
-   MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
+   MPC_ROOT: $(Build.SourcesDirectory)/MPC
    TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
    TAOX11_ROOT: $(Build.SourcesDirectory)/taox11
    RIDL_ROOT: $(Build.SourcesDirectory)/ridl
