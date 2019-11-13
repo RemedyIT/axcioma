@@ -66,5 +66,5 @@ jobs:
       bin/brix11 make -N -d $(TAOX11_ROOT)/orbsvcs/tests
       bin/brix11 make -N -d $(TAOX11_ROOT)/tests
       bin/brix11 make -N -d $(DANCEX11_ROOT)/tests
-      bin/brix11 make -N -d -L $(DOC_ROOT)/ciaox11=$(DOC_ROOT)/ciaox11/bin/ciaox11_tests.lst
+      bin/brix11 make -N -d -L $(CIAOX11_ROOT)=$(CIAOX11_ROOT)/bin/ciaox11_tests.lst
     displayName: Run brix11 make
