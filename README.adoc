@@ -1,4 +1,4 @@
-image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=http://scoreboard.axcioma.org]
+image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=https://www.axcioma.org/scoreboard.html]
 
 = Building AXCIOMA or TAOX11
 
