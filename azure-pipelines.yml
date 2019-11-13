@@ -29,6 +29,11 @@ jobs:
         PackageDeps: g++-4.8
         platform_file: include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU
   steps:
+  - task: UseRubyVersion@0
+    inputs:
+      versionSpec: '>= 2.4'
+      addToPath: true
+    displayName: Install ruby
   - script: |
       wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
       sudo apt-add-repository "deb http://apt.llvm.org/$(lsb_release -cs)/ $(Repo) main"
