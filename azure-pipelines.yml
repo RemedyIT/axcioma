@@ -6,7 +6,7 @@ variables:
    RIDL_ROOT: $(Build.SourcesDirectory)/ridl
    TAOX11_ROOT: $(Build.SourcesDirectory)/taox11
    CIAOX11_ROOT: $(Build.SourcesDirectory)/ciaox11
-   DANCEOX11_ROOT: $(Build.SourcesDirectory)/dancex11
+   DANCEX11_ROOT: $(Build.SourcesDirectory)/dancex11
    system.prefergit: true
 
 resources:
