@@ -3,8 +3,10 @@ variables:
    ACE_ROOT: $(Build.SourcesDirectory)/ACE/ACE
    MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
    TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
-   TAOX11_ROOT: $(Build.SourcesDirectory)/taox11
    RIDL_ROOT: $(Build.SourcesDirectory)/ridl
+   TAOX11_ROOT: $(Build.SourcesDirectory)/taox11
+   CIAOX11_ROOT: $(Build.SourcesDirectory)/ciaox11
+   DANCEOX11_ROOT: $(Build.SourcesDirectory)/dancex11
    system.prefergit: true
 
 resources:
@@ -17,26 +19,10 @@ jobs:
     vmImage: ubuntu-18.04
   strategy:
     matrix:
-      GCC48:
-        CC: gcc-4.8
-        CXX: g++-4.8
-        PackageDeps: g++-4.8
-      GCC6:
-        CC: gcc-6
-        CXX: g++-6
-        PackageDeps: g++-6
-      GCC7:
-        CC: gcc-7
-        CXX: g++-7
-        PackageDeps: g++-7
       GCC8:
         CC: gcc-8
         CXX: g++-8
         PackageDeps: g++-8
-      GCC9:
-        CC: gcc-9
-        CXX: g++-9
-        PackageDeps: g++-9
   steps:
   - task: UseRubyVersion@0
     inputs:
@@ -55,11 +41,13 @@ jobs:
   - powershell: |
       git clone --depth 1 git://github.com/DOCGroup/ACE_TAO.git $(DOC_ROOT)
       git clone --depth 1 git://github.com/DOCGroup/MPC.git $(MPC_ROOT)
-      git clone --depth 1 git://github.com/RemedyIT/taox11.git $(TAOX11_ROOT)
       git clone --depth 1 git://github.com/RemedyIT/ridl.git $(RIDL_ROOT)
+      git clone --depth 1 git://github.com/RemedyIT/taox11.git $(TAOX11_ROOT)
+      git clone --depth 1 git://github.com/RemedyIT/ciaox11.git $(CIAOX11_ROOT)
+      git clone --depth 1 git://github.com/RemedyIT/dancex11.git $(DANCEX11_ROOT)
     displayName: git clone dependent repositories
   - powershell: |
-      bin/brix11 -t gnuace -E configure -w workspace -b 64
+      bin/brix11 -t gnuace -E configure -w workspace -b 64 -I $(CIAOX11_ROOT) -I $(DANCEX11_ROOT)
     displayName: Run brix11 configure
   - powershell: |
       bin/brix11 env
@@ -68,10 +56,13 @@ jobs:
   - powershell: |
       bin/brix11 gen build workspace.mwc
       bin/brix11 gen build $(TAOX11_ROOT)/examples -- gen build $(TAOX11_ROOT)/orbsvcs/tests -- gen build $(TAOX11_ROOT)/tests
+      bin/brix11 gen build $(DANCEX11_ROOT)/tests
     displayName: Run brix11 gen build
   - powershell: |
       bin/brix11 make -N -d
       bin/brix11 make -N -d $(TAOX11_ROOT)/examples
       bin/brix11 make -N -d $(TAOX11_ROOT)/orbsvcs/tests
       bin/brix11 make -N -d $(TAOX11_ROOT)/tests
+      bin/brix11 make -N -d $(DANCEX11_ROOT)/tests
+      bin/brix11 make -N -d -L $(DOC_ROOT)/ciaox11=$(DOC_ROOT)/ciaox11/bin/ciaox11_tests.lst
     displayName: Run brix11 make
