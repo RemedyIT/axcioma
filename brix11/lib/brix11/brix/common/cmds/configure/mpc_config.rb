@@ -19,7 +19,11 @@ module BRIX11
         MWCCFG = 'workspace'
 
         def self.create_config(cfg)
-          mpccfg = File.join(Configurator::ROOT, 'taox11', 'bin', 'MPC', 'config', MPCCFG)
+          if Exec.get_run_environment('TAOX11_ROOT')
+            mpccfg = File.join(Exec.get_run_environment('TAOX11_ROOT'), 'bin', 'MPC', 'config', MPCCFG)
+          else
+            mpccfg = File.join(Configurator::ROOT, 'taox11', 'bin', 'MPC', 'config', MPCCFG)
+          end
           # backup current file
           Util.backup_file(mpccfg) unless cfg.dryrun?
           # collect list of configured MPC include folders for enabled modules
