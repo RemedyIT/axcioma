@@ -2,17 +2,22 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+ #  CIAOX11_ROOT: $(Build.SourcesDirectory)/ciaox11
+ #  DANCEX11_ROOT: $(Build.SourcesDirectory)/dancex11
 
 variables:
    ACE_ROOT: $(Build.SourcesDirectory)/ACE/ACE
    MPC_ROOT: $(Build.SourcesDirectory)/ACE/MPC
    TAO_ROOT: $(Build.SourcesDirectory)/ACE/TAO
- #  CIAOX11_ROOT: $(Build.SourcesDirectory)/ciaox11
- #  DANCEX11_ROOT: $(Build.SourcesDirectory)/dancex11
    TAOX11_ROOT: $(Build.SourcesDirectory)/taox11
    RIDL_ROOT: $(Build.SourcesDirectory)/ridl
    system.prefergit: true
 
+resources:
+- repo: self
+  fetchDepth: 1
+
+jobs:
 - job: Linux
   pool:
     vmImage: ubuntu-latest
