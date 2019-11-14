@@ -10,6 +10,14 @@ variables:
    DANCEX11_ROOT: $(Build.SourcesDirectory)/dancex11
    system.prefergit: true
 
+schedules:
+- cron: "0 7 * * SUN"
+  displayName: Weekly Sunday
+  branches:
+    include:
+    - master
+  always: true
+
 resources:
 - repo: self
   fetchDepth: 1
