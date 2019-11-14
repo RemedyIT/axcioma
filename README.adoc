@@ -1,4 +1,5 @@
 image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=https://www.axcioma.org/scoreboard.html]
+image:https://dev.azure.com/remedyit/axcioma/_apis/build/status/axcioma?branchName=master[Azure pipeline, link=https://dev.azure.com/remedyit/axcioma/_build?definitionId=2&_a=summary]
 
 = Building AXCIOMA or TAOX11
 
