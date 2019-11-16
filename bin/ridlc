@@ -11,7 +11,7 @@ exit $?
 #!ruby
 #---------------------------------
 #---------------------------------
-$: << (ENV['RIDL_ROOT'] || File.join(ENV['TAOX11_BASE_ROOT'] || File.join(File.dirname(__FILE__), '..'), 'ridl', 'lib'))
+$: << (ENV['RIDL_ROOT'] || File.expand_path(File.join(File.dirname(__FILE__), '..', 'ridl', 'lib')))
 
 _ridlrc = []
 if File.readable?(File.join(File.dirname(__FILE__), '..', '.ridlrc'))

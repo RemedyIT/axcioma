@@ -23,16 +23,17 @@ module BRIX11
         # define common environment for spawning BRIX11 subprocesses
         env = {}
         ridl_root = Exec.get_run_environment('RIDL_ROOT')
-        ridl_root ||= if File.file?(File.join(BRIX11_BASE_ROOT, 'ridl', 'ridl.rb'))
-                        Exec.update_run_environment('RIDL_ROOT', BRIX11_BASE_ROOT)
-                      else
-                        base_root = File.dirname(BRIX11_BASE_ROOT)
-                        if File.directory?(File.join(base_root, 'ridl', 'lib'))
-                          Exec.update_run_environment 'RIDL_ROOT', File.join(base_root, 'ridl', 'lib')
-                        else
-                          ''
-                        end
-                      end
+        unless ridl_root
+          # try to find an ridl installation somewhere from BRIX11_BASE_ROOT down
+          root = BRIX11_BASE_ROOT
+          until root =~ /^(\/|.:[\/\\])$/
+            root = File.dirname(root)
+            if File.directory?(File.join(root, 'ridl', 'lib', 'ridl'))
+              ridl_root ||= Exec.update_run_environment('RIDL_ROOT', File.join(root, 'ridl', 'lib'))
+              break
+            end
+          end
+        end
         $: << ridl_root if ridl_root && !$:.include?(ridl_root)
         mpc_root = Exec.get_run_environment('MPC_ROOT')
         unless mpc_root
