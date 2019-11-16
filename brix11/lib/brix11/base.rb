@@ -167,7 +167,7 @@ module BRIX11
     }
     opts.on('-x', '--crossbuild',
             'Define crossbuild configuration for BRIX11 commands.',
-            'Requires definition of X11_HOST_ROOT and X11_TARGET_ROOT environment variables.') {
+            'Requires definition of X11_HOST_ROOT environment variable.') {
       options.user_config.crossbuild = true
     }
 

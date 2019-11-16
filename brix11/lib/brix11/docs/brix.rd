@@ -20,7 +20,7 @@
                                    Separate (optional) value by '=' like VAR=VAL. By default value will be '1'.
                                    Supports $VAR and ${VAR}-form variable expansion.
   -x, --crossbuild                 Define crossbuild configuration for BRIX11 commands.
-                                   Requires definition of X11_HOST_ROOT and X11_TARGET_ROOT environment variables.
+                                   Requires definition of X11_HOST_ROOT environment variable.
 
   -c, --config=BRIX11RC            Load config from BRIX11RC file.
                                    Default:  ~/.brix11rc and/or ./.brix11rc
