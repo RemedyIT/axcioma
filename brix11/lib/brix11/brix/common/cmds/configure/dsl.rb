@@ -342,6 +342,10 @@ module BRIX11
               super(base, rc.mpc_include)
               @rc = rc
             end
+            def base(path)
+              # expand specified path relative to rcfile folder
+              @rc.mpc_base = File.expand_path(path.to_s, @base)
+            end
             def mwc_include(*args)
               args.each do |arg|
                 case arg
@@ -383,6 +387,7 @@ module BRIX11
           @ridl_backend = {backend: nil, bases: []}
           @ridl_be_path = []
           @brix_path = []
+          @mpc_base = nil
           @mpc_include = []
           @mwc_include = {}
           DSLHandler.new(self).instance_eval(&block)
@@ -398,6 +403,8 @@ module BRIX11
                     :brix_path,
                     :mpc_include,
                     :mwc_include
+
+        attr_accessor :mpc_base
 
         def enabled?(allrc)
           # do all our own dependencies check out?
