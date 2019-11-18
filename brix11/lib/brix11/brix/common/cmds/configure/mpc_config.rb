@@ -19,7 +19,11 @@ module BRIX11
         MWCCFG = 'workspace'
 
         def self.create_config(cfg)
-          mpccfg = File.join(Configurator::ROOT, 'taox11', 'bin', 'MPC', 'config', MPCCFG)
+          # find MPC base path among active rc specs (only 1 definition allowed)
+          mpcbase_rcspec = cfg.rclist.values.select {|rc| rc.mpc_base }
+          BRIX11.log_fatal("Found #{mpcbase_rcspec.size} MPC base paths (in #{mpcbase_rcspec.collect {|rc| rc.mpc_base }.join(" and ")}). Only a single base path definition allowed.") if mpcbase_rcspec.size>1
+          BRIX11.log_fatal("Missing MPC base path. At least 1 base path definition required.") if mpcbase_rcspec.empty?
+          mpccfg = File.join(mpcbase_rcspec.shift.mpc_base, 'config', MPCCFG)
           # backup current file
           Util.backup_file(mpccfg) unless cfg.dryrun?
           # collect list of configured MPC include folders for enabled modules

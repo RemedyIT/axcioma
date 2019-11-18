@@ -71,13 +71,13 @@ Usage: brix11 [general options] command [options] [command [options] [...]
                                      Use --show-types to list available project types and active default.
         --show-types                 List available project types (with compiler options) and active default
         --add-templates=PATH         Add a template library basepath to be evaluated before standard brix templates.
-    -E, --environment                Environment settings overrule BRIX11 (like RIDL_ROOT, ACE_ROOT, TAOX11_BASE_ROOT etc.).
+    -E, --environment                Environment settings overrule BRIX11 (like RIDL_ROOT, ACE_ROOT, X11_BASE_ROOT etc.).
                                      Default: off
     -D, --define=VARIABLE            Define an additional environment variable for BRIX11 commands.
                                      Separate (optional) value by '=' like VAR=VAL. By default value will be '1'.
                                      Supports \$VAR and \${VAR}-form variable expansion.
     -x, --crossbuild                 Define crossbuild configuration for BRIX11 commands.
-                                     Requires definition of X11_HOST_ROOT and X11_TARGET_ROOT environment variables.
+                                     Requires definition of X11_HOST_ROOT environment variable.
 
     -c, --config=BRIX11RC            Load config from BRIX11RC file.
                                      Default:  ~/.brix11rc and/or ./.brix11rc

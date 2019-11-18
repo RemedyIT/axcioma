@@ -154,7 +154,7 @@ module BRIX11
       (options.user_config.user_templates ||= []) << v
     }
     opts.on('-E', '--environment',
-            'Environment settings overrule BRIX11 (like RIDL_ROOT, ACE_ROOT, TAOX11_BASE_ROOT etc.).',
+            'Environment settings overrule BRIX11 (like RIDL_ROOT, ACE_ROOT, X11_BASE_ROOT etc.).',
             "Default: #{options.config.use_environment ? 'on' : 'off'}") {
       options.user_config.use_environment = true
     }
@@ -167,7 +167,7 @@ module BRIX11
     }
     opts.on('-x', '--crossbuild',
             'Define crossbuild configuration for BRIX11 commands.',
-            'Requires definition of X11_HOST_ROOT and X11_TARGET_ROOT environment variables.') {
+            'Requires definition of X11_HOST_ROOT environment variable.') {
       options.user_config.crossbuild = true
     }
 
