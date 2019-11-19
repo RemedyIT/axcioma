@@ -162,7 +162,7 @@ module BRIX11
 
       def base_mpc_args(opts, runopts, cmdargv)
         argv = Exec.mswin? ? ['perl'] : []
-        # determin if we have a path and project, path only, project only or none
+        # determine if we have a path and project, path only, project only or none
         path = opts.delete(:project)
         if project = opts.delete(:subprj)
           # path and project or project only
