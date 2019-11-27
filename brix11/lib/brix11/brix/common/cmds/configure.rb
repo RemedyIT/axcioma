@@ -21,7 +21,6 @@ module BRIX11
         :features => {}
       }
 
-
       def self.setup(optparser, options)
         options[:configure] = OPTIONS.dup
         optparser.banner = "#{DESC}\n\n"+
@@ -41,6 +40,10 @@ module BRIX11
 
         optparser.on('-w', '--workspace', '=NAME', 'Set MWC workspace filename to NAME.mwc.', 'Default: "workspace".') do |v|
           options[:configure][:workspace] = v
+        end
+
+        optparser.on('-t', '--target', '=OS', 'Specify target OS platform.', 'Default: detected') do |v|
+          options[:configure][:target] = v
         end
 
         if /linux/i =~ Platform.platform_os
@@ -68,12 +71,17 @@ module BRIX11
           STDOUT.puts 'BRIX11 configure configuration variables'
           STDOUT.puts '----------------------------------------'
           vars = rclist.values.collect {|rc| rc.dependencies.values.collect {|dep| dep.environment.values}}.flatten
+          vars.prepend(Common::Configure::RCSpec::Dependency::Environment.new(:path) do
+            name 'PATH'
+            description 'Executable searchpath addition (prepended).'
+          end)
           vars.each {|v| STDOUT.puts('%-15s  %s' % [v.variable.to_s, v.description]) }
           STDOUT.puts
           exit
         end
 
         optparser.on('-W', '--with', '=VARIABLE', 'Set a configuration variable as "<varname>=<value>".' ,
+                                                  'Supports \$VAR and \${VAR}-form variable expansion.',
                                                   'Use "-V" or "--showvar" to display the list of variables.') do |v|
           var, val = v.split('=')
           BRIX11.log_fatal("Missing required value for configuration variable in [--with #{v}].") unless val

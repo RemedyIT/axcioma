@@ -13,6 +13,31 @@ configure :acetao do
 
   dependencies do
 
+    optional :crosscompiler do
+      environment :targetsysroot do
+        name 'SDKTARGETSYSROOT'
+        description 'Target sysroot folder (required for cross builds)'
+      end
+      environment :crosscompile_prefix do
+        name 'CROSS_COMPILE'
+        description 'Prefix for crosscompiler binaries'
+      end
+      environment :x11_host_root do
+        name 'X11_HOST_ROOT'
+        description 'AXCIOMA host buildroot (required for cross builds)'
+      end
+      environment :ace_host_root do
+        name 'HOST_ROOT'
+        description 'ACE host buildroot (optional for cross builds)'
+        default '${X11_HOST_ROOT}/ACE/ACE'
+      end
+      requires :targetsysroot, :x11_host_root
+      exist '${SDKTARGETSYSROOT}'
+      executable '${CROSS_COMPILE}gcc'
+      file '${X11_HOST_ROOT}/bin/brix11'
+      exist '${HOST_ROOT}/ace'
+    end
+
     optional :ssl do
       environment :sslroot do
         name 'SSL_ROOT'

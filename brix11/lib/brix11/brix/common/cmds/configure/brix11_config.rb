@@ -25,7 +25,7 @@ module BRIX11
           # backup current file
           Util.backup_file(brix11rc) unless cfg.dryrun?
           # determine/validate platform specific project type
-          project_type, project_compiler = if cfg.rclist.has_key?(:acetao)
+          project_type, project_compiler = if cfg.cfglist.has_key?(:acetao)
                                              cfg.options[:platform][:project_type].call(
                                                          cfg.options[:bitsize] || cfg.options[:platform][:bits],
                                                          BRIX11.options.user_config.project_type,
@@ -39,8 +39,8 @@ module BRIX11
                                              end
                                            end
           # collect list of configured be paths of enabled modules relative to location of brix11rc file
-          brix_paths = cfg.rclist.values.collect do |rc|
-            rc.brix_path.collect {|p| Util.relative_path(p, base_root) }
+          brix_paths = cfg.cfglist.values.collect do |mod|
+            mod.brix_path.collect {|p| Util.relative_path(p, base_root) }
           end.flatten
           # generate ridlrc file
           BRIX11.show_msg("Creating #{brix11rc}")
@@ -51,7 +51,9 @@ module BRIX11
                               'project_type' => project_type,
                               'project_compiler' => project_compiler,
                               'brix_paths' => brix_paths,
-                              'user_environment' => cfg.user_env }))
+                              'user_environment' => cfg.user_env,
+                              'crossbuild' => (cfg.features.has_key?(:crosscompiler) && cfg.features[:crosscompiler].state),
+                              'target_platform' => (cfg.options[:target] || Platform.platform_os) }))
           ensure
             brix11rc_io.close unless cfg.dryrun?
           end

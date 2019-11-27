@@ -27,7 +27,10 @@ module BRIX11
           public
 
           def platform_helpers
-            @platform_helpers ||= Hash.new(->(s, opts) { opts[:platform][:os] = s.downcase.to_sym })
+            @platform_helpers ||= Hash.new(->(s, opts) {
+                                              opts[:platform][:os] = s.downcase.to_sym
+                                              opts[:platform][:bits] = 0
+                                            })
           end
 
           def platform_os
@@ -56,20 +59,33 @@ module BRIX11
                                         opts[:platform][:bits] = (opts[:platform][:arch] == 'x86_64' ? 64 : 32)
                                         opts[:platform][:defaults] = {
                                           :libroot => '/usr',
-                                          :incpath => '/usr/include',
-                                          :libpath => (opts[:platform][:bits] == 64 ? '/usr/lib64' : '/usr/lib'),
                                           :dll_dir => 'lib',
                                           :library_path_var => 'LD_LIBRARY_PATH',
                                           :test_configs => %w{LINUX Linux}
                                         }
-                                        opts[:platform][:project_type] = ->(bits, pt=nil, cc=nil) {
+                                        opts[:platform][:project_type] = ->(_bits, pt=nil, cc=nil) {
+                                          prjh = BRIX11::Project.handler(pt || 'gnuautobuild', cc)
+                                          [prjh.class::ID, prjh.compiler]
+                                        }
+                                      }
+        platform_helpers[/yocto/i] = ->(s, opts) {
+                                        opts[:platform][:os] = :linux
+                                        #opts[:platform][:arch] = nil
+                                        opts[:platform][:bits] = 0
+                                        opts[:platform][:defaults] = {
+                                          :libroot => '${SDKTARGETSYSROOT}/usr',
+                                          :dll_dir => 'lib',
+                                          :library_path_var => 'LD_LIBRARY_PATH',
+                                          :test_configs => %w{LINUX Linux YOCTO Yocto}
+                                        }
+                                        opts[:platform][:project_type] = ->(_bits, pt=nil, cc=nil) {
                                           prjh = BRIX11::Project.handler(pt || 'gnuautobuild', cc)
                                           [prjh.class::ID, prjh.compiler]
                                         }
                                       }
 
         def self.determin(opts)
-          _, ph = platform_helpers.detect {|re, _| re =~ platform_os }
+          _, ph = platform_helpers.detect {|re, _| re =~ (opts[:target] || platform_os) }
           ph ||= platform_helpers.default
           opts[:platform] ||= {}
           ph.call(platform_os, opts)
