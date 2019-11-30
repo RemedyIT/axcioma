@@ -42,7 +42,7 @@ module BRIX11
           options[:configure][:workspace] = v
         end
 
-        optparser.on('-t', '--target', '=OS', 'Specify target OS platform.', 'Default: detected') do |v|
+        optparser.on('-T', '--target', '=OS', 'Specify target OS platform.', 'Default: detected') do |v|
           options[:configure][:target] = v
         end
 
