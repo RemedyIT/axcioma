@@ -43,6 +43,16 @@ configure :acetao do
       library_path '${ZLIB_ROOT}/${:DLL_DIR}'
     end
 
+    optional :valgrind do
+      environment :testdelay do
+        name 'ACE_RUNTEST_DELAY'
+        description 'Delay multiplication factor for ACE test framework'
+      end
+      environment :valgrindcmd do
+        name 'ACE_RUN_VALGRIND_CMD'
+        description 'Executable name to be used for valgrind'
+      end
+    end
   end
 
   mpc do
