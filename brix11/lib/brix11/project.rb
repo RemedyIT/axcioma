@@ -185,7 +185,7 @@ module BRIX11
         path ||= '.'
         if project
           case
-          when File.exists?(File.join(path, project))
+          when File.exist?(File.join(path, project))
             # project specifies an existing .mwc/.mpc file in <path>/
             if /\.(mwc|mpc)\Z/ =~ project
               if $1 == 'mpc'
@@ -202,12 +202,12 @@ module BRIX11
               BRIX11.log_error("Unknown project file #{project} in #{path}")
               return nil
             end
-          when File.exists?(File.join(path, "#{project}.mwc"))
+          when File.exist?(File.join(path, "#{project}.mwc"))
             # project specifies basename of an existing .mwc file -> run mwc.pl
             project = "#{project}.mwc"
             cmd = Project.mwc_cmd
             mwc = true
-          when File.exists?(File.join(path, "#{project}.mpc"))
+          when File.exist?(File.join(path, "#{project}.mpc"))
             # project specifies basename of an existing .mpc file -> run mpc.pl
             project = "#{project}.mpc"
             cmd = Project.mpc_cmd
