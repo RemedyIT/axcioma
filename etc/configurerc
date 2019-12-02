@@ -52,6 +52,10 @@ configure :acetao do
         name 'ACE_RUN_VALGRIND_CMD'
         description 'Executable name to be used for valgrind'
       end
+      environment :valgrindopts do
+        name 'VALGRIND_OPTS'
+        description 'Optional arguments used by valgrind'
+      end
     end
   end
 
