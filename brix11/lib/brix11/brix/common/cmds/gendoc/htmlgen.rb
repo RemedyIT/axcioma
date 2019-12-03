@@ -48,7 +48,7 @@ module BRIX11
             BRIX11.log(2, "docgen> Collecting resources from #{respath}")
             Dir.glob(File.join(respath, mask || '*')).each do |res|
               unless File.directory?(res)
-                FileUtils.mkdir_p(tgtdir, :verbose => BRIX11.verbose?) unless File.exists?(tgtdir)
+                FileUtils.mkdir_p(tgtdir, :verbose => BRIX11.verbose?) unless File.exist?(tgtdir)
                 target = File.join(tgtdir, File.basename(res))
                 FileUtils.cp(res, target, :verbose => BRIX11.verbose?)
               end
