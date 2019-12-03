@@ -75,7 +75,7 @@ module BRIX11
 
         optparser.on('-W', '--with', '=VARIABLE', 'Set a configuration variable as "<varname>=<value>".' ,
                                                   'Use "-V" or "--showvar" to display the list of variables.') do |v|
-          var, val = v.split('=')
+          var, val = v.split('=', 2)
           BRIX11.log_fatal("Missing required value for configuration variable in [--with #{v}].") unless val
           options[:configure][:variables][var.to_sym] = val
         end
