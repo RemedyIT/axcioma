@@ -1,9 +1,9 @@
 #!/bin/sh
 
 if [ -x "$RIDL_RUBY" ]; then
-  $RIDL_RUBY -x $0 $@
+  $RIDL_RUBY -x $0 "$@"
 else
-  /usr/bin/env ruby -x $0 $@
+  /usr/bin/env ruby -x $0 "$@"
 fi
 
 exit $?
