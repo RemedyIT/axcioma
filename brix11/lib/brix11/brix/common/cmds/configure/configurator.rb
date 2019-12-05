@@ -101,7 +101,7 @@ module BRIX11
                   @env_additions[env.name] = val
                 elsif env.default
                   # track defaulted env vars (not exported to user env)
-                  env_defaults << env.name
+                  #env_defaults << env.name
                   # match (platform) defaults (if any) to any specified default
                   val = options[:platform][:defaults][env.default]
                   # otherwise just use specified default value
@@ -189,7 +189,7 @@ module BRIX11
                 # keep all in current runtime env
                 @env_additions.each {|k,v| Exec.update_run_environment(k, v) }
                 # remove defaulted vars from user env additions
-                env_defaults.each { |var| @env_additions.delete(var) }
+                #env_defaults.each { |var| @env_additions.delete(var) }
                 # keep rest for user env additions
                 @mod.env_additions.merge!(@env_additions)
               end
