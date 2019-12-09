@@ -70,6 +70,12 @@ configure :acetao do
 
   end
 
+  features do
+    enable :cross do
+      depends_on :crosscompiler
+    end
+  end
+
   mpc do
     include %w{$MPC_ROOT/config $ACE_ROOT/bin/MakeProjectCreator/config}
 
