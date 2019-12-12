@@ -67,7 +67,7 @@ module BRIX11
 
             def expand_var(val)
               val.gsub(/\$\{([^\s\/\}:;]+)\}/) do |m|
-                (@env_additions[$1] || Exec.get_run_environment($1, true)).to_s
+                (@env_additions[$1] || Exec.get_run_environment($1)).to_s
               end
             end
             private :expand_var
@@ -288,8 +288,11 @@ module BRIX11
 
         def process
           BRIX11.log(1, 'Processing specifications')
-          # reset user defined runtime environment
+          # reset user defined runtime environment but keep X11_BASE_ROOT
+          base_root = Exec.get_run_environment('X11_BASE_ROOT')
           Exec.reset_run_environment
+          Exec.update_run_environment('X11_BASE_ROOT', base_root) if base_root
+          # process all loaded specs
           @allrc.each do |mod_id, rcspec|
             BRIX11.log(3, "Checking specifications for [#{mod_id}]")
             CfgModule.new(self, rcspec).process
