@@ -1,0 +1,28 @@
+{
+  "os": "linux",
+  "bits": 0,
+  "defaults": {
+    "libroot":  "${SDKTARGETSYSROOT}/usr",
+    "dll_dir": "lib",
+    "library_path_var": "LD_LIBRARY_PATH",
+    "test_configs": ["LINUX", "Linux"]
+  },
+  "project_type": "gnuautobuild",
+  "project_cc": "gnu",
+  "config_include": "config-linux.h",
+  "config_prelude": [
+    "#define ACE_HAS_VERSIONED_NAMESPACE 1",
+    "#define ACE_MONITOR_FRAMEWORK 0"
+  ],
+  "config_post": [],
+  "gnumake_include": "platform_linux.GNU",
+  "gnumake_prelude": [
+    "debug=0",
+    "c++11=1",
+    "no_deprecated=0",
+    "inline=1",
+    "optimize=1",
+    "boost=0"
+  ],
+  "gnumake_post": []
+}

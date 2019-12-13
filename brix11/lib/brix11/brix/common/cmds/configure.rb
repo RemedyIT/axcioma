@@ -26,8 +26,9 @@ module BRIX11
         optparser.banner = "#{DESC}\n\n"+
                            "Usage: #{options[:script_name]} configure [options]\n\n"
 
-        optparser.on('-b', '--bits', '=BITSIZE', Integer, 'Override platform default bitsize (32 or 64).') do |v|
-          BRIX11.log_fatal("Invalid bitsize specified [#{v}]. Supported sizes are 32 or 64.") unless [32,64].include?(v.to_i)
+        optparser.on('-b', '--bits', '=BITSIZE', Integer, 'Override platform default bitsize (0, 32 or 64).',
+                                                          'Specifying 0 disables explicit bitsize setting.') do |v|
+          BRIX11.log_fatal("Invalid bitsize specified [#{v}]. Supported sizes are 0, 32 or 64.") unless [0, 32,64].include?(v.to_i)
           options[:configure][:bitsize] = v.to_i
         end
 
@@ -42,7 +43,7 @@ module BRIX11
           options[:configure][:workspace] = v
         end
 
-        optparser.on('-T', '--target', '=OS', 'Specify target OS platform.', 'Default: detected') do |v|
+        optparser.on('-T', '--target', '=NAME', 'Specify target platform name.', 'Default: host') do |v|
           options[:configure][:target] = v
         end
 

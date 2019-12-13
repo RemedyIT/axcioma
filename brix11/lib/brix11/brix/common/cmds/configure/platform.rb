@@ -7,6 +7,8 @@
 # @copyright Copyright (c) Remedy IT Expertise BV
 #--------------------------------------------------------------------
 
+require 'json'
+
 module BRIX11
 
   module Common
@@ -28,8 +30,34 @@ module BRIX11
 
           def platform_helpers
             @platform_helpers ||= Hash.new(->(s, opts) {
-                                              opts[:platform][:os] = s.downcase.to_sym
-                                              opts[:platform][:bits] = 0
+                                              opts[:platform].merge!({
+                                                os: :linux,
+                                                bits: 0,
+                                                defaults: {
+                                                  libroot: '${SDKTARGETSYSROOT}/usr',
+                                                  dll_dir: 'lib',
+                                                  library_path_var: 'LD_LIBRARY_PATH',
+                                                  test_configs: %w{LINUX Linux},
+                                                  prj_type: 'gnuautobuild'
+                                                },
+                                                project_type: ->(opts, pt=nil, cc=nil) {
+                                                  opts_def = opts[:platform][:defaults]
+                                                  prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
+                                                  [prjh.class::ID, prjh.compiler]
+                                                },
+                                                config_prelude: %Q{
+                                                    #define ACE_HAS_VERSIONED_NAMESPACE 1
+                                                    #define ACE_MONITOR_FRAMEWORK 0
+                                                  }.gsub(/^\s+/, ''),
+                                                gnumake_prelude: %Q{
+                                                    debug=0
+                                                    c++11=1
+                                                    no_deprecated=0
+                                                    inline=1
+                                                    optimize=1
+                                                    boost=0
+                                                  }.gsub(/^\s+/, '')
+                                              })
                                             })
           end
 
@@ -39,61 +67,103 @@ module BRIX11
         end
 
         platform_helpers[/windows/i] = ->(s, opts) {
-                                          opts[:platform][:os] = :windows
-                                          opts[:platform][:arch] = ENV['PLATFORM']
-                                          opts[:platform][:bits] = (opts[:platform][:arch] == 'x64' ? 64 : 32)
-                                          opts[:platform][:defaults] = {
-                                            :dll_dir => 'bin',
-                                            :library_path_var => 'PATH',
-                                            :test_configs => %w{Win32}
-                                          }
-                                          opts[:platform][:project_type] = ->(bits, pt=nil, cc=nil) {
-                                            prjh = BRIX11::Project.handler(pt || 'vs2017', cc)
-                                            comp = prjh.compiler.to_s.gsub(/x\d\d/, "x#{bits}")
-                                            [prjh.class::ID, comp]
-                                          }
+                                          opts[:platform].merge!({
+                                            os: :windows,
+                                            arch: ENV['PLATFORM'],
+                                            bits: (ENV['PLATFORM'] == 'x64' ? 64 : 32),
+                                            defaults: {
+                                              dll_dir: 'bin',
+                                              library_path_var: 'PATH',
+                                              test_configs: %w{Win32},
+                                              prj_type: 'vs2017'
+                                            },
+                                            project_type: ->(opts, pt=nil, cc=nil) {
+                                              bits = opts[:bitsize] || opts[:platform][:bits]
+                                              opts_def = opts[:platform][:defaults]
+                                              prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
+                                              comp = prjh.compiler.to_s.gsub(/x\d\d/, "x#{bits}")
+                                              [prjh.class::ID, comp]
+                                            },
+                                            config_include: 'config-win32.h',
+                                            config_prelude: %Q{
+                                                #define ACE_HAS_VERSIONED_NAMESPACE 1
+                                                #define ACE_MONITOR_FRAMEWORK 0
+                                                #define __ACE_INLINE__ 1
+                                                #define ACE_DISABLE_WIN32_INCREASE_PRIORITY
+                                                #define ACE_DISABLE_WIN32_ERROR_WINDOWS
+                                              }.gsub(/^\s+/, '')
+                                          })
                                         }
         platform_helpers[/linux/i] = ->(s, opts) {
-                                        opts[:platform][:os] = :linux
-                                        opts[:platform][:arch] = `uname -m`.chomp
+                                        opts[:platform].merge!({
+                                          os: :linux,
+                                          arch: `uname -m`.chomp,
+                                          defaults: {
+                                            libroot: '/usr',
+                                            dll_dir: 'lib',
+                                            library_path_var: 'LD_LIBRARY_PATH',
+                                            test_configs: %w{LINUX Linux},
+                                            prj_type: 'gnuautobuild'
+                                          },
+                                          project_type: ->(_opts, pt=nil, cc=nil) {
+                                            opts_def = opts[:platform][:defaults]
+                                            prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
+                                            [prjh.class::ID, prjh.compiler]
+                                          },
+                                          config_include: 'config-linux.h',
+                                          config_prelude: %Q{
+                                              #define ACE_HAS_VERSIONED_NAMESPACE 1
+                                              #define ACE_MONITOR_FRAMEWORK 0
+                                            }.gsub(/^\s+/, ''),
+                                          gnumake_include: 'platform_linux.GNU',
+                                          gnumake_prelude: %Q{
+                                              debug=0
+                                              c++11=1
+                                              no_deprecated=0
+                                              inline=1
+                                              optimize=1
+                                              boost=0
+                                            }.gsub(/^\s+/, '')
+                                        })
                                         opts[:platform][:bits] = (opts[:platform][:arch] == 'x86_64' ? 64 : 32)
-                                        opts[:platform][:defaults] = {
-                                          :libroot => '/usr',
-                                          :dll_dir => 'lib',
-                                          :library_path_var => 'LD_LIBRARY_PATH',
-                                          :test_configs => %w{LINUX Linux}
-                                        }
-                                        opts[:platform][:project_type] = ->(_bits, pt=nil, cc=nil) {
-                                          prjh = BRIX11::Project.handler(pt || 'gnuautobuild', cc)
-                                          [prjh.class::ID, prjh.compiler]
-                                        }
-                                      }
-        platform_helpers[/yocto/i] = ->(s, opts) {
-                                        opts[:platform][:os] = :linux
-                                        #opts[:platform][:arch] = nil
-                                        opts[:platform][:bits] = 0
-                                        opts[:platform][:defaults] = {
-                                          :libroot => '${SDKTARGETSYSROOT}/usr',
-                                          :dll_dir => 'lib',
-                                          :library_path_var => 'LD_LIBRARY_PATH',
-                                          :test_configs => %w{LINUX Linux YOCTO Yocto}
-                                        }
-                                        opts[:platform][:project_type] = ->(_bits, pt=nil, cc=nil) {
-                                          prjh = BRIX11::Project.handler(pt || 'gnuautobuild', cc)
-                                          [prjh.class::ID, prjh.compiler]
-                                        }
                                       }
 
         def self.determin(opts)
-          _, ph = platform_helpers.detect {|re, _| re =~ (opts[:target] || platform_os) }
-          ph ||= platform_helpers.default
+          build_target = (opts[:target] || platform_os)
+          _, ph = platform_helpers.detect {|re, _| re =~ build_target }
           opts[:platform] ||= {}
-          ph.call(platform_os, opts)
+          (ph || platform_helpers.default).call(platform_os, opts)
+          # see if there is a <build_target>.json to supplement/customize the defaults
+          target_json = File.join(Exec.get_run_environment('X11_BASE_ROOT'), 'etc', build_target+'.json')
+          if File.file?(target_json)
+            tgt_spec = JSON.parse(IO.read(target_json))
+            opts[:platform][:os] = tgt_spec['os'].to_sym if tgt_spec.has_key?('os')
+            opts[:platform][:bits] = tgt_spec['bits'] if tgt_spec.has_key?('bits')
+            if tgt_spec.has_key?('defaults')
+              tgt_defs = tgt_spec['defaults']
+              opts[:platform][:defaults][:libroot] = tgt_defs['libroot'] if tgt_defs.has_key?('libroot')
+              opts[:platform][:defaults][:dll_dir] = tgt_defs['dll_dir'] if tgt_defs.has_key?('dll_dir')
+              opts[:platform][:defaults][:library_path_var] = tgt_defs['library_path_var'] if tgt_defs.has_key?('library_path_var')
+              opts[:platform][:defaults][:test_configs] = tgt_defs['test_configs'] if tgt_defs.has_key?('test_configs')
+            end
+            opts[:platform][:defaults][:prj_type] = tgt_spec['project_type'] if tgt_spec.has_key?('project_type')
+            opts[:platform][:defaults][:prj_cc] = tgt_spec['project_cc'] if tgt_spec.has_key?('project_cc')
+            opts[:platform][:config_include] = tgt_spec['config_include'] if tgt_spec.has_key?('config_include')
+            opts[:platform][:config_prelude] = (tgt_spec['config_prelude'].join("\n") << "\n") if tgt_spec.has_key?('config_prelude')
+            opts[:platform][:config_post] = (tgt_spec['config_post'].join("\n") << "\n") if tgt_spec.has_key?('config_post')
+            opts[:platform][:gnumake_include] = tgt_spec['gnumake_include'] if tgt_spec.has_key?('gnumake_include')
+            opts[:platform][:gnumake_prelude] = (tgt_spec['gnumake_prelude'].join("\n") << "\n") if tgt_spec.has_key?('gnumake_prelude')
+            opts[:platform][:gnumake_post] = (tgt_spec['gnumake_post'].join("\n") << "\n") if tgt_spec.has_key?('gnumake_post')
+          end
+          # always add target name in uppercase for non-standard target
+          opts[:platform][:defaults][:test_configs] << build_target.upcase unless ph
+          opts[:platform]
         end
-      end
 
-    end
+      end # Platform
 
-  end
+    end # Configure
 
-end
+  end # Common
+
+end # BRIX11

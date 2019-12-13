@@ -21,58 +21,16 @@ module BRIX11
 
         DEFAULT_FEATURES = File.join('bin', 'MakeProjectCreator', 'config', 'default.features')
 
-        class << self
-          def config_includes
-            @config_includes ||= {}
-          end
-          def config_prelude
-            @config_defines ||= {}
-          end
-          def make_includes
-            @make_includes ||= {}
-          end
-          def std_macros
-            @std_macros ||= {}
-          end
-        end
-
-        config_includes[:windows] = 'config-win32.h'
-        config_includes[:linux] = 'config-linux.h'
-
-        make_includes[:linux] = 'platform_linux.GNU'
-
-        config_prelude[:linux] = <<-__EOT__.gsub(/^\s+/, '')
-            #define ACE_HAS_VERSIONED_NAMESPACE 1
-            #define ACE_MONITOR_FRAMEWORK 0
-            __EOT__
-
-        config_prelude[:windows] = <<-__EOT__.gsub(/^\s+/, '')
-            #define ACE_HAS_VERSIONED_NAMESPACE 1
-            #define ACE_MONITOR_FRAMEWORK 0
-            #define __ACE_INLINE__ 1
-            #define ACE_DISABLE_WIN32_INCREASE_PRIORITY
-            #define ACE_DISABLE_WIN32_ERROR_WINDOWS
-            __EOT__
-
-        std_macros[:linux] = <<-__EOT__.gsub(/^\s+/, '')
-          debug=0
-          c++11=1
-          no_deprecated=0
-          inline=1
-          optimize=1
-          boost=0
-        __EOT__
-
         def self.config_include(opts)
-          config_includes[opts[:platform][:os]]
+          opts[:platform][:config_include] || "config_#{opts[:platform][:os]}.h"
         end
 
         def self.make_include(opts)
-          make_includes[opts[:platform][:os]]
+          opts[:platform][:gnumake_include] || "platform_#{opts[:platform][:os]}.GNU"
         end
 
         def self.default_platform_macros(opts)
-          std_macros[opts[:platform][:os]] + "buildbits=#{opts[:bitsize] || opts[:platform][:bits]}\n"
+          (opts[:platform][:gnumake_prelude] || '') + "buildbits=#{opts[:bitsize] || opts[:platform][:bits]}\n"
         end
 
         def self.create_config(cfg)
@@ -95,8 +53,9 @@ module BRIX11
           begin
             config_h_io = cfg.dryrun? ? STDOUT : File.new(config_h, 'w')
             config_h_io.puts("//----- #{CONFIG_H} -----") if cfg.dryrun?
-            config_h_io << config_prelude[cfg.options[:platform][:os]]
+            config_h_io << (cfg.options[:platform][:config_prelude] || '')
             config_h_io.puts(%Q{#include "ace/#{config_include(cfg.options)}"})
+            config_h_io << (cfg.options[:platform][:config_post] || '')
           ensure
             config_h_io.close unless cfg.dryrun?
           end
@@ -121,6 +80,7 @@ module BRIX11
               # generate default platform macros
               platform_macros_io << default_platform_macros(cfg.options)
               platform_macros_io.puts(%Q{include $(ACE_ROOT)/include/makeinclude/#{make_include(cfg.options)}})
+              platform_macros_io << (cfg.options[:platform][:gnumake_post] || '')
             ensure
               platform_macros_io.close unless cfg.dryrun?
             end

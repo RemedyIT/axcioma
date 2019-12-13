@@ -27,7 +27,7 @@ module BRIX11
           # determine/validate platform specific project type
           project_type, project_compiler = if cfg.cfglist.has_key?(:acetao)
                                              cfg.options[:platform][:project_type].call(
-                                                         cfg.options[:bitsize] || cfg.options[:platform][:bits],
+                                                         cfg.options,
                                                          BRIX11.options.user_config.project_type,
                                                          BRIX11.options.user_config.project_compiler)
                                            else
