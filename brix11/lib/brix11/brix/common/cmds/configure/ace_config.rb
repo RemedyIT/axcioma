@@ -22,7 +22,7 @@ module BRIX11
         DEFAULT_FEATURES = File.join('bin', 'MakeProjectCreator', 'config', 'default.features')
 
         def self.config_include(opts)
-          opts[:platform][:config_include] || "config_#{opts[:platform][:os]}.h"
+          opts[:platform][:config_include] || "config-#{opts[:platform][:os]}.h"
         end
 
         def self.make_include(opts)
