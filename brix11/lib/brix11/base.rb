@@ -52,10 +52,6 @@ module BRIX11
     options.force || false
   end
 
-  def self.interactive?
-    options.interactive || false
-  end
-
   Console::Text.label_format=('%-18s')
   Console::Text.indent = 1
 
@@ -243,10 +239,9 @@ module BRIX11
       exit
     }
 
-    # TODO : is this useful?
-    #opts.on_tail('--[no-]interact',
-    #             '(Do not) run commands interactively.',
-    #             'Default: interactive') { |v| options.interactive = v }
+    opts.on_tail('--[no-]rcscan',
+                 "(Do not) scan for #{BRIX11RC} files.",
+                 'Default: scan for files') { |v| options.no_rc_scan = !v }
     opts.on_tail('-f', '--force',
                  'Force all tasks to run even if their dependencies do not require them to.',
                  'Default: off') { options.force = true }
