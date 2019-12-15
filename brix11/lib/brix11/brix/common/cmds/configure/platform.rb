@@ -139,13 +139,10 @@ module BRIX11
             tgt_spec = JSON.parse(IO.read(target_json))
             opts[:platform][:os] = tgt_spec['os'].to_sym if tgt_spec.has_key?('os')
             opts[:platform][:bits] = tgt_spec['bits'] if tgt_spec.has_key?('bits')
-            if tgt_spec.has_key?('defaults')
-              tgt_defs = tgt_spec['defaults']
-              opts[:platform][:defaults][:libroot] = tgt_defs['libroot'] if tgt_defs.has_key?('libroot')
-              opts[:platform][:defaults][:dll_dir] = tgt_defs['dll_dir'] if tgt_defs.has_key?('dll_dir')
-              opts[:platform][:defaults][:library_path_var] = tgt_defs['library_path_var'] if tgt_defs.has_key?('library_path_var')
-              opts[:platform][:defaults][:test_configs] = tgt_defs['test_configs'] if tgt_defs.has_key?('test_configs')
-            end
+            opts[:platform][:defaults][:libroot] = tgt_spec['libroot'] if tgt_spec.has_key?('libroot')
+            opts[:platform][:defaults][:dll_dir] = tgt_spec['dll_dir'] if tgt_spec.has_key?('dll_dir')
+            opts[:platform][:defaults][:library_path_var] = tgt_spec['library_path_var'] if tgt_spec.has_key?('library_path_var')
+            opts[:platform][:defaults][:test_configs] = tgt_spec['test_configs'] if tgt_spec.has_key?('test_configs')
             opts[:platform][:defaults][:prj_type] = tgt_spec['project_type'] if tgt_spec.has_key?('project_type')
             opts[:platform][:defaults][:prj_cc] = tgt_spec['project_cc'] if tgt_spec.has_key?('project_cc')
             opts[:platform][:config_include] = tgt_spec['config_include'] if tgt_spec.has_key?('config_include')

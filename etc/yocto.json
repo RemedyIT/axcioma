@@ -1,12 +1,10 @@
 {
   "os": "linux",
   "bits": 0,
-  "defaults": {
-    "libroot":  "${SDKTARGETSYSROOT}/usr",
-    "dll_dir": "lib",
-    "library_path_var": "LD_LIBRARY_PATH",
-    "test_configs": ["LINUX", "Linux"]
-  },
+  "libroot":  "${SDKTARGETSYSROOT}/usr",
+  "dll_dir": "lib",
+  "library_path_var": "LD_LIBRARY_PATH",
+  "test_configs": ["LINUX", "Linux"],
   "project_type": "gnuautobuild",
   "project_cc": "gnu",
   "config_include": "config-linux.h",
