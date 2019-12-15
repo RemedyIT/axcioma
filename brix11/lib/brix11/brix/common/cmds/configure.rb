@@ -43,7 +43,7 @@ module BRIX11
           options[:configure][:workspace] = v
         end
 
-        optparser.on('-T', '--target', '=NAME', 'Specify target platform name.', 'Default: host') do |v|
+        optparser.on('-T', '--target', '=NAME', 'Specify target platform name.', 'Default: none (target is host os)') do |v|
           options[:configure][:target] = v
         end
 
