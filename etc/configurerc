@@ -13,7 +13,7 @@ configure :acetao do
 
   dependencies do
 
-    optional :crosscompiler do
+    optional :crossbuild do
       environment :targetsysroot do
         name 'SDKTARGETSYSROOT'
         description 'Target sysroot folder (required for cross builds)'
@@ -71,7 +71,7 @@ configure :acetao do
 
   features do
     enable :cross do
-      depends_on :crosscompiler
+      depends_on :crossbuild
     end
   end
 

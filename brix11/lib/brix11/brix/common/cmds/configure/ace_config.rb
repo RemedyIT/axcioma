@@ -71,7 +71,7 @@ module BRIX11
                 cfg.options[:defines].each {|m,v| platform_macros_io.puts("#{m}=#{v ? v : '1'}") }
               end
               # generate crossbuild defines
-              if cfg.features.has_key?(:crosscompiler) && cfg.features[:crosscompiler].state
+              if cfg.features.has_key?(:crossbuild) && cfg.features[:crossbuild].state
                 platform_macros_io.puts("CROSS_COMPILE = #{cfg.user_env['CROSS_COMPILE']}")
                 platform_macros_io.puts("ARCH :=")
                 platform_macros_io.puts("FLAGS_C_CC += --sysroot=$(SDKTARGETSYSROOT)")

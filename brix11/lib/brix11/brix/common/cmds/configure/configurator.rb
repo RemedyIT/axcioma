@@ -374,6 +374,11 @@ module BRIX11
           MPC_Config.create_config(self)
           # generate MWC project config
           MPC_Config.create_workspace(self)
+          # setup HOST environment
+          if features.has_key?(:crossbuild) && features[:crossbuild].state && !options[:variables].has_key?(:x11_host_root)
+            # when no X11 host root is specified for a crossbuild we set up a minimal host environment ourselves
+            HostSetup.create_host_environment(self)
+          end
         end
 
         class << self

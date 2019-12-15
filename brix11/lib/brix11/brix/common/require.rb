@@ -56,6 +56,8 @@ module BRIX11
           Exec.update_run_environment('MPC_ROOT', mpc_root) if mpc_root
         end
         Project.mpc_path = mpc_root if mpc_root
+
+        HostBuild.activate # activate this command if appropriate
       end
 
     end

@@ -52,7 +52,7 @@ module BRIX11
                               'project_compiler' => project_compiler,
                               'brix_paths' => brix_paths,
                               'user_environment' => cfg.user_env,
-                              'crossbuild' => (cfg.features.has_key?(:crosscompiler) && cfg.features[:crosscompiler].state),
+                              'crossbuild' => (cfg.features.has_key?(:crossbuild) && cfg.features[:crossbuild].state),
                               'target_platform' => (cfg.options[:target] || Platform.platform_os) }))
           ensure
             brix11rc_io.close unless cfg.dryrun?
