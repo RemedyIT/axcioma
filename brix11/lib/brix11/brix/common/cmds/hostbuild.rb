@@ -44,37 +44,34 @@ module BRIX11
         rc = true
 
         Sys.in_dir(host_root) do
-          begin
-            host_env = {
-                'ACE_ROOT' => File.join(host_root, 'ACE'),
-                'TAO_ROOT' => File.join(host_root, 'TAO'),
-                'MPC_ROOT' => Exec.get_run_environment('MPC_ROOT'),
+          host_env = {
+              'ACE_ROOT' => File.join(host_root, 'ACE'),
+              'TAO_ROOT' => File.join(host_root, 'TAO'),
+              'MPC_ROOT' => Exec.get_run_environment('MPC_ROOT'),
+          }
+          prj = Project.handler('gnuautobuild')
+          prjargv = []
+          log(2, "checking for gnuautobuild type project")
+          if options[:hostbuild][:generate] || (!prj.project_exists?(*prjargv) && options[:hostbuild][:build])
+            opts = {
+              project: Configure::HostSetup::MWC,
+              mpc_path: File.join(host_root, 'ACE', 'bin'),
+              env: host_env,
+              overwrite_env: true
             }
-            prj = Project.handler('gnuautobuild')
-            prjargv = []
-            log(2, "checking for gnuautobuild type project")
-            if options[:hostbuild][:generate] || (!prj.project_exists?(*prjargv) && options[:hostbuild][:build])
-              opts = {
-                project: Configure::HostSetup::MWC,
-                mpc_path: File.join(host_root, 'ACE', 'bin'),
-                env: host_env,
-                overwrite_env: true
-              }
-              rc = prj.generate(opts, prjargv)
-              raise Command::CmdError, 'Failed to generate project files.' unless rc
-            end
-            opts = options.to_h.merge!({
-                      project: Configure::HostSetup::MWC,
-                      env: host_env,
-                      overwrite_env: true,
-                      make: { noredirect: options[:hostbuild][:noredirect] }
-                    })
-            prjargv << opts
-            rc = prj.clean([], *prjargv) if options[:hostbuild][:clean]
-            rc = prj.build([],*prjargv ) if rc && options[:hostbuild][:build]
-            log_error('Failed to make hosttools') unless rc
-          ensure
+            rc = prj.generate(opts, prjargv)
+            raise Command::CmdError, 'Failed to generate project files.' unless rc
           end
+          opts = options.to_h.merge!({
+                    project: Configure::HostSetup::MWC,
+                    env: host_env,
+                    overwrite_env: true,
+                    make: { noredirect: options[:hostbuild][:noredirect] }
+                  })
+          prjargv << opts
+          rc = prj.clean([], *prjargv) if options[:hostbuild][:clean]
+          rc = prj.build([],*prjargv ) if rc && options[:hostbuild][:build]
+          log_error('Failed to make hosttools') unless rc
         end
 
         rc
