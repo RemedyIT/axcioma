@@ -29,7 +29,7 @@ module BRIX11
           public
 
           def platform_helpers
-            @platform_helpers ||= Hash.new(->(s, opts) {
+            @platform_helpers ||= Hash.new(->(_s, opts) {
                                               opts[:platform].merge!({
                                                 os: :linux,
                                                 bits: 0,
@@ -40,8 +40,8 @@ module BRIX11
                                                   test_configs: %w{LINUX Linux},
                                                   prj_type: 'gnuautobuild'
                                                 },
-                                                project_type: ->(opts, pt=nil, cc=nil) {
-                                                  opts_def = opts[:platform][:defaults]
+                                                project_type: lambda { |opts_, pt=nil, cc=nil|
+                                                  opts_def = opts_[:platform][:defaults]
                                                   prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
                                                   [prjh.class::ID, prjh.compiler]
                                                 },
@@ -66,7 +66,7 @@ module BRIX11
           end
         end
 
-        platform_helpers[/windows/i] = ->(s, opts) {
+        platform_helpers[/windows/i] = ->(_s, opts) {
                                           opts[:platform].merge!({
                                             os: :windows,
                                             arch: ENV['PLATFORM'],
@@ -77,9 +77,9 @@ module BRIX11
                                               test_configs: %w{Win32},
                                               prj_type: 'vs2017'
                                             },
-                                            project_type: ->(opts, pt=nil, cc=nil) {
-                                              bits = opts[:bitsize] || opts[:platform][:bits]
-                                              opts_def = opts[:platform][:defaults]
+                                            project_type: lambda { |opts_, pt=nil, cc=nil|
+                                              bits = opts_[:bitsize] || opts_[:platform][:bits]
+                                              opts_def = opts_[:platform][:defaults]
                                               prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
                                               comp = prjh.compiler.to_s.gsub(/x\d\d/, "x#{bits}")
                                               [prjh.class::ID, comp]
@@ -94,7 +94,7 @@ module BRIX11
                                               }.gsub(/^\s+/, '')
                                           })
                                         }
-        platform_helpers[/linux/i] = ->(s, opts) {
+        platform_helpers[/linux/i] = ->(_s, opts) {
                                         opts[:platform].merge!({
                                           os: :linux,
                                           arch: `uname -m`.chomp,
@@ -105,8 +105,8 @@ module BRIX11
                                             test_configs: %w{LINUX Linux},
                                             prj_type: 'gnuautobuild'
                                           },
-                                          project_type: ->(_opts, pt=nil, cc=nil) {
-                                            opts_def = opts[:platform][:defaults]
+                                          project_type: lambda { |opts_, pt=nil, cc=nil|
+                                            opts_def = opts_[:platform][:defaults]
                                             prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
                                             [prjh.class::ID, prjh.compiler]
                                           },
