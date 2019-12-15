@@ -48,9 +48,9 @@ module BRIX11
         end
         optparser.on('-N', '--no-redirect',
                      'Do not redirect output from child process..',
-                     'Default: redirect and filter output.') {|v|
+                     'Default: redirect and filter output.') do |v|
           options[:make][:noredirect] = true
-        }
+        end
       end
 
       def run(argv)
