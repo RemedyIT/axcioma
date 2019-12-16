@@ -48,9 +48,9 @@ module BRIX11
         end
         optparser.on('-N', '--no-redirect',
                      'Do not redirect output from child process..',
-                     'Default: redirect and filter output.') {|v|
+                     'Default: redirect and filter output.') do |v|
           options[:make][:noredirect] = true
-        }
+        end
       end
 
       def run(argv)
@@ -98,6 +98,7 @@ module BRIX11
           rc = prj.clean(options[:make][:make_opts].dup, *prjargv) if options[:make][:clean]
           rc = prj.build(options[:make][:make_opts].dup,*prjargv ) if rc && options[:make][:build]
           log_error("Executing #{current_cmd} failed.") unless rc
+          rc
         end
 
         # do we have any buildlists specified

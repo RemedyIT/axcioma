@@ -13,6 +13,30 @@ configure :acetao do
 
   dependencies do
 
+    optional :crossbuild do
+      environment :targetsysroot do
+        name 'SDKTARGETSYSROOT'
+        description 'Target sysroot folder (required for cross builds)'
+      end
+      environment :crosscompile_prefix do
+        name 'CROSS_COMPILE'
+        description 'Prefix for crosscompiler binaries'
+      end
+      environment :x11_host_root do
+        name 'X11_HOST_ROOT'
+        description 'AXCIOMA host buildroot (optional for cross builds)'
+        default '${X11_BASE_ROOT}/HOST'
+      end
+      environment :ace_host_root do
+        name 'HOST_ROOT'
+        description 'ACE host buildroot (optional for cross builds)'
+        default '${X11_HOST_ROOT}/ACE/ACE'
+      end
+      requires :targetsysroot
+      exist '${SDKTARGETSYSROOT}'
+      executable '${CROSS_COMPILE}gcc'
+    end
+
     optional :ssl do
       environment :sslroot do
         name 'SSL_ROOT'
@@ -43,6 +67,12 @@ configure :acetao do
       library_path '${ZLIB_ROOT}/${:DLL_DIR}'
     end
 
+  end
+
+  features do
+    enable :cross do
+      depends_on :crossbuild
+    end
   end
 
   mpc do

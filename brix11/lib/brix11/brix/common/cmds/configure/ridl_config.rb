@@ -36,8 +36,8 @@ module BRIX11
           # backup current file
           Util.backup_file(ridlrc) unless cfg.dryrun?
           # determine the backend to configure
-          ridl_be_list = cfg.rclist.values.inject({}) do |hsh, rc|      # collect backend table
-            hsh.merge!({rc.ridl_backend[:backend] => rc.ridl_backend[:bases]}) if rc.ridl_backend[:backend]
+          ridl_be_list = cfg.cfglist.values.inject({}) do |hsh, mod|      # collect backend table
+            hsh.merge!({mod.ridl_backend[:backend] => mod.ridl_backend[:bases]}) if mod.ridl_backend[:backend]
             hsh
           end
           # select the backend to configure
@@ -49,8 +49,8 @@ module BRIX11
             end
           end
           # collect list of configured be paths of enabled modules relative to location of ridlrc file
-          ridl_be_path = cfg.rclist.values.collect do |rc|
-            rc.ridl_be_path.collect {|p| Util.relative_path(p, base_root) }
+          ridl_be_path = cfg.cfglist.values.collect do |mod|
+            mod.ridl_be_path.collect {|p| Util.relative_path(p, base_root) }
           end.flatten
           # generate ridlrc file
           BRIX11.show_msg("Creating #{ridlrc}")

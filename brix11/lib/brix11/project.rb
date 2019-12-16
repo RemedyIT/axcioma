@@ -183,6 +183,9 @@ module BRIX11
           project = nil unless path
         end
         path ||= '.'
+        mpcpath = opts.delete(:mpc_path)
+        mpccmd = mpcpath ? File.join(mpcpath, MPC_CMD) : Project.mpc_cmd
+        mwccmd = mpcpath ? File.join(mpcpath, MWC_CMD) : Project.mwc_cmd
         if project
           case
           when File.exist?(File.join(path, project))
@@ -190,11 +193,11 @@ module BRIX11
             if /\.(mwc|mpc)\Z/ =~ project
               if $1 == 'mpc'
                 # .mpc file -> run mpc.pl on specified file
-                cmd = Project.mpc_cmd
+                cmd = mpccmd
                 mwc = false
               else
                 # .mwc file -> run mwc.pl on specified file
-                cmd = Project.mwc_cmd
+                cmd = mwccmd
                 mwc = true
               end
             else
@@ -205,12 +208,12 @@ module BRIX11
           when File.exist?(File.join(path, "#{project}.mwc"))
             # project specifies basename of an existing .mwc file -> run mwc.pl
             project = "#{project}.mwc"
-            cmd = Project.mwc_cmd
+            cmd = mwccmd
             mwc = true
           when File.exist?(File.join(path, "#{project}.mpc"))
             # project specifies basename of an existing .mpc file -> run mpc.pl
             project = "#{project}.mpc"
-            cmd = Project.mpc_cmd
+            cmd = mpccmd
             mwc = false
           else
             # project may specify a subproject in one of the .mpc files in the
@@ -220,14 +223,14 @@ module BRIX11
               return nil
             end
             project = mpcname # replace project by .mpc file to generate
-            cmd = Project.mpc_cmd
+            cmd = mpccmd
             mwc = false
           end
         else
           # use mwc.pl in <path>/ to build all projects in that
           # directory and the tree below recursively
           mwc = true
-          cmd = Project.mwc_cmd
+          cmd = mwccmd
         end
         argv << cmd
         argv << '-type' << @type
@@ -247,6 +250,10 @@ module BRIX11
         argv.concat(extra_mpc_args)
 
         argv.concat(cmdargv)
+
+        run_env = opts.delete(:env)
+        runopts[:env] = run_env if run_env
+        runopts[:overwrite_env] = opts.delete(:overwrite_env)
 
         opts.each do |opt, val|
           case val

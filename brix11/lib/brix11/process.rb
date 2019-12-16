@@ -229,6 +229,10 @@ module BRIX11
       run_env[env] || ((BRIX11.use_environment? || force_use_env) ? ENV[env] : nil)
     end
 
+    def self.reset_run_environment
+      run_env.clear
+    end
+
     # runcmd cmd [, arg[, arg[, ...]]] [, opts = {}] [, &block]
     #
     # opts = {
