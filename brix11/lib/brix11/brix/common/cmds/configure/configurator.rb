@@ -59,16 +59,28 @@ module BRIX11
         class CfgModule
 
           class CfgDependency
+
+            Evaluator = Class.new do
+              def initialize(rcdep)
+                @rcdep = rcdep
+              end
+              def getenv(varname)
+                @rcdep.get_var(varname)
+              end
+            end
+
             def initialize(mod, rcdep)
               @mod = mod
               @rcdep = rcdep
               @env_additions = {}
             end
 
+            def get_var(varname)
+              (@env_additions[varname] || Exec.get_run_environment(varname)).to_s
+            end
+
             def expand_var(val)
-              val.gsub(/\$\{([^\s\/\}:;]+)\}/) do |m|
-                (@env_additions[$1] || Exec.get_run_environment($1)).to_s
-              end
+              val.gsub(/\$\{([^\s\/\}:;]+)\}/) { |m| get_var($1) }
             end
             private :expand_var
 
@@ -179,6 +191,19 @@ module BRIX11
                     break # stop verifying
                   end
                 end if @rcdep.state # only verify execs if still needed
+                # verify evaluation blocks
+                @rcdep.evals.each do |id, block|
+                  BRIX11.log(3, "Verifying [#{@mod.mod_id}:#{featureid}] : evaluate [#{id}, #{block.inspect}]")
+                  unless Evaluator.new(self).instance_eval(&block)
+                    if @rcdep.required?
+                      BRIX11.log_warning("Verification of evaluate [#{id}] failed for mandatory feature :#{featureid} for module :#{@mod.mod_id}. Disabling module.")
+                    else
+                      BRIX11.log_information("Verification of evaluate [#{id}] failed for feature :#{featureid} for module :#{@mod.mod_id}. Disabling feature.")
+                    end
+                    @rcdep.state = false
+                    break # stop verifying
+                  end
+                end if @rcdep.state # only verify evals if still needed
               end
               # keep environment additions if dependency fulfilled
               if @rcdep.state
