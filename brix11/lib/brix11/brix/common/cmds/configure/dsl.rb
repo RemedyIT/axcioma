@@ -206,6 +206,10 @@ module BRIX11
               @dep.execs.concat(paths.flatten)
             end
 
+            def evaluate(id, &block)
+              @dep.evals << [id, block]
+            end
+
             def library_path(*args)
               @dep.library_paths.concat(args.flatten.collect {|arg| arg.to_s })
             end
@@ -220,12 +224,13 @@ module BRIX11
             @files = []
             @paths = []
             @execs = []
+            @evals = []
             @library_paths = []
             @state = true # true until proven otherwise
             DSLHandler.new(self).instance_eval(&block)
           end
 
-          attr_reader :kind, :featureid, :environment, :requires, :files, :paths, :execs, :library_paths
+          attr_reader :kind, :featureid, :environment, :requires, :files, :paths, :execs, :evals, :library_paths
           attr_accessor :state
 
           def required?
