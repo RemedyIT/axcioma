@@ -80,6 +80,7 @@ configure :acetao do
         name 'VALGRIND_OPTS'
         description 'Optional arguments used by valgrind'
       end
+      requires :valgrindcmd
     end
   end
 
