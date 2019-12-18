@@ -74,7 +74,7 @@ configure :acetao do
       end
       environment :valgrindcmd do
         name 'ACE_RUN_VALGRIND_CMD'
-        description 'Executable name to be used for valgrind'
+        description 'Executable name to be used for valgrind (required for valgrind integration)'
       end
       environment :valgrindopts do
         name 'VALGRIND_OPTS'
