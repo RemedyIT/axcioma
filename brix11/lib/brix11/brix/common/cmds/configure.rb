@@ -21,14 +21,14 @@ module BRIX11
         :features => {}
       }
 
-
       def self.setup(optparser, options)
         options[:configure] = OPTIONS.dup
         optparser.banner = "#{DESC}\n\n"+
                            "Usage: #{options[:script_name]} configure [options]\n\n"
 
-        optparser.on('-b', '--bits', '=BITSIZE', Integer, 'Override platform default bitsize (32 or 64).') do |v|
-          BRIX11.log_fatal("Invalid bitsize specified [#{v}]. Supported sizes are 32 or 64.") unless [32,64].include?(v.to_i)
+        optparser.on('-b', '--bits', '=BITSIZE', Integer, 'Override platform default bitsize (0, 32 or 64).',
+                                                          'Specifying 0 disables explicit bitsize setting.') do |v|
+          BRIX11.log_fatal("Invalid bitsize specified [#{v}]. Supported sizes are 0, 32 or 64.") unless [0, 32,64].include?(v.to_i)
           options[:configure][:bitsize] = v.to_i
         end
 
@@ -41,6 +41,10 @@ module BRIX11
 
         optparser.on('-w', '--workspace', '=NAME', 'Set MWC workspace filename to NAME.mwc.', 'Default: "workspace".') do |v|
           options[:configure][:workspace] = v
+        end
+
+        optparser.on('-T', '--target', '=NAME', 'Specify target platform name.', 'Default: none (target is host os)') do |v|
+          options[:configure][:target] = v
         end
 
         if /linux/i =~ Platform.platform_os
@@ -68,12 +72,17 @@ module BRIX11
           STDOUT.puts 'BRIX11 configure configuration variables'
           STDOUT.puts '----------------------------------------'
           vars = rclist.values.collect {|rc| rc.dependencies.values.collect {|dep| dep.environment.values}}.flatten
+          vars.prepend(Common::Configure::RCSpec::Dependency::Environment.new(:path) do
+            name 'PATH'
+            description 'Executable searchpath addition (prepended).'
+          end)
           vars.each {|v| STDOUT.puts('%-15s  %s' % [v.variable.to_s, v.description]) }
           STDOUT.puts
           exit
         end
 
         optparser.on('-W', '--with', '=VARIABLE', 'Set a configuration variable as "<varname>=<value>".' ,
+                                                  'Supports \$VAR and \${VAR}-form variable expansion.',
                                                   'Use "-V" or "--showvar" to display the list of variables.') do |v|
           var, val = v.split('=', 2)
           BRIX11.log_fatal("Missing required value for configuration variable in [--with #{v}].") unless val

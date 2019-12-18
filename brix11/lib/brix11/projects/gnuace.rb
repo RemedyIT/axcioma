@@ -80,6 +80,10 @@ module BRIX11
 
         runopts[:debug] = options[:make][:debug]
 
+        run_env = options[:env]
+        runopts[:env] = run_env if run_env
+        runopts[:overwrite_env] = options[:overwrite_env]
+
         argv = base_build_arg(project, path, cmdargv, runopts) << runopts
         argv << Proc.new if block_given?
         ok, rc = Exec.runcmd(*argv)

@@ -190,12 +190,24 @@ module BRIX11
               @dep.environment[env.variable] = env
             end
 
+            def requires(*var)
+              @dep.requires.concat(var.flatten)
+            end
+
             def file(*files)
               @dep.files.concat(files.flatten)
             end
 
             def exist(*paths)
               @dep.paths.concat(paths.flatten)
+            end
+
+            def executable(*paths)
+              @dep.execs.concat(paths.flatten)
+            end
+
+            def evaluate(id, &block)
+              @dep.evals << [id, block]
             end
 
             def library_path(*args)
@@ -208,14 +220,17 @@ module BRIX11
             @kind = kind
             @featureid = featureid
             @environment = {}
+            @requires = []
             @files = []
             @paths = []
+            @execs = []
+            @evals = []
             @library_paths = []
             @state = true # true until proven otherwise
             DSLHandler.new(self).instance_eval(&block)
           end
 
-          attr_reader :kind, :featureid, :environment, :files, :paths, :library_paths
+          attr_reader :kind, :featureid, :environment, :requires, :files, :paths, :execs, :evals, :library_paths
           attr_accessor :state
 
           def required?

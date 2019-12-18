@@ -3,7 +3,7 @@
 
 == Collection
 
-common
+  common
 
 == Usage
 
@@ -16,6 +16,8 @@ common
   -e, --enable=FEATURE             Enable feature (independent of dependency checks).
   -w, --workspace=NAME             Set MWC workspace filename to NAME.mwc.
                                    Default: "workspace".
+  -T, --target=NAME                Specify target platform name.
+                                   Default: none (target is host os)
   -D, --define=MACRO               Define macro for make files as <macro>[=<value>].
   -I, --include=PATH               Include any modules in PATH in configure process.
   -P, --print-config               Print out the current configuration (if any).
@@ -51,11 +53,18 @@ create the following configuration files
 
   BRIX11 configuration
 
- workspace.mwc
+  workspace.mwc
 
   MPC workspace containing all core libraries and support libraries
 
+When a crossbuild is configured without specifying an explicit external host environment (a TAOX11 or AXCIOMA build tree) a local,
+minimalized crossbuild host environment is set up in the $X11_BASE_ROOT/HOST folder.
+The minimum required host tool binaries can than be build using the _brix11_ _host_ _build_ command.
+
+The _brix11_ _host_ _build_ command is *only* available when a crossbuild with local, minimalized, host environment is configured.
+
 :*NOTE*
+
   As the _configure_ command updates/creates, among others, the configuration for
   BRIX11 itself no other commands can be chained. The _configure_ command
   will *always* exit BRIX11 when finished.
@@ -73,3 +82,20 @@ Configure with custom MWC workspace name and specified Xerces-C library root
 $ brix11 configure -E ciaox11/connectors/psdd4ccm
 
 Configure excluding the psdd4ccm connector module.
+
+$ brix11 configure --target yocto \
+  -W targetsysroot=../YOCTO/sysroots/aarch64-poky-linux \
+  -W crosscompile_prefix=aarch64-poky-linux- \
+  -W path=/path/to/host/cross/compiler/binaries
+
+Configure crossbuild for a Yocto aarch64 target with minimal, local, host environment set up in $X11_BASE_ROOT/HOST.
+BRIX11 reads (optional) target build specs from $X11_BASE_ROOT/etc/<target>.json if available.
+
+$ brix11 configure --target yocto \
+  -W x11_host_root=/path/to/host/x11/build/tree \
+  -W targetsysroot=../YOCTO/sysroots/aarch64-poky-linux \
+  -W crosscompile_prefix=aarch64-poky-linux- \
+  -W path=/path/to/host/cross/compiler/binaries
+
+Configure crossbuild for a Yocto aarch64 target with explicit external host environment set up in *x11_host_root*.
+BRIX11 reads (optional) target build specs from $X11_BASE_ROOT/etc/<target>.json if available.

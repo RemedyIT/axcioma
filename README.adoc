@@ -1,5 +1,6 @@
 image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=https://www.axcioma.org/scoreboard.html]
 image:https://dev.azure.com/remedyit/axcioma/_apis/build/status/axcioma?branchName=master[Azure pipeline, link=https://dev.azure.com/remedyit/axcioma/_build?definitionId=2&_a=summary]
+image:https://www.codefactor.io/repository/github/remedyit/axcioma/badge[CodeFactor, link=https://www.codefactor.io/repository/github/remedyit/axcioma]
 
 = Building AXCIOMA or TAOX11
 
@@ -59,7 +60,13 @@ The configure step generates the necessary configuration files for the specified
 
  bin/brix11 configure
 
-NOTE: Configure doesn't use your current environment, when you want configure to use your current environment use `bin/brix11 -E configure`. As alternative you can specify configuration variables as argument to configure, for example `-W nddshome=$HOME/NDDS/rti_connext_dds-5.2.3 -W nddsarch=x64Linux3gcc4.8.2` to specify the RTI Connext DDS home and architecture.
+NOTE: Configure doesn't use your current environment, when you want configure to use your current environment
+use `bin/brix11 -E configure`. When using the `-E` switch you have to keep in mind you will have to keep using
+that switch when building project files, running make and running tests. +
+As alternative you can specify configuration variables as argument to configure,
+for example `-W nddshome=$HOME/NDDS/rti_connext_dds-5.2.3 -W nddsarch=x64Linux3gcc4.8.2` to specify the
+RTI Connext DDS home and architecture. This will cause the settings to be stored in the BRIX11 configuration.
+The `bin/brix11 env` command will show you all environment variables set up by BRIX11.
 
 == Generate build artifacts
 

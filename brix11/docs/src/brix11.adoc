@@ -94,6 +94,8 @@ Usage: brix11 [general options] command [options] [command [options] [...]
 
     -V, --version                    Show version information and exit.
 
+        --[no-]rcscan                (Do not) scan for .brix11rc files.
+                                     Default: scan for files
     -f, --force                      Force all tasks to run even if their dependencies do not require them to.
                                      Default: off
     -n, --dryrun                     Perform dry run (no destructive/persistent actions).
