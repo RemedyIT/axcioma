@@ -55,7 +55,6 @@ module BRIX11
                                                     no_deprecated=0
                                                     inline=1
                                                     optimize=1
-                                                    boost=0
                                                   }.gsub(/^\s+/, '')
                                               })
                                             })
@@ -122,7 +121,6 @@ module BRIX11
                                               no_deprecated=0
                                               inline=1
                                               optimize=1
-                                              boost=0
                                             }.gsub(/^\s+/, '')
                                         })
                                         opts[:platform][:bits] = (opts[:platform][:arch] == 'x86_64' ? 64 : 32)
