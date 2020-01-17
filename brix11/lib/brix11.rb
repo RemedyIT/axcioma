@@ -28,5 +28,5 @@ end
 require 'brix11/base'
 
 if $0 == __FILE__
-  BRIX11.run
+  exit(1) unless BRIX11.run
 end

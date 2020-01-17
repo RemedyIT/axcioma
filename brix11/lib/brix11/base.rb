@@ -302,6 +302,8 @@ module BRIX11
     ensure
       options.logfile.close if options.logfile
     end
+    log(2, "run -> rc=#{rc}")
+    rc
   end
 
   def self.execute(argv)

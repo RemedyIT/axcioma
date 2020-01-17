@@ -31,7 +31,7 @@ end
 
 if __FILE__ == $0
 
-  BRIX11.run
+  exit(1) unless BRIX11.run
 
 end
 
