@@ -109,7 +109,6 @@ module BRIX11
                   no_deprecated=0
                   inline=1
                   optimize=1
-                  boost=0
                 }.gsub(/^\s+/, '')
                 platform_macros_io.puts('include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU')
               ensure
