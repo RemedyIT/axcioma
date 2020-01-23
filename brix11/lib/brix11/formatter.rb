@@ -163,7 +163,7 @@ module BRIX11
 
       # override
       def print(*args)
-        txt = (@cache.to_s.dup << args.flatten.join)
+        txt = ((@cache || '') << args.flatten.join)
         lines = txt.split("\n")
         # cache last line if NOT ended by "\n"
         @cache = lines.pop unless /\n$/ =~ txt
