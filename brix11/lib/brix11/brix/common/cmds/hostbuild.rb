@@ -38,7 +38,7 @@ module BRIX11
         end
       end
 
-      def run(_argv)
+      def run(argv)
         # get make's own options/arguments
         # skip the '--' (if any)
         if !argv.empty? && argv.first == '--'
