@@ -46,7 +46,7 @@ module BRIX11
         end
         # only arguments after PROJECT or after '--' are remaining, now gather unless arg is new brix command
         options[:hostbuild][:make_opts] ||= []
-        while !(argv.empty?)
+        until argv.empty?
           break if Command.is_command_arg?(argv.first, options)
           options[:hostbuild][:make_opts] << argv.shift
         end
