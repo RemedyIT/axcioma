@@ -78,11 +78,11 @@ module BRIX11
                     project: Configure::HostSetup::MWC,
                     env: host_env,
                     overwrite_env: true,
-                    make: { noredirect: options[:hostbuild][:noredirect], make_opts: options[:hostbuild][:make_opts] }
+                    make: { noredirect: options[:hostbuild][:noredirect] }
                   })
           prjargv << opts
-          rc = prj.clean([], *prjargv) if options[:hostbuild][:clean]
-          rc = prj.build([],*prjargv ) if rc && options[:hostbuild][:build]
+          rc = prj.clean(options[:hostbuild][:make_opts].dup, *prjargv) if options[:hostbuild][:clean]
+          rc = prj.build(options[:hostbuild][:make_opts].dup,*prjargv ) if rc && options[:hostbuild][:build]
           log_error('Failed to make hosttools') unless rc
         end
 
