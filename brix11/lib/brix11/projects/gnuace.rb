@@ -59,7 +59,6 @@ module BRIX11
         runopts[:capture] = :all if block_given?
         runopts[:filter] = init_filter(options[:verbose] || 1, options[:logfile]) unless options[:make][:noredirect]
         runopts[:debug] = options[:make][:debug]
-        runopts[:gnu_make_version] = BRIX11.options.config.gnu_make_version
         argv = base_build_arg(project, path, cmdargv, runopts) << 'realclean' << runopts
         argv << Proc.new if block_given?
         ok, rc = Exec.runcmd(*argv)
@@ -89,7 +88,6 @@ module BRIX11
         runopts[:capture] = :all if block_given?
         runopts[:filter] = init_filter(options[:verbose] || 1, options[:logfile]) unless options[:make][:noredirect]
         runopts[:debug] = options[:make][:debug]
-        runopts[:gnu_make_version] = BRIX11.options.config.gnu_make_version
 
         run_env = options[:env]
         runopts[:env] = run_env if run_env
