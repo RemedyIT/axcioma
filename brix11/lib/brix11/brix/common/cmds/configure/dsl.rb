@@ -57,7 +57,6 @@ module BRIX11
           def load_all_rc(includes, excludes)
             rclist = {}
             loaded_rcs = []
-            dirstack = []
             # determine default trees to scan
             cwd = Dir.getwd
             if Configurator::ROOT.size > cwd.size
