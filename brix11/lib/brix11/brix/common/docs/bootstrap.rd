@@ -9,14 +9,14 @@ common
 
   brix11 bootstrap [TARGET] [options]
 
-  TARGET := Target component collection to bootstrap. Currently supported:
+  TARGET := Target component collection to bootstrap. Supported:
             taox11         Bootstraps solely the TAOX11 framework components
             axcioma        Bootstraps the AXCIOMA framework components (default)
 
 === options
 
   -t, --tag=COMPONENT:TAG          Override default repository tags for framework components.
-                                   Specify as <component id>:<tag>. Currently supported components:
+                                   Specify as <component id>:<tag>. Supported components:
                                    ACE        DOC Group ACE+TAO repository
                                    MPC        DOC Group MPC repository
                                    ridl       RIDL IDL compiler frontend

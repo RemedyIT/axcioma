@@ -24,12 +24,12 @@ module BRIX11
         options[:bootstrap] = OPTIONS.dup
         optparser.banner = "#{DESC}\n\n"+
                            "Usage: #{options[:script_name]} bootstrap [TARGET] [options]\n\n"+
-                           "       TARGET := Target component collection to bootstrap. Currently supported:\n"+
+                           "       TARGET := Target component collection to bootstrap. Supported:\n"+
                            "                 taox11 \tBootstraps solely the TAOX11 framework components\n"+
                            "                 axcioma\tBootstraps the AXCIOMA framework components (default)\n\n"
 
         optparser.on('-t', '--tag', '=COMPONENT:TAG', String, 'Override default repository tags for framework components.',
-                                                              'Specify as <component id>:<tag>. Currently supported components:',
+                                                              'Specify as <component id>:<tag>. Supported components:',
                                                               "ACE\tDOC Group ACE + TAO repository",
                                                               "MPC\tDOC Group MPC repository",
                                                               "ridl\tRIDL IDL compiler frontend",
