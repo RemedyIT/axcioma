@@ -47,8 +47,8 @@ module BRIX11
         log(3, "Loading #{BRIX11RC} from #{rcpath}")
         begin
           _cfg = JSON.parse(IO.read(rcpath))
-        rescue JSON::ParserError
-          log_fatal("Error parsing JSON file #{rcpath}")
+        rescue JSON::ParserError => ex
+          log_fatal("Error parsing JSON file #{rcpath}: #{ex}")
         end
         log(4, "Read from #{rcpath}: [#{_cfg}]")
         _rcdir = File.dirname(rcpath)
