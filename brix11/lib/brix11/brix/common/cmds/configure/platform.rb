@@ -140,8 +140,8 @@ module BRIX11
           if File.file?(target_json)
             begin
               tgt_spec = JSON.parse(IO.read(target_json))
-            rescue JSON::ParserError
-              log_fatal("Error parsing JSON file #{target_json}")
+            rescue JSON::ParserError => ex
+              log_fatal("Error parsing JSON file #{target_json}: #{ex}")
             end
             opts[:platform][:os] = tgt_spec['os'].to_sym if tgt_spec.has_key?('os')
             opts[:platform][:bits] = tgt_spec['bits'] if tgt_spec.has_key?('bits')
