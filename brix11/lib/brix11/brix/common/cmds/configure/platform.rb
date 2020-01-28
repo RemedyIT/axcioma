@@ -30,11 +30,6 @@ module BRIX11
             os
           end
 
-          def get_make_version
-            version = `make --version`.match(/[\d.]+/).to_s
-            version
-          end
-
           public
 
           def platform_helpers
