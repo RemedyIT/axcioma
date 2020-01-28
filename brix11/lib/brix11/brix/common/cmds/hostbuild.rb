@@ -61,9 +61,10 @@ module BRIX11
               'TAO_ROOT' => File.join(host_root, 'TAO'),
               'MPC_ROOT' => Exec.get_run_environment('MPC_ROOT'),
           }
-          prj = Project.handler(BRIX11.options.config.gnu_make_version >= '4.0' ? 'gnuace' : 'gnuautobuild')
+          default_project_type = BRIX11::Project.handler('gnumake').default_prj_type
+          prj = Project.handler(default_project_type)
           prjargv = []
-          log(2, "checking for gnuautobuild type project")
+          log(2, "checking for #{default_project_type} type project")
           if options[:hostbuild][:generate] || (!prj.project_exists?(*prjargv) && options[:hostbuild][:build])
             opts = {
               project: Configure::HostSetup::MWC,

@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------
-# @file    solution.rb
+# @file    msbuild.rb
 # @author  Marijke Hengstmengel
 #
 # @brief   MSBuild Solution project type support for brix11

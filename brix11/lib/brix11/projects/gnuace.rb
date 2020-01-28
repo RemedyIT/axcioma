@@ -14,17 +14,26 @@ module BRIX11
 
   module Project
 
-    class GnuAce < Handler
+    class GnuMake < Handler
 
-      ID = 'gnuace'
-      DESCRIPTION = 'GNU Make makefiles'
+      ID = 'gnumake'
       BUILDTOOL = 'make'
       BUILDTOOL_VERSION = `make --version`.match(/[\d.]+/).to_s
       PROJECTNAME = 'GNUmakefile'
+      DESCRIPTION = 'GNU Make makefiles'
       COMPILERS = Hash[
         gnu: GNUCompiler
       ]
       COMPILERS.default = GNUCompiler
+
+      def default_prj_type
+        BUILDTOOL_VERSION >= '4.0' ? 'gnuace' : 'gnuautobuild'
+      end
+    end
+
+    class GnuAce < GnuMake
+
+      ID = 'gnuace'
 
       def make_files
         PROJECTNAME
@@ -144,6 +153,7 @@ module BRIX11
 
     end # Handler
 
+    register(GnuMake::ID, GnuMake)
     register(GnuAce::ID, GnuAce)
 
   end # Project

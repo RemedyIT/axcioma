@@ -47,7 +47,7 @@ module BRIX11
                                                   dll_dir: 'lib',
                                                   library_path_var: 'LD_LIBRARY_PATH',
                                                   test_configs: %w{LINUX Linux},
-                                                  prj_type: 'gnuautobuild'
+                                                  prj_type: BRIX11::Project.handler('gnumake').default_prj_type
                                                 },
                                                 project_type: lambda { |opts_, pt=nil, cc=nil|
                                                   opts_def = opts_[:platform][:defaults]
@@ -111,7 +111,7 @@ module BRIX11
                                             dll_dir: 'lib',
                                             library_path_var: 'LD_LIBRARY_PATH',
                                             test_configs: %w{LINUX Linux},
-                                            prj_type: get_make_version >= '4.0' ? 'gnuace' : 'gnuautobuild'
+                                            prj_type: BRIX11::Project.handler('gnumake').default_prj_type
                                           },
                                           project_type: lambda { |opts_, pt=nil, cc=nil|
                                             opts_def = opts_[:platform][:defaults]
