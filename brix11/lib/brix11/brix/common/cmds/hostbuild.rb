@@ -49,7 +49,7 @@ module BRIX11
               'TAO_ROOT' => File.join(host_root, 'TAO'),
               'MPC_ROOT' => Exec.get_run_environment('MPC_ROOT'),
           }
-          prj = Project.handler('gnuautobuild')
+          prj = Project.handler(BRIX11.options.config.gnu_make_version >= '4.0' ? 'gnuace' : 'gnuautobuild')
           prjargv = []
           log(2, "checking for gnuautobuild type project")
           if options[:hostbuild][:generate] || (!prj.project_exists?(*prjargv) && options[:hostbuild][:build])
@@ -71,7 +71,7 @@ module BRIX11
           prjargv << opts
           rc = prj.clean([], *prjargv) if options[:hostbuild][:clean]
           rc = prj.build([],*prjargv ) if rc && options[:hostbuild][:build]
-          log_error('Failed to make hosttools') unless rc
+          log_error('Failed to make host tools') unless rc
         end
 
         rc

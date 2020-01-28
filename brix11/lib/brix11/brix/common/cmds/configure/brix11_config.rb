@@ -53,6 +53,7 @@ module BRIX11
                               'brix_paths' => brix_paths,
                               'user_environment' => cfg.user_env,
                               'crossbuild' => (cfg.features.has_key?(:crossbuild) && cfg.features[:crossbuild].state),
+                              'gnu_make_version' => (cfg.options[:platform][:gnu_make_version]),
                               'target_platform' => (cfg.options[:target] || Platform.platform_os) }))
           ensure
             brix11rc_io.close unless cfg.dryrun?

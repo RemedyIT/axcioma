@@ -101,6 +101,7 @@ module BRIX11
                                         opts[:platform].merge!({
                                           os: :linux,
                                           arch: `uname -m`.chomp,
+                                          gnu_make_version: `make --version`.match(/[\d.]+/),
                                           defaults: {
                                             libroot: '/usr',
                                             dll_dir: 'lib',
