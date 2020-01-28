@@ -2,7 +2,7 @@
 # @file    solution.rb
 # @author  Marijke Hengstmengel
 #
-# @brief   MSVC Solution project type support for brix11
+# @brief   MSBuild Solution project type support for brix11
 #
 # @copyright Copyright (c) Remedy IT Expertise BV
 #--------------------------------------------------------------------

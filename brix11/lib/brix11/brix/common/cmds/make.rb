@@ -23,7 +23,6 @@ module BRIX11
         make_opts: []
       }
 
-
       def self.setup(optparser, options)
         options[:make] = OPTIONS.dup
         options[:make][:lists] = []

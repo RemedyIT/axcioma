@@ -19,6 +19,7 @@ module BRIX11
       ID = 'gnuace'
       DESCRIPTION = 'GNU Make makefiles'
       BUILDTOOL = 'make'
+      BUILDTOOL_VERSION = `make --version`.match(/[\d.]+/).to_s
       PROJECTNAME = 'GNUmakefile'
       COMPILERS = Hash[
         gnu: GNUCompiler
@@ -125,7 +126,7 @@ module BRIX11
         argv << (opts[:debug] ? 'debug=1' : 'debug=0')
         # GNU make 4.0 has a way to control output during parallel execution
         # https://www.gnu.org/software/make/manual/html_node/Parallel-Output.html#Parallel-Output
-        argv << '-j' << (Exec.max_cpu_cores > 0 ? Exec.max_cpu_cores.strip : Exec.cpu_cores) << '-Orecurse' if Exec.cpu_cores > 1 && opts[:gnu_make_version] >= '4.0'
+        argv << '-j' << (Exec.max_cpu_cores > 0 ? Exec.max_cpu_cores.strip : Exec.cpu_cores) << '-Orecurse' if Exec.cpu_cores > 1 && BUILDTOOL_VERSION >= '4.0'
         argv << '--always-make' if opts[:force]
         opts[:chdir] = path if path && (project || File.directory?(path))
         if opts[:chdir]
