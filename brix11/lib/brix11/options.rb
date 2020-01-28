@@ -45,7 +45,11 @@ module BRIX11
 
       def load(rcpath)
         log(3, "Loading #{BRIX11RC} from #{rcpath}")
-        _cfg = JSON.parse(IO.read(rcpath))
+        begin
+          _cfg = JSON.parse(IO.read(rcpath))
+        rescue JSON::ParserError
+          log_fatal("Error parsing JSON file #{rcpath}")
+        end
         log(4, "Read from #{rcpath}: [#{_cfg}]")
         _rcdir = File.dirname(rcpath)
         # handle automatic env var expansion in brix_paths

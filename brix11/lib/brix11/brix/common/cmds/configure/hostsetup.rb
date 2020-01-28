@@ -152,7 +152,7 @@ module BRIX11
           # only setup if no $X11_BASE_ROOT/HOST folder exists yet
           x11_host_root = File.join(Exec.get_run_environment('X11_BASE_ROOT'), FOLDER)
           if File.directory?(x11_host_root)
-            BRIX11.log_information('$X11_BASE_ROOT/HOST already exists. Assuming existing crosssbuild host environment to be used.')
+            BRIX11.log_information('$X11_BASE_ROOT/HOST already exists. Assuming existing crossbuild host environment to be used.')
           else
             BRIX11.show_msg("Setting up crossbuild host environment at $X11_BASE_ROOT/#{FOLDER}")
             x11_host_acetao_root = File.join(x11_host_root, 'ACE')
