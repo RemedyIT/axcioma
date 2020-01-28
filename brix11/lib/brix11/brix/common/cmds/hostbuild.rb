@@ -23,7 +23,7 @@ module BRIX11
       def self.setup(optparser, options)
         options[:hostbuild] = OPTIONS.dup
         optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} host build [options]\n\n"
+                           "Usage: #{options[:script_name]} host build [options] [-- make-options]\n\n"
 
         optparser.on('-c', '--clean', 'Clean only.') { options[:hostbuild][:clean] = true; options[:hostbuild][:build] = false }
         optparser.on('-r', '--rebuild', 'Clean and than build.') { options[:hostbuild][:clean] = true; options[:hostbuild][:build] = true }
@@ -38,7 +38,19 @@ module BRIX11
         end
       end
 
-      def run(_argv)
+      def run(argv)
+        # get make's own options/arguments
+        # skip the '--' (if any)
+        if !argv.empty? && argv.first == '--'
+          argv.shift
+        end
+        # only arguments after PROJECT or after '--' are remaining, now gather unless arg is new brix command
+        options[:hostbuild][:make_opts] ||= []
+        until argv.empty?
+          break if Command.is_command_arg?(argv.first, options)
+          options[:hostbuild][:make_opts] << argv.shift
+        end
+
         host_root = File.join(Exec.get_run_environment('X11_BASE_ROOT'), Configure::HostSetup::FOLDER, 'ACE')
         BRIX11.show_msg("Building crossbuild host tools.")
         rc = true
@@ -69,8 +81,8 @@ module BRIX11
                     make: { noredirect: options[:hostbuild][:noredirect] }
                   })
           prjargv << opts
-          rc = prj.clean([], *prjargv) if options[:hostbuild][:clean]
-          rc = prj.build([],*prjargv ) if rc && options[:hostbuild][:build]
+          rc = prj.clean(options[:hostbuild][:make_opts].dup, *prjargv) if options[:hostbuild][:clean]
+          rc = prj.build(options[:hostbuild][:make_opts].dup,*prjargv ) if rc && options[:hostbuild][:build]
           log_error('Failed to make hosttools') unless rc
         end
 
