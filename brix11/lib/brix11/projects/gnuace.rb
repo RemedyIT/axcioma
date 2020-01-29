@@ -14,16 +14,26 @@ module BRIX11
 
   module Project
 
-    class GnuAce < Handler
+    class GnuMake < Handler
 
-      ID = 'gnuace'
-      DESCRIPTION = 'GNU Make makefiles'
+      ID = 'gnumake'
       BUILDTOOL = 'make'
+      BUILDTOOL_VERSION = %x{which #{BUILDTOOL} 2>/dev/null}.strip.empty? ? '' : %x{#{BUILDTOOL} --version}.match(/[\d.]+/).to_s
       PROJECTNAME = 'GNUmakefile'
+      DESCRIPTION = 'GNU Make makefiles'
       COMPILERS = Hash[
         gnu: GNUCompiler
       ]
       COMPILERS.default = GNUCompiler
+
+      def default_prj_type
+        BUILDTOOL_VERSION >= '4.0' ? 'gnuace' : 'gnuautobuild'
+      end
+    end
+
+    class GnuAce < GnuMake
+
+      ID = 'gnuace'
 
       def make_files
         PROJECTNAME
@@ -49,7 +59,7 @@ module BRIX11
         runopts[:capture] = :all if block_given?
         runopts[:filter] = init_filter(options[:verbose] || 1, options[:logfile]) unless options[:make][:noredirect]
         runopts[:debug] = options[:make][:debug]
-        argv = base_build_arg(project, path, cmdargv,runopts) << 'realclean' << runopts
+        argv = base_build_arg(project, path, cmdargv, runopts) << 'realclean' << runopts
         argv << Proc.new if block_given?
         ok, rc = Exec.runcmd(*argv)
         BRIX11.log_warning("#{self.type}\#clean failed with exitcode #{rc}") unless ok
@@ -77,7 +87,6 @@ module BRIX11
         runopts[:force] = options[:force]
         runopts[:capture] = :all if block_given?
         runopts[:filter] = init_filter(options[:verbose] || 1, options[:logfile]) unless options[:make][:noredirect]
-
         runopts[:debug] = options[:make][:debug]
 
         run_env = options[:env]
@@ -122,6 +131,9 @@ module BRIX11
         argv = [BUILDTOOL]
         argv.concat(cmdargv)
         argv << (opts[:debug] ? 'debug=1' : 'debug=0')
+        # GNU make 4.0 has a way to control output during parallel execution
+        # https://www.gnu.org/software/make/manual/html_node/Parallel-Output.html#Parallel-Output
+        argv << '-j' << (Exec.max_cpu_cores > 0 ? Exec.max_cpu_cores.strip : Exec.cpu_cores) << '-Orecurse' if Exec.cpu_cores > 1 && BUILDTOOL_VERSION >= '4.0'
         argv << '--always-make' if opts[:force]
         opts[:chdir] = path if path && (project || File.directory?(path))
         if opts[:chdir]
@@ -139,6 +151,7 @@ module BRIX11
 
     end # Handler
 
+    register(GnuMake::ID, GnuMake)
     register(GnuAce::ID, GnuAce)
 
   end # Project
