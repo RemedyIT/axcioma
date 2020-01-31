@@ -322,9 +322,7 @@ module BRIX11
 
       def base_build_arg(project, path, cmdargv, opts)
         argv = [BUILDTOOL]
-        if Exec.max_cpu_cores > 0
-          argv << "/maxcpucount:#{Exec.max_cpu_cores}" if Exec.cpu_cores > 1
-        end
+        argv << "/maxcpucount#{(Exec.max_cpu_cores > 0) ? ":#{Exec.max_cpu_cores}" : ''}" if Exec.cpu_cores > 1
         argv.concat(cmdargv)
         #argv << '--always-make' if opts[:force]
 
