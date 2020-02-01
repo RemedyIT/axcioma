@@ -18,7 +18,7 @@ module BRIX11
 
       ID = 'gnumake'
       BUILDTOOL = 'make'
-      BUILDTOOL_VERSION = %x{which #{BUILDTOOL} 2>/dev/null}.strip.empty? ? '' : %x{#{BUILDTOOL} --version}.match(/[\d.]+/).to_s
+      BUILDTOOL_VERSION = (Sys.expand("#{BUILDTOOL} --version").chomp.split("\n").first || '').match(/[\d.]+/).to_s
       PROJECTNAME = 'GNUmakefile'
       DESCRIPTION = 'GNU Make makefiles'
       COMPILERS = Hash[

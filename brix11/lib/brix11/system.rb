@@ -41,14 +41,22 @@ module BRIX11
       @max_cpu_cores
     end
 
+    def self.expand(cmd, default='', redirect_err=true)
+      excmd = cmd
+      if redirect_err
+        excmd << ' 2>' << (mswin? ? 'NUL' : '/dev/null')
+      end
+      %x{#{excmd}} rescue default
+    end
+
     def self.pager
       if mswin?
         'more'
       else
         # check for 'less'
-        if (`which less 2>/dev/null`).strip.empty?
+        if expand('which less').strip.empty?
           # 'more'?
-          if (`which more 2>/dev/null`).strip.empty?
+          if expand('which more').strip.empty?
             'cat'
           else
             'more'
