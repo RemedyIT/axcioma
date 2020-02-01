@@ -319,8 +319,11 @@ module BRIX11
           Exec.update_run_environment('X11_BASE_ROOT', base_root) if base_root
           # process all loaded specs
           @allrc.each do |mod_id, rcspec|
-            BRIX11.log(3, "Checking specifications for [#{mod_id}]")
-            CfgModule.new(self, rcspec).process
+            # skip any modules explicitly disabled on the command line
+            unless options[:features].has_key?(mod_id) && !options[:features][mod_id]
+              BRIX11.log(3, "Checking specifications for [#{mod_id}]")
+              CfgModule.new(self, rcspec).process
+            end
           end
           # now filter active modules from full list
           @allmod.each do |mod_id, mod|
