@@ -133,7 +133,7 @@ module BRIX11
                 # verify required dependency variables
                 @rcdep.requires.each do |var|
                   BRIX11.log(3, "Verifying [#{@mod.mod_id}:#{featureid}] : requires :#{var}")
-                  unless options[:variables].has_key?(var)
+                  unless options[:variables].has_key?(var) || (@rcdep.environment.has_key?(var) && Exec.get_run_environment(@rcdep.environment[var].name))
                     if @rcdep.required?
                       BRIX11.log_warning("Verification of require [:#{var}] failed for mandatory feature :#{featureid} for module :#{@mod.mod_id}. Disabling module.")
                     else
