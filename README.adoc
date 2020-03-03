@@ -1,6 +1,7 @@
 image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=https://www.axcioma.org/scoreboard.html]
 image:https://dev.azure.com/remedyit/axcioma/_apis/build/status/axcioma?branchName=master[Azure pipeline, link=https://dev.azure.com/remedyit/axcioma/_build?definitionId=2&_a=summary]
 image:https://www.codefactor.io/repository/github/remedyit/axcioma/badge[CodeFactor, link=https://www.codefactor.io/repository/github/remedyit/axcioma]
+image:https://github.com/RemedyIT/axcioma/workflows/GitHub%20CI/badge.svg[GitHub Action, link=https://github.com/RemedyIT/axcioma/actions?query=workflow%3A%22GitHub+CI%22]
 
 = Building AXCIOMA or TAOX11
 
