@@ -146,6 +146,7 @@ module BRIX11
                 end
               else
                 BRIX11.log_fatal("Cannot find project at #{path}")
+                rc = false
               end
             end
             rc
