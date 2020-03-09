@@ -122,7 +122,7 @@ module BRIX11
             if options[:make][:clean] && prj.project_exists?(path)
               options[:make][:build] = false # clean only in this pass
               unless Make.new(cmd.entry, options).run(nil)
-                BRIX11.log_fatal("Failed to clean project at #{path}.")
+                BRIX11.log_error("Failed to clean project at #{path}.")
                 rc = false
               end
               options[:make][:clean] = false # do not clean anymore
@@ -135,7 +135,7 @@ module BRIX11
                 options[:genbuild] = GenerateBuild::OPTIONS.dup
                 options[:genbuild][:project] = options[:make][:project]
                 unless GenerateBuild.new(cmd.entry, options).run(nil)
-                  BRIX11.log_fatal("Failed to generate project for #{path}.")
+                  BRIX11.log_error("Failed to generate project for #{path}.")
                   rc = false
                 end
               end
@@ -145,7 +145,7 @@ module BRIX11
                   rc = false
                 end
               else
-                BRIX11.log_fatal("Cannot find project at #{path}")
+                BRIX11.log_error("Cannot find project at #{path}")
                 rc = false
               end
             end
