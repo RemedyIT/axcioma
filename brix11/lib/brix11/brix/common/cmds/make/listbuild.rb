@@ -108,6 +108,7 @@ module BRIX11
           end
 
           def self.do_build(cmd, path)
+            rc = true
             # create new command options
             options = cmd.options.dup
             options[:make] = cmd.options[:make].dup
@@ -120,7 +121,10 @@ module BRIX11
             # if clean requested do so if the project exists
             if options[:make][:clean] && prj.project_exists?(path)
               options[:make][:build] = false # clean only in this pass
-              BRIX11.log_fatal("Failed to clean project at #{path}.") unless Make.new(cmd.entry, options).run(nil)
+              unless Make.new(cmd.entry, options).run(nil)
+                BRIX11.log_error("Failed to clean project at #{path}.")
+                rc = false
+              end
               options[:make][:clean] = false # do not clean anymore
               options[:make][:build] = cmd.options[:make][:build] # reset
             end
@@ -130,20 +134,29 @@ module BRIX11
               if cmd.options[:make][:genbuild]
                 options[:genbuild] = GenerateBuild::OPTIONS.dup
                 options[:genbuild][:project] = options[:make][:project]
-                BRIX11.log_fatal("Failed to generate project for #{path}.") unless GenerateBuild.new(cmd.entry, options).run(nil)
+                unless GenerateBuild.new(cmd.entry, options).run(nil)
+                  BRIX11.log_error("Failed to generate project for #{path}.")
+                  rc = false
+                end
               end
               if prj.project_exists?(path)
-                Make.new(cmd.entry, options).run(nil)
+                unless Make.new(cmd.entry, options).run(nil)
+                  BRIX11.log_error("Failed to make project at #{path}.")
+                  rc = false
+                end
               else
-                BRIX11.log_fatal("Cannot find project at #{path}")
+                BRIX11.log_error("Cannot find project at #{path}")
+                rc = false
               end
             end
+            rc
           end
         end # MPCBuilder
 
         self.builders[:mpc] = MPCBuilder
 
         def self.build_all(cmd)
+          rc = true
           cmd.options[:make][:lists].each do |root, list|
             BRIX11.log(2, "Checking buildlist %s (root = %s)", list, root)
             BRIX11.log_fatal("Buildlist #{list} does not exist.") unless File.exist?(list)
@@ -153,13 +166,17 @@ module BRIX11
               # (lists may have multiple lines w. multiple test scripts per project)
               unless build_track.include?(path)
                 BRIX11.show_msg("Building #{path}")
-                builders[gentype].do_build(cmd, path)
+                unless builders[gentype].do_build(cmd, path)
+                  BRIX11.log_error("Executing build in #{path} failed")
+                  rc = false
+                end
                 build_track << path
               else
                 BRIX11.log(2, "Skipping previously built %s", path)
               end
             end
           end
+          rc
         end
 
       end # ListBuilder

@@ -102,7 +102,7 @@ module BRIX11
 
         # do we have any buildlists specified
         unless options[:make][:lists].nil? || options[:make][:lists].empty?
-          ListBuilder.build_all(self)
+          rc = ListBuilder.build_all(self)
         end
 
         rc
