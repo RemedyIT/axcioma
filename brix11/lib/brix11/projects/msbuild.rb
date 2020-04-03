@@ -297,8 +297,8 @@ module BRIX11
         sln_name << PROJECTEXT
         unless File.exist?(File.join(path, sln_name))
           # incase file does not exist look for a single .sln file in path
-          prj_list = Dir.glob(File.join(path, "*#{PROJECTEXT}"))
-          BRIX11.log_fatal("Specify project to build. Multiple projects (.sln) available at location #{path}.") if prj_list.size > 1
+          prj_list = Dir.glob(File.join(File.expand_path(path), "*#{PROJECTEXT}"))
+          BRIX11.log_fatal("Specify project to build. #{prj_list.size} projects (.sln) available at location #{path}.") if prj_list.size > 1
           if prj_list.size == 1
             sln_name = File.basename(prj_list.shift)
           else
