@@ -85,10 +85,12 @@ module BRIX11
               BRIX11.log(5, "Examining [#{curdir}]")
               # check for rc file
               rcpath = File.join(curdir, 'etc', 'configurerc')
-              if (!loaded_rcs.include?(rcpath)) && File.file?(rcpath)
+              # On Windows we can get lower and uppercase drive letters dependent
+              # on how we are executed so we store the loaded rcs in lowercase
+              if (!loaded_rcs.include?(rcpath.downcase)) && File.file?(rcpath)
                 # load rc file
                 rc_load(rclist, rcpath)
-                loaded_rcs << rcpath
+                loaded_rcs << rcpath.downcase
               end
               # get a list of paths to all subdirs
               dirlist = Dir[File.join(curdir, '*')].select {|p| File.directory?(p) }
