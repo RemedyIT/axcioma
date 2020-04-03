@@ -74,7 +74,6 @@ module BRIX11
     # path should be either a relative path like 'brix/<name>' or
     # a full path like /path/to/brix/<name> (in which case the path
     # to the brix folder is added to the library search path)
-    #
     def self.load(path)
       name = File.basename(path).to_sym                  # collection name
       if loaded?(name)
