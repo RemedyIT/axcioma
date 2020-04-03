@@ -23,6 +23,7 @@ GNUmakefile*
 *.lib
 *.iobj
 *.ipdb
+*.ilk
 *.exp
 *.exe
 ridl
