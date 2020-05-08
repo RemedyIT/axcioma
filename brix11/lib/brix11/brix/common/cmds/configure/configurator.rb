@@ -183,9 +183,9 @@ module BRIX11
                   BRIX11.log(3, "Verifying [#{@mod.mod_id}:#{featureid}] : exec [#{name}] -> [#{exe}]")
                   unless conf_path.split(File::PATH_SEPARATOR).any? { |sp| File.executable?(File.join(sp, exe)) }
                     if @rcdep.required?
-                      BRIX11.log_warning("Verification of executable [#{name}] failed for mandatory feature :#{featureid} for module :#{@mod.mod_id}. Disabling module.")
+                      BRIX11.log_warning("Verification of executable [#{name}](#{exe}) failed for mandatory feature :#{featureid} for module :#{@mod.mod_id}. Disabling module.")
                     else
-                      BRIX11.log_information("Verification of executable [#{name}] failed for feature :#{featureid} for module :#{@mod.mod_id}. Disabling feature.")
+                      BRIX11.log_information("Verification of executable [#{name}](#{exe}) failed for feature :#{featureid} for module :#{@mod.mod_id}. Disabling feature.")
                     end
                     @rcdep.state = false
                     break # stop verifying
