@@ -57,19 +57,19 @@ jobs:
             os: ubuntu-18.04
             CC: gcc-8
             CXX: g++-8
-            RubyVersion: 2.7.x
+            RubyVersion: 2.7
             PackageDeps: g++-8
           - name: GCC9Ruby27
             os: ubuntu-18.04
             CC: gcc-9
             CXX: g++-9
-            RubyVersion: 2.7.x
+            RubyVersion: 2.7
             PackageDeps: g++-9
           - name: GCC10Ruby27
             os: ubuntu-20.04
             CC: gcc-10
             CXX: g++-10
-            RubyVersion: 2.7.x
+            RubyVersion: 2.7
             PackageDeps: g++-10
     env:
       CC: ${{ matrix.CC }}
