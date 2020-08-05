@@ -57,7 +57,7 @@ TAOX11 can be specified as optional target, which is done using
 
 == Configure
 
-The configure step generates the necessary configuration files for the specified target (execute `bin/brix11 help configure' for more details). The configure step is performed by executing
+The configure step generates the necessary configuration files for the specified target (execute `bin/brix11 help configure` for more details). The configure step is performed by executing
 
  bin/brix11 configure
 
