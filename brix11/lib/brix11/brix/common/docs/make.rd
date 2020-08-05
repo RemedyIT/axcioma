@@ -42,7 +42,7 @@ multicore (or parallel) building using all cpu cores available.
 When BRIX11_NUMBER_OF_PROCESSORS is set to a number less then the system defined number of cpu cores, BRIX11 will at
 most use the number of cpu cores specified by BRIX11_NUMBER_OF_PROCESSORS to run the build.
 Multicore building is supported for:
-  - msbuild based project types ('vs2015' and 'vs2017')
+  - msbuild based project types ('vs2015', 'vs2017', 'vs2019')
   - 'gnuautobuild' project type
   - 'gnuace' project type when GNU make 4.0 or newer is used
 

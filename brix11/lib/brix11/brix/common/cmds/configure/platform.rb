@@ -78,7 +78,7 @@ module BRIX11
                                               dll_dir: 'bin',
                                               library_path_var: 'PATH',
                                               test_configs: %w{Win32},
-                                              prj_type: 'vs2017'
+                                              prj_type: 'vs2019'
                                             },
                                             project_type: lambda { |opts_, pt=nil, cc=nil|
                                               bits = opts_[:bitsize] || opts_[:platform][:bits]
