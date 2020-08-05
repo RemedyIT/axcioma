@@ -40,6 +40,14 @@ module BRIX11
 
     end
 
+    class MSCNMake64VC142 < MSCNMake64
+
+      def version
+        'vs2019nmake'
+      end
+
+    end
+
     class MSCNMake32 < MSCCompiler
 
       def platform
@@ -64,6 +72,14 @@ module BRIX11
 
     end
 
+    class MSCNMake32VC142 < MSCNMake32
+
+      def version
+        'vs2019nmake'
+      end
+
+    end
+
     class NMake < Handler
 
       ID = 'nmake'
@@ -73,13 +89,16 @@ module BRIX11
       PROJECTEXT = '.mak'
       COMPILERS = Hash[
         vc14: MSCNMake64VC14,
-        vc141: MSCNMake64VC141,
         vc14x64: MSCNMake64VC14,
-        vc141x64: MSCNMake64VC141,
         vc14x32: MSCNMake32VC14,
+        vc141: MSCNMake64VC141,
+        vc141x64: MSCNMake64VC141,
         vc141x32: MSCNMake32VC141,
+        vc142: MSCNMake64VC142,
+        vc142x64: MSCNMake64VC142,
+        vc142x32: MSCNMake32VC142
       ]
-      COMPILERS.default = MSCNMake64VC141
+      COMPILERS.default = MSCNMake64VC142
 
       def initialize(type, compiler_id)
         super
