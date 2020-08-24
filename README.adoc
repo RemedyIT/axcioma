@@ -1,6 +1,7 @@
 image:https://img.shields.io/badge/scoreboard-Remedy IT-brightgreen.svg[Scoreboard, link=https://www.axcioma.org/scoreboard.html]
 image:https://www.codefactor.io/repository/github/remedyit/axcioma/badge[CodeFactor, link=https://www.codefactor.io/repository/github/remedyit/axcioma]
 image:https://github.com/RemedyIT/axcioma/workflows/linux/badge.svg[Linux CI, link=https://github.com/RemedyIT/axcioma/actions?query=workflow%3Alinux]
+image:https://github.com/RemedyIT/axcioma/workflows/fuzzr/badge.svg[Fuzzr CI, link=https://github.com/RemedyIT/axcioma/actions?query=workflow%3Afuzzr]
 
 = Building AXCIOMA or TAOX11
 
