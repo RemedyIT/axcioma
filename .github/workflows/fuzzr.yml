@@ -6,10 +6,13 @@ on:
     branches:
       - master
   schedule:
-    - cron: '0 7 * * SUN'
+    - cron: '0 1 * * SUN'
 
 env:
-  AXCIOMA_ROOT: ${{ github.workspace }}/axcioma
+  AXCIOMA_ROOT: ${{ github.workspace }}
+  DOC_ROOT: ${{ github.workspace }}/ACE
+  ACE_ROOT: ${{ github.workspace }}/ACE/ACE
+  TAO_ROOT: ${{ github.workspace }}/ACE/TAO
 
 jobs:
   build:
@@ -18,13 +21,19 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.5
-    - name: git clone dependent repositories
-      run: |
-        git clone --depth 1 git://github.com/RemedyIT/axcioma.git $AXCIOMA_ROOT
+        ruby-version: 2.7
+    - name: checkout ACE_TAO
+      uses: actions/checkout@v2
+      with:
+        repository: DOCGroup/ACE_TAO
+        path: ${{ env.DOC_ROOT }}
+        ref: Latest_Micro
     - name: install fuzzr gem
       run: |
         gem install fuzzr
     - name: Run fuzzr
       run: |
         fuzz
+    - name: Run fuzz
+      run: |
+        $ACE_ROOT/bin/fuzz -s check_for_improper_main_declaration,
