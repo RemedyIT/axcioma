@@ -10,9 +10,6 @@ on:
 
 env:
   AXCIOMA_ROOT: ${{ github.workspace }}
-  DOC_ROOT: ${{ github.workspace }}/ACE
-  ACE_ROOT: ${{ github.workspace }}/ACE/ACE
-  TAO_ROOT: ${{ github.workspace }}/ACE/TAO
 
 jobs:
   build:
@@ -22,18 +19,9 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7
-    - name: checkout ACE_TAO
-      uses: actions/checkout@v2
-      with:
-        repository: DOCGroup/ACE_TAO
-        path: ${{ env.DOC_ROOT }}
-        ref: Latest_Micro
     - name: install fuzzr gem
       run: |
         gem install fuzzr
     - name: Run fuzzr
       run: |
         fuzz
-    - name: Run fuzz
-      run: |
-        $ACE_ROOT/bin/fuzz -s check_for_improper_main_declaration,
