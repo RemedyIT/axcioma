@@ -8,7 +8,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '0 7 * * SUN'
+    - cron: '0 1 * * SUN'
 
 env:
   DOC_ROOT: ${{ github.workspace }}/ACE_TAO
@@ -107,6 +107,38 @@ jobs:
       run: |
         sudo apt-get --yes update
         sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
+    - name: checkout ACE_TAO
+      uses: actions/checkout@v2
+      with:
+        repository: DOCGroup/ACE_TAO
+        path: ${{ env.DOC_ROOT }}
+        ref: Latest_Micro
+    - name: checkout MPC
+      uses: actions/checkout@v2
+      with:
+        repository: DOCGroup/MPC
+        path: ${{ env.MPC_ROOT }}
+        ref: Latest_ACETAO_Micro
+    - name: checkout ridl
+      uses: actions/checkout@v2
+      with:
+        repository: RemedyIT/ridl
+        path: ${{ env.RIDL_ROOT }}
+    - name: checkout taox11
+      uses: actions/checkout@v2
+      with:
+        repository: RemedyIT/taox11
+        path: ${{ env.TAOX11_ROOT }}
+    - name: checkout ciaox11
+      uses: actions/checkout@v2
+      with:
+        repository: RemedyIT/ciaox11
+        path: ${{ env.CIAOX11_ROOT }}
+    - name: checkout dancex11
+      uses: actions/checkout@v2
+      with:
+        repository: RemedyIT/dancex11
+        path: ${{ env.DANCEX11_ROOT }}
     - name: Run brix11 configure
       run: |
         $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
