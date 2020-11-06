@@ -30,13 +30,17 @@ module BRIX11
           mpcinc = cfg.cfglist.values.collect do |mod|
             mod.mpc_include
           end.flatten
+          # collect list of configured MPC dynamic types folders for enabled modules
+          mpcdynamic = cfg.cfglist.values.collect do |mod|
+            mod.mpc_dynamic_type
+          end.flatten
           # generate mpc config file
           BRIX11.show_msg("Creating #{mpccfg}")
           begin
             mpccfg_io = cfg.dryrun? ? STDOUT : File.new(mpccfg, 'w')
             mpccfg_io.puts("//----- #{MPCCFG} -----") if cfg.dryrun?
             mpccfg_io.puts("includes = #{mpcinc.join(', ')}")
-            mpccfg_io.puts('dynamic_types = $MPC_ROOT, $TAO_ROOT/MPC, $TAOX11_ROOT/bin/MPC')
+            mpccfg_io.puts("dynamic_types = #{mpcdynamic.join(', ')}")
             mpccfg_io.puts('main_functions = cplusplus:ACE_TMAIN')
           ensure
             mpccfg_io.close unless cfg.dryrun?

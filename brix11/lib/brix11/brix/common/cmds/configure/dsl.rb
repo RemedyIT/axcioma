@@ -364,6 +364,9 @@ module BRIX11
               # expand specified path relative to rcfile folder
               @rc.mpc_base = File.expand_path(path.to_s, @base)
             end
+            def dynamic_type(*args)
+              @rc.mpc_dynamic_type.concat(args.flatten.collect {|p| p.start_with?('$') ? p : File.expand_path(p, @base)})
+            end
             def mwc_include(*args)
               args.each do |arg|
                 case arg
@@ -407,6 +410,7 @@ module BRIX11
           @brix_path = []
           @mpc_base = nil
           @mpc_include = []
+          @mpc_dynamic_type = []
           @mwc_include = {}
           DSLHandler.new(self).instance_eval(&block)
         end
@@ -420,6 +424,7 @@ module BRIX11
                     :ridl_be_path,
                     :brix_path,
                     :mpc_include,
+                    :mpc_dynamic_type,
                     :mwc_include
 
         attr_accessor :mpc_base

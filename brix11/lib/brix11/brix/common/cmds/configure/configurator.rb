@@ -260,6 +260,10 @@ module BRIX11
             @rcspec.mpc_include
           end
 
+          def mpc_dynamic_type
+            @rcspec.mpc_dynamic_type
+          end
+
           def mwc_include
             @rcspec.mwc_include
           end
