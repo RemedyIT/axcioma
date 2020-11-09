@@ -162,7 +162,7 @@ module BRIX11
     def print_version
       puts "#{title} #{version}"
       puts copyright
-      @base_collections.each {|be| puts '---'; be.print_version }
+      #@base_collections.each {|be| puts '---'; be.print_version }
     end
 
     def lookup_path
