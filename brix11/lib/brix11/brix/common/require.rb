@@ -15,7 +15,7 @@ module BRIX11
     TITLE = 'Common'.freeze
     DESC = 'BRIX11 Common brix collection'.freeze
     COPYRIGHT = "Copyright (c) 2014-#{Time.now.year} Remedy IT Expertise BV, The Netherlands".freeze
-    VERSION = {major: 0, minor: 1, release: 0}
+    VERSION = {major: 1, minor: 1, release: 0}
 
     Collection.configure(:common, ROOT, TITLE, DESC, COPYRIGHT, VERSION) do |cfg|
 

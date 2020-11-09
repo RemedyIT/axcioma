@@ -230,6 +230,8 @@ module BRIX11
     opts.separator ''
     opts.on('-V', '--version',
             'Show version information and exit.') {
+      options.load_config
+      load_brix
       puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
       puts COPYRIGHT
       puts
