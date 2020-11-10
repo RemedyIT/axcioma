@@ -45,7 +45,7 @@ This can be done all together by executing the following commands
 
 For all commands additional help is available by executing `bin/brix11 help _command_`.
 
-== Bootstrap
+=== Bootstrap
 
 AXCIOMA is the default target for bootstrapping. The bootstrap command will clone all dependent git repositories to their expected location. This can be done by executing
 
@@ -55,7 +55,7 @@ TAOX11 can be specified as optional target, which is done using
 
  bin/brix11 bootstrap taox11
 
-== Configure
+=== Configure
 
 The configure step generates the necessary configuration files for the specified target (execute `bin/brix11 help configure` for more details). The configure step is performed by executing
 
@@ -69,19 +69,19 @@ for example `-W nddshome=$HOME/NDDS/rti_connext_dds-5.2.3 -W nddsarch=x64Linux3g
 RTI Connext DDS home and architecture. This will cause the settings to be stored in the BRIX11 configuration.
 The `bin/brix11 env` command will show you all environment variables set up by BRIX11.
 
-== Generate build artifacts
+=== Generate build artifacts
 
 The generate step will generate the necessary build infrastructure using https://github.com/DOCGroup/MPC[MPC] to compile the core of the target.
 
  bin/brix11 gen build workspace.mwc
 
-== Compile
+=== Compile
 
 The compile step will compile the core of the target with the default compiler for your platform
 
  bin/brix11 make
 
-== Generate user documentation
+=== Generate user documentation
 
 User documentation can be generated after the `brix11 configure` command using https://asciidoctor.org/[Asciidoctor] by executing
 
@@ -89,3 +89,8 @@ User documentation can be generated after the `brix11 configure` command using h
 
 After generation the documentation can be found under `docs/html`. A good place to start reading is the `getting_started.html`
 document (either under `docs/html/ciaox11` for AXCIOMA or `docs/html/taox11` for TAOX11).
+
+== Building formal releases
+
+To get and build a formal release either checkout a formal release tag after cloning this repository or download and install a formal release source package of this repository.
+From there just follow the regular build steps outlined above. The bootstrap procedure will automatically pull in the right versions of the dependent git repositories.
