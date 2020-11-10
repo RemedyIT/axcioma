@@ -23,4 +23,4 @@ common
 Generate documentation from Asciidoctor sources into the 'docs' directory. To install
 Asciidoctor with coderay support as gem run the following command
 
-$ gem install asciidoctor:2.0.10 coderay
+$ gem install asciidoctor coderay
