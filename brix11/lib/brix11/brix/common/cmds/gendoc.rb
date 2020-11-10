@@ -30,7 +30,7 @@ module BRIX11
           require 'asciidoctor'
           require 'asciidoctor/extensions'
         rescue LoadError
-          BRIX11.log_fatal("This command requires the installation of the Asciidoctor 2.0.10 gem!")
+          BRIX11.log_fatal("This command requires the installation of the Asciidoctor gem!")
         end
         # load document generator(s)
         Dir.glob(File.join(ROOT, 'cmds', 'gendoc', '*.rb')).each { |p| require "brix/common/cmds/gendoc/#{File.basename(p)}"}
