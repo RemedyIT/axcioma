@@ -92,7 +92,7 @@ configure :acetao do
 
   mpc do
     include %w{$MPC_ROOT/config $ACE_ROOT/bin/MakeProjectCreator/config}
-    dynamic_type %w{$MPC_ROOT $TAO_ROOT/MPC}
+    dynamic_type %w{$MPC_ROOT $TAO_ROOT/MPC $ACE_ROOT/bin/MakeProjectCreator}
 
     mwc_include %w{
       $(ACE_ROOT)/ace
