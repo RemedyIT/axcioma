@@ -105,7 +105,6 @@ module BRIX11
                 # generate default platform macros
                 platform_macros_io << %Q{
                   debug=0
-                  c++11=1
                   no_deprecated=0
                   inline=1
                   optimize=1
