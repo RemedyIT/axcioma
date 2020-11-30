@@ -55,7 +55,6 @@ module BRIX11
                                                   }.gsub(/^\s+/, ''),
                                                 gnumake_prelude: %Q{
                                                     debug=0
-                                                    no_deprecated=0
                                                     inline=1
                                                     optimize=1
                                                   }.gsub(/^\s+/, '')
@@ -120,7 +119,6 @@ module BRIX11
                                           gnumake_include: 'platform_linux.GNU',
                                           gnumake_prelude: %Q{
                                               debug=0
-                                              no_deprecated=0
                                               inline=1
                                               optimize=1
                                             }.gsub(/^\s+/, '')
