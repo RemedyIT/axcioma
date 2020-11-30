@@ -105,7 +105,6 @@ module BRIX11
                 # generate default platform macros
                 platform_macros_io << %Q{
                   debug=0
-                  no_deprecated=0
                   inline=1
                   optimize=1
                 }.gsub(/^\s+/, '')
