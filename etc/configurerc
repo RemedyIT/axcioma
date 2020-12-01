@@ -82,6 +82,18 @@ configure :acetao do
       end
       requires :valgrindcmd
     end
+
+    optional :valgrind_keep_debuginfo do
+      environment :valgrindcmd do
+        name 'ACE_RUN_VALGRIND_CMD'
+        description 'Executable name to be used for valgrind (required for valgrind integration)'
+      end
+      evaluate(:valgrind) do
+        valgrind_ver_ = `#{getenv('ACE_RUN_VALGRIND_CMD')} --version`.chomp.split("\n").first.split('valgrind-').last
+        valgrind_ver_ >= '3.14.0'
+      end
+      requires :valgrindcmd
+    end
   end
 
   features do
