@@ -46,6 +46,9 @@ module BRIX11
             },
             'OpenDDS' => {
               :folders => {
+                '.' => :norecurse,
+                'dds' => :norecurse,
+                'dds/DCPS' => :norecurse,
                 'dds/idl' => :norecurse,
                 'MPC' => :recurse,
               }
