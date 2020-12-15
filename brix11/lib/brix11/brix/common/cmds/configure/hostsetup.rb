@@ -38,8 +38,8 @@ module BRIX11
               'MPC' => :recurse,
               'tao' => :norecurse
             },
-            'OpenDDS' => {
-              'dds/idl' => :norecurse
+            'dds' => {
+              'idl' => :norecurse
             }
         }
 
@@ -166,7 +166,7 @@ module BRIX11
               dds_root = Exec.get_run_environment('DDS_ROOT')
               x11_host_opendds_root = File.join(x11_host_root, File.basename(dds_root))
               # link necessary source code
-              setup(dds_root, x11_host_opendds_root, 'OpenDDS') unless cfg.dryrun?
+              setup(dds_root, x11_host_opendds_root, 'dds') unless cfg.dryrun?
             end
             # create build configuration
             create_build_config(x11_host_acetao_root, cfg)
