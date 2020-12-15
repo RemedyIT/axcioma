@@ -142,7 +142,7 @@ module BRIX11
                 end
                 mwc_config_io << %Q{
                   workspace {
-                   #{mwc_workspace.join("\n")}
+                   #{mwc_workspaces.join("\n")}
                   }
                 }.gsub(/^\s+/, '')
               ensure
