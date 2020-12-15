@@ -36,7 +36,7 @@ module BRIX11
               }
             },
             'TAO' => {
-              :module_folder => 'ACE',
+              :module_folder => 'TAO',
               :folders => {
                 '.' => :norecurse,
                 'TAO_IDL' => :recurse,
