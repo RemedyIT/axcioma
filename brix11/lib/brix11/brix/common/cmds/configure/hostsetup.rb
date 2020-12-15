@@ -37,6 +37,9 @@ module BRIX11
               'TAO_IDL' => :recurse,
               'MPC' => :recurse,
               'tao' => :norecurse
+            },
+            'OpenDDS' => {
+              'dds/idl' => :norecurse
             }
         }
 
@@ -133,11 +136,13 @@ module BRIX11
               begin
                 mwc_config_io = cfg.dryrun? ? STDOUT : File.new(mwc_config, 'w')
                 mwc_config_io.puts("#----- HOST MWC config -----") if cfg.dryrun?
+                mwc_workspaces = %w{ACE/ace ACE/apps/gperf/src TAO/TAO_IDL}
+                if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
+                  mwc_workspaces << '../OpenDDS/dds/idl'
+                end
                 mwc_config_io << %Q{
                   workspace {
-                   ACE/ace
-                   ACE/apps/gperf/src
-                   TAO/TAO_IDL
+                   #{mwc_workspace.join("\n")}
                   }
                 }.gsub(/^\s+/, '')
               ensure
@@ -157,6 +162,12 @@ module BRIX11
             # link necessary source code
             setup(Exec.get_run_environment('ACE_ROOT'), x11_host_acetao_root, 'ACE') unless cfg.dryrun?
             setup(Exec.get_run_environment('TAO_ROOT'), x11_host_acetao_root, 'TAO') unless cfg.dryrun?
+            if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
+              dds_root = Exec.get_run_environment('DDS_ROOT')
+              x11_host_opendds_root = File.join(x11_host_root, File.basename(dds_root))
+              # link necessary source code
+              setup(dds_root, x11_host_opendds_root, 'OpenDDS') unless cfg.dryrun?
+            end
             # create build configuration
             create_build_config(x11_host_acetao_root, cfg)
             # create MWC config
