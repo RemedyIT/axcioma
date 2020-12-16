@@ -76,6 +76,11 @@ module BRIX11
                 platform_macros_io.puts("ARCH :=")
                 platform_macros_io.puts("FLAGS_C_CC += --sysroot=$(SDKTARGETSYSROOT)")
                 platform_macros_io.puts("LDFLAGS += --sysroot=$(SDKTARGETSYSROOT)")
+                # generate OpenDDS IDL path override if OpenDDS enabled
+                if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
+                  opendds_dir = File.basename(Exec.get_run_environment('DDS_ROOT'))
+                  platform_macros_io.puts("override OPENDDS_IDL = $(X11_HOST_ROOT)/#{opendds_dir}/bin/opendds_idl")
+                end
               end
               # generate default platform macros
               platform_macros_io << default_platform_macros(cfg.options)
