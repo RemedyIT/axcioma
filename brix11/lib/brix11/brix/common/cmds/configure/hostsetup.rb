@@ -152,7 +152,8 @@ module BRIX11
                 mwc_config_io.puts("#----- HOST MWC config -----") if cfg.dryrun?
                 mwc_workspaces = %w{ACE/ace ACE/apps/gperf/src TAO/TAO_IDL}
                 if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
-                  mwc_workspaces << '../OpenDDS/dds/idl'
+                  opendds_folder = File.basename(Exec.get_run_environment('DDS_ROOT'))
+                  mwc_workspaces << "../#{opendds_folder}/dds/idl"
                 end
                 mwc_config_io << %Q{
                   workspace {
