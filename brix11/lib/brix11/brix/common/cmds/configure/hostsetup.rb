@@ -24,19 +24,34 @@ module BRIX11
 
         SOURCE_CONFIG = {
             'ACE' => {
-              'ace' => :norecurse,
-              'ace/os_include' => :recurse,
-              'bin' => :norecurse,
-              'bin/MakeProjectCreator' => :recurse,
-              'bin/PerlACE' => :recurse,
-              'apps/gperf/src' => :recurse,
-              'include' => :recurse
+              :module_folder => 'ACE',
+              :folders => {
+                'ace' => :norecurse,
+                'ace/os_include' => :recurse,
+                'bin' => :norecurse,
+                'bin/MakeProjectCreator' => :recurse,
+                'bin/PerlACE' => :recurse,
+                'apps/gperf/src' => :recurse,
+                'include' => :recurse
+              }
             },
             'TAO' => {
-              '.' => :norecurse,
-              'TAO_IDL' => :recurse,
-              'MPC' => :recurse,
-              'tao' => :norecurse
+              :module_folder => 'TAO',
+              :folders => {
+                '.' => :norecurse,
+                'TAO_IDL' => :recurse,
+                'MPC' => :recurse,
+                'tao' => :norecurse
+              }
+            },
+            'OpenDDS' => {
+              :folders => {
+                '.' => :norecurse,
+                'dds' => :norecurse,
+                'dds/DCPS' => :norecurse,
+                'dds/idl' => :norecurse,
+                'MPC' => :recurse,
+              }
             }
         }
 
@@ -77,10 +92,12 @@ module BRIX11
             end
 
             def setup(src, dst, mod)
-                dst = File.join(File.expand_path(dst), mod)
+                dst = File.expand_path(dst)
+                src_cfg = HostSetup::SOURCE_CONFIG[mod]
+                dst = File.join(dst, src_cfg[:module_folder]) if src_cfg.has_key?(:module_folder)
                 FileUtils.mkdir_p(dst)
                 in_dir(src) do
-                    HostSetup::SOURCE_CONFIG[mod].each do |dir, opt|
+                  src_cfg[:folders].each do |dir, opt|
                         setup_folder(dst, dir, opt == :recurse)
                     end
                 end
@@ -133,11 +150,14 @@ module BRIX11
               begin
                 mwc_config_io = cfg.dryrun? ? STDOUT : File.new(mwc_config, 'w')
                 mwc_config_io.puts("#----- HOST MWC config -----") if cfg.dryrun?
+                mwc_workspaces = %w{ACE/ace ACE/apps/gperf/src TAO/TAO_IDL}
+                if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
+                  opendds_folder = File.basename(Exec.get_run_environment('DDS_ROOT'))
+                  mwc_workspaces << "../#{opendds_folder}/dds/idl"
+                end
                 mwc_config_io << %Q{
                   workspace {
-                   ACE/ace
-                   ACE/apps/gperf/src
-                   TAO/TAO_IDL
+                   #{mwc_workspaces.join("\n")}
                   }
                 }.gsub(/^\s+/, '')
               ensure
@@ -157,6 +177,12 @@ module BRIX11
             # link necessary source code
             setup(Exec.get_run_environment('ACE_ROOT'), x11_host_acetao_root, 'ACE') unless cfg.dryrun?
             setup(Exec.get_run_environment('TAO_ROOT'), x11_host_acetao_root, 'TAO') unless cfg.dryrun?
+            if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
+              dds_root = Exec.get_run_environment('DDS_ROOT')
+              x11_host_opendds_root = File.join(x11_host_root, File.basename(dds_root))
+              # link necessary source code
+              setup(dds_root, x11_host_opendds_root, 'OpenDDS') unless cfg.dryrun?
+            end
             # create build configuration
             create_build_config(x11_host_acetao_root, cfg)
             # create MWC config

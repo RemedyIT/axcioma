@@ -51,16 +51,25 @@ module BRIX11
           options[:hostbuild][:make_opts] << argv.shift
         end
 
-        host_root = File.join(Exec.get_run_environment('X11_BASE_ROOT'), Configure::HostSetup::FOLDER, 'ACE')
+        host_root = File.join(Exec.get_run_environment('X11_BASE_ROOT'), Configure::HostSetup::FOLDER)
+        host_acetao_root = File.join(host_root, 'ACE')
         BRIX11.show_msg("Building crossbuild host tools.")
         rc = true
 
-        Sys.in_dir(host_root) do
-          host_env = {
-              'ACE_ROOT' => File.join(host_root, 'ACE'),
-              'TAO_ROOT' => File.join(host_root, 'TAO'),
-              'MPC_ROOT' => Exec.get_run_environment('MPC_ROOT'),
-          }
+        host_env = {
+            'ACE_ROOT' => File.join(host_acetao_root, 'ACE'),
+            'TAO_ROOT' => File.join(host_acetao_root, 'TAO'),
+            'MPC_ROOT' => Exec.get_run_environment('MPC_ROOT'),
+        }
+
+        # Check if we have configured a build with OpenDDS
+        if Common::Configure::Configurator.get_test_config.include?('OPENDDS')
+          # add HOST DDS_ROOT env
+          dds_root = Exec.get_run_environment('DDS_ROOT')
+          host_env['DDS_ROOT'] = File.join(host_root, File.basename(dds_root))
+        end
+
+        Sys.in_dir(host_acetao_root) do
           default_project_type = BRIX11::Project.handler('gnumake').default_prj_type
           prj = Project.handler(default_project_type)
           prjargv = []
@@ -68,7 +77,7 @@ module BRIX11
           if options[:hostbuild][:generate] || (!prj.project_exists?(*prjargv) && options[:hostbuild][:build])
             opts = {
               project: Configure::HostSetup::MWC,
-              mpc_path: File.join(host_root, 'ACE', 'bin'),
+              mpc_path: File.join(host_acetao_root, 'ACE', 'bin'),
               env: host_env,
               overwrite_env: true
             }
