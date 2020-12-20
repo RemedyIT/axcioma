@@ -29,9 +29,29 @@ module BRIX11
 
       include BRIX11::LogMethods
 
+      def self.merge(to, from)
+        from.each_pair do |(k,v)|
+          k = k.to_sym
+          if to.has_key?(k)
+            case to[k]
+            when Array
+              to[k].concat v
+            when Hash
+              to[k].merge!(v)
+            when OpenStruct
+              _merge(to[k], v)
+            else
+              to[k] = v
+            end
+          else
+            to[k] = v
+          end
+        end
+        to
+      end
+
       def initialize(hash=nil)
-        super
-        @table = _merge(_defaults, @table)
+        super(Config.merge(_defaults, hash || {}))
       end
 
       def options
@@ -39,8 +59,12 @@ module BRIX11
       end
 
       def merge(from)
-        _merge(@table, from)
+        Config.merge(self, from)
         self
+      end
+
+      def has_key?(k)
+        @table.has_key?(k)
       end
 
       def load(rcpath)
@@ -86,27 +110,6 @@ module BRIX11
         }
       end
 
-      def _merge(to, from)
-        from.each_pair do |(k,v)|
-          k = k.to_sym
-          if to.has_key?(k)
-            case to[k]
-            when Array
-              to[k].concat v
-            when Hash
-              to[k].merge!(v)
-            when OpenStruct
-              _merge(to[k].__send__(:table), v)
-            else
-              to[k] = v
-            end
-          else
-            to[k] = v
-          end
-        end
-        to
-      end
-
     end
 
     protected
@@ -150,9 +153,14 @@ module BRIX11
 
     public
 
+    def has_key?(k)
+      @table.has_key?(k)
+    end
+
     def reset
       @table.clear
-      @table.merge!(_defaults)
+      Config.merge(self, _defaults)
+      #update_to_values!(_defaults)
       _rc_paths.clear
       _rc_paths << BRIX11RC_GLOBAL
       _loaded_rc_paths.clear
