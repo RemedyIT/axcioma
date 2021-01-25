@@ -24,6 +24,7 @@ env:
   TAOX11_ROOT: ${{ github.workspace }}/taox11
   CIAOX11_ROOT: ${{ github.workspace }}/ciaox11
   DANCEX11_ROOT: ${{ github.workspace }}/dancex11
+  DDS_ROOT: ${{ github.workspace }}/OpenDDS
 
 jobs:
   build:
@@ -97,6 +98,11 @@ jobs:
       with:
         repository: RemedyIT/dancex11
         path: ${{ env.DANCEX11_ROOT }}
+    - name: checkout OpenDDS
+      uses: actions/checkout@v2
+      with:
+        repository: objectcomputing/OpenDDS
+        path: ${{ env.DDS_ROOT }}
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
@@ -111,7 +117,7 @@ jobs:
         sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
     - name: Run brix11 configure
       run: |
-        $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
+        $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT -W openddsroot=$DDS_ROOT
     - name: Print brix11 configuration
       run: |
         $X11_BASE_ROOT/bin/brix11 env -- configure -P
