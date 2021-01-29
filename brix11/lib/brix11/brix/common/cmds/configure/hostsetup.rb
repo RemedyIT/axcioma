@@ -41,11 +41,11 @@ module BRIX11
                 '.' => :norecurse,
                 'TAO_IDL' => :recurse,
                 'MPC' => :recurse,
-                'tao' => :norecurse
-                'tao/PortableServer' => :norecurse
-                'tao/BiDir_GIOP' => :norecurse
-                'tao/PI' => :norecurse
-                'tao/CodecFactory' => :norecurse
+                'tao' => :norecurse,
+                'tao/PortableServer' => :norecurse,
+                'tao/BiDir_GIOP' => :norecurse,
+                'tao/PI' => :norecurse,
+                'tao/CodecFactory' => :norecurse,
                 'tao/AnyTypeCode' => :norecurse
               }
             },
@@ -60,7 +60,7 @@ module BRIX11
                 'dds/DCPS/security/framework' => :norecurse,
                 'dds/DCPS/XTypes' => :norecurse,
                 'dds/DCPS/yard' => :norecurse,
-                'MPC' => :recurse,
+                'MPC' => :recurse
               }
             }
         }
