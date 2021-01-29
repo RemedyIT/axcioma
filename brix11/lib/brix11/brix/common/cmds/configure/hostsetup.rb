@@ -49,6 +49,7 @@ module BRIX11
                 '.' => :norecurse,
                 'dds' => :norecurse,
                 'dds/DCPS' => :norecurse,
+                'dds/XTypes' => :norecurse,
                 'dds/idl' => :norecurse,
                 'MPC' => :recurse,
               }
