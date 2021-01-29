@@ -55,10 +55,11 @@ module BRIX11
                 'dds' => :norecurse,
                 'dds/idl' => :norecurse,
                 'dds/DCPS' => :norecurse,
-                'dds/CorbaSeq' => :norecurse,
-                'dds/transport/framework' => :norecurse,
-                'dds/security/framework' => :norecurse,
-                'dds/XTypes' => :norecurse,
+                'dds/DCPS/CorbaSeq' => :norecurse,
+                'dds/DCPS/transport/framework' => :norecurse,
+                'dds/DCPS/security/framework' => :norecurse,
+                'dds/DCPS/XTypes' => :norecurse,
+                'dds/DCPS/yard' => :norecurse,
                 'MPC' => :recurse,
               }
             }
