@@ -41,13 +41,24 @@ module BRIX11
                 '.' => :norecurse,
                 'TAO_IDL' => :recurse,
                 'MPC' => :recurse,
-                'tao' => :recurse
+                'tao' => :norecurse
+                'tao/PortableServer' => :norecurse
+                'tao/BiDir_GIOP' => :norecurse
+                'tao/PI' => :norecurse
+                'tao/CodecFactory' => :norecurse
+                'tao/AnyTypeCode' => :norecurse
               }
             },
             'OpenDDS' => {
               :folders => {
                 '.' => :norecurse,
-                'dds' => :recurse,
+                'dds' => :norecurse,
+                'dds/idl' => :norecurse,
+                'dds/DCPS' => :norecurse,
+                'dds/CorbaSeq' => :norecurse,
+                'dds/transport/framework' => :norecurse,
+                'dds/security/framework' => :norecurse,
+                'dds/XTypes' => :norecurse,
                 'MPC' => :recurse,
               }
             }
