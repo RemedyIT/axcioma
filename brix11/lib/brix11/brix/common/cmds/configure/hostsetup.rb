@@ -151,7 +151,6 @@ module BRIX11
                 mwc_workspaces = %w{ACE/ace ACE/apps/gperf/src TAO/TAO_IDL}
                 if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
                   opendds_folder = File.basename(Exec.get_run_environment('DDS_ROOT'))
-                  mwc_workspaces << "../#{opendds_folder}/dds/idl"
                   # opendds_idl uses functions from the OpenDDS core which means
                   # we also have to build the core tao and opendds libraries
                   # just for the hash function
