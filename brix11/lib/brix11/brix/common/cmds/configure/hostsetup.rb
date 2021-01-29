@@ -41,12 +41,7 @@ module BRIX11
                 '.' => :norecurse,
                 'TAO_IDL' => :recurse,
                 'MPC' => :recurse,
-                'tao' => :norecurse,
-                'tao/PortableServer' => :norecurse,
-                'tao/BiDir_GIOP' => :norecurse,
-                'tao/PI' => :norecurse,
-                'tao/CodecFactory' => :norecurse,
-                'tao/AnyTypeCode' => :norecurse
+                'tao' => :norecurse
               }
             },
             'OpenDDS' => {
@@ -55,11 +50,7 @@ module BRIX11
                 'dds' => :norecurse,
                 'dds/idl' => :norecurse,
                 'dds/DCPS' => :norecurse,
-                'dds/DCPS/CorbaSeq' => :norecurse,
-                'dds/DCPS/transport/framework' => :norecurse,
-                'dds/DCPS/security/framework' => :norecurse,
                 'dds/DCPS/XTypes' => :norecurse,
-                'dds/DCPS/yard' => :norecurse,
                 'MPC' => :recurse
               }
             }
@@ -163,11 +154,8 @@ module BRIX11
                 mwc_workspaces = %w{ACE/ace ACE/apps/gperf/src TAO/TAO_IDL}
                 if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
                   opendds_folder = File.basename(Exec.get_run_environment('DDS_ROOT'))
-                  # opendds_idl uses functions from the OpenDDS core which means
-                  # we also have to build the core tao and opendds libraries
-                  # just for the hash function
-                  mwc_workspaces << "../#{opendds_folder}/dds"
-                  mwc_workspaces << "TAO/tao"
+                  mwc_workspaces << "../#{opendds_folder}/dds/DCPS/OpenDDS_Util.mpc"
+                  mwc_workspaces << "../#{opendds_folder}/dds/idl"
                 end
                 mwc_config_io << %Q{
                   workspace {
