@@ -41,16 +41,13 @@ module BRIX11
                 '.' => :norecurse,
                 'TAO_IDL' => :recurse,
                 'MPC' => :recurse,
-                'tao' => :norecurse
+                'tao' => :recurse
               }
             },
             'OpenDDS' => {
               :folders => {
                 '.' => :norecurse,
-                'dds' => :norecurse,
-                'dds/DCPS' => :norecurse,
-                'dds/DCPS/XTypes' => :norecurse,
-                'dds/idl' => :norecurse,
+                'dds' => :recurse,
                 'MPC' => :recurse,
               }
             }
@@ -155,6 +152,11 @@ module BRIX11
                 if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
                   opendds_folder = File.basename(Exec.get_run_environment('DDS_ROOT'))
                   mwc_workspaces << "../#{opendds_folder}/dds/idl"
+                  # opendds_idl uses functions from the OpenDDS core which means
+                  # we also have to build the core tao and opendds libraries
+                  # just for the hash function
+                  mwc_workspaces << "../#{opendds_folder}/dds"
+                  mwc_workspaces << "TAO/tao"
                 end
                 mwc_config_io << %Q{
                   workspace {
