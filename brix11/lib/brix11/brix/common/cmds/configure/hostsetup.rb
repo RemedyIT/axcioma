@@ -48,9 +48,10 @@ module BRIX11
               :folders => {
                 '.' => :norecurse,
                 'dds' => :norecurse,
-                'dds/DCPS' => :norecurse,
                 'dds/idl' => :norecurse,
-                'MPC' => :recurse,
+                'dds/DCPS' => :norecurse,
+                'dds/DCPS/XTypes' => :norecurse,
+                'MPC' => :recurse
               }
             }
         }
@@ -153,6 +154,7 @@ module BRIX11
                 mwc_workspaces = %w{ACE/ace ACE/apps/gperf/src TAO/TAO_IDL}
                 if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
                   opendds_folder = File.basename(Exec.get_run_environment('DDS_ROOT'))
+                  mwc_workspaces << "../#{opendds_folder}/dds/DCPS/OpenDDS_Util.mpc"
                   mwc_workspaces << "../#{opendds_folder}/dds/idl"
                 end
                 mwc_config_io << %Q{
