@@ -114,7 +114,7 @@ jobs:
     - name: Add packages
       run: |
         sudo apt-get --yes update
-        sudo apt-get --yes install libxerces-c-dev libssl-dev ${{ matrix.PackageDeps }}
+        sudo apt-get --yes install libxerces-c-dev libssl-dev libzmq3-dev ${{ matrix.PackageDeps }}
     - name: Run brix11 configure
       run: |
         $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT -W openddsroot=$DDS_ROOT
@@ -126,4 +126,5 @@ jobs:
         $X11_BASE_ROOT/bin/brix11 gen build workspace.mwc -- gen build $TAOX11_ROOT/examples -- gen build $TAOX11_ROOT/orbsvcs/tests -- gen build $TAOX11_ROOT/tests -- gen build $DANCEX11_ROOT/tests
     - name: Run brix11 make
       run: |
-        $X11_BASE_ROOT/bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make -N -d $TAOX11_ROOT/orbsvcs/tests -- make -N -d $TAOX11_ROOT/tests -- make -N -d $DANCEX11_ROOT/tests -- make -N -d -L $CIAOX11_ROOT=$CIAOX11_ROOT/bin/ciaox11_tests.lst
+        $X11_BASE_ROOT/bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make -N -d $TAOX11_ROOT/orbsvcs/tests -- make -N -d $TAOX11_ROOT/tests -- make -N -d $DANCEX11_ROOT/tests -- make -N -d -L $CIAOX11_ROOT=$CIAOX11_ROOT/bin/ciaox11_tests.lst -- make -N -d -L $CIAOX11_ROOT=$CIAOX11_ROOT/connectors/psdd4ccm/bin/psdd4ccm_tests.lst -- make -N -d -L $CIAOX11_ROOT=$CIAOX11_ROOT/ddsx11/vendors/opendds/bin/ddsx11_opendds_tests.lst -- make -N -d -L $CIAOX11_ROOT=$CIAOX11_ROOT/ddsx11/vendors/opendds/bin/dds4ccm_opendds_tests.lst
+
