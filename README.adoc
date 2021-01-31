@@ -65,8 +65,9 @@ NOTE: Configure doesn't use your current environment, when you want configure to
 use `bin/brix11 -E configure`. When using the `-E` switch you have to keep in mind you will have to keep using
 that switch when building project files, running make and running tests. +
 As alternative you can specify configuration variables as argument to configure,
-for example `-W nddshome=$HOME/NDDS/rti_connext_dds-5.2.3 -W nddsarch=x64Linux3gcc4.8.2` to specify the
-RTI Connext DDS home and architecture. This will cause the settings to be stored in the BRIX11 configuration.
+for example `-W nddshome=<dir> -W nddsarch=<arch>` to specify the
+RTI Connext DDS home and architecture or `-W openddshome=<dir>` to specify the location of the OpenDDS sources.
+This will cause the settings to be stored in the BRIX11 configuration.
 The `bin/brix11 env` command will show you all environment variables set up by BRIX11.
 
 === Generate build artifacts
