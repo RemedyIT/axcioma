@@ -148,11 +148,7 @@ module BRIX11
                   fnm = expand_var(fpath)
                   BRIX11.log(3, "Verifying [#{@mod.mod_id}:#{featureid}] : file [#{fpath}] -> [#{fnm}]")
                   unless File.file?(fnm)
-                    if @rcdep.required?
-                      BRIX11.log_warning("Verification of file [#{fpath}] failed for mandatory feature :#{featureid} for module :#{@mod.mod_id}. Disabling module.")
-                    else
-                      BRIX11.log_information("Verification of file [#{fpath}] failed for feature :#{featureid} for module :#{@mod.mod_id}. Disabling feature.")
-                    end
+                    BRIX11.log_information("Verification of file [#{fpath}] failed for feature :#{featureid} for module :#{@mod.mod_id}. Disabling feature.")
                     @rcdep.state = false
                     break # stop verifying
                   end
