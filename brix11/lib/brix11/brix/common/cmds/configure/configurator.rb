@@ -134,11 +134,7 @@ module BRIX11
                 @rcdep.requires.each do |var|
                   BRIX11.log(3, "Verifying [#{@mod.mod_id}:#{featureid}] : requires :#{var}")
                   unless options[:variables].has_key?(var) || (@rcdep.environment.has_key?(var) && Exec.get_run_environment(@rcdep.environment[var].name))
-                    if @rcdep.required?
-                      BRIX11.log_warning("Verification of require [:#{var}] failed for mandatory feature :#{featureid} for module :#{@mod.mod_id}. Disabling module.")
-                    else
-                      BRIX11.log_information("Verification of require [:#{var}] failed for feature :#{featureid} for module :#{@mod.mod_id}. Disabling feature.")
-                    end
+                    BRIX11.log_information("Verification of require [:#{var}] failed for feature :#{featureid} for module :#{@mod.mod_id}. Disabling feature.")
                     @rcdep.state = false
                     break # stop verifying
                   end
@@ -158,11 +154,7 @@ module BRIX11
                   fp = expand_var(path)
                   BRIX11.log(3, "Verifying [#{@mod.mod_id}:#{featureid}] : exist [#{path}] -> [#{fp}]")
                   unless File.exist?(fp)
-                    if @rcdep.required?
-                      BRIX11.log_warning("Verification of path [#{path}] failed for mandatory feature :#{featureid} for module :#{@mod.mod_id}. Disabling module.")
-                    else
-                      BRIX11.log_information("Verification of path [#{path}] failed for feature :#{featureid} for module :#{@mod.mod_id}. Disabling feature.")
-                    end
+                    BRIX11.log_information("Verification of path [#{path}] failed for feature :#{featureid} for module :#{@mod.mod_id}. Disabling feature.")
                     @rcdep.state = false
                     break # stop verifying
                   end
