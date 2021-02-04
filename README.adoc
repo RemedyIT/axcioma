@@ -66,7 +66,7 @@ use `bin/brix11 -E configure`. When using the `-E` switch you have to keep in mi
 that switch when building project files, running make and running tests. +
 As alternative you can specify configuration variables as argument to configure,
 for example `-W nddshome=<dir> -W nddsarch=<arch>` to specify the
-RTI Connext DDS home and architecture or `-W openddshome=<dir>` to specify the location of the OpenDDS sources.
+RTI Connext DDS home and architecture or `-W openddsroot=<dir>` to specify the location of the OpenDDS sources.
 This will cause the settings to be stored in the BRIX11 configuration.
 The `bin/brix11 env` command will show you all environment variables set up by BRIX11.
 
