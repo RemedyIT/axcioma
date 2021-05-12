@@ -140,6 +140,9 @@ module BRIX11
               log_fatal("Error parsing JSON file #{target_json}: #{ex}")
             end
             opts[:platform][:os] = tgt_spec['os'].to_sym if tgt_spec.has_key?('os')
+            opts[:platform][:distro] = tgt_spec['distro'].to_sym if tgt_spec.has_key?('distro')
+            opts[:platform][:version] = tgt_spec['version'].to_sym if tgt_spec.has_key?('version')
+            opts[:platform][:arch] = tgt_spec['arch'].to_sym if tgt_spec.has_key?('arch')
             opts[:platform][:bits] = tgt_spec['bits'] if tgt_spec.has_key?('bits')
             opts[:platform][:defaults][:libroot] = tgt_spec['libroot'] if tgt_spec.has_key?('libroot')
             opts[:platform][:defaults][:dll_dir] = tgt_spec['dll_dir'] if tgt_spec.has_key?('dll_dir')

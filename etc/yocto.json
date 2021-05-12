@@ -1,5 +1,8 @@
 {
   "os": "linux",
+  "distro": "yocto_poky",
+  "version": "sumo",
+  "arch" : "aarch64",
   "bits": 0,
   "libroot":  "${SDKTARGETSYSROOT}/usr",
   "dll_dir": "lib",
