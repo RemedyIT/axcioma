@@ -44,6 +44,7 @@ module BRIX11
               [:warning,    /(.*[\/\\])?ld(\.exe)?:\s*[Ww]arning:? (?<desc>.*)/],
               [:error,      /(.*[\/\\])?ld(\.exe)?:\s*(?<desc>.*)/],
               # generic
+              [:error,    /(.*?): [Ee]rror: (?<desc>unrecognized command-line option.*)/],
               [:error,    /(?<name>^.*?):(?<line>\d+):(\d+:)? (?<desc>.*)/],
               [:info,     /(?<name>^.*?):\s*(?<desc>.*):$/],
           ]

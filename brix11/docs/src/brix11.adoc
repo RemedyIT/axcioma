@@ -116,7 +116,7 @@ Executing `brix11 -L` will display the list of available commands:
 
 ---------------------------------------------------------------------------------------------------------------
 BRIX11 pluggable scaffolding tool 1.1.0
-Copyright (c) 2014-20219 Remedy IT Expertise BV, The Netherlands
+Copyright (c) 2014-2021 Remedy IT Expertise BV, The Netherlands
 
 
   Command                                            | Description
