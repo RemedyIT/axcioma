@@ -137,4 +137,8 @@ jobs:
     - name: Run brix11 make
       run: |
         $X11_BASE_ROOT/bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make -N -d $TAOX11_ROOT/orbsvcs/tests -- make -N -d $TAOX11_ROOT/tests -- make -N -d $DANCEX11_ROOT/tests -- make -N -d -L $CIAOX11_ROOT=$CIAOX11_ROOT/bin/ciaox11_tests.lst -- make -N -d -L $CIAOX11_ROOT=$CIAOX11_ROOT/connectors/psdd4ccm/bin/psdd4ccm_tests.lst -- make -N -d -L $CIAOX11_ROOT=$CIAOX11_ROOT/ddsx11/vendors/opendds/bin/ddsx11_opendds_tests.lst -- make -N -d -L $CIAOX11_ROOT=$CIAOX11_ROOT/ddsx11/vendors/opendds/bin/dds4ccm_opendds_tests.lst
+    - name: Run brix11 generate documentation
+      run: |
+        gem install asciidoctor:2.0.15 coderay
+        $X11_BASE_ROOT/bin/brix11 generate documentation
 
