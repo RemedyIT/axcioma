@@ -144,10 +144,10 @@ jobs:
       run: |
         $X11_BASE_ROOT/bin/brix11 generate documentation
     - name: Check documentation file existence
-        id: check_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: "docs/html/taox11/getting_started.html1"
+      id: check_files
+      uses: andstor/file-existence-action@v1
+      with:
+        files: "docs/html/taox11/getting_started.html1"
     - name: File exists
       if: steps.check_files.outputs.files_exists == 'false'
       uses: actions/github-script@v4
