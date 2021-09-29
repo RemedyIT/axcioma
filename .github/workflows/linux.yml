@@ -151,7 +151,7 @@ jobs:
         files: "docs/html/taox11/getting_started.html"
     - name: File exists
       if: steps.check_files.outputs.files_exists == 'false'
-      uses: actions/github-script@v4
+      uses: actions/github-script@v5
       with:
         script: |
           core.setFailed('Documentation not generated')
