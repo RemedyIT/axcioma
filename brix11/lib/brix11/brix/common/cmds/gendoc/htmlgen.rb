@@ -77,6 +77,8 @@ module BRIX11
                   map["#{respath.basename}_root"] = respath.relative_path_from(targetdir).to_s
                   map
                 end)
+                # add current adoc src root
+                attribs['adoc_root'] = srcpath
                 # add common 'docs' root
                 attribs.merge!({ 'docs_root' => Pathname.new(File.join(X11_DOC_ROOT, 'html')).relative_path_from(targetdir).to_s })
                 BRIX11.log(2, "gendoc> Rendering HTML from #{src} to #{target}")
