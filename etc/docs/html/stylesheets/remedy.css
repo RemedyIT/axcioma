@@ -746,6 +746,70 @@ table.tableblock tbody tr td.tableblock p { font-size: 1em; }
 
 div.listingblock div.content pre { padding: 3px; line-height: 15px; -moz-border-radius: 3px; border-radius: 3px; -moz-box-shadow: 1px 2px 2px #b4b4b4; box-shadow: 1px 2px 2px #b4b4b4; background-color: #F9F9F9; border-color: #b4b4b4; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.9em; }
 
+.doc details {
+ margin-left:1rem
+}
+.doc details>summary {
+ display:block;
+ position:relative;
+ line-height:1.6;
+ margin-bottom:.5rem
+}
+.doc details>summary::-webkit-details-marker {
+ display:none
+}
+.doc details>summary::before {
+ content:"";
+ border:solid transparent;
+ border-left:solid;
+ border-width:.3em 0 .3em .5em;
+ position:absolute;
+ top:.5em;
+ left:-1rem;
+ transform:translateX(15%)
+}
+.doc details[open]>summary::before {
+ border-color:currentColor transparent transparent;
+ border-width:.5rem .3rem 0;
+ transform:translateY(15%)
+}
+.doc details>summary::after {
+ content:"";
+ width:1rem;
+ height:1em;
+ position:absolute;
+ top:.3em;
+ left:-1rem
+}
+.doc details.result {
+ margin-top:.25rem
+}
+.doc details.result>summary {
+ color:#5d5d5d;
+ font-style:italic;
+ margin-bottom:0
+}
+.doc details.result>.content {
+ margin-left:-1rem
+}
+.doc .exampleblock>.content,
+.doc details.result>.content {
+ background:#fff;
+ border:.25rem solid #5d5d5d;
+ border-radius:.5rem;
+ padding:.75rem
+}
+.doc .exampleblock>.content::after,
+.doc details.result>.content::after {
+ content:"";
+ display:table;
+ clear:both
+}
+.doc .exampleblock>.content>:first-child,
+.doc details>.content>:first-child {
+ margin-top:0
+}
+
 .print-only { display: none !important; }
 
 @media print { @page { margin: 1.25cm 0.75cm; }

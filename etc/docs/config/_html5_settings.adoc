@@ -5,3 +5,5 @@ include::_settings.adoc[]
 :stylesheet: remedy.css
 :!copycss:
 :icons: font
+
+:doctype: doc
