@@ -1,6 +1,6 @@
 :toc: left
 :toclevels: 6
-:docinfo1:
+:docinfo: shared
 :last-update-label!:
 :source-highlighter: coderay
 :prewrap!:
