@@ -137,6 +137,8 @@ module BRIX11
 
           collect_resources(opts)
 
+          BRIX11.show_msg('Generating User documentation')
+
           generate_html(opts)
         end
 
