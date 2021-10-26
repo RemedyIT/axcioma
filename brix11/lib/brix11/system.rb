@@ -45,6 +45,8 @@ module BRIX11
       excmd = cmd
       if redirect_err
         excmd << ' 2>' << (mswin? ? 'NUL' : '/dev/null')
+      else
+        excmd << ' 2>&1'
       end
       %x{#{excmd}} rescue default
     end
