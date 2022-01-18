@@ -28,8 +28,14 @@ GNUmakefile*
 *.exe
 *.kdev4
 *.so*
+*.log
 commit.txt
 taox11/html
 taox11/latex
 *.gcno
 workspace.mwc*
+ciaox11/
+dancex11/
+ridl/
+taox11/
+stage/
