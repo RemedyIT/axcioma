@@ -30,6 +30,8 @@ bin/brix11 env -- configure -P 2>&1 | tee configure.log
 
 bin/brix11 gen build workspace.mwc -- gen build $TAOX11_ROOT/examples -- gen build $TAOX11_ROOT/orbsvcs/tests -- gen build $TAOX11_ROOT/tests
 
+bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make -N -d $TAOX11_ROOT/orbsvcs/tests -- make -N -d $TAOX11_ROOT/tests -- make -N -d $DANCEX11_ROOT/tests 2>&1 | tee make-all.log
+
 bin/brix11 run list -l taox11/bin/taox11_tests.lst -r taox11 2>&1 | tee run-test.log
 
 make -j -C ${TAOX11_ROOT} install
