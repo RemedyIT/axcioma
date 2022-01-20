@@ -13,7 +13,7 @@ export LD_LIBRARY_PATH=$X11_BASE_ROOT/lib:$X11_BASE_ROOT/ACE/ACE/lib:/usr/local/
 export MPC_BASE=$X11_BASE_ROOT/taox11/bin/MPC
 export MPC_ROOT=$X11_BASE_ROOT/ACE/MPC
 export PATH=$X11_BASE_ROOT/dancex11/bin:$X11_BASE_ROOT/ciaox11/bin:$X11_BASE_ROOT/bin:$X11_BASE_ROOT/taox11/bin:$HOME/.local/bin:$PYTHONPATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-export RIDL_BE_PATH=:$X11_BASE_ROOT/taox11:$X11_BASE_ROOT/ciaox11:$X11_BASE_ROOT/ciaox11/connectors/psdd4ccm
+export RIDL_BE_PATH=$X11_BASE_ROOT/taox11:$X11_BASE_ROOT/ciaox11:$X11_BASE_ROOT/ciaox11/connectors/psdd4ccm
 export RIDL_BE_SELECT=ccmx11
 export RIDL_ROOT=$X11_BASE_ROOT/ridl/lib
 export TAOX11_ROOT=$X11_BASE_ROOT/taox11
@@ -37,4 +37,6 @@ bin/brix11 make -N -d $X11_BASE_ROOT -- make -N -d $TAOX11_ROOT/examples -- make
 bin/brix11 run list -l taox11/bin/taox11_tests.lst -r taox11 2>&1 | tee run-test.log
 
 make -j -C ${TAOX11_ROOT} install
+make -j -C ${TAO_ROOT} -k install
+make -j -C ${ACE_ROOT} -k install
 
