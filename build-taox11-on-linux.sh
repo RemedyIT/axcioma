@@ -39,6 +39,10 @@ make -j -C ${X11_BASE_ROOT} install 2>&1 | tee make-install.log
 pushd ${INSTALL_PREFIX}/include/x11
 cp -p *.h ../tao/x11
 cp -p *.cpp ../tao/x11
+cd ..
+mkdir -p orbsvcs/naming_server
+cp -p naming_server/* orbsvcs/naming_server
+rm -rf x11 naming_server
 popd
 
 #FIXME: show install garbage! CK
