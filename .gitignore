@@ -1,7 +1,8 @@
 build
 .*
 *~
-ACE
+ACE/
+ACE_TAO/
 *C.h
 *C.inl
 *C.cpp
@@ -20,6 +21,7 @@ GNUmakefile*
 *.pdb
 *.Build.CppClean.log
 *.dll
+*.dylib
 *.lib
 *.iobj
 *.ipdb
@@ -31,5 +33,10 @@ GNUmakefile*
 commit.txt
 taox11/html
 taox11/latex
+taox11/
 *.gcno
 workspace.mwc*
+ciaox11/
+dancex11/
+ridl/
+stage/
