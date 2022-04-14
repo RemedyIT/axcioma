@@ -29,24 +29,10 @@ bin/brix11 run list -l taox11/bin/taox11_tests.lst -r taox11 2>&1 | tee run-test
 
 make -j -C ${X11_BASE_ROOT} install 2>&1 | tee make-install.log
 
-#TODO: should be not needed? CK
-# make -j -C ${TAOX11_ROOT} install
-# make -j -C ${TAO_ROOT} -k install
-# make -j -C ${ACE_ROOT} -k install
-
-#FIXME: quickfix to make include tree usable! CK
-# see taox11/tao/x11/taox11.mpc
-pushd ${INSTALL_PREFIX}/include/x11
-cp -p *.h ../tao/x11
-cp -p *.cpp ../tao/x11
-cd ..
-mkdir -p orbsvcs/naming_server
-cp -p naming_server/* orbsvcs/naming_server
-rm -rf x11 naming_server
-popd
-
-#FIXME: show install garbage! CK
 find ${INSTALL_PREFIX}/include -type d -name home -prune | xargs tree
-#TODO: remove garbage! CK
 find ${INSTALL_PREFIX}/include -type d -name home -prune | xargs rm -rf
 
+#FIXME: remove the installed include garbage! CK
+rm -rf ${INSTALL_PREFIX}/include
+
+exit 0
