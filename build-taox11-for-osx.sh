@@ -30,7 +30,7 @@ $X11_BASE_ROOT/bin/brix11 bootstrap taox11
 
 ############################################################
 # patch to build ACE with -std=c++17
-cd $ACE_ROOT && patch -p1 < ../ACE_Auto_Ptr.patch
+cd $ACE_ROOT && patch -p2 < ../../ACE_Auto_Ptr.patch
 cd $X11_BASE_ROOT
 ############################################################
 
