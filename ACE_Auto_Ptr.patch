@@ -1,0 +1,13 @@
+diff --git a/ACE/ace/Auto_Ptr.h b/ACE/ace/Auto_Ptr.h
+index 01236ce8198..f4b71dabad9 100644
+--- a/ACE/ace/Auto_Ptr.h
++++ b/ACE/ace/Auto_Ptr.h
+@@ -70,7 +70,7 @@ ACE_END_VERSIONED_NAMESPACE_DECL
+ 
+ #if !defined (ACE_LACKS_AUTO_PTR)
+ #include <memory>
+-using std::auto_ptr;
++//XXX using std::auto_ptr;
+ #else /* !ACE_LACKS_AUTO_PTR */
+ 
+ ACE_BEGIN_VERSIONED_NAMESPACE_DECL
