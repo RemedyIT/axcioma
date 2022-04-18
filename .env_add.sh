@@ -1,8 +1,5 @@
 #!/bin/sh
 
-#XXX set -u
-#XXX set -e
-
 export X11_BASE_ROOT=$PWD
 export TAOX11_ROOT=$X11_BASE_ROOT/taox11
 export ACE_ROOT=$X11_BASE_ROOT/ACE/ACE

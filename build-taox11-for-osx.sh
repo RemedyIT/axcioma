@@ -8,6 +8,9 @@ set -e
 set -u
 
 export LANG=C
+export CC=clang
+export CXX=clang++
+
 export WORKSPACE=`realpath ..`
 export X11_BASE_ROOT=$WORKSPACE/axcioma
 export INSTALL_PREFIX=$X11_BASE_ROOT/stage
@@ -16,51 +19,60 @@ source .env_add.sh
 
 set -x
 
-############################################################
-
 export BRIX11_VERBOSE=1
 export BRIX11_NUMBER_OF_PROCESSORS=6
 
-############################################################
-
 # TODO: force to build only taox11! CK
 rm -rf ciaox11 dancex11
+rm -f *.log
 
 $X11_BASE_ROOT/bin/brix11 bootstrap taox11
 
 $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT
 
-# - name: Print brix11 configuration
+# Print brix11 configuration
 $X11_BASE_ROOT/bin/brix11 --version
-$X11_BASE_ROOT/bin/brix11 env -- configure -P 2>&1 | tee env-configure.log
+$X11_BASE_ROOT/bin/brix11 env -- configure -P 2>&1 | tee configure.log
+
+############################################################
+# gen GNUmakefile from workspace.mwc
+# see taox11/tao/x11/taox11.mpc
+# and ACE/ACE/ace/ace_for_tao.mpc
+# NO! bin/brix11 gen build workspace.mwc -- gen build ${TAOX11_ROOT}/examples -- gen build ${TAOX11_ROOT}/orbsvcs/tests -- gen build ${TAOX11_ROOT}/tests
+############################################################
 
 # FIXME: quickfixes for OSX
-# ACE/include/makeinclude/platform_macosx.GNU
+# ACE/ACE/include/makeinclude/platform_gcc_clang_common.GNU
+# ACE/ACE/include/makeinclude/platform_clang_common.GNU
+# ACE/ACE/include/makeinclude/platform_macosx_common.GNU
+# ACE/ACE/include/makeinclude/platform_macosx.GNU
 platform_file='include $(ACE_ROOT)/include/makeinclude/platform_macosx.GNU'
 echo ${platform_file} > ${ACE_ROOT}/include/makeinclude/platform_macros.GNU
 
-# ACE/ace/config.h
-# ACE/ace/config-macosx.h
+# ACE/ACE/ace/config.h
+# ACE/ACE/ace/config-macosx.h
 echo '#include "ace/config-macosx.h"' > ${ACE_ROOT}/ace/config.h
 
-# ACE/bin/MakeProjectCreator/config/default.features
+# ACE/ACE/bin/MakeProjectCreator/config/default.features
 echo 'ipv6=1' > ${ACE_ROOT}/bin/MakeProjectCreator/config/default.features
 echo 'versioned_namespace=1' >> ${ACE_ROOT}/bin/MakeProjectCreator/config/default.features
 echo 'acetaompc=1' >> ${ACE_ROOT}/bin/MakeProjectCreator/config/default.features
 echo 'inline=1' >> ${ACE_ROOT}/bin/MakeProjectCreator/config/default.features
 echo 'optimize=1' >> ${ACE_ROOT}/bin/MakeProjectCreator/config/default.features
+# TODO: echo 'c++17=1' >> ${ACE_ROOT}/bin/MakeProjectCreator/config/default.features
 
-# generate all makefiles
+# generate all GNUmakefile
 # see workspace.mwc
 perl ${TAOX11_ROOT}/bin/mwc.pl -type gnuace ${X11_BASE_ROOT}/workspace.mwc -workers ${BRIX11_NUMBER_OF_PROCESSORS}
-
-#see taox11/taox11.mpc
-#and ACE_TAO/ACE/ace/ace_for_tao.mpc
-#NO! bin/brix11 gen build workspace.mwc
+perl ${TAOX11_ROOT}/bin/mwc.pl -type gnuace ${TAOX11_ROOT}/orbsvcs/tests -workers ${BRIX11_NUMBER_OF_PROCESSORS}
+perl ${TAOX11_ROOT}/bin/mwc.pl -type gnuace ${TAOX11_ROOT}/examples -workers ${BRIX11_NUMBER_OF_PROCESSORS}
+perl ${TAOX11_ROOT}/bin/mwc.pl -type gnuace ${TAOX11_ROOT}/tests -workers ${BRIX11_NUMBER_OF_PROCESSORS}
 
 # make all
-make -j ${BRIX11_NUMBER_OF_PROCESSORS} 2>&1 | tee build-all.log
-$X11_BASE_ROOT/bin/brix11 make -N -d ${TAOX11_ROOT}/examples -- make -N -d ${TAOX11_ROOT}/orbsvcs/tests -- make -N -d ${TAOX11_ROOT}/tests 2>&1 | tee -a build-all.log
+make -j ${BRIX11_NUMBER_OF_PROCESSORS} 2>&1 | tee make-all.log
+make -j ${BRIX11_NUMBER_OF_PROCESSORS} -C ${TAOX11_ROOT}/orbsvcs/tests 2>&1 | tee -a make-all.log
+make -j ${BRIX11_NUMBER_OF_PROCESSORS} -C ${TAOX11_ROOT}/examples 2>&1 | tee -a make-all.log
+make -j ${BRIX11_NUMBER_OF_PROCESSORS} -C ${TAOX11_ROOT}/tests 2>&1 | tee -a make-all.log
 
 # make tests
 $X11_BASE_ROOT/bin/brix11 run list -l taox11/bin/taox11_tests.lst -r taox11 2>&1 | tee run-list.log

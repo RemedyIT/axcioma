@@ -12,6 +12,7 @@ set -x
 
 #TODO: force to build only taox11! CK
 rm -rf ciaox11 dancex11
+rm -f *.log
 
 bin/brix11 bootstrap taox11
 
