@@ -29,7 +29,7 @@ rm -f ./*.log
 "${X11_BASE_ROOT}/bin/brix11" bootstrap taox11
 
 ############################################################
-# patch to build ACE with -std=c++20
+# patch to build ACE with -std=c++17
 cd "${ACE_ROOT}" && git stash && patch -p2 < ../../ACE_Auto_Ptr.patch
 cd "${X11_BASE_ROOT}"
 ############################################################
@@ -52,8 +52,8 @@ cd "${X11_BASE_ROOT}"
 # ACE/ACE/include/makeinclude/platform_clang_common.GNU
 # ACE/ACE/include/makeinclude/platform_macosx_common.GNU
 # ACE/ACE/include/makeinclude/platform_macosx.GNU
-platform_file='include $(ACE_ROOT)/include/makeinclude/platform_macosx.GNU'
-echo ${platform_file} > "${ACE_ROOT}/include/makeinclude/platform_macros.GNU"
+echo 'include $(ACE_ROOT)/include/makeinclude/platform_macosx.GNU' >
+${platform_file} > "${ACE_ROOT}/include/makeinclude/platform_macros.GNU"
 
 # ACE/ACE/ace/config.h
 # ACE/ACE/ace/config-macosx.h
@@ -67,6 +67,7 @@ echo ${platform_file} > "${ACE_ROOT}/include/makeinclude/platform_macros.GNU"
 # ACE/ACE/ace/config-macosx-lion.h
 # ACE/ACE/ace/config-macosx-leopard.h
 echo '#include "ace/config-macosx.h"' > "${ACE_ROOT}/ace/config.h"
+# patch to build ACE with -std=c++20
 echo '#define throw() noexcept' >> "${ACE_ROOT}/ace/config.h"
 
 # ACE/ACE/bin/MakeProjectCreator/config/default.features
