@@ -1,7 +1,7 @@
 {
   "bootstrap": [
-    { "id": "ACE", "collections": ["TAOX11", "AXCIOMA"], "dir": "ACE", "repo": "https://github.com/DOCGroup/ACE_TAO.git", "tag": "ACE+TAO-7_0_6" },
-    { "id": "MPC", "collections": ["TAOX11", "AXCIOMA"], "dir": "ACE/MPC", "repo": "https://github.com/DOCGroup/MPC.git", "tag": "ACE+TAO-7_0_6" },
+    { "id": "ACE", "collections": ["TAOX11", "AXCIOMA"], "dir": "ACE", "repo": "https://github.com/DOCGroup/ACE_TAO.git", "tag": "ACE+TAO-7_0_7" },
+    { "id": "MPC", "collections": ["TAOX11", "AXCIOMA"], "dir": "ACE/MPC", "repo": "https://github.com/DOCGroup/MPC.git", "tag": "ACE+TAO-7_0_7" },
     { "id": "ridl", "collections": ["TAOX11", "AXCIOMA"], "dir": "ridl", "repo": "https://github.com/RemedyIT/ridl.git", "tag": "master" },
     { "id": "taox11", "collections": ["TAOX11", "AXCIOMA"], "dir": "taox11", "repo": "https://github.com/RemedyIT/taox11.git", "tag": "master" },
     { "id": "ciaox11", "collections": ["AXCIOMA"], "dir": "ciaox11", "repo": "https://github.com/RemedyIT/ciaox11.git", "tag": "master" },
