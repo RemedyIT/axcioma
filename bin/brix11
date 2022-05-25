@@ -24,8 +24,8 @@ ENV['BRIX11RC'] = (ENV['BRIX11RC'] || '').split(File::PATH_SEPARATOR).unshift(*_
 
 require 'brix11'
 
-if RUBY_VERSION.to_f < 2.0
-  STDERR.puts("ERROR: Your ruby version should be >= 2.0")
+if RUBY_VERSION.to_f < 2.5
+  STDERR.puts("ERROR: Your ruby version should be >= 2.5")
   exit (false)
 end
 
