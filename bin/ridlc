@@ -21,8 +21,8 @@ ENV['RIDLRC'] = (ENV['RIDLRC'] || '').split(File::PATH_SEPARATOR).unshift(*_ridl
 
 require 'ridl/ridl'
 
-if RUBY_VERSION.to_f < 2.0
-  STDERR.puts("ERROR: Your ruby version should be >= 2.0")
+if RUBY_VERSION.to_f < 2.5
+  STDERR.puts("ERROR: Your ruby version should be >= 2.5")
   exit (false)
 end
 
