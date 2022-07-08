@@ -84,36 +84,43 @@ jobs:
       with:
         repository: DOCGroup/ACE_TAO
         path: ${{ env.DOC_ROOT }}
+        ref: ACE+TAO-7_0_4
     - name: checkout MPC
       uses: actions/checkout@v2
       with:
         repository: DOCGroup/MPC
         path: ${{ env.MPC_ROOT }}
+        ref: ACE+TAO-7_0_4
     - name: checkout ridl
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
+        ref: v2.2.1_dev
     - name: checkout taox11
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/taox11
         path: ${{ env.TAOX11_ROOT }}
+        ref: v2.2.1_dev
     - name: checkout ciaox11
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/ciaox11
         path: ${{ env.CIAOX11_ROOT }}
+        ref: v2.2.1_dev
     - name: checkout dancex11
       uses: actions/checkout@v2
       with:
         repository: RemedyIT/dancex11
         path: ${{ env.DANCEX11_ROOT }}
+        ref: v2.2.1_dev
     - name: checkout OpenDDS
       uses: actions/checkout@v2
       with:
         repository: objectcomputing/OpenDDS
         path: ${{ env.DDS_ROOT }}
+        ref: DDS-3.18.1
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
