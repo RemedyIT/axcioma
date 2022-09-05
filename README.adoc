@@ -17,7 +17,7 @@ Before bootstrapping AXCIOMA make sure you have installed the following prerequi
 [cols="<,<",options="header",]
 |=========================================
 |Prerequisite |Package name
-|ruby 2.0 or newer|ruby
+|ruby 2.5 or newer|ruby
 |perl version 5.10 or newer |perl
 |git |git
 |gcc version 4.7 or newer |gcc
