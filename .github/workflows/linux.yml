@@ -35,7 +35,7 @@ env:
   DDS_ROOT: ${{ github.workspace }}/OpenDDS
   X11_BRANCH: master
   ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
-  OPENDDS_BRANCH: latest_release
+  OPENDDS_BRANCH: latest-release
 
 jobs:
   build:
