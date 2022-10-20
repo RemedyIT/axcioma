@@ -33,6 +33,9 @@ env:
   CIAOX11_ROOT: ${{ github.workspace }}/ciaox11
   DANCEX11_ROOT: ${{ github.workspace }}/dancex11
   DDS_ROOT: ${{ github.workspace }}/OpenDDS
+  X11_BRANCH: master
+  ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
+  OPENDDS_BRANCH: latest-release
 
 jobs:
   build:
@@ -76,44 +79,55 @@ jobs:
       CC: ${{ matrix.CC }}
       CXX: ${{ matrix.CXX }}
     steps:
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) && github.repository_owner == 'RemedyIT'
+      run: |
+        echo "X11_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
+    - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false && github.repository_owner == 'RemedyIT'
+      run: |
+        echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
     - uses: actions/checkout@v3
     - name: checkout ACE_TAO
       uses: actions/checkout@v3
       with:
         repository: DOCGroup/ACE_TAO
         path: ${{ env.DOC_ROOT }}
-        ref: Latest_ACE7TAO3_Micro
+        ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout MPC
       uses: actions/checkout@v3
       with:
         repository: DOCGroup/MPC
         path: ${{ env.MPC_ROOT }}
-        ref: Latest_ACE7TAO3_Micro
+        ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout ridl
       uses: actions/checkout@v3
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
+        ref: ${{ env.X11_BRANCH }}
     - name: checkout taox11
       uses: actions/checkout@v3
       with:
         repository: RemedyIT/taox11
         path: ${{ env.TAOX11_ROOT }}
+        ref: ${{ env.X11_BRANCH }}
     - name: checkout ciaox11
       uses: actions/checkout@v3
       with:
         repository: RemedyIT/ciaox11
         path: ${{ env.CIAOX11_ROOT }}
+        ref: ${{ env.X11_BRANCH }}
     - name: checkout dancex11
       uses: actions/checkout@v3
       with:
         repository: RemedyIT/dancex11
         path: ${{ env.DANCEX11_ROOT }}
+        ref: ${{ env.X11_BRANCH }}
     - name: checkout OpenDDS
       uses: actions/checkout@v3
       with:
         repository: objectcomputing/OpenDDS
         path: ${{ env.DDS_ROOT }}
+        ref: ${{ env.OPENDDS_BRANCH }}
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
