@@ -160,7 +160,7 @@ jobs:
         $X11_BASE_ROOT/bin/brix11 generate documentation
     - name: Check documentation file existence
       id: check_files
-      uses: andstor/file-existence-action@v1
+      uses: andstor/file-existence-action@v2
       with:
         files: "docs/html/taox11/getting_started.html"
     - name: File exists
