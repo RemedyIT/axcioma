@@ -125,7 +125,7 @@ jobs:
     - name: checkout OpenDDS
       uses: actions/checkout@v3
       with:
-        repository: objectcomputing/OpenDDS
+        repository: OpenDDS/OpenDDS
         path: ${{ env.DDS_ROOT }}
         ref: ${{ env.OPENDDS_BRANCH }}
     - uses: ruby/setup-ruby@v1
