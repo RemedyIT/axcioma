@@ -45,7 +45,7 @@ module BRIX11
           # generate ridlrc file
           BRIX11.show_msg("Creating #{brix11rc}")
           begin
-            brix11rc_io = cfg.dryrun? ? STDOUT : File.new(brix11rc, 'wb')
+            brix11rc_io = cfg.dryrun? ? STDOUT : File.new(brix11rc, 'w')
             brix11rc_io.puts("#----- #{BRIX11RC} -----") if cfg.dryrun?
             brix11rc_io.puts(JSON.pretty_generate({
                               'project_type' => project_type,
