@@ -37,7 +37,7 @@ module BRIX11
           # generate mpc config file
           BRIX11.show_msg("Creating #{mpccfg}")
           begin
-            mpccfg_io = cfg.dryrun? ? STDOUT : File.new(mpccfg, 'w')
+            mpccfg_io = cfg.dryrun? ? STDOUT : File.new(mpccfg, 'wb')
             mpccfg_io.puts("//----- #{MPCCFG} -----") if cfg.dryrun?
             mpccfg_io.puts("includes = #{mpcinc.join(', ')}")
             mpccfg_io.puts("dynamic_types = #{mpcdynamic.join(', ')}")
@@ -61,7 +61,7 @@ module BRIX11
           # generate mpc config file
           BRIX11.show_msg("Creating #{mwccfg}")
           begin
-            mwccfg_io = cfg.dryrun? ? STDOUT : File.new(mwccfg, 'w')
+            mwccfg_io = cfg.dryrun? ? STDOUT : File.new(mwccfg, 'wb')
             mwccfg_io.puts("//----- #{MWCCFG} -----") if cfg.dryrun?
             mwccfg_io.puts('workspace {')
             mwcinc.each {|p| mwccfg_io.puts("  #{p}") }

@@ -133,7 +133,7 @@ module BRIX11
               end
 
               begin
-                default_features_io = cfg.dryrun? ? STDOUT : File.new(default_features, 'w')
+                default_features_io = cfg.dryrun? ? STDOUT : File.new(default_features, 'wb')
                 default_features_io.puts("#----- HOST #{ACE_Config::DEFAULT_FEATURES} -----") if cfg.dryrun?
                 default_features_io << %Q{
                   bzip2=0

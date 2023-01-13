@@ -92,7 +92,7 @@ module BRIX11
           end
           BRIX11.show_msg("Creating #{default_features}")
           begin
-            default_features_io = cfg.dryrun? ? STDOUT : File.new(default_features, 'w')
+            default_features_io = cfg.dryrun? ? STDOUT : File.new(default_features, 'wb')
             default_features_io.puts("#----- #{DEFAULT_FEATURES} -----") if cfg.dryrun?
             # generate all feature definitions
             cfg.features.each {|featureid, feature| default_features_io.puts("#{featureid}=#{feature.state ? '1' : '0'}") }
