@@ -255,7 +255,7 @@ module BRIX11
       end
 
       def add_entry(txt, options = {}, &prc)
-        entry = Entry.new(self, txt, (options || {}).merge({proc: prc}))
+        entry = Entry.new(self, txt, (options || {}).merge({ proc: prc }))
         @entries[entry.name] = entry
       end
 
@@ -334,7 +334,7 @@ module BRIX11
           _count
         end
         _hdr = options[:header]
-        @header = _hdr ? (Hash === _hdr ? Text.new("\n", _hdr) : Text.new("\n", {label: _hdr.to_s})) : nil
+        @header = _hdr ? (Hash === _hdr ? Text.new("\n", _hdr) : Text.new("\n", { label: _hdr.to_s })) : nil
         @size = options[:size]
         @format = options[:format]
         @fmtstr = "%#{@count.to_s.size}s" if @format == :numbered

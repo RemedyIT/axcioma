@@ -386,7 +386,7 @@ module BRIX11
           @prerequisites = []
           @dependencies = {}
           @features = {}
-          @ridl_backend = {backend: nil, bases: []}
+          @ridl_backend = { backend: nil, bases: [] }
           @ridl_be_path = []
           @brix_path = []
           @mpc_base = nil

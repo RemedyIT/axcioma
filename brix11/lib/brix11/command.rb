@@ -290,7 +290,7 @@ module BRIX11
     end
 
     def self.descriptions(scope = nil, all = false)
-      selection = scope ? {scope => Node.new(scope, [], scoped_commands[scope])} : commands
+      selection = scope ? { scope => Node.new(scope, [], scoped_commands[scope]) } : commands
       maxlen = determin_max_desc(selection, all)
       maxlen = (((4 + maxlen) / 5) * 5) + 10
       desc = ["%-#{maxlen}s | %s" % ["Command#{scope ? " (#{scope})" : ''}", 'Description']]

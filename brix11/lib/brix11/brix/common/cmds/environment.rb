@@ -13,8 +13,7 @@ module BRIX11
     class Environment < Command::Base
       DESC = 'Print BRIX11 environment settings for development.'.freeze
 
-      OPTIONS = {
-      }
+      OPTIONS = {}
 
       def self.setup(optparser, options)
         options[:environment] = OPTIONS.dup

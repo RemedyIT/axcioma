@@ -13,8 +13,7 @@ module BRIX11
     class Execute < Command::Base
       DESC = 'Execute a process in the brix11 environment.'.freeze
 
-      OPTIONS = {
-      }
+      OPTIONS = {}
 
       def self.setup(optparser, options)
         options[:execute] = OPTIONS.dup

@@ -14,8 +14,7 @@ module BRIX11
     class Help < Command::Base
       DESC = 'Show help (documentation) for brix11 (command).'.freeze
 
-      OPTIONS = {
-      }
+      OPTIONS = {}
 
       MAIN_HELP = File.join(BRIX11_BASE_ROOT, 'lib', 'brix11', 'docs', 'brix.rd')
 

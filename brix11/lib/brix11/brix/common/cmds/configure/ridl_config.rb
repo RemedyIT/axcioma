@@ -33,7 +33,7 @@ module BRIX11
           Util.backup_file(ridlrc) unless cfg.dryrun?
           # determine the backend to configure
           ridl_be_list = cfg.cfglist.values.inject({}) do |hsh, mod|      # collect backend table
-            hsh.merge!({mod.ridl_backend[:backend] => mod.ridl_backend[:bases]}) if mod.ridl_backend[:backend]
+            hsh.merge!({ mod.ridl_backend[:backend] => mod.ridl_backend[:bases] }) if mod.ridl_backend[:backend]
             hsh
           end
           # select the backend to configure

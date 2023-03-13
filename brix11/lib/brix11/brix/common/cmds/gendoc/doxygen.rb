@@ -41,9 +41,9 @@ module BRIX11
             config = config.gsub(/\$\{(\w+)\}/) { |_| resolve_path_var($1) }
             # check for availability of doxygen
             if has_doxygen?
-              opts = { env: { 'BRIX11_HAVE_DOT' => has_dot? ? 'YES' : 'NO'} }
+              opts = { env: { 'BRIX11_HAVE_DOT' => has_dot? ? 'YES' : 'NO' } }
               Sys.in_dir(Exec.get_run_environment('X11_BASE_ROOT')) do
-                Exec.runcmd('doxygen', config, noredirect ? opts : opts.merge({silent: true, filter: NullFilter.new}))
+                Exec.runcmd('doxygen', config, noredirect ? opts : opts.merge({ silent: true, filter: NullFilter.new }))
               end
             else
               BRIX11.log_error('No source documentation will be generated as the doxygen tool is not available!')
