@@ -89,7 +89,7 @@ module BRIX11
         end.max
       end
 
-      def collect_desc(container, maxlen, scope, path=[], all)
+      def collect_desc(container, maxlen, scope, path = [], all)
         descs = []
         pfx = path.empty? ? '' : (path.join(' ') << ' ')
         container.keys.sort.each do |id|
@@ -112,7 +112,7 @@ module BRIX11
       BRIX11.options
     end
 
-    def self.set_collection(scope=nil)
+    def self.set_collection(scope = nil)
       set_cur_collection(scope ? scope.to_s : nil)
     end
 
@@ -120,7 +120,7 @@ module BRIX11
       cur_collection_scope
     end
 
-    def self.register(cmdid, desc, klass, override=false)
+    def self.register(cmdid, desc, klass, override = false)
       BRIX11.log(2, "Registering brix command #{cmdid}=#{desc} in collection #{cur_collection_scope}")
       idlist = cmdid.to_s.split(':').collect { |s| s.split('|') }   # extract optional namespaces and aliases
       BRIX11.log_fatal("Namespace or command ids and aliases should be at least #{MIN_CMDLEN} long") if idlist.flatten.any? {|i| i.size < MIN_CMDLEN}
@@ -289,7 +289,7 @@ module BRIX11
       cmd.run(argv)
     end
 
-    def self.descriptions(scope=nil, all=false)
+    def self.descriptions(scope = nil, all = false)
       selection = scope ? {scope => Node.new(scope, [], scoped_commands[scope])} : commands
       maxlen = determin_max_desc(selection, all)
       maxlen = (((4+maxlen) / 5) * 5) + 10

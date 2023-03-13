@@ -47,7 +47,7 @@ module BRIX11
             ENV['PATH'] = _oldpath
           end
 
-          def wait(noblock=false)
+          def wait(noblock = false)
             begin
               rc, @status = Process.waitpid2(@pid, noblock ? Process::WNOHANG : 0)
             end until noblock || (rc == @pid && @status)
@@ -223,7 +223,7 @@ module BRIX11
       run_env[env]
     end
 
-    def self.get_run_environment(env, force_use_env=false)
+    def self.get_run_environment(env, force_use_env = false)
       run_env[env] || ((BRIX11.use_environment? || force_use_env) ? ENV[env] : nil)
     end
 

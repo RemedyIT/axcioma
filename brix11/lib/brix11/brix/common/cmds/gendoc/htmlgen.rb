@@ -57,7 +57,7 @@ module BRIX11
             end
           end
 
-          def generate_html_from_folder(srcroot, tgtbase, opts, srcdir=nil)
+          def generate_html_from_folder(srcroot, tgtbase, opts, srcdir = nil)
             srcpath = srcdir ? File.join(srcroot, srcdir) : srcroot.dup
             tgtdir = srcdir ? File.join(X11_DOC_ROOT, 'html', srcdir) : X11_DOC_ROOT.dup
             BRIX11.log(2, "gendoc> Generating HTML from #{srcpath}")

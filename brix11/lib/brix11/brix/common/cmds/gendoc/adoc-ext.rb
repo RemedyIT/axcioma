@@ -17,7 +17,7 @@ module BRIX11
 
         named :dirlist
 
-        def collect_dirlist(glob, recurse=false, indent=0)
+        def collect_dirlist(glob, recurse = false, indent = 0)
           (indent>0 ? [] : ['.', '..']).concat(Dir.glob(glob).collect do |p|
             entry = "#{' ' * indent}#{File.basename(p)}#{File.directory?(p) ? '\\' : ''}"
             if File.directory?(p) && recurse

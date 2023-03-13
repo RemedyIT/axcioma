@@ -49,7 +49,7 @@ module BRIX11
         to
       end
 
-      def initialize(hash=nil)
+      def initialize(hash = nil)
         super(Config.merge(_defaults, hash || {}))
       end
 

@@ -56,7 +56,7 @@ module BRIX11
       registry.has_key?(type.to_sym)
     end
 
-    def self.handler(type, compiler=nil)
+    def self.handler(type, compiler = nil)
       BRIX11.log_fatal("Unknown project type [#{type}]") unless registry.has_key?(type.to_sym)
       registry[type.to_sym].new(type, compiler)
     end
@@ -145,7 +145,7 @@ module BRIX11
         raise Command::CmdError, "#{self.class.name}\#make_files not implemented"
       end
 
-      def generate(opts={}, cmdargv=[])
+      def generate(opts = {}, cmdargv = [])
         runopts = {}
         return false unless argv = base_mpc_args(opts, runopts, cmdargv)
         runopts[:capture] = :all if block_given?

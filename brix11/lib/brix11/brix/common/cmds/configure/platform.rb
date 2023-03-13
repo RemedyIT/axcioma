@@ -41,7 +41,7 @@ module BRIX11
                                                   test_configs: %w{LINUX Linux},
                                                   prj_type: BRIX11::Project.handler('gnumake').default_prj_type
                                                 },
-                                                project_type: lambda { |opts_, pt=nil, cc=nil|
+                                                project_type: lambda { |opts_, pt = nil, cc = nil|
                                                   opts_def = opts_[:platform][:defaults]
                                                   prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
                                                   [prjh.class::ID, prjh.compiler]
@@ -75,7 +75,7 @@ module BRIX11
                                               test_configs: %w{Win32},
                                               prj_type: 'vs2019'
                                             },
-                                            project_type: lambda { |opts_, pt=nil, cc=nil|
+                                            project_type: lambda { |opts_, pt = nil, cc = nil|
                                               bits = opts_[:bitsize] || opts_[:platform][:bits]
                                               opts_def = opts_[:platform][:defaults]
                                               prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
@@ -103,7 +103,7 @@ module BRIX11
                                             test_configs: %w{LINUX Linux},
                                             prj_type: BRIX11::Project.handler('gnumake').default_prj_type
                                           },
-                                          project_type: lambda { |opts_, pt=nil, cc=nil|
+                                          project_type: lambda { |opts_, pt = nil, cc = nil|
                                             opts_def = opts_[:platform][:defaults]
                                             prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
                                             [prjh.class::ID, prjh.compiler]

@@ -39,7 +39,7 @@ module BRIX11
       @max_cpu_cores
     end
 
-    def self.expand(cmd, default='', redirect_err=true)
+    def self.expand(cmd, default = '', redirect_err = true)
       excmd = cmd
       if redirect_err
         excmd << ' 2>' << (mswin? ? 'NUL' : '/dev/null')

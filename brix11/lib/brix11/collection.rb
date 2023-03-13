@@ -45,7 +45,7 @@ module BRIX11
 
     # search for collection in brix search paths
     # attempt to load first match found
-    def self.find(name, required=true)
+    def self.find(name, required = true)
       # iterate configured brix collection search paths
       BRIX11.options.config.brix_paths.each do |brixpath|
         # expand env vars if present (could be if added through command line)
