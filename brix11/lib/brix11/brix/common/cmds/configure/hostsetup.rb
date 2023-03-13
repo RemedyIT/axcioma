@@ -7,7 +7,6 @@
 # @copyright Copyright (c) Remedy IT Expertise BV
 #--------------------------------------------------------------------
 
-
 require 'fileutils'
 
 module BRIX11

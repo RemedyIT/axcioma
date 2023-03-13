@@ -26,7 +26,6 @@ module BRIX11
             @test_config ||= Configure::Configurator.get_test_config
           end
 
-
           def is_configured?(cfgs)
             cfgs.all? do |cfg|
               cfg = cfg.lstrip

@@ -216,7 +216,6 @@ module BRIX11
             end
           end # DSLHandler
 
-
           def initialize(kind, featureid, &block)
             @kind = kind
             @featureid = featureid

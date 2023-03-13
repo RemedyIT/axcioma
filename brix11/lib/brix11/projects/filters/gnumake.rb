@@ -74,7 +74,6 @@ module BRIX11
             @verbosity = verbosity
           end
 
-
           def match(s)
             @last_output_category = nil
             filter_output(s)

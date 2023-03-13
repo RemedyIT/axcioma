@@ -87,7 +87,6 @@ module BRIX11
       errout.puts args.flatten.collect { |a| (colorize? && Color === a) ? a.code : a }.join
     end
 
-
     def list(lst, mode = :rows, *rest)
       lst.collect { |li| [li, "\n"] }
     end

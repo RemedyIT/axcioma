@@ -22,7 +22,6 @@ module BRIX11
         TOOL_PATTERN = /(\d+\>)?CustomBuild:.*\Z/
         COMPILE_PATTERN = /Invoking\s+".*(?<tool>(ridlc|tao_idl))\s+on\s+(?<name>(\S+))".*\Z/
 
-
         # override
         def initialize(verbosity)
           @pattern = TOOL_PATTERN
