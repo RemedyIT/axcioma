@@ -15,10 +15,10 @@ module BRIX11
       DESC = 'Configure the project.'.freeze
 
       OPTIONS = {
-        :includes => [],
-        :excludes => [],
-        :variables => {},
-        :features => {}
+        includes: [],
+        excludes: [],
+        variables: {},
+        features: {}
       }
 
       def self.setup(optparser, options)

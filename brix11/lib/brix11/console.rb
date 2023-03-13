@@ -139,11 +139,11 @@ module BRIX11
     end
 
     def self.display_alert(text)
-      display_text(text, :label => 'NOTICE', :label_fmt => proc {|t| yellow(reverse(t.label_format_str % t.label)) })
+      display_text(text, label: 'NOTICE', label_fmt: proc {|t| yellow(reverse(t.label_format_str % t.label)) })
     end
 
     def self.display_warning(text)
-      display_text(text, :label => 'WARNING', :label_fmt => proc {|t| red(reverse(t.label_format_str % t.label))})
+      display_text(text, label: 'WARNING', label_fmt: proc {|t| red(reverse(t.label_format_str % t.label))})
     end
 
     def self.confirm(prompt, options = {})
@@ -258,7 +258,7 @@ module BRIX11
       end
 
       def add_entry(txt, options = {}, &prc)
-        entry = Entry.new(self, txt, (options || {}).merge({:proc => prc}))
+        entry = Entry.new(self, txt, (options || {}).merge({proc: prc}))
         @entries[entry.name] = entry
       end
 
@@ -338,7 +338,7 @@ module BRIX11
           _count
         end
         _hdr = options[:header]
-        @header = _hdr ? (Hash === _hdr ? Text.new("\n", _hdr) : Text.new("\n", {:label => _hdr.to_s})) : nil
+        @header = _hdr ? (Hash === _hdr ? Text.new("\n", _hdr) : Text.new("\n", {label: _hdr.to_s})) : nil
         @size = options[:size]
         @format = options[:format]
         @fmtstr = "%#{@count.to_s.size}s" if @format == :numbered

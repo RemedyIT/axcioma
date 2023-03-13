@@ -16,12 +16,12 @@ module BRIX11
       DESC = 'Generate documentation from ASCIIDoctor sources.'.freeze
 
       OPTIONS = {
-        :docsources => {
+        docsources: {
             'brix11' => ["#{File.join(BRIX11_BASE_ROOT, 'docs')}"]
           },
-        :adoc_attribs => {},
-        :doxygen => false,
-        :doxygen_config => nil
+        adoc_attribs: {},
+        doxygen: false,
+        doxygen_config: nil
       }
 
       X11_DOC_ROOT = File.expand_path(File.join(File.dirname(BRIX11_BASE_ROOT), 'docs'))

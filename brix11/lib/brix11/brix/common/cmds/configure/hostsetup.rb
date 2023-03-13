@@ -24,8 +24,8 @@ module BRIX11
 
         SOURCE_CONFIG = {
             'ACE' => {
-              :module_folder => 'ACE',
-              :folders => {
+              module_folder: 'ACE',
+              folders: {
                 'ace' => :norecurse,
                 'ace/os_include' => :recurse,
                 'bin' => :norecurse,
@@ -36,8 +36,8 @@ module BRIX11
               }
             },
             'TAO' => {
-              :module_folder => 'TAO',
-              :folders => {
+              module_folder: 'TAO',
+              folders: {
                 '.' => :norecurse,
                 'TAO_IDL' => :recurse,
                 'MPC' => :recurse,
@@ -45,7 +45,7 @@ module BRIX11
               }
             },
             'OpenDDS' => {
-              :folders => {
+              folders: {
                 '.' => :norecurse,
                 'dds' => :norecurse,
                 'dds/idl' => :norecurse,

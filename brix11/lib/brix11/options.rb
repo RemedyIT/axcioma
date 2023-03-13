@@ -106,7 +106,7 @@ module BRIX11
 
       def _defaults
         {
-          :brix_paths => []
+          brix_paths: []
         }
       end
 
@@ -116,8 +116,8 @@ module BRIX11
 
     def _defaults
       {
-        :verbose => (ENV['BRIX11_VERBOSE'] || 1).to_i,
-        :help_proc => lambda {
+        verbose: (ENV['BRIX11_VERBOSE'] || 1).to_i,
+        help_proc: lambda {
           options.load_config
           load_brix
           puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
@@ -127,9 +127,9 @@ module BRIX11
           puts
           exit
         },
-        :config => Config.new({
-          :project_type => 'gnuace',
-          :use_environment => false
+        config: Config.new({
+          project_type: 'gnuace',
+          use_environment: false
         })
       }
     end

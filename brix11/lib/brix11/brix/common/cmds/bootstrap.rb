@@ -16,8 +16,8 @@ module BRIX11
       DESC = 'Bootstrap the project.'.freeze
 
       OPTIONS = {
-        :target => 'AXCIOMA',
-        :tags => {}
+        target: 'AXCIOMA',
+        tags: {}
       }
 
       def self.setup(optparser, options)
