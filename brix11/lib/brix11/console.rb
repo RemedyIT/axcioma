@@ -213,7 +213,7 @@ module BRIX11
             @ch = @text
             @text = ["#{@text[0,1]}\r#{_ind}", bold(@text[0,1]), @text[1..-1]]
           else
-            @ch = "#{@menu.entries.size+1}"
+            @ch = "#{@menu.entries.size + 1}"
             @text = [_ind, bold(@ch), @text]
           end
         end
@@ -443,7 +443,7 @@ module BRIX11
       begin
         txt = screen.ask(prompt, String).strip
         sel = if /^(\s|\d)+$/ =~ txt
-          txt.split.collect { |a| a.to_i-1 }
+          txt.split.collect { |a| a.to_i - 1 }
         elsif /^a(l|ll)?$/ =~ txt
           (0...list.count).to_a
         elsif txt.empty?

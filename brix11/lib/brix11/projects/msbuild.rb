@@ -135,7 +135,7 @@ module BRIX11
 
         # override
         def output_patterns
-          OUTPUT_PATTERNS+Project::Filter::MSBuildFile::IGNORE_PATTERNS
+          OUTPUT_PATTERNS + Project::Filter::MSBuildFile::IGNORE_PATTERNS
         end
 
       end # Filter

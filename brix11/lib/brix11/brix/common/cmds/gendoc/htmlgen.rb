@@ -66,7 +66,7 @@ module BRIX11
                 # setup target file name
                 target = [X11_DOC_ROOT, 'html', tgtbase]
                 target << srcdir if srcdir
-                target << File.basename(src, '.adoc')+'.html'
+                target << File.basename(src, '.adoc') + '.html'
                 target = File.absolute_path(File.join(*target))
                 # setup relative resource path attributes
                 targetdir = Pathname.new(File.dirname(target))

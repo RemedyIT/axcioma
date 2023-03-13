@@ -236,7 +236,7 @@ module BRIX11
           n_workers = (Exec.max_cpu_cores == 0 ? Exec.cpu_cores : Exec.max_cpu_cores)
           argv << '-workers' << n_workers unless cmdargv.any? { |arg| arg == '-workers' }
           if mpc_wrkdir_ix = cmdargv.find_index('-workers_dir')
-            mpc_wrkdir = cmdargv[mpc_wrkdir_ix+1] || '.'
+            mpc_wrkdir = cmdargv[mpc_wrkdir_ix + 1] || '.'
           else
             mpc_wrkdir = (ENV['MPC_WORKERS_DIR'] || Sys.tempdir)
             argv << '-workers_dir' << mpc_wrkdir
@@ -297,10 +297,10 @@ module BRIX11
           if /\A\s*project\s*\((.*)\)/ =~ ln
             convert = !ln.index('*').nil?
             prj = $1.strip.sub(/\A\*\Z/, base_name)
-            prj.sub!(/\A\*/) { |_| base_name+'_' }
-            prj.sub!(/\*\Z/) { |_| '_'+base_name }
+            prj.sub!(/\A\*/) { |_| base_name + '_' }
+            prj.sub!(/\*\Z/) { |_| '_' + base_name }
             prj.sub!('*', "_#{base_name}_")
-            prj.gsub!(/(\A|[^a-zA-Z0-9])?([a-zA-Z0-9])([a-zA-Z0-9]*)/) { |_| $1+$2.upcase+$3 } if convert
+            prj.gsub!(/(\A|[^a-zA-Z0-9])?([a-zA-Z0-9])([a-zA-Z0-9]*)/) { |_| $1 + $2.upcase + $3 } if convert
             ptable[prj] = file
           end
         end

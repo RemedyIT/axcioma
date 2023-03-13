@@ -9,7 +9,7 @@
 require 'brix11/command'
 module BRIX11
   module Common
-    class Configure  < Command::Base
+    class Configure < Command::Base
 
       DESC = 'Configure the project.'.freeze
 
@@ -22,7 +22,7 @@ module BRIX11
 
       def self.setup(optparser, options)
         options[:configure] = OPTIONS.dup
-        optparser.banner = "#{DESC}\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
                            "Usage: #{options[:script_name]} configure [options]\n\n"
 
         optparser.on('-b', '--bits', '=BITSIZE', Integer, 'Override platform default bitsize (0, 32 or 64).',
@@ -65,7 +65,7 @@ module BRIX11
 
         optparser.on('-V', '--show-var', 'Display the list of configuration variables.') do
           # load all rc files
-          rclist  = RCSpec.load_all_rc(options[:configure][:includes], options[:configure][:excludes])
+          rclist = RCSpec.load_all_rc(options[:configure][:includes], options[:configure][:excludes])
           # Show list of variables available to set through '--with'
           STDOUT.puts
           STDOUT.puts 'BRIX11 configure configuration variables'

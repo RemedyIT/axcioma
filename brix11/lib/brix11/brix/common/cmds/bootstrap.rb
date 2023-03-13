@@ -10,7 +10,7 @@ require 'brix11/command'
 require 'fileutils'
 module BRIX11
   module Common
-    class BootStrap  < Command::Base
+    class BootStrap < Command::Base
 
       DESC = 'Bootstrap the project.'.freeze
 
@@ -21,10 +21,10 @@ module BRIX11
 
       def self.setup(optparser, options)
         options[:bootstrap] = OPTIONS.dup
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} bootstrap [TARGET] [options]\n\n"+
-                           "       TARGET := Target component collection to bootstrap. Supported:\n"+
-                           "                 taox11 \tBootstraps solely the TAOX11 framework components\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} bootstrap [TARGET] [options]\n\n" +
+                           "       TARGET := Target component collection to bootstrap. Supported:\n" +
+                           "                 taox11 \tBootstraps solely the TAOX11 framework components\n" +
                            "                 axcioma\tBootstraps the AXCIOMA framework components (default)\n\n"
 
         optparser.on('-t', '--tag', '=COMPONENT:TAG', String, 'Override default repository tags for framework components.',

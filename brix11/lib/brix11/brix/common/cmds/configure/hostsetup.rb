@@ -12,7 +12,7 @@ require 'fileutils'
 
 module BRIX11
   module Common
-    class Configure  < Command::Base
+    class Configure < Command::Base
 
       module HostSetup
         FOLDER = 'HOST'

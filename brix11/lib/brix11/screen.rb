@@ -37,7 +37,7 @@ module BRIX11
     module ColorizeMethods
       def self.included(mod)
         Screen::COLORS.keys.each do |color|
-          mod.module_eval <<-EOT, __FILE__, __LINE__+1
+          mod.module_eval <<-EOT, __FILE__, __LINE__ + 1
             def #{color}(s)
               [BRIX11::Screen::COLORS[:#{color}].first, s, BRIX11::Screen::COLORS[:#{color}].last]
             end

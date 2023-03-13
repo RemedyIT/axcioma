@@ -9,7 +9,7 @@
 
 module BRIX11
   module Common
-    class Make  < Command::Base
+    class Make < Command::Base
 
       class ListBuilder
 
@@ -93,7 +93,7 @@ module BRIX11
               # any path that is a parent to another path is a false positive
               # (search could not find projecttype in original path and traversed
               #  too far up until it a parent root for other tests)
-              !build_list.any? { |gtp, bp| bp.start_with?(path) && bp.size>path.size && ['/', '\\'].include?(bp[path.size]) }
+              !build_list.any? { |gtp, bp| bp.start_with?(path) && bp.size > path.size && ['/', '\\'].include?(bp[path.size]) }
             end
           end
         end

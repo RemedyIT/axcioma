@@ -12,7 +12,7 @@ require 'brix11/log'
 
 module BRIX11
   module Common
-    class Configure  < Command::Base
+    class Configure < Command::Base
 
       module Platform
         class << self
@@ -129,7 +129,7 @@ module BRIX11
           opts[:platform] ||= {}
           (ph || platform_helpers.default).call(platform_os, opts)
           # see if there is a <build_target>.json to supplement/customize the defaults
-          target_json = File.join(Exec.get_run_environment('X11_BASE_ROOT'), 'etc', build_target+'.json')
+          target_json = File.join(Exec.get_run_environment('X11_BASE_ROOT'), 'etc', build_target + '.json')
           if File.file?(target_json)
             begin
               tgt_spec = JSON.parse(IO.read(target_json))

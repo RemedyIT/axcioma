@@ -9,7 +9,7 @@
 
 module BRIX11
   module Common
-    class Configure  < Command::Base
+    class Configure < Command::Base
 
       class Configurator
 
@@ -270,7 +270,7 @@ module BRIX11
             # evaluate our dependency specs
             BRIX11.show_msg("Processing dependencies for [#{mod_id}]")
             @rcspec.dependencies.each do |featureid, rcdep|
-              dep =  CfgDependency.new(self, rcdep)
+              dep = CfgDependency.new(self, rcdep)
               dep.process
               @deplist << dep
               # set the resulting feature state
@@ -327,7 +327,7 @@ module BRIX11
               mod.features.each do |featureid, rcfeature|
                 # chain (OR-ed) previous encountered feature specs
                 other_feature = features[featureid]
-                features[featureid] =  DerivedFeature.new(rcfeature, self, other_feature)
+                features[featureid] = DerivedFeature.new(rcfeature, self, other_feature)
               end
               # add this module to active list
               @cfglist[mod_id] = mod
@@ -337,7 +337,7 @@ module BRIX11
                 # chain (OR-ed) previous encountered feature specs
                 other_feature = features[featureid]
                 # fix this feature to it's negated state
-                features[featureid] =  DerivedFeature.new(StaticFeature.new(featureid, !rcfeature.state), self, other_feature)
+                features[featureid] = DerivedFeature.new(StaticFeature.new(featureid, !rcfeature.state), self, other_feature)
               end
             end
           end
@@ -452,8 +452,8 @@ module BRIX11
             print_file(_cfg_file, '.ridlrc') if File.exist?(_cfg_file)
             _cfg_file = File.join(Configurator::ROOT, '.brix11rc')
             print_file(_cfg_file, '.brix11rc') if File.exist?(_cfg_file)
-            _cfg_file = File.join(Configurator::ROOT, (workspace || 'workspace')+'.mwc')
-            print_file(_cfg_file, (workspace || 'workspace')+'.mwc') if File.exist?(_cfg_file)
+            _cfg_file = File.join(Configurator::ROOT, (workspace || 'workspace') + '.mwc')
+            print_file(_cfg_file, (workspace || 'workspace') + '.mwc') if File.exist?(_cfg_file)
             STDOUT.puts('=' * 60)
             STDOUT.puts("Test config: #{_test_configs.join(' ')}") if _test_configs
             STDOUT.puts

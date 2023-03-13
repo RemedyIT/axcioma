@@ -10,7 +10,7 @@ require 'brix11/command'
 require 'fileutils'
 module BRIX11
   module Common
-    class HostBuild  < Command::Base
+    class HostBuild < Command::Base
 
       DESC = 'Build crossbuild host tools.'.freeze
 
@@ -21,7 +21,7 @@ module BRIX11
 
       def self.setup(optparser, options)
         options[:hostbuild] = OPTIONS.dup
-        optparser.banner = "#{DESC}\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
                            "Usage: #{options[:script_name]} host build [options] [-- make-options]\n\n"
 
         optparser.on('-c', '--clean', 'Clean only.') { options[:hostbuild][:clean] = true; options[:hostbuild][:build] = false }

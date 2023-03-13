@@ -11,7 +11,7 @@ require 'json'
 
 module BRIX11
   module Common
-    class Configure  < Command::Base
+    class Configure < Command::Base
 
       module RIDL_Config
         RIDLRC = '.ridlrc'

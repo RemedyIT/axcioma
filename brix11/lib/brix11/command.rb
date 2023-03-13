@@ -75,14 +75,14 @@ module BRIX11
           id.size + case obj
                     when Entry
                       obj.id.size +
-                          obj.aliases.inject(0) { |a| a.size+1 } +
+                          obj.aliases.inject(0) { |a| a.size + 1 } +
                           if all && obj.super
-                            get_overridden_collections(obj).join(',').size+3
+                            get_overridden_collections(obj).join(',').size + 3
                           else
                             0
                           end
                     when Node
-                      determin_max_desc(obj.table, all)+obj.aliases.inject(0) { |a| a.size+1 }
+                      determin_max_desc(obj.table, all) + obj.aliases.inject(0) { |a| a.size + 1 }
                     else
                       0
                     end
@@ -99,9 +99,9 @@ module BRIX11
             if all && obj.super
               collection_str << " [#{get_overridden_collections(obj).join(',')}]"
             end
-            descs << "%-#{maxlen}s | %s" % ["#{pfx}#{([id]+obj.aliases).join('|')}#{obj.super ? '*' : ''} (#{collection_str})", obj.desc]
+            descs << "%-#{maxlen}s | %s" % ["#{pfx}#{([id] + obj.aliases).join('|')}#{obj.super ? '*' : ''} (#{collection_str})", obj.desc]
           when Node
-            descs.concat collect_desc(obj.table, maxlen, nil, scope ? path : (path+[([id]+obj.aliases).join('|')]), all)
+            descs.concat collect_desc(obj.table, maxlen, nil, scope ? path : (path + [([id] + obj.aliases).join('|')]), all)
           end
         end
         descs
@@ -153,8 +153,8 @@ module BRIX11
       scoped_ids << ids.first
       # create new command entry
       ce = Entry.new(ids.shift, ids.dup, scoped_ids.join(':'), desc, klass, cur_collection_scope)
-      BRIX11.log_fatal("Brix command [#{ce.scoped_id}] clashes with existing namespace or an alias") unless container[ce.id].nil?  || Entry === container[ce.id]
-      ce.aliases.each { |ca| BRIX11.log_fatal("Brix command [#{ce.scoped_id}] alias [#{ca}] clashes with existing namespace(-alias) or command") unless container[ca].nil?  || AliasEntry === container[ca] }
+      BRIX11.log_fatal("Brix command [#{ce.scoped_id}] clashes with existing namespace or an alias") unless container[ce.id].nil? || Entry === container[ce.id]
+      ce.aliases.each { |ca| BRIX11.log_fatal("Brix command [#{ce.scoped_id}] alias [#{ca}] clashes with existing namespace(-alias) or command") unless container[ca].nil? || AliasEntry === container[ca] }
       if container.has_key?(ce.id)
         BRIX11.log_fatal("Duplicate Brix command [#{ce.scoped_id}] without override specified") unless override
         ce.super = container[ce.id]       # chain previous command entry
@@ -207,10 +207,10 @@ module BRIX11
         until path.empty?
           idstr = path.shift
           object = container[idstr]
-          unless object || idstr.size<MIN_CMDLEN
+          unless object || idstr.size < MIN_CMDLEN
             # Check for partial match
             matches = container.keys.select { |k| k.start_with?(idstr) }
-            if matches.size>1
+            if matches.size > 1
               BRIX11.log_error("Multiple commands or namespaces match [#{idstr}] : #{matches.join('|')}")
               return nil
             end
@@ -221,11 +221,11 @@ module BRIX11
               first = false
               # check if first name segment might be collection scope
               object = scoped_commands[idstr]
-              unless object || idstr.size<MIN_CMDLEN
+              unless object || idstr.size < MIN_CMDLEN
                 # partial match ?
                 matches = scoped_commands.keys.select { |k| k.start_with?(idstr) }
                 # only if single match
-                object = scoped_commands[matches.first] unless matches.size>1
+                object = scoped_commands[matches.first] unless matches.size > 1
               end
             end
             unless object
@@ -274,9 +274,9 @@ module BRIX11
         optparser.order!(argv)  # destructively parse until non-arg encountered (removes '--' args)
         # check if last arg parsed was '--'
         #   if so stuff it back (command might need this)
-        argv.insert(0, '--') if argv_org[0...(argv_org.size-argv.size)].last == '--'
+        argv.insert(0, '--') if argv_org[0...(argv_org.size - argv.size)].last == '--'
         BRIX11.log(2, "executing command #{object.scoped_id}")
-        rc  = false
+        rc = false
         rc = run(options[:command] = object.klass.new(object, options), argv)
         # check if command left '--' in place (or skipped to next); if so remove it
         argv.shift if argv.first == '--'
@@ -292,9 +292,9 @@ module BRIX11
     def self.descriptions(scope = nil, all = false)
       selection = scope ? {scope => Node.new(scope, [], scoped_commands[scope])} : commands
       maxlen = determin_max_desc(selection, all)
-      maxlen = (((4+maxlen) / 5) * 5) + 10
+      maxlen = (((4 + maxlen) / 5) * 5) + 10
       desc = ["%-#{maxlen}s | %s" % ["Command#{scope ? " (#{scope})" : ''}", 'Description']]
-      desc << ('-'*(maxlen+43))
+      desc << ('-' * (maxlen + 43))
       desc.concat(collect_desc(selection, maxlen, scope, [], all))
     end
 

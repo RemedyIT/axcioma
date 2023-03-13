@@ -44,7 +44,7 @@ module BRIX11
 
           # override
           def output_patterns
-            OUTPUT_PATTERNS+IGNORE_PATTERNS
+            OUTPUT_PATTERNS + IGNORE_PATTERNS
           end
 
         end  # MSBuildFile
@@ -79,7 +79,7 @@ module BRIX11
 
           # override
           def output_patterns
-            OUTPUT_PATTERNS+MSBuildFile::IGNORE_PATTERNS
+            OUTPUT_PATTERNS + MSBuildFile::IGNORE_PATTERNS
           end
 
         end # MSBuild

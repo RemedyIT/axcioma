@@ -37,7 +37,7 @@ module BRIX11
         Dir.glob(File.join(ROOT, 'cmds', 'gendoc', '*.rb')).each { |p| require "brix/common/cmds/gendoc/#{File.basename(p)}" }
         # initialize options and option parser
         options[:gendoc] = OPTIONS.dup
-        optparser.banner = "#{DESC}\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
                            "Usage: #{options[:script_name]} gen[erate] doc[umentation] [options]\n\n"
 
         # only support doxygen generation if a configuration has been set

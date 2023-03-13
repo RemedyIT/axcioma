@@ -9,7 +9,7 @@
 
 module BRIX11
   module Common
-    class Configure  < Command::Base
+    class Configure < Command::Base
 
       module MPC_Config
         MPCCFG = 'MPC.cfg'
@@ -18,7 +18,7 @@ module BRIX11
         def self.create_config(cfg)
           # find MPC base path among active rc specs (only 1 definition allowed)
           mpcbase_rcspec = cfg.cfglist.values.select { |mod| mod.mpc_base }
-          BRIX11.log_fatal("Found #{mpcbase_rcspec.size} MPC base paths (in #{mpcbase_rcspec.collect { |rc| rc.mpc_base }.join(" and ")}). Only a single base path definition allowed.") if mpcbase_rcspec.size>1
+          BRIX11.log_fatal("Found #{mpcbase_rcspec.size} MPC base paths (in #{mpcbase_rcspec.collect { |rc| rc.mpc_base }.join(" and ")}). Only a single base path definition allowed.") if mpcbase_rcspec.size > 1
           BRIX11.log_fatal("Missing MPC base path. At least 1 base path definition required.") if mpcbase_rcspec.empty?
           mpccfg = File.join(mpcbase_rcspec.shift.mpc_base, 'config', MPCCFG)
           # backup current file
@@ -45,7 +45,7 @@ module BRIX11
         end
 
         def self.create_workspace(cfg)
-          mwccfg = File.join(Configurator::ROOT, (cfg.options[:workspace] || MWCCFG)+'.mwc')
+          mwccfg = File.join(Configurator::ROOT, (cfg.options[:workspace] || MWCCFG) + '.mwc')
           # backup current file
           Util.backup_file(mwccfg) unless cfg.dryrun?
           # collect list of configured MWC project folders for enabled modules

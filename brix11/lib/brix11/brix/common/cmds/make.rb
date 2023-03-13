@@ -10,7 +10,7 @@ require 'brix11/command'
 
 module BRIX11
   module Common
-    class Make  < Command::Base
+    class Make < Command::Base
 
       DESC = 'Make (build) the project.'.freeze
 
@@ -25,9 +25,9 @@ module BRIX11
       def self.setup(optparser, options)
         options[:make] = OPTIONS.dup
         options[:make][:lists] = []
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} make [options] [PROJECT [make-options]]|[-- make-options]\n\n"+
-                           "       PROJECT := Path to project folder or name of subproject. If both PROJECT and SUBPRJ\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} make [options] [PROJECT [make-options]]|[-- make-options]\n\n" +
+                           "       PROJECT := Path to project folder or name of subproject. If both PROJECT and SUBPRJ\n" +
                            "                  are specified, PROJECT should be path and SUBPRJ subproject name.\n\n"
 
         optparser.on('-c', '--clean', 'Clean project only.') { options[:make][:clean] = true; options[:make][:build] = false }
@@ -81,7 +81,7 @@ module BRIX11
           prjargv = []
           prjargv << options[:make][:subprj] if options[:make][:subprj]
           prjargv << options[:make][:project] if options[:make][:project]
-          log(2, "checking for #{options[:config][:project_type]} type project #{options[:make][:subprj] || options[:make][:project]}#{options[:make][:subprj] ? ' in '+(options[:make][:project] || '.') : ''}")
+          log(2, "checking for #{options[:config][:project_type]} type project #{options[:make][:subprj] || options[:make][:project]}#{options[:make][:subprj] ? ' in ' + (options[:make][:project] || '.') : ''}")
           unless prj.project_exists?(*prjargv) || ( options[:make][:clean] && !options[:make][:build])
             unless (options[:make][:genbuild])
               log_error('Nothing to build')
