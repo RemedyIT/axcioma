@@ -10,9 +10,7 @@ require 'brix11/system'
 require 'brix11/process'
 
 module BRIX11
-
   module Project
-
     BASEDIR = 'projects'
 
     MWC_CMD = 'mwc.pl'
@@ -310,9 +308,7 @@ module BRIX11
       end
 
     end # Handler
-
   end # Project
-
 end # BRIX11
 
 require 'brix11/projects/filters/ridl'

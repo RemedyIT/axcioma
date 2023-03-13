@@ -11,13 +11,10 @@ require 'json'
 require 'brix11/log'
 
 module BRIX11
-
   module Common
-
     class Configure  < Command::Base
 
       module Platform
-
         class << self
 
           include BRIX11::LogMethods
@@ -158,11 +155,8 @@ module BRIX11
           opts[:platform][:defaults][:test_configs] << build_target.upcase unless ph
           opts[:platform]
         end
-
       end # Platform
 
     end # Configure
-
   end # Common
-
 end # BRIX11

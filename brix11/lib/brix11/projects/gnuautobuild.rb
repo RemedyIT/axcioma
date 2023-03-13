@@ -9,9 +9,7 @@
 require 'brix11/projects/gnuace'
 
 module BRIX11
-
   module Project
-
     class GnuAutobuild < GnuAce
 
       ID = 'gnuautobuild'
@@ -28,7 +26,5 @@ module BRIX11
     end # Handler
 
     register(GnuAutobuild::ID, GnuAutobuild)
-
   end # Project
-
 end # BRIX11

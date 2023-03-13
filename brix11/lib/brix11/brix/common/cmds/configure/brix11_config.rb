@@ -10,13 +10,10 @@
 require 'json'
 
 module BRIX11
-
   module Common
-
     class Configure  < Command::Base
 
       module BRIX11_Config
-
         BRIX11RC = '.brix11rc'
 
         def self.create_config(cfg)
@@ -58,11 +55,8 @@ module BRIX11
             brix11rc_io.close unless cfg.dryrun?
           end
         end
-
       end
 
     end
-
   end
-
 end

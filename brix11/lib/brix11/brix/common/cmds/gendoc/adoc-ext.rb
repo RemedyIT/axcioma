@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Common
-
     class GenerateDocumentation < Command::Base
 
       ## Custom 'dirlist' block macro extension
@@ -47,7 +45,5 @@ module BRIX11
       end
 
     end # GenerateDocumentation
-
   end # Common
-
 end # BRIX11

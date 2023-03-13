@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
     class MSCCompiler < Compiler
 
       class Filter
@@ -85,9 +83,7 @@ module BRIX11
       end
 
     end # MSCCompiler
-
   end # Project
-
 end # BRIX11
 
 

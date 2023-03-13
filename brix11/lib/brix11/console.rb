@@ -9,9 +9,7 @@
 require 'brix11/screen'
 
 module BRIX11
-
   module Console
-
     class << self
       def screen
         @screen ||= Screen.new(BRIX11.options[:output] || $stdout, $stdin)
@@ -461,7 +459,5 @@ module BRIX11
         println(red 'Error:', "Invalid selection entered [#{txt}]")
       end while true
     end
-
   end # Console
-
 end # BRIX11

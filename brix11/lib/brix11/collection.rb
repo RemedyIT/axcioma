@@ -9,7 +9,6 @@
 require 'brix11/command'
 
 module BRIX11
-
   class Collection
 
     BASEDIR = 'brix'

@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module Common
-
     class Execute  < Command::Base
 
       DESC = 'Execute a process in the brix11 environment.'.freeze
@@ -71,6 +70,5 @@ module BRIX11
 
       Command.register('execute', DESC, Common::Execute)
     end # Execute
-
   end # Common
 end # BRIX11

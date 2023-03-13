@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module Common
-
     class Make  < Command::Base
 
       DESC = 'Make (build) the project.'.freeze
@@ -112,6 +111,5 @@ module BRIX11
     end # Make
 
     Dir.glob(File.join(ROOT, 'cmds', 'make', '*.rb')).each { |p| require "brix/common/cmds/make/#{File.basename(p)}"}
-
   end # Common
 end # BRIX11

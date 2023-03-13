@@ -9,7 +9,6 @@
 require 'brix11/command'
 module BRIX11
   module Common
-
     class Configure  < Command::Base
 
       DESC = 'Configure the project.'.freeze
@@ -111,7 +110,5 @@ module BRIX11
     end # Configure
 
     Dir.glob(File.join(ROOT, 'cmds', 'configure', '*.rb')).each { |p| require "brix/common/cmds/configure/#{File.basename(p)}"}
-
   end # Common
-
 end # BRIX11

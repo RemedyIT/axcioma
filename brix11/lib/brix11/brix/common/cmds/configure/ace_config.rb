@@ -8,13 +8,10 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Common
-
     class Configure  < Command::Base
 
       module ACE_Config
-
         CONFIG_H = File.join('ace', 'config.h')
 
         PLATFORM_MACROS = File.join('include', 'makeinclude', 'platform_macros.GNU')
@@ -100,11 +97,8 @@ module BRIX11
             default_features_io.close unless cfg.dryrun?
           end
         end
-
       end
 
     end
-
   end
-
 end

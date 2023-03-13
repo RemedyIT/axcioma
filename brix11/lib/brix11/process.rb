@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Exec
-
     self.singleton_class.class_eval do
     private
       def run_env
@@ -303,7 +301,6 @@ module BRIX11
         end
       end
     end
-
   end # Exec
 
   ::Signal.trap(:INT) do
@@ -312,5 +309,4 @@ module BRIX11
     BRIX11.log_error ('interrupted')
     ::Kernel.exit(-1)
   end
-
 end # BRIX11

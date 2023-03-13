@@ -11,7 +11,6 @@ require 'rdoc'
 
 module BRIX11
   module Common
-
     class Help  < Command::Base
 
       DESC = 'Show help (documentation) for brix11 (command).'.freeze
@@ -63,6 +62,5 @@ module BRIX11
 
       Command.register('help', DESC, Common::Help)
     end # Help
-
   end # Common
 end # BRIX11

@@ -12,7 +12,6 @@ require 'brix11/log'
 require 'brix11/project'
 
 module BRIX11
-
   BRIX11_ROOT = File.dirname(__FILE__)
 
   class << self
@@ -318,7 +317,6 @@ module BRIX11
     end
     rc
   end
-
 end # BRIX11
 #Need to require this files AFTER the base is setup
 require 'brix11/options'

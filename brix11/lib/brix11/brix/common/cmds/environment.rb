@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module Common
-
     class Environment  < Command::Base
 
       DESC = 'Print BRIX11 environment settings for development.'.freeze
@@ -48,6 +47,5 @@ module BRIX11
 
       Command.register('environment', DESC, Common::Environment)
     end # Environment
-
   end # Common
 end # BRIX11

@@ -8,11 +8,8 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
     module Filter
-
       class RIDLCompiler
         include Formatter::Filter::FilterMethods
 
@@ -85,9 +82,6 @@ module BRIX11
         end
 
       end # RIDLCompiler
-
     end # Filter
-
   end # Project
-
 end # BRIX11

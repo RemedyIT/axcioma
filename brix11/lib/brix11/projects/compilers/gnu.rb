@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
       class GNUCompiler < Compiler
 
         class Filter
@@ -83,7 +81,5 @@ module BRIX11
         end
 
       end # GNUCompiler
-
   end # Project
-
 end # BRIX11

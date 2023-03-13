@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   module Common
-
     class GenerateDocumentation < Command::Base
 
       DESC = 'Generate documentation from ASCIIDoctor sources.'.freeze
@@ -64,6 +63,5 @@ module BRIX11
 
       Command.register('generate:documentation', DESC, Common::GenerateDocumentation)
     end # GenerateDocumentation
-
   end # Common
 end # BRIX11

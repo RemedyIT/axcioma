@@ -11,13 +11,10 @@ require 'pathname'
 require 'time'
 
 module BRIX11
-
   module Common
-
     class Configure  < Command::Base
 
       module Util
-
         class << self
 
           def backup_file(fpath)
@@ -41,11 +38,8 @@ module BRIX11
           end
 
         end
-
       end
 
     end
-
   end
-
 end

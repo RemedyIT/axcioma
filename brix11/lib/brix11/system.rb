@@ -9,9 +9,7 @@
 require 'fileutils'
 
 module BRIX11
-
   module Sys
-
     def self.mswin?
       /mingw/ =~ RUBY_PLATFORM ? true : false
     end
@@ -116,9 +114,7 @@ module BRIX11
     def self.rm(path)
       FileUtils.rm(path, verbose: BRIX11.verbose?, noop: BRIX11.dryrun?)
     end
-
   end
 
   include Sys
-
 end

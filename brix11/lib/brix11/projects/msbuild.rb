@@ -12,13 +12,10 @@ require 'brix11/projects/filters/msbuild'
 require 'brix11/projects/compilers/msc'
 
 module BRIX11
-
   module Project
-
     # MSBuild solution specific IDL compiler filter
 
     module Filter
-
       class MSBuildIDL
         include Formatter::Filter::FilterMethods
 
@@ -68,7 +65,6 @@ module BRIX11
         end
 
       end # MSBuildIDL
-
     end # Filter
 
     # MSBuild solution specific MSC derivatives
@@ -443,7 +439,5 @@ module BRIX11
     end
 
     register(MSBuildVS2019::ID, MSBuildVS2019)
-
   end # Project
-
 end # BRIX11

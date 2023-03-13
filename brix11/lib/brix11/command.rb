@@ -11,7 +11,6 @@ require 'brix11/project'
 require 'brix11/process'
 
 module BRIX11
-
   module Command
     Entry = Struct.new(:id, :aliases, :scoped_id, :desc, :klass, :collection, :super, :override)
 
@@ -333,7 +332,5 @@ module BRIX11
       end
 
     end # Base
-
   end # Command
-
 end # BRIX11

@@ -8,11 +8,8 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
       module Filter
-
         class MSBuildFile
           include Formatter::Filter::FilterMethods
 
@@ -86,10 +83,7 @@ module BRIX11
           end
 
         end # MSBuild
-
       end # Filter
-
   end # Project
-
 end # BRIX11
 

@@ -11,9 +11,7 @@ require 'brix11/projects/compilers/gnu'
 require 'brix11/projects/filters/gnumake'
 
 module BRIX11
-
   module Project
-
     class GnuMake < Handler
 
       ID = 'gnumake'
@@ -153,7 +151,5 @@ module BRIX11
 
     register(GnuMake::ID, GnuMake)
     register(GnuAce::ID, GnuAce)
-
   end # Project
-
 end # BRIX11

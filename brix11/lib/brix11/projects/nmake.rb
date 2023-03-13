@@ -11,9 +11,7 @@ require 'brix11/projects/filters/nmake'
 require 'brix11/projects/compilers/msc'
 
 module BRIX11
-
   module Project
-
     # NMAKE specific MSC derivatives for use with MPC
 
     class MSCNMake64 < MSCCompiler
@@ -220,7 +218,5 @@ module BRIX11
     end # Handler
 
     register(NMake::ID, NMake)
-
   end # Project
-
 end # BRIX11

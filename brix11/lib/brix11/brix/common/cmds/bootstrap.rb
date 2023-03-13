@@ -10,7 +10,6 @@ require 'brix11/command'
 require 'fileutils'
 module BRIX11
   module Common
-
     class BootStrap  < Command::Base
 
       DESC = 'Bootstrap the project.'.freeze
@@ -80,7 +79,5 @@ module BRIX11
     end # BootStrap
 
     Command.register('bootstrap', BootStrap::DESC, Common::BootStrap)
-
   end # Common
-
 end # BRIX11

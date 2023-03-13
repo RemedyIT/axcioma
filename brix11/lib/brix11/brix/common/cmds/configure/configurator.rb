@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Common
-
     class Configure  < Command::Base
 
       class Configurator
@@ -473,7 +471,5 @@ module BRIX11
       end # Configurator
 
     end # Configure
-
   end # Common
-
 end # BRIX11

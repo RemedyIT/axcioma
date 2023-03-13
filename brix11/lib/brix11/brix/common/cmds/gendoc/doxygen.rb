@@ -9,13 +9,10 @@
 require 'fileutils'
 
 module BRIX11
-
   module Common
-
     class GenerateDocumentation < Command::Base
 
       module Doxygen
-
         class NullFilter
           def print(_); end
           def flush; end
@@ -59,11 +56,8 @@ module BRIX11
         def self.run(opts)
           generate(opts[:doxygen_config], (!!opts[:noredirect]) || BRIX11.verbose?) if opts[:doxygen_config]
         end
-
       end # Doxygen
 
     end # GenerateDocumentation
-
   end # Common
-
 end # BRIX11

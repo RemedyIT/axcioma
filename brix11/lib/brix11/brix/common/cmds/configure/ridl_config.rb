@@ -10,13 +10,10 @@
 require 'json'
 
 module BRIX11
-
   module Common
-
     class Configure  < Command::Base
 
       module RIDL_Config
-
         RIDLRC = '.ridlrc'
 
         class << self
@@ -62,11 +59,8 @@ module BRIX11
             ridlrc_io.close unless cfg.dryrun?
           end
         end
-
       end
 
     end
-
   end
-
 end

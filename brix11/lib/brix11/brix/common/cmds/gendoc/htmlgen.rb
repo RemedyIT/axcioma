@@ -11,13 +11,10 @@ require 'optparse'
 require 'pathname'
 
 module BRIX11
-
   module Common
-
     class GenerateDocumentation < Command::Base
 
       module HTMLGenerator
-
         OPTIONS = {
           resourcefolders: {
               'images' => '*.{ico,png,jpg,gif,bmp}',
@@ -141,11 +138,8 @@ module BRIX11
 
           generate_html(opts)
         end
-
       end # HTMLGenerator
 
     end # GenerateDocumentation
-
   end # Common
-
 end # BRIX11

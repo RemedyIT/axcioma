@@ -8,11 +8,8 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
       module Filter
-
         class GNUMakefile
 
           include Formatter::Filter::FilterMethods
@@ -89,9 +86,6 @@ module BRIX11
           end
 
         end # GMake
-
       end # Filter
-
   end # Project
-
 end # BRIX11

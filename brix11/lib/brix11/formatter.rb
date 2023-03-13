@@ -9,11 +9,8 @@
 require 'brix11/console'
 
 module BRIX11
-
   module Formatter
-
     module Printing
-
       def output=(out)
         @output = out
       end
@@ -43,7 +40,6 @@ module BRIX11
       end
 
       include Screen::ColorizeMethods
-
     end # Printing
 
     class Filter
@@ -51,7 +47,6 @@ module BRIX11
       include Printing
 
       module FilterMethods
-
         include Screen::ColorizeMethods
 
         def verbosity
@@ -150,7 +145,6 @@ module BRIX11
             end
           end
         end
-
       end # FilterMethods
 
       def initialize(filters, verbosity = 1)
@@ -244,7 +238,5 @@ module BRIX11
       end
 
     end
-
   end # Formatter
-
 end # BRIX11

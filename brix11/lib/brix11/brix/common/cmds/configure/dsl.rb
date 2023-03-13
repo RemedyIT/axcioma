@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Common
-
     class Configure  < Command::Base
 
       class RCSpec
@@ -445,7 +443,5 @@ module BRIX11
       end # RCSpec
 
     end
-
   end
-
 end

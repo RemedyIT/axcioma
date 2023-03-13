@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Common
-
     ROOT = File.dirname(__FILE__)
     TITLE = 'Common'.freeze
     DESC = 'BRIX11 Common brix collection'.freeze
@@ -63,7 +61,5 @@ module BRIX11
     end
 
     Dir.glob(File.join(ROOT, 'cmds', '*.rb')).each { |p| require "brix/common/cmds/#{File.basename(p)}"}
-
   end
-
 end

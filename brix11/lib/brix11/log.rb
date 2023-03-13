@@ -9,7 +9,6 @@
 require 'brix11/formatter'
 
 module BRIX11
-
   #
   # Reporting/Logging
   #
@@ -119,5 +118,4 @@ module BRIX11
       verbosity < 1
     end
   end
-
 end # BRIX11

@@ -8,9 +8,7 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Common
-
     class Make  < Command::Base
 
       class ListBuilder
@@ -182,7 +180,5 @@ module BRIX11
       end # ListBuilder
 
     end # Make
-
   end # Common
-
 end # BRIX11

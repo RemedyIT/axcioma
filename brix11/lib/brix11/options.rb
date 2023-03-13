@@ -11,7 +11,6 @@ require 'ostruct'
 require 'brix11/log'
 
 module BRIX11
-
   BRIX11RC = '.brix11rc'
   BRIX11RC_GLOBAL = File.expand_path(File.join(ENV['HOME'] || ENV['HOMEPATH'] || '~', BRIX11RC))
 
@@ -242,5 +241,4 @@ module BRIX11
   end # OPTIONS class
 
   OPTIONS.reset # initialize
-
 end # BRIX11

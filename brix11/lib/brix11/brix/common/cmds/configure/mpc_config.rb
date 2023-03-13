@@ -8,13 +8,10 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Common
-
     class Configure  < Command::Base
 
       module MPC_Config
-
         MPCCFG = 'MPC.cfg'
         MWCCFG = 'workspace'
 
@@ -70,11 +67,8 @@ module BRIX11
             mwccfg_io.close unless cfg.dryrun?
           end
         end
-
       end
 
     end
-
   end
-
 end
