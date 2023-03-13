@@ -10,11 +10,8 @@
 module BRIX11
   module Common
     class Configure < Command::Base
-
       class RCSpec
-
         class << self
-
           private
 
           # DSL handler for rc file toplevel block
@@ -99,13 +96,10 @@ module BRIX11
             end until includes.empty?
             rclist
           end
-
         end
 
         class Dependency
-
           class << self
-
             # DSL handler for dependencies block
             class DSLHandler
               def initialize(rc)
@@ -128,13 +122,10 @@ module BRIX11
             def load(rc, &block)
               DSLHandler.new(rc).instance_eval(&block)
             end
-
           end
 
           class Environment
-
             class << self
-
               # DSL handler for environment block
               class DSLHandler
                 def initialize(env)
@@ -157,7 +148,6 @@ module BRIX11
               def load(env, &block)
                 DSLHandler.new(env).instance_eval(&block)
               end
-
             end
 
             def initialize(varid, &block)
@@ -176,7 +166,6 @@ module BRIX11
             def validate
               raise "Missing name for environment spec [#{@variable}]" unless @name
             end
-
           end # Environment
 
           # DSL handler for dependency specification block
@@ -240,13 +229,10 @@ module BRIX11
           def optional?
             @kind == :optional
           end
-
         end # Dependency
 
         class Feature
-
           class << self
-
             # DSL handler for features blocks
             class DSLHandler
               def initialize(rc)
@@ -271,7 +257,6 @@ module BRIX11
             def load(rc, &block)
               DSLHandler.new(rc).instance_eval(&block)
             end
-
           end
 
           # DSL handler for feature dependency blocks
@@ -298,7 +283,6 @@ module BRIX11
           end
 
           attr_reader :state, :featureid, :prerequisites, :exclusives
-
         end # Feature
 
         # DSL handler for configure blocks
@@ -438,9 +422,7 @@ module BRIX11
         def disabled?(allrc)
           !enabled?(allrc)
         end
-
       end # RCSpec
-
     end
   end
 end

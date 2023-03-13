@@ -17,7 +17,6 @@ module BRIX11
   OPTIONS = OpenStruct.new
 
   class << OPTIONS
-
     include BRIX11::LogMethods
 
     def options
@@ -25,7 +24,6 @@ module BRIX11
     end
 
     class Config < OpenStruct
-
       include BRIX11::LogMethods
 
       def self.merge(to, from)
@@ -108,7 +106,6 @@ module BRIX11
           brix_paths: []
         }
       end
-
     end
 
     protected
@@ -237,7 +234,6 @@ module BRIX11
             end
       cfg.to_s
     end
-
   end # OPTIONS class
 
   OPTIONS.reset # initialize

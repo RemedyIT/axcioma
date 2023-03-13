@@ -10,7 +10,6 @@
 module BRIX11
   module Common
     class Configure < Command::Base
-
       module ACE_Config
         CONFIG_H = File.join('ace', 'config.h')
 
@@ -98,7 +97,6 @@ module BRIX11
           end
         end
       end
-
     end
   end
 end

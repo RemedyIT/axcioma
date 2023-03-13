@@ -10,7 +10,6 @@
 module BRIX11
   module Common
     class GenerateDocumentation < Command::Base
-
       ## Custom 'dirlist' block macro extension
       class DirListBlockMacro < Asciidoctor::Extensions::BlockMacroProcessor
         use_dsl
@@ -43,7 +42,6 @@ module BRIX11
       Asciidoctor::Extensions.register do
         block_macro DirListBlockMacro
       end
-
     end # GenerateDocumentation
   end # Common
 end # BRIX11

@@ -13,10 +13,8 @@ require 'time'
 module BRIX11
   module Common
     class Configure < Command::Base
-
       module Util
         class << self
-
           def backup_file(fpath)
             # do we have anything to backup?
             if File.exist?(fpath)
@@ -36,10 +34,8 @@ module BRIX11
             p = Pathname.new(path)
             p.relative_path_from(Pathname.new(relbase)).to_s
           end
-
         end
       end
-
     end
   end
 end

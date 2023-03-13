@@ -11,7 +11,6 @@ require 'fileutils'
 module BRIX11
   module Common
     class BootStrap < Command::Base
-
       DESC = 'Bootstrap the project.'.freeze
 
       OPTIONS = {
@@ -75,7 +74,6 @@ module BRIX11
         BRIX11.show_msg('Bootstrapping finished. Exiting BRIX11.')
         exit(0)
       end
-
     end # BootStrap
 
     Command.register('bootstrap', BootStrap::DESC, Common::BootStrap)

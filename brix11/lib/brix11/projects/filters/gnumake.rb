@@ -11,7 +11,6 @@ module BRIX11
   module Project
       module Filter
         class GNUMakefile
-
           include Formatter::Filter::FilterMethods
 
           TOOL_PATTERNS = [
@@ -46,11 +45,9 @@ module BRIX11
           def output_patterns
             OUTPUT_PATTERNS
           end
-
         end # GNUMakefile
 
         class GMake
-
           include Formatter::Filter::FilterMethods
 
           OUTPUT_PATTERNS = [
@@ -83,7 +80,6 @@ module BRIX11
           def output_patterns
             OUTPUT_PATTERNS
           end
-
         end # GMake
       end # Filter
   end # Project

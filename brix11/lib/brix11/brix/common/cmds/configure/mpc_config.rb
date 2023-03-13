@@ -10,7 +10,6 @@
 module BRIX11
   module Common
     class Configure < Command::Base
-
       module MPC_Config
         MPCCFG = 'MPC.cfg'
         MWCCFG = 'workspace'
@@ -68,7 +67,6 @@ module BRIX11
           end
         end
       end
-
     end
   end
 end

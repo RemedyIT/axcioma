@@ -13,7 +13,6 @@ require 'pathname'
 module BRIX11
   module Common
     class GenerateDocumentation < Command::Base
-
       module HTMLGenerator
         OPTIONS = {
           resourcefolders: {
@@ -32,7 +31,6 @@ module BRIX11
         }
 
         class << self
-
           private
           def resolve_path_var(v)
             Exec.get_run_environment(v) || v
@@ -124,7 +122,6 @@ module BRIX11
               end
             end
           end
-
         end
 
         def self.run(opts)
@@ -139,7 +136,6 @@ module BRIX11
           generate_html(opts)
         end
       end # HTMLGenerator
-
     end # GenerateDocumentation
   end # Common
 end # BRIX11

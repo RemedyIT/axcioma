@@ -10,7 +10,6 @@ require 'brix11/system'
 
 module BRIX11
   class Screen
-
     class Color
       def initialize(code)
         @code = code
@@ -159,6 +158,5 @@ module BRIX11
         end
       end while true
     end
-
   end
 end

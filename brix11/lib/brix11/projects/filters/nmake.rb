@@ -46,7 +46,6 @@ module BRIX11
           def output_patterns
             OUTPUT_PATTERNS
           end
-
         end # Makefile
 
         class NMake
@@ -79,7 +78,6 @@ module BRIX11
           def output_patterns
             OUTPUT_PATTERNS
           end
-
         end # NMake
       end # Filter
   end # Project

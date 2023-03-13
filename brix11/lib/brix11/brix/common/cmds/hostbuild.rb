@@ -11,7 +11,6 @@ require 'fileutils'
 module BRIX11
   module Common
     class HostBuild < Command::Base
-
       DESC = 'Build crossbuild host tools.'.freeze
 
       OPTIONS = {
@@ -106,7 +105,6 @@ module BRIX11
           end
         end
       end
-
     end # BootStrap
   end # Common
 end # BRIX11

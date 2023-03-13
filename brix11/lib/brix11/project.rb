@@ -81,7 +81,6 @@ module BRIX11
     end
 
     class Compiler
-
       attr_reader :id
 
       def initialize(id)
@@ -99,11 +98,9 @@ module BRIX11
       def build_args
         []
       end
-
     end
 
     class Handler
-
       attr_reader :type
 
       def self.compiler(id)
@@ -306,7 +303,6 @@ module BRIX11
         end
         ptable
       end
-
     end # Handler
   end # Project
 end # BRIX11

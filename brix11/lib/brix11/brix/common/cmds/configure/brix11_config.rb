@@ -12,7 +12,6 @@ require 'json'
 module BRIX11
   module Common
     class Configure < Command::Base
-
       module BRIX11_Config
         BRIX11RC = '.brix11rc'
 
@@ -56,7 +55,6 @@ module BRIX11
           end
         end
       end
-
     end
   end
 end

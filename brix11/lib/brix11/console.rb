@@ -129,7 +129,6 @@ module BRIX11
         end
         txt << @text
       end
-
     end # Text
 
     def self.display_text(text, options = {})
@@ -285,7 +284,6 @@ module BRIX11
       def stop_called?
         @stop
       end
-
     end # Menu
 
     # run given Console::Menu definition

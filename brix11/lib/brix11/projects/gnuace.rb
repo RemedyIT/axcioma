@@ -13,7 +13,6 @@ require 'brix11/projects/filters/gnumake'
 module BRIX11
   module Project
     class GnuMake < Handler
-
       ID = 'gnumake'
       BUILDTOOL = 'make'
       BUILDTOOL_VERSION = (Sys.expand("#{BUILDTOOL} --version").chomp.split("\n").first || '').match(/[\d.]+/).to_s
@@ -30,7 +29,6 @@ module BRIX11
     end
 
     class GnuAce < GnuMake
-
       ID = 'gnuace'
 
       def make_files
@@ -146,7 +144,6 @@ module BRIX11
         argv.concat(@compiler.build_args)
         argv
       end
-
     end # Handler
 
     register(GnuMake::ID, GnuMake)

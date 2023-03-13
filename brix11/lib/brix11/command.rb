@@ -301,7 +301,6 @@ module BRIX11
     class CmdError < StandardError; end
 
     class Base
-
       include BRIX11::LogMethods
 
       def initialize(entry, options)
@@ -330,7 +329,6 @@ module BRIX11
       def scoped_name
         @scoped_name ||= @entry.scoped_id.gsub(':','_')
       end
-
     end # Base
   end # Command
 end # BRIX11

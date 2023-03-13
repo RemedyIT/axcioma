@@ -80,7 +80,6 @@ module BRIX11
           end
           output.println(plist)
         end
-
       end # RIDLCompiler
     end # Filter
   end # Project

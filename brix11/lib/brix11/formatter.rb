@@ -43,7 +43,6 @@ module BRIX11
     end # Printing
 
     class Filter
-
       include Printing
 
       module FilterMethods
@@ -201,11 +200,9 @@ module BRIX11
           #@active_filter = nil unless filtered
         end
       end
-
     end # Filter
 
     class Tee
-
       include Printing
 
       def initialize(logfile, out = nil)
@@ -236,7 +233,6 @@ module BRIX11
         @logfile.puts args.flatten.join
         super
       end
-
     end
   end # Formatter
 end # BRIX11

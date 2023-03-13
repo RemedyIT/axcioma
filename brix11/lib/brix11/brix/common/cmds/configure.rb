@@ -10,7 +10,6 @@ require 'brix11/command'
 module BRIX11
   module Common
     class Configure < Command::Base
-
       DESC = 'Configure the project.'.freeze
 
       OPTIONS = {

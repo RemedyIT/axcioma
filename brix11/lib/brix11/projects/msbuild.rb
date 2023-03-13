@@ -62,16 +62,13 @@ module BRIX11
           # filter other output
           @ridl_filter.filter_output(s) || @taoidl_filter.filter_output(s)
         end
-
       end # MSBuildIDL
     end # Filter
 
     # MSBuild solution specific MSC derivatives
 
     class MSBuildCompiler < MSCCompiler
-
       class Filter < MSCCompiler::Filter
-
         TOOL_PATTERN = /(\d+\>)?((ClCompile:)|(Link:)).*\Z/
         CMD_PATTERN = /(((?<tool>([Cc][Ll]\.exe))\s((?<cmdarg>(.*))\s+([\S]+\.)(c|C|cc|CC|cxx|CXX|cpp|CPP|S|asm)\s+.*))|((?<tool>([Ll][Ii][Nn][Kk]\.exe))\s.*))\Z/
         COMPILE_PATTERN = /\A\s+(?<name>(\S+\.(c|C|cc|CC|cxx|CXX|cpp|CPP|S|asm)))\Z/
@@ -136,82 +133,63 @@ module BRIX11
         def output_patterns
           OUTPUT_PATTERNS + Project::Filter::MSBuildFile::IGNORE_PATTERNS
         end
-
       end # Filter
 
       # override
       def filter(verbosity)
         Filter.new(verbosity)
       end
-
     end # MSBuildCompiler
 
     class MSBuildCompiler64 < MSBuildCompiler
-
       def platform
         'x64'
       end
-
     end # MSBuildCompiler64
 
     class MSBuildVC14x64 < MSBuildCompiler64
-
       def version
         'v140'
       end
-
     end # MSBuildVC14x64
 
     class MSBuildVC141x64 < MSBuildCompiler64
-
       def version
         'v141'
       end
-
     end # MSBuildVC141x64
 
     class MSBuildVC142x64 < MSBuildCompiler64
-
       def version
         'v142'
       end
-
     end # MSBuildVC142x64
 
     class MSBuildCompiler32 < MSBuildCompiler
-
       def platform
         'Win32'
       end
-
     end # MSBuildCompiler32
 
     class MSBuildVC14x32 < MSBuildCompiler32
-
       def version
         'v140'
       end
-
     end # MSBuildVC14x32
 
     class MSBuildVC141x32 < MSBuildCompiler32
-
       def version
         'v141'
       end
-
     end # MSBuildVC141x32
 
     class MSBuildVC142x32 < MSBuildCompiler32
-
       def version
         'v142'
       end
-
     end # MSBuildVC142x32
 
     class MSBuildSolution < Handler
-
       BUILDTOOL = 'msbuild'
       PROJECTEXT = '.sln'
 
@@ -355,11 +333,9 @@ module BRIX11
         argv << "/p:Configuration=#{opts[:debug] ? 'Debug' : 'Release'}"
         argv
       end
-
     end # MSBuildSolution
 
     class MSBuildVS2015 < MSBuildSolution
-
       ID = 'vs2015'
       DESCRIPTION = 'Microsoft Visual Studio 2015 solutions'
       COMPILERS = Hash[
@@ -380,13 +356,11 @@ module BRIX11
       def base_build_arg(project, path, cmdargv, opts)
         super << "/p:PlatformTarget=#{@compiler.platform}"
       end
-
     end
 
     register(MSBuildVS2015::ID, MSBuildVS2015)
 
     class MSBuildVS2017 < MSBuildSolution
-
       ID = 'vs2017'
       DESCRIPTION = 'Microsoft Visual Studio 2017 solutions'
       COMPILERS = Hash[
@@ -407,13 +381,11 @@ module BRIX11
       def base_build_arg(project, path, cmdargv, opts)
         super << "/p:Platform=#{@compiler.platform}"
       end
-
     end
 
     register(MSBuildVS2017::ID, MSBuildVS2017)
 
     class MSBuildVS2019 < MSBuildSolution
-
       ID = 'vs2019'
       DESCRIPTION = 'Microsoft Visual Studio 2019 solutions'
       COMPILERS = Hash[
@@ -434,7 +406,6 @@ module BRIX11
       def base_build_arg(project, path, cmdargv, opts)
         super << "/p:Platform=#{@compiler.platform}"
       end
-
     end
 
     register(MSBuildVS2019::ID, MSBuildVS2019)

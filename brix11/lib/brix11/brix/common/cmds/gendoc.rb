@@ -11,7 +11,6 @@ require 'brix11/command'
 module BRIX11
   module Common
     class GenerateDocumentation < Command::Base
-
       DESC = 'Generate documentation from ASCIIDoctor sources.'.freeze
 
       OPTIONS = {

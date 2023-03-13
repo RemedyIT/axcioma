@@ -10,9 +10,7 @@
 module BRIX11
   module Common
     class Make < Command::Base
-
       class ListBuilder
-
         class << self
           public
 
@@ -175,9 +173,7 @@ module BRIX11
           end
           rc
         end
-
       end # ListBuilder
-
     end # Make
   end # Common
 end # BRIX11

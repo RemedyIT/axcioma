@@ -10,7 +10,6 @@ require 'brix11/command'
 
 module BRIX11
   class Collection
-
     BASEDIR = 'brix'
 
     class << self
@@ -192,6 +191,5 @@ module BRIX11
         Command.set_collection(_c)
       end
     end
-
   end
 end

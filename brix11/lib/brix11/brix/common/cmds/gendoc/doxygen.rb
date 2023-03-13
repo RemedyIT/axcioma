@@ -11,7 +11,6 @@ require 'fileutils'
 module BRIX11
   module Common
     class GenerateDocumentation < Command::Base
-
       module Doxygen
         class NullFilter
           def print(_); end
@@ -19,7 +18,6 @@ module BRIX11
         end
 
         class << self
-
           private
 
           def resolve_path_var(v)
@@ -57,7 +55,6 @@ module BRIX11
           generate(opts[:doxygen_config], (!!opts[:noredirect]) || BRIX11.verbose?) if opts[:doxygen_config]
         end
       end # Doxygen
-
     end # GenerateDocumentation
   end # Common
 end # BRIX11

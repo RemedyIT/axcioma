@@ -11,7 +11,6 @@ require 'brix11/command'
 module BRIX11
   module Common
     class Make < Command::Base
-
       DESC = 'Make (build) the project.'.freeze
 
       OPTIONS = {

@@ -12,7 +12,6 @@ require 'rdoc'
 module BRIX11
   module Common
     class Help < Command::Base
-
       DESC = 'Show help (documentation) for brix11 (command).'.freeze
 
       OPTIONS = {

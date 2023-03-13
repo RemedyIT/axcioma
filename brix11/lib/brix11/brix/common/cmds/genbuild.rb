@@ -12,7 +12,6 @@ require 'brix11/command'
 module BRIX11
   module Common
     class GenerateBuild < Command::Base
-
       DESC = 'Run MPC to generate build files.'.freeze
 
       OPTIONS = {}

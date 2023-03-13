@@ -10,9 +10,7 @@
 module BRIX11
   module Common
     class Configure < Command::Base
-
       class Configurator
-
         ROOT = File.dirname(BRIX11_BASE_ROOT)
 
         class DerivedFeature
@@ -55,9 +53,7 @@ module BRIX11
         end # StaticFeature
 
         class CfgModule
-
           class CfgDependency
-
             Evaluator = Class.new do
               def initialize(rcdep)
                 @rcdep = rcdep
@@ -467,9 +463,7 @@ module BRIX11
           _cfg_file = File.join(_ace_root, 'bin', 'MakeProjectCreator', 'config', 'default.features')
           File.exist?(_cfg_file) ? get_test_config_from(_cfg_file) : []
         end
-
       end # Configurator
-
     end # Configure
   end # Common
 end # BRIX11

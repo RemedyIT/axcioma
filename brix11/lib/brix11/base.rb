@@ -36,7 +36,6 @@ module BRIX11
     def loaded_brix_paths
       @loaded_brix_paths ||= []
     end
-
   end
 
   def self.use_environment?
