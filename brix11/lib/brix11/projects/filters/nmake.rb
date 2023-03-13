@@ -18,7 +18,7 @@ module BRIX11
             /.*nmake\.exe.*\/f\s+(?<desc>Makefile.*)\Z/
           ]
           OUTPUT_PATTERNS = [
-            [:warning,     /(?<name>.*)\s+(?<desc>will not be built due to the following missing library: .*)/]
+            [:warning, /(?<name>.*)\s+(?<desc>will not be built due to the following missing library: .*)/]
           ]
 
           def initialize(verbosity)

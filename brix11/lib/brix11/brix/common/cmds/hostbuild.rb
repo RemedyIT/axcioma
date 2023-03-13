@@ -31,7 +31,7 @@ module BRIX11
         end
         optparser.on('-N', '--no-redirect',
                      'Do not redirect output from child process..',
-                     'Default: redirect and filter output.')  do
+                     'Default: redirect and filter output.') do
           options[:hostbuild][:noredirect] = true
         end
       end

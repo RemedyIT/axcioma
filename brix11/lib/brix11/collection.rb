@@ -57,7 +57,7 @@ module BRIX11
         if File.directory?(brixpath)
           BRIX11.log(3, "Examining brix collection path : #{brixpath}")
           if File.file?(File.join(brixpath, 'require.rb'))
-            bc = Collection.load(brixpath)  # handles recursive loading
+            bc = Collection.load(brixpath) # handles recursive loading
             bc.setup(BRIX11.options.optparser, BRIX11.options) # only actually executes setup once
             return bc
           else
@@ -73,7 +73,7 @@ module BRIX11
     # a full path like /path/to/brix/<name> (in which case the path
     # to the brix folder is added to the library search path)
     def self.load(path)
-      name = File.basename(path).to_sym                  # collection name
+      name = File.basename(path).to_sym # collection name
       if loaded?(name)
         if Sys.compare_path(collections[name.to_sym].root, path) != 0
           BRIX11.log_fatal("Duplicate Brix collection [:#{name}] @ #{path} (previously loaded from #{collections[name].root})")
@@ -103,7 +103,7 @@ module BRIX11
         BRIX11.log_error(ex.backtrace.join("\n")) if $VERBOSE
         exit 1
       ensure
-        Command.set_collection(_c)   # reset command loading scope
+        Command.set_collection(_c) # reset command loading scope
       end
     end
 

@@ -117,7 +117,7 @@ module BRIX11
           when IO
             spawn_opts[:in] = opts[:input]
           else
-            input_str = true  # input opts[:input] as string
+            input_str = true # input opts[:input] as string
             inputrd, inputwr = IO.pipe
             spawn_opts[:in] = inputrd
           end

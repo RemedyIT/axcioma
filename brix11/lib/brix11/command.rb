@@ -122,10 +122,10 @@ module BRIX11
 
     def self.register(cmdid, desc, klass, override = false)
       BRIX11.log(2, "Registering brix command #{cmdid}=#{desc} in collection #{cur_collection_scope}")
-      idlist = cmdid.to_s.split(':').collect { |s| s.split('|') }   # extract optional namespaces and aliases
+      idlist = cmdid.to_s.split(':').collect { |s| s.split('|') } # extract optional namespaces and aliases
       BRIX11.log_fatal("Namespace or command ids and aliases should be at least #{MIN_CMDLEN} long") if idlist.flatten.any? { |i| i.size < MIN_CMDLEN }
       scoped_ids = []
-      ids = idlist.pop                   # actual cmd ids (first is primary id, rest aliases)
+      ids = idlist.pop # actual cmd ids (first is primary id, rest aliases)
       # get root containers
       container = commands
       scoped_container = (scoped_commands[cur_collection_scope] ||= {})
@@ -135,7 +135,7 @@ module BRIX11
         nsids = idlist.shift
         # check for id clashes
         nsids.each { |nsnm| BRIX11.log_fatal("Brix command namespace id [#{nsnm}] clashes with existing command") if Entry === container[nsnm] }
-        nsid = nsids.shift    # first id is primary namespace id, rest aliases
+        nsid = nsids.shift # first id is primary namespace id, rest aliases
         scoped_ids << nsid
         BRIX11.log_fatal("Brix command namespace [#{nsid}] clashes with existing namespace alias") if AliasNode === container[nsid]
         nsids.each { |nsnm| BRIX11.log_fatal("Brix command namespace alias [#{nsnm}] clashes with existing namespace") if Node === container[nsnm] }
@@ -201,7 +201,7 @@ module BRIX11
       first = true
       until argv.empty? || argv.first.start_with?('-')
         cmdspec << (arg = argv.shift)
-        path = arg.split(':')   # determin possible command path segments
+        path = arg.split(':') # determin possible command path segments
         # walk the path
         object = nil
         until path.empty?
