@@ -64,7 +64,7 @@ module BRIX11
               cfg.features.each { |featureid, feature| platform_macros_io.puts("#{featureid}=#{feature.state ? '1' : '0'}") }
               # generate all cmdline specified macros (if any)
               if cfg.options[:defines]
-                cfg.options[:defines].each { |m,v| platform_macros_io.puts("#{m}=#{v ? v : '1'}") }
+                cfg.options[:defines].each { |m, v| platform_macros_io.puts("#{m}=#{v ? v : '1'}") }
               end
               # generate crossbuild defines
               if cfg.features.has_key?(:crossbuild) && cfg.features[:crossbuild].state

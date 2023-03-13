@@ -90,7 +90,7 @@ module BRIX11
                   })
           prjargv << opts
           rc = prj.clean(options[:hostbuild][:make_opts].dup, *prjargv) if options[:hostbuild][:clean]
-          rc = prj.build(options[:hostbuild][:make_opts].dup,*prjargv ) if rc && options[:hostbuild][:build]
+          rc = prj.build(options[:hostbuild][:make_opts].dup, *prjargv ) if rc && options[:hostbuild][:build]
           log_error('Failed to make host tools') unless rc
         end
 

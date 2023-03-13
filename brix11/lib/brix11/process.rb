@@ -15,7 +15,7 @@ module BRIX11
         unless @run_env
           @run_env = {}
           # add all user environment vars
-          (BRIX11.options.config.user_environment || {}).each_pair do |k,v|
+          (BRIX11.options.config.user_environment || {}).each_pair do |k, v|
             # expand embedded var references
             @run_env[k] = v.gsub(/\$\{?([^\s\/\}:;]+)\}?/) { |m| ENV[$1] }
           end

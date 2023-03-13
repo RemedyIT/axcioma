@@ -26,7 +26,7 @@ module BRIX11
 
         optparser.on('-b', '--bits', '=BITSIZE', Integer, 'Override platform default bitsize (0, 32 or 64).',
                                                           'Specifying 0 disables explicit bitsize setting.') do |v|
-          BRIX11.log_fatal("Invalid bitsize specified [#{v}]. Supported sizes are 0, 32 or 64.") unless [0, 32,64].include?(v.to_i)
+          BRIX11.log_fatal("Invalid bitsize specified [#{v}]. Supported sizes are 0, 32 or 64.") unless [0, 32, 64].include?(v.to_i)
           options[:configure][:bitsize] = v.to_i
         end
 

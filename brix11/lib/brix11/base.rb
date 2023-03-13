@@ -124,7 +124,7 @@ module BRIX11
       puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
       puts COPYRIGHT
       puts
-      puts '  %-45s | %-35s' % ['Project type [compilers]','Description']
+      puts '  %-45s | %-35s' % ['Project type [compilers]', 'Description']
       puts '  ' + ('-' * 83)
       Project.describe_each do |type, compilers, desc|
         type_s = type.to_s

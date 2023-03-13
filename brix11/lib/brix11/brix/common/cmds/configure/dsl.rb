@@ -82,7 +82,7 @@ module BRIX11
               rcpath = File.join(curdir, 'etc', 'configurerc')
               # We must compare paths in the array whether it is already there, when it is not there
               # yet and it exists we load the rc file
-              if (!loaded_rcs.any?{ |rcs| BRIX11::Sys.compare_path(rcs,rcpath) == 0 }) && File.file?(rcpath)
+              if (!loaded_rcs.any?{ |rcs| BRIX11::Sys.compare_path(rcs, rcpath) == 0 }) && File.file?(rcpath)
                 # load rc file
                 rc_load(rclist, rcpath)
                 loaded_rcs << rcpath

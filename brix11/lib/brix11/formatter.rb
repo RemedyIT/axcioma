@@ -120,7 +120,7 @@ module BRIX11
         end
 
         def filter_output(s)
-          matched_category,_ = output_patterns.detect do |cat, re|
+          matched_category, _ = output_patterns.detect do |cat, re|
             if rem = re.match(s)
               unless cat == :ignore
                 format_output(cat, rem)

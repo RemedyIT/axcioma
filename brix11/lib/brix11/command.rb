@@ -327,7 +327,7 @@ module BRIX11
       end
 
       def scoped_name
-        @scoped_name ||= @entry.scoped_id.gsub(':','_')
+        @scoped_name ||= @entry.scoped_id.gsub(':', '_')
       end
     end # Base
   end # Command

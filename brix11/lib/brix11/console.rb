@@ -210,7 +210,7 @@ module BRIX11
           _ind = ' ' * menu.indent
           if @menu.select_by == :name
             @ch = @text
-            @text = ["#{@text[0,1]}\r#{_ind}", bold(@text[0,1]), @text[1..-1]]
+            @text = ["#{@text[0, 1]}\r#{_ind}", bold(@text[0, 1]), @text[1..-1]]
           else
             @ch = "#{@menu.entries.size + 1}"
             @text = [_ind, bold(@ch), @text]
@@ -262,7 +262,7 @@ module BRIX11
       def help
         _help = [@help.dup]
         _hsep = ''
-        @entries.each do |n,entry|
+        @entries.each do |n, entry|
           if entry.enabled?
             _help << _hsep
             _help << "#{entry.ch} for " << entry.name
@@ -394,9 +394,9 @@ module BRIX11
 
       def item_list
         if Proc === @sort
-          @items.sort { |a,b| @sort.call(a,b) }
+          @items.sort { |a, b| @sort.call(a, b) }
         elsif @sort
-          @items.sort { |a,b| item_to_s(a) <=> item_to_s(b) }
+          @items.sort { |a, b| item_to_s(a) <=> item_to_s(b) }
         else
           @items
         end

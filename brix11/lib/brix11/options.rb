@@ -27,7 +27,7 @@ module BRIX11
       include BRIX11::LogMethods
 
       def self.merge(to, from)
-        from.each_pair do |(k,v)|
+        from.each_pair do |(k, v)|
           k = k.to_sym
           if to.has_key?(k)
             case to[k]

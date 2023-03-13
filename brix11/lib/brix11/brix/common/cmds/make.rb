@@ -93,7 +93,7 @@ module BRIX11
           end
           prjargv << options
           rc = prj.clean(options[:make][:make_opts].dup, *prjargv) if options[:make][:clean]
-          rc = prj.build(options[:make][:make_opts].dup,*prjargv ) if rc && options[:make][:build]
+          rc = prj.build(options[:make][:make_opts].dup, *prjargv ) if rc && options[:make][:build]
           log_error("Executing #{current_cmd} failed.") unless rc
           rc
         end

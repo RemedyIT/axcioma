@@ -24,7 +24,7 @@ module BRIX11
     include Screen::ColorizeMethods
 
     def log_fatal(msg, rc = 1)
-      output.error_println 'BRIX11 - ',red(bold 'ERROR'), ' : ', msg
+      output.error_println 'BRIX11 - ', red(bold 'ERROR'), ' : ', msg
       exit rc
     end
 

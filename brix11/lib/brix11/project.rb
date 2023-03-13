@@ -63,13 +63,13 @@ module BRIX11
 
     def self.describe_each
       if block_given?
-        registry.sort { |(t1,h1),(t2,h2)|
+        registry.sort { |(t1, h1), (t2, h2)|
           t1.to_s <=> t2.to_s
-        }.each { |type,handler|
+        }.each { |type, handler|
           compilers = if handler.const_defined?(:COMPILERS)
-                        handler::COMPILERS.sort { |(t1,h1),(t2,h2)|
+                        handler::COMPILERS.sort { |(t1, h1), (t2, h2)|
                           t1.to_s <=> t2.to_s
-                        }.collect { |k,v|
+                        }.collect { |k, v|
                           v == handler::COMPILERS.default ? "#{k}*" : k.to_s
                         }
                       else
@@ -260,7 +260,7 @@ module BRIX11
             val.each { |ve| argv << "-#{opt}" << ve }
           when Hash
             unless val.empty?
-              argv << "-#{opt}" << %Q{#{val.collect { |k,v| "#{k}=#{v}" }.join(',')}}
+              argv << "-#{opt}" << %Q{#{val.collect { |k, v| "#{k}=#{v}" }.join(',')}}
             end
           end
         end

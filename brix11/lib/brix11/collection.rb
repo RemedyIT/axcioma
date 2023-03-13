@@ -124,7 +124,7 @@ module BRIX11
       maxlen = ((maxlen / 5) * 5) + 10
       desc = ["%-#{maxlen}s | %s" % ['Collection', 'Description']]
       desc << ('-' * (maxlen + 43))
-      collections.values.sort { |a,b| a.name.to_s <=> b.name.to_s }.each do |bc|
+      collections.values.sort { |a, b| a.name.to_s <=> b.name.to_s }.each do |bc|
         desc << "%-#{maxlen}s | %s" % [bc.name, bc.description]
       end
       desc

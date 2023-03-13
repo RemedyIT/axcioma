@@ -35,7 +35,7 @@ module BRIX11
         PROJECTNAME
       end
 
-      def clean(cmdargv,*args)
+      def clean(cmdargv, *args)
         options = case args.last
                   when Hash, OpenStruct
                     args.pop

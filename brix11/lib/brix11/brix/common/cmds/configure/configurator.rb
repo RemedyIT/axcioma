@@ -190,7 +190,7 @@ module BRIX11
               # keep environment additions if dependency fulfilled
               if @rcdep.state
                 # keep in current runtime env
-                @env_additions.each { |k,v| Exec.update_run_environment(k, v) }
+                @env_additions.each { |k, v| Exec.update_run_environment(k, v) }
                 # keep for user env additions
                 @mod.env_additions.merge!(@env_additions)
               end
@@ -429,7 +429,7 @@ module BRIX11
 
         def self.print_config(workspace)
           # printing the configuration requires an existing ACE_ROOT and config files
-          if Exec.get_run_environment('ACE_ROOT') && File.exist?(File.join(Exec.get_run_environment('ACE_ROOT'),'ace', 'config.h'))
+          if Exec.get_run_environment('ACE_ROOT') && File.exist?(File.join(Exec.get_run_environment('ACE_ROOT'), 'ace', 'config.h'))
             _test_configs = nil
             _ace_root = Exec.get_run_environment('ACE_ROOT')
             print_file(File.join(_ace_root, 'ace', 'config.h'), 'config.h')

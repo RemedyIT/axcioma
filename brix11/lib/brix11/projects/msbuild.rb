@@ -217,7 +217,7 @@ module BRIX11
         runopts[:capture] = :all if block_given?
         runopts[:filter] = init_filter(options[:verbose] || 1, options[:logfile]) unless options[:make][:noredirect]
         runopts[:debug] = options[:make][:debug]
-        argv = base_build_arg(project, path,cmdargv, runopts) << '/t:Clean' << runopts
+        argv = base_build_arg(project, path, cmdargv, runopts) << '/t:Clean' << runopts
         argv << Proc.new if block_given?
         ok, rc = Exec.runcmd(*argv)
         BRIX11.log_warning("#{self.type}\#clean failed with exitcode #{rc}") unless ok
@@ -282,7 +282,7 @@ module BRIX11
       def sln_for_dir(path)
         dir_name = Pathname.new(path).basename()
         # mpc creates sln files with name of dir, but replaces '-' with '_'
-        sln_name = dir_name.to_s.gsub('-','_')
+        sln_name = dir_name.to_s.gsub('-', '_')
         sln_name << PROJECTEXT
         unless File.exist?(File.join(path, sln_name))
           # incase file does not exist look for a single .sln file in path

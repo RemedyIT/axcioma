@@ -33,7 +33,7 @@ module BRIX11
 
       def run(argv)
         envs =
-          (options[:environment][:full] ? Exec.full_environment : Exec.run_environment).sort do |(ka,_),(kb,_)|
+          (options[:environment][:full] ? Exec.full_environment : Exec.run_environment).sort do |(ka, _), (kb, _)|
                 ka <=> kb
               end.collect { |(key, val)| Sys.environment_command(key, val) }.join("\n")
         if options[:environment][:file]

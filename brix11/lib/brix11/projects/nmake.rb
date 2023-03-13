@@ -110,7 +110,7 @@ module BRIX11
         runopts[:capture] = :all if block_given?
         runopts[:filter] = init_filter(options[:verbose] || 1, options[:logfile]) unless options[:make][:noredirect]
         runopts[:debug] = options[:make][:debug]
-        argv = base_build_arg(project, path,cmdargv, runopts) << 'realclean' << runopts
+        argv = base_build_arg(project, path, cmdargv, runopts) << 'realclean' << runopts
         argv << Proc.new if block_given?
         ok, rc = Exec.runcmd(*argv)
         BRIX11.log_warning("#{self.type}\#clean failed with exitcode #{rc}") unless ok
