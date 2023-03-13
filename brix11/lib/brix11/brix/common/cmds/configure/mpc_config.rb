@@ -17,8 +17,8 @@ module BRIX11
 
         def self.create_config(cfg)
           # find MPC base path among active rc specs (only 1 definition allowed)
-          mpcbase_rcspec = cfg.cfglist.values.select {|mod| mod.mpc_base }
-          BRIX11.log_fatal("Found #{mpcbase_rcspec.size} MPC base paths (in #{mpcbase_rcspec.collect {|rc| rc.mpc_base }.join(" and ")}). Only a single base path definition allowed.") if mpcbase_rcspec.size>1
+          mpcbase_rcspec = cfg.cfglist.values.select { |mod| mod.mpc_base }
+          BRIX11.log_fatal("Found #{mpcbase_rcspec.size} MPC base paths (in #{mpcbase_rcspec.collect { |rc| rc.mpc_base }.join(" and ")}). Only a single base path definition allowed.") if mpcbase_rcspec.size>1
           BRIX11.log_fatal("Missing MPC base path. At least 1 base path definition required.") if mpcbase_rcspec.empty?
           mpccfg = File.join(mpcbase_rcspec.shift.mpc_base, 'config', MPCCFG)
           # backup current file
@@ -61,7 +61,7 @@ module BRIX11
             mwccfg_io = cfg.dryrun? ? STDOUT : File.new(mwccfg, 'w')
             mwccfg_io.puts("//----- #{MWCCFG} -----") if cfg.dryrun?
             mwccfg_io.puts('workspace {')
-            mwcinc.each {|p| mwccfg_io.puts("  #{p}") }
+            mwcinc.each { |p| mwccfg_io.puts("  #{p}") }
             mwccfg_io.puts('}')
           ensure
             mwccfg_io.close unless cfg.dryrun?

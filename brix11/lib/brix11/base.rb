@@ -77,7 +77,7 @@ module BRIX11
       brixpath = File.expand_path(brixpath)
       unless loaded_brix_paths.include?(brixpath)
         log(3, "Examining brix search path : #{brixpath}")
-        Dir.glob(File.join(brixpath, 'brix', '*')).select {|p| File.directory?(p) }.each do |brixdir|
+        Dir.glob(File.join(brixpath, 'brix', '*')).select { |p| File.directory?(p) }.each do |brixdir|
           log(4, "#load_brix - inspecting possible Brix collection @ #{brixdir}")
           if File.file?(File.join(brixdir, 'require.rb'))
             bc = Collection.load(brixdir)
@@ -145,7 +145,7 @@ module BRIX11
       puts
     }
     opts.on('--add-templates', '=PATH',
-            'Add a template library basepath to be evaluated before standard brix templates.') {|v|
+            'Add a template library basepath to be evaluated before standard brix templates.') { |v|
       (options.user_config.user_templates ||= []) << v
     }
     opts.on('-E', '--environment',
@@ -222,7 +222,7 @@ module BRIX11
     }
     opts.on('--scope', '=COLLECTION',
             'Defines collection scope for filtering commands.',
-            'Default: no scope') {|v|
+            'Default: no scope') { |v|
       options.scope = v
     }
 

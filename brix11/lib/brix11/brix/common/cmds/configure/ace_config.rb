@@ -62,10 +62,10 @@ module BRIX11
               platform_macros_io = cfg.dryrun? ? STDOUT : File.new(platform_macros, 'w')
               platform_macros_io.puts("#----- #{PLATFORM_MACROS} -----") if cfg.dryrun?
               # generate all feature macros
-              cfg.features.each {|featureid, feature| platform_macros_io.puts("#{featureid}=#{feature.state ? '1' : '0'}") }
+              cfg.features.each { |featureid, feature| platform_macros_io.puts("#{featureid}=#{feature.state ? '1' : '0'}") }
               # generate all cmdline specified macros (if any)
               if cfg.options[:defines]
-                cfg.options[:defines].each {|m,v| platform_macros_io.puts("#{m}=#{v ? v : '1'}") }
+                cfg.options[:defines].each { |m,v| platform_macros_io.puts("#{m}=#{v ? v : '1'}") }
               end
               # generate crossbuild defines
               if cfg.features.has_key?(:crossbuild) && cfg.features[:crossbuild].state
@@ -92,7 +92,7 @@ module BRIX11
             default_features_io = cfg.dryrun? ? STDOUT : File.new(default_features, 'w')
             default_features_io.puts("#----- #{DEFAULT_FEATURES} -----") if cfg.dryrun?
             # generate all feature definitions
-            cfg.features.each {|featureid, feature| default_features_io.puts("#{featureid}=#{feature.state ? '1' : '0'}") }
+            cfg.features.each { |featureid, feature| default_features_io.puts("#{featureid}=#{feature.state ? '1' : '0'}") }
           ensure
             default_features_io.close unless cfg.dryrun?
           end

@@ -22,12 +22,12 @@ module BRIX11
         optparser.banner = "#{DESC}\n\nUsage: #{options[:script_name]} environment [options]\n\n"
         optparser.on('-A', '--all',
                      'Specifies to print all environment variables.',
-                     'Default: print only BRIX11 specific environment') {|v|
+                     'Default: print only BRIX11 specific environment') { |v|
           options[:environment][:full] = true
         }
         optparser.on('-f', '--file', '=FILE',
                      'Specifies filename to write environment settings to.',
-                     'Default: print to console') {|v|
+                     'Default: print to console') { |v|
                         options[:environment][:file] = v
                      }
       end
@@ -36,9 +36,9 @@ module BRIX11
         envs =
           (options[:environment][:full] ? Exec.full_environment : Exec.run_environment).sort do |(ka,_),(kb,_)|
                 ka <=> kb
-              end.collect {|(key, val)| Sys.environment_command(key, val) }.join("\n")
+              end.collect { |(key, val)| Sys.environment_command(key, val) }.join("\n")
         if options[:environment][:file]
-          File.open(options[:environment][:file], 'w') {|f| f.puts envs }
+          File.open(options[:environment][:file], 'w') { |f| f.puts envs }
         else
           self.println(envs)
         end

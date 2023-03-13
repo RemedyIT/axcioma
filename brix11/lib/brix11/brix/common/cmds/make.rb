@@ -33,10 +33,10 @@ module BRIX11
         optparser.on('-c', '--clean', 'Clean project only.') { options[:make][:clean] = true; options[:make][:build] = false }
         optparser.on('-r', '--rebuild', 'Clean and than build project.') { options[:make][:clean] = true; options[:make][:build] = true }
         optparser.on('-p', '--project', '=SUBPRJ',
-                     'Specifies path to or name of (sub-)project to build.') {|v| options[:make][:subprj] = v }
+                     'Specifies path to or name of (sub-)project to build.') { |v| options[:make][:subprj] = v }
         optparser.on('--no-gen-build', 'Do not automatically generate build files using MPC if they do not exist yet.') { options[:make][:genbuild] = false }
         optparser.on('--debug', 'Debug build.', 'Default: Off') { options[:make][:debug] = true }
-        optparser.on('--release', 'Release build.', 'Default: On') { options[:make][:debug] = false}
+        optparser.on('--release', 'Release build.', 'Default: On') { options[:make][:debug] = false }
         optparser.on('-L', '--build-list', '=BUILDLIST', 'Build the list of projects specified by BUILDLIST.',
                                                          'BUILDLIST specifies a buildlist file and optional root as: [<root>=]<listfile>.',
                                                          'If no root is specified it defaults to the location of the listfile.') do |v|
@@ -110,6 +110,6 @@ module BRIX11
       Command.register('make|build', DESC, Common::Make)
     end # Make
 
-    Dir.glob(File.join(ROOT, 'cmds', 'make', '*.rb')).each { |p| require "brix/common/cmds/make/#{File.basename(p)}"}
+    Dir.glob(File.join(ROOT, 'cmds', 'make', '*.rb')).each { |p| require "brix/common/cmds/make/#{File.basename(p)}" }
   end # Common
 end # BRIX11

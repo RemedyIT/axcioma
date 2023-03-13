@@ -31,7 +31,7 @@ module BRIX11
             if @rcfeature.prerequisites.empty?
               other_state || @rcfeature.state
             else
-              other_state || (@rcfeature.prerequisites.any? {|freq| @cfg.features[freq] ? @cfg.features[freq].state : false } ? @rcfeature.state : !@rcfeature.state)
+              other_state || (@rcfeature.prerequisites.any? { |freq| @cfg.features[freq] ? @cfg.features[freq].state : false } ? @rcfeature.state : !@rcfeature.state)
             end
           end
 
@@ -194,7 +194,7 @@ module BRIX11
               # keep environment additions if dependency fulfilled
               if @rcdep.state
                 # keep in current runtime env
-                @env_additions.each {|k,v| Exec.update_run_environment(k, v) }
+                @env_additions.each { |k,v| Exec.update_run_environment(k, v) }
                 # keep for user env additions
                 @mod.env_additions.merge!(@env_additions)
               end
@@ -343,12 +343,12 @@ module BRIX11
           end
           # collect all unique library path additions of all active module dependencies
           lib_paths = @cfglist.values.collect do |mod|
-            mod.dependencies.select {|dep| dep.state }.collect do |dep|
+            mod.dependencies.select { |dep| dep.state }.collect do |dep|
               dep.library_paths.collect do |str|
                 # expand any env var references in string
                 path = str.gsub(/\$\{([^\s\/\}:;]+)\}/) { |m| Exec.get_run_environment($1).to_s }
                 # expand any special vars (currently only '${:DDL_DIR}')
-                path.gsub(/\$\{:DLL_DIR\}/) {|m| options[:platform][:defaults][:dll_dir] }
+                path.gsub(/\$\{:DLL_DIR\}/) { |m| options[:platform][:defaults][:dll_dir] }
               end
             end
           end.flatten.uniq
@@ -371,7 +371,7 @@ module BRIX11
           end
           # check any exclusive feature dependencies
           features.each do |featureid, feature|
-            if feature.exclusives.count {|excl_fid| features.has_key?(excl_fid) && features[excl_fid].state } > 1
+            if feature.exclusives.count { |excl_fid| features.has_key?(excl_fid) && features[excl_fid].state } > 1
               BRIX11.log_fatal("Feature :#{featureid} allows only one of it's prerequisite features [:#{feature.exclusives.join(', :')}] to be enabled.")
             end
           end
@@ -421,13 +421,13 @@ module BRIX11
             features = File.readlines(features_cfg_file).collect do |ln|
               feature = nil
               if /\A\s*\w+\s*=\s*(0|1)\s*\Z/ =~ ln
-                feature, val = ln.split('=').collect {|s| s.strip }
+                feature, val = ln.split('=').collect { |s| s.strip }
                 feature = nil if val.to_i == 0
               end
               feature
             end.compact
             # upcase each active feature to provide it's test config
-            test_configs.concat(features.collect {|ftr| ftr.upcase })
+            test_configs.concat(features.collect { |ftr| ftr.upcase })
           end
         end
 

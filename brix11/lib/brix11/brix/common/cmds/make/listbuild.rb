@@ -93,7 +93,7 @@ module BRIX11
               # any path that is a parent to another path is a false positive
               # (search could not find projecttype in original path and traversed
               #  too far up until it a parent root for other tests)
-              !build_list.any? {|gtp, bp| bp.start_with?(path) && bp.size>path.size && ['/', '\\'].include?(bp[path.size]) }
+              !build_list.any? { |gtp, bp| bp.start_with?(path) && bp.size>path.size && ['/', '\\'].include?(bp[path.size]) }
             end
           end
         end
@@ -102,7 +102,7 @@ module BRIX11
           def self.check_build(dir)
             # an MPC build project dir should contain an .mpc file itself
             # OR it's subdirectories must contain .mpc files
-            Dir.glob(File.join(dir, '**', '*.mpc')).any? {|p| File.file?(p)}
+            Dir.glob(File.join(dir, '**', '*.mpc')).any? { |p| File.file?(p) }
           end
 
           def self.do_build(cmd, path)

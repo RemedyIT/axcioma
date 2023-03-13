@@ -161,7 +161,7 @@ module BRIX11
         lines = txt.split("\n")
         # cache last line if NOT ended by "\n"
         @cache = lines.pop unless /\n$/ =~ txt
-        lines.each {|ln| filter_line(ln) }
+        lines.each { |ln| filter_line(ln) }
       end
 
       # override

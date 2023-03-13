@@ -23,7 +23,7 @@ module BRIX11
             # is the base_be part of be's bases?
             return true if be_table[be].include?(base_be)
             # is the base_be part of the bases of be's bases?
-            be_table[be].any? {|beb| is_base_backend?(be_table, beb, base_be) }
+            be_table[be].any? { |beb| is_base_backend?(be_table, beb, base_be) }
           end
         end
 
@@ -47,7 +47,7 @@ module BRIX11
           end
           # collect list of configured be paths of enabled modules relative to location of ridlrc file
           ridl_be_path = cfg.cfglist.values.collect do |mod|
-            mod.ridl_be_path.collect {|p| Util.relative_path(p, base_root) }
+            mod.ridl_be_path.collect { |p| Util.relative_path(p, base_root) }
           end.flatten
           # generate ridlrc file
           BRIX11.show_msg("Creating #{ridlrc}")

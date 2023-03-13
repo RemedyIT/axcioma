@@ -70,12 +70,12 @@ module BRIX11
           STDOUT.puts
           STDOUT.puts 'BRIX11 configure configuration variables'
           STDOUT.puts '----------------------------------------'
-          vars = rclist.values.collect {|rc| rc.dependencies.values.collect {|dep| dep.environment.values}}.flatten
+          vars = rclist.values.collect { |rc| rc.dependencies.values.collect { |dep| dep.environment.values } }.flatten
           vars.prepend(Common::Configure::RCSpec::Dependency::Environment.new(:path) do
             name 'PATH'
             description 'Executable searchpath addition (prepended).'
           end)
-          vars.each {|v| STDOUT.puts('%-15s  %s' % [v.variable.to_s, v.description]) }
+          vars.each { |v| STDOUT.puts('%-15s  %s' % [v.variable.to_s, v.description]) }
           STDOUT.puts
           exit
         end
@@ -109,6 +109,6 @@ module BRIX11
       Command.register('configure', DESC, Common::Configure)
     end # Configure
 
-    Dir.glob(File.join(ROOT, 'cmds', 'configure', '*.rb')).each { |p| require "brix/common/cmds/configure/#{File.basename(p)}"}
+    Dir.glob(File.join(ROOT, 'cmds', 'configure', '*.rb')).each { |p| require "brix/common/cmds/configure/#{File.basename(p)}" }
   end # Common
 end # BRIX11

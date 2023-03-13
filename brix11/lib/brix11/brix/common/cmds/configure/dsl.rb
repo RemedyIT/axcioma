@@ -93,9 +93,9 @@ module BRIX11
                 BRIX11.log(5, "Skipping [#{curdir}], already loaded or doesn't exist")
               end
               # get a list of paths to all subdirs
-              dirlist = Dir[File.join(curdir, '*')].select {|p| File.directory?(p) }
+              dirlist = Dir[File.join(curdir, '*')].select { |p| File.directory?(p) }
               # filter out any excluded folders and prepend rest of subdirs to include list
-              includes.unshift(*dirlist.select {|p| !excludes.include?(p) })
+              includes.unshift(*dirlist.select { |p| !excludes.include?(p) })
             end until includes.empty?
             rclist
           end
@@ -212,7 +212,7 @@ module BRIX11
             end
 
             def library_path(*args)
-              @dep.library_paths.concat(args.flatten.collect {|arg| arg.to_s })
+              @dep.library_paths.concat(args.flatten.collect { |arg| arg.to_s })
             end
           end # DSLHandler
 
@@ -282,7 +282,7 @@ module BRIX11
             end
 
             def depends_on(*args)
-              @feature.prerequisites.concat(args.flatten.collect {|a| a.to_sym})
+              @feature.prerequisites.concat(args.flatten.collect { |a| a.to_sym })
             end
 
             def depends_exclusively_on(arg)
@@ -309,7 +309,7 @@ module BRIX11
           end
 
           def depends_on(*mod_id)
-            @rc.prerequisites.concat(mod_id.flatten.collect {|mid| mid.to_sym})
+            @rc.prerequisites.concat(mod_id.flatten.collect { |mid| mid.to_sym })
           end
 
           def dependencies(&block)
@@ -328,7 +328,7 @@ module BRIX11
             end
             def include(*args)
               # add include paths; expand relative paths (not based on env var) based on @base
-              @arr.concat(args.flatten.collect {|p| p.start_with?('$') ? p : File.expand_path(p, @base)})
+              @arr.concat(args.flatten.collect { |p| p.start_with?('$') ? p : File.expand_path(p, @base) })
             end
           end # IncludeDSL
 
@@ -343,7 +343,7 @@ module BRIX11
                 @hash = hash
               end
               def extends(*args)
-                @hash[:bases].concat(args.flatten.collect {|arg| arg.to_sym })
+                @hash[:bases].concat(args.flatten.collect { |arg| arg.to_sym })
               end
             end # BackendDSL
 
@@ -363,7 +363,7 @@ module BRIX11
               @rc.mpc_base = File.expand_path(path.to_s, @base)
             end
             def dynamic_type(*args)
-              @rc.mpc_dynamic_type.concat(args.flatten.collect {|p| p.start_with?('$') ? p : File.expand_path(p, @base)})
+              @rc.mpc_dynamic_type.concat(args.flatten.collect { |p| p.start_with?('$') ? p : File.expand_path(p, @base) })
             end
             def mwc_include(*args)
               args.each do |arg|
@@ -429,9 +429,9 @@ module BRIX11
 
         def enabled?(allrc)
           # do all our own dependencies check out?
-          if dependencies.values.all? {|dep| dep.optional? || dep.state }
+          if dependencies.values.all? { |dep| dep.optional? || dep.state }
             # are all our prerequisite modules available and enabled?
-            return prerequisites.all? {|mod_id| allrc.has_key?(mod_id) && allrc[mod_id].enabled?(allrc) }
+            return prerequisites.all? { |mod_id| allrc.has_key?(mod_id) && allrc[mod_id].enabled?(allrc) }
           end
           false
         end

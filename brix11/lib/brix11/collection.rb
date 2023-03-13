@@ -117,7 +117,7 @@ module BRIX11
     end
 
     def self.print_versions
-      collections.values.each {|c| c.print_version}
+      collections.values.each { |c| c.print_version }
     end
 
     def self.descriptions
@@ -125,7 +125,7 @@ module BRIX11
       maxlen = ((maxlen / 5) * 5) + 10
       desc = ["%-#{maxlen}s | %s" % ['Collection', 'Description']]
       desc << ('-'*(maxlen+43))
-      collections.values.sort {|a,b| a.name.to_s <=> b.name.to_s }.each do |bc|
+      collections.values.sort { |a,b| a.name.to_s <=> b.name.to_s }.each do |bc|
         desc << "%-#{maxlen}s | %s" % [bc.name, bc.description]
       end
       desc
@@ -165,7 +165,7 @@ module BRIX11
     end
 
     def lookup_path
-      @base_collections.inject([@root]) {|paths, bbc| paths.concat(bbc.lookup_path) }
+      @base_collections.inject([@root]) { |paths, bbc| paths.concat(bbc.lookup_path) }
     end
 
     def setup(optparser, options)

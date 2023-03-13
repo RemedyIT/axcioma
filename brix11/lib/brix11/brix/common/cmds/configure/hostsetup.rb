@@ -80,7 +80,7 @@ module BRIX11
                 Dir.glob(File.join(dir, '*')).each do |p|
                     unless File.basename(p).start_with?('.')
                         if !File.directory?(p)
-                            unless EXCLUDES.any? {|pat| pat.is_a?(String) ? (pat == p) : (pat =~ p) }
+                            unless EXCLUDES.any? { |pat| pat.is_a?(String) ? (pat == p) : (pat =~ p) }
                                 File.link(p, File.join(dst, p))
                             end
                         elsif recurse

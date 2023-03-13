@@ -125,7 +125,7 @@ module BRIX11
 
         def self.determin(opts)
           build_target = (opts[:target] || platform_os)
-          _, ph = platform_helpers.detect {|re, _| re =~ build_target }
+          _, ph = platform_helpers.detect { |re, _| re =~ build_target }
           opts[:platform] ||= {}
           (ph || platform_helpers.default).call(platform_os, opts)
           # see if there is a <build_target>.json to supplement/customize the defaults

@@ -60,6 +60,6 @@ module BRIX11
 
     end
 
-    Dir.glob(File.join(ROOT, 'cmds', '*.rb')).each { |p| require "brix/common/cmds/#{File.basename(p)}"}
+    Dir.glob(File.join(ROOT, 'cmds', '*.rb')).each { |p| require "brix/common/cmds/#{File.basename(p)}" }
   end
 end

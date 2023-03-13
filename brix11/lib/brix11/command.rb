@@ -75,14 +75,14 @@ module BRIX11
           id.size + case obj
                     when Entry
                       obj.id.size +
-                          obj.aliases.inject(0) {|a| a.size+1 } +
+                          obj.aliases.inject(0) { |a| a.size+1 } +
                           if all && obj.super
                             get_overridden_collections(obj).join(',').size+3
                           else
                             0
                           end
                     when Node
-                      determin_max_desc(obj.table, all)+obj.aliases.inject(0) {|a| a.size+1 }
+                      determin_max_desc(obj.table, all)+obj.aliases.inject(0) { |a| a.size+1 }
                     else
                       0
                     end
@@ -123,7 +123,7 @@ module BRIX11
     def self.register(cmdid, desc, klass, override = false)
       BRIX11.log(2, "Registering brix command #{cmdid}=#{desc} in collection #{cur_collection_scope}")
       idlist = cmdid.to_s.split(':').collect { |s| s.split('|') }   # extract optional namespaces and aliases
-      BRIX11.log_fatal("Namespace or command ids and aliases should be at least #{MIN_CMDLEN} long") if idlist.flatten.any? {|i| i.size < MIN_CMDLEN}
+      BRIX11.log_fatal("Namespace or command ids and aliases should be at least #{MIN_CMDLEN} long") if idlist.flatten.any? { |i| i.size < MIN_CMDLEN }
       scoped_ids = []
       ids = idlist.pop                   # actual cmd ids (first is primary id, rest aliases)
       # get root containers
@@ -177,7 +177,7 @@ module BRIX11
       if idstr
         unless (object = container[idstr]) || idstr.size < MIN_CMDLEN
           # Check for partial match
-          object = container.keys.select {|k| k.start_with?(idstr) }.shift
+          object = container.keys.select { |k| k.start_with?(idstr) }.shift
           object = container[object] if object
         end
         case object
@@ -209,7 +209,7 @@ module BRIX11
           object = container[idstr]
           unless object || idstr.size<MIN_CMDLEN
             # Check for partial match
-            matches = container.keys.select {|k| k.start_with?(idstr) }
+            matches = container.keys.select { |k| k.start_with?(idstr) }
             if matches.size>1
               BRIX11.log_error("Multiple commands or namespaces match [#{idstr}] : #{matches.join('|')}")
               return nil
@@ -223,7 +223,7 @@ module BRIX11
               object = scoped_commands[idstr]
               unless object || idstr.size<MIN_CMDLEN
                 # partial match ?
-                matches = scoped_commands.keys.select {|k| k.start_with?(idstr) }
+                matches = scoped_commands.keys.select { |k| k.start_with?(idstr) }
                 # only if single match
                 object = scoped_commands[matches.first] unless matches.size>1
               end

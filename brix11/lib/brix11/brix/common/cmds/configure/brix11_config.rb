@@ -37,7 +37,7 @@ module BRIX11
                                            end
           # collect list of configured be paths of enabled modules relative to location of brix11rc file
           brix_paths = cfg.cfglist.values.collect do |mod|
-            mod.brix_path.collect {|p| Util.relative_path(p, base_root) }
+            mod.brix_path.collect { |p| Util.relative_path(p, base_root) }
           end.flatten
           # generate ridlrc file
           BRIX11.show_msg("Creating #{brix11rc}")

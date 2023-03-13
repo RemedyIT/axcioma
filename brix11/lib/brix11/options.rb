@@ -94,7 +94,7 @@ module BRIX11
       end
 
       def save(rcpath)
-        File.open(rcpath, 'w') {|f| f << JSON.pretty_generate(@table) }
+        File.open(rcpath, 'w') { |f| f << JSON.pretty_generate(@table) }
       end
 
       def to_s
@@ -170,7 +170,7 @@ module BRIX11
 
     def load_config
       # first collect config from known (standard and configured) locations
-      _rc_paths.collect {|path| File.expand_path(path) }.each do |rcp|
+      _rc_paths.collect { |path| File.expand_path(path) }.each do |rcp|
         log(3, "Testing rc path #{rcp}")
         if File.readable?(rcp) && !_loaded_rc_paths.include?(rcp)
           _cfg = Config.new.load(rcp)

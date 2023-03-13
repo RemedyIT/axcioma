@@ -137,11 +137,11 @@ module BRIX11
     end
 
     def self.display_alert(text)
-      display_text(text, label: 'NOTICE', label_fmt: proc {|t| yellow(reverse(t.label_format_str % t.label)) })
+      display_text(text, label: 'NOTICE', label_fmt: proc { |t| yellow(reverse(t.label_format_str % t.label)) })
     end
 
     def self.display_warning(text)
-      display_text(text, label: 'WARNING', label_fmt: proc {|t| red(reverse(t.label_format_str % t.label))})
+      display_text(text, label: 'WARNING', label_fmt: proc { |t| red(reverse(t.label_format_str % t.label)) })
     end
 
     def self.confirm(prompt, options = {})
@@ -332,7 +332,7 @@ module BRIX11
           items.size
         else
           _count = 0
-          items.each { |i| _count += 1}
+          items.each { |i| _count += 1 }
           _count
         end
         _hdr = options[:header]
@@ -396,9 +396,9 @@ module BRIX11
 
       def item_list
         if Proc === @sort
-          @items.sort {|a,b| @sort.call(a,b) }
+          @items.sort { |a,b| @sort.call(a,b) }
         elsif @sort
-          @items.sort {|a,b| item_to_s(a) <=> item_to_s(b) }
+          @items.sort { |a,b| item_to_s(a) <=> item_to_s(b) }
         else
           @items
         end
@@ -443,7 +443,7 @@ module BRIX11
       begin
         txt = screen.ask(prompt, String).strip
         sel = if /^(\s|\d)+$/ =~ txt
-          txt.split.collect {|a| a.to_i-1 }
+          txt.split.collect { |a| a.to_i-1 }
         elsif /^a(l|ll)?$/ =~ txt
           (0...list.count).to_a
         elsif txt.empty?

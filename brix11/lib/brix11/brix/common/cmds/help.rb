@@ -54,7 +54,7 @@ module BRIX11
         end
         formatter = Sys.has_ansi? ? RDoc::Markup::ToAnsi.new() : RDoc::Markup::ToRdoc.new()
         text = RDoc::RD.parse(data).accept(formatter)
-        text = text.split("\n").collect {|l| "  #{l}" }.join("\n")
+        text = text.split("\n").collect { |l| "  #{l}" }.join("\n")
         text << "\n\n"
         Exec.runcmd(Sys.pager, input: text, silent: true)
         true

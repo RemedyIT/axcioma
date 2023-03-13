@@ -22,18 +22,18 @@ module BRIX11
         optparser.banner = "#{DESC}\n\nUsage: #{options[:script_name]} execute [options] PROGRAM [arguments [--]]\n\n"
         optparser.on('-d', '--detach',
                      'Specifies to detach from child process after execution.',
-                     'Default: wait for child process to terminate') {|v|
+                     'Default: wait for child process to terminate') { |v|
                         options[:execute][:detach] = true
                      }
         optparser.on('-C', '--capture', '=FILE',
                      'Capture output from child process to file FILE.',
-                     'Default: no output capture') {|v|
+                     'Default: no output capture') { |v|
           options[:execute][:capture] = v
           options[:execute][:noredirect] = false
         }
         optparser.on('-N', '--no-redirect',
                      'Do not redirect output from child process..',
-                     'Default: redirect (and optionally filter or capture) output.') {|v|
+                     'Default: redirect (and optionally filter or capture) output.') { |v|
           options[:execute][:noredirect] = true
           options[:execute][:capture] = nil
         }

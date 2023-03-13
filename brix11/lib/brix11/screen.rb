@@ -72,19 +72,19 @@ module BRIX11
     # end
 
     def print(*args)
-      output.print args.flatten.collect {|a| (colorize? && Color === a) ? a.code : a }.join
+      output.print args.flatten.collect { |a| (colorize? && Color === a) ? a.code : a }.join
     end
 
     def println(*args)
-      output.puts args.flatten.collect {|a| (colorize? && Color === a) ? a.code : a }.join
+      output.puts args.flatten.collect { |a| (colorize? && Color === a) ? a.code : a }.join
     end
 
     def error_print(*args)
-      errout.print args.flatten.collect {|a| (colorize? && Color === a) ? a.code : a }.join
+      errout.print args.flatten.collect { |a| (colorize? && Color === a) ? a.code : a }.join
     end
 
     def error_println(*args)
-      errout.puts args.flatten.collect {|a| (colorize? && Color === a) ? a.code : a }.join
+      errout.puts args.flatten.collect { |a| (colorize? && Color === a) ? a.code : a }.join
     end
 
 
@@ -140,7 +140,7 @@ module BRIX11
       yield(m) if block_given?
       m.update_responses
       println(m.header)
-      println(list(m.choices.collect {|c| c[1] }))
+      println(list(m.choices.collect { |c| c[1] }))
       println(m.prompt)
       begin
         ans = input.gets.strip

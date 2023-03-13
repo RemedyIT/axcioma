@@ -27,21 +27,21 @@ module BRIX11
         #optparser.on('-r', '--recurse', 'Recurse directories.') { options[:genbuild][:recurse] = true }
         optparser.on('-S', '--static', 'Generate for static build.') { options[:genbuild][:static] = true }
         optparser.on('-e', '--enable', '=FEATURE',
-                     'Enable feature(s). If specifying more than 1 separate by \',\'') {|v|
+                     'Enable feature(s). If specifying more than 1 separate by \',\'') { |v|
                         options[:genbuild][:features]||={};
                         v.split(',').each { |f| options[:genbuild][:features][f] = 1 }
                      }
         optparser.on('-d', '--disable', '=FEATURE',
-                     'Disable feature(s). If specifying more than 1 separate by \',\'') {|v|
+                     'Disable feature(s). If specifying more than 1 separate by \',\'') { |v|
                         options[:genbuild][:features]||={};
                         v.split(',').each { |f| options[:genbuild][:features][f] = 0 }
                      }
         optparser.on('-p', '--project', '=SUBPRJ',
-                     'Specifies path to or name of (sub-)project to generate for.') {|v| options[:genbuild][:subprj] = v }
+                     'Specifies path to or name of (sub-)project to generate for.') { |v| options[:genbuild][:subprj] = v }
         optparser.on('-I', '--include', '=DIR',
-                     'Include directory.') {|v| options[:genbuild][:include]||=[]; options[:genbuild][:include]<< v }
+                     'Include directory.') { |v| options[:genbuild][:include]||=[]; options[:genbuild][:include]<< v }
         optparser.on('-X', '--exclude', '=DIR',
-                     'Exclude directory.') {|v| options[:genbuild][:exclude] = ((options[:genbuild][:exclude] || '').split(',') << v).join(',') }
+                     'Exclude directory.') { |v| options[:genbuild][:exclude] = ((options[:genbuild][:exclude] || '').split(',') << v).join(',') }
       end
 
       def run(argv)

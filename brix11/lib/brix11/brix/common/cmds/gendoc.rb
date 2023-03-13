@@ -34,7 +34,7 @@ module BRIX11
           BRIX11.log_fatal("This command requires the installation of the Asciidoctor gem!")
         end
         # load document generator(s)
-        Dir.glob(File.join(ROOT, 'cmds', 'gendoc', '*.rb')).each { |p| require "brix/common/cmds/gendoc/#{File.basename(p)}"}
+        Dir.glob(File.join(ROOT, 'cmds', 'gendoc', '*.rb')).each { |p| require "brix/common/cmds/gendoc/#{File.basename(p)}" }
         # initialize options and option parser
         options[:gendoc] = OPTIONS.dup
         optparser.banner = "#{DESC}\n\n"+
@@ -47,7 +47,7 @@ module BRIX11
           }
         optparser.on('-N', '--no-redirect',
                      'Do not redirect output from doxygen process..',
-                     'Default: run silent and hide output.') {|v|
+                     'Default: run silent and hide output.') { |v|
           options[:gendoc][:noredirect] = true
         }
         end
