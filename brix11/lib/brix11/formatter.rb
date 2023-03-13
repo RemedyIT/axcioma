@@ -197,7 +197,7 @@ module BRIX11
           # check if we should provide verbose output for non-filtered lines
           output.println(s) unless filtered || @verbosity <= 1
           # reset active filter if the last line was not recognized by it
-          #@active_filter = nil unless filtered
+          # @active_filter = nil unless filtered
         end
       end
     end # Filter

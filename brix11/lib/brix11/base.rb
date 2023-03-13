@@ -317,7 +317,7 @@ module BRIX11
     rc
   end
 end # BRIX11
-#Need to require this files AFTER the base is setup
+# Need to require this files AFTER the base is setup
 require 'brix11/options'
 require 'brix11/system'
 require 'brix11/console'

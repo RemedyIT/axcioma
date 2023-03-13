@@ -313,7 +313,7 @@ module BRIX11
         argv = [BUILDTOOL]
         argv << "/maxcpucount#{(Exec.max_cpu_cores > 0) ? ":#{Exec.max_cpu_cores}" : ''}" if Exec.cpu_cores > 1
         argv.concat(cmdargv)
-        #argv << '--always-make' if opts[:force]
+        # argv << '--always-make' if opts[:force]
 
         opts[:chdir] = path if path && (project || File.directory?(path))
         if opts[:chdir]

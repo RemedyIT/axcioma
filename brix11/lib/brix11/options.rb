@@ -156,7 +156,7 @@ module BRIX11
     def reset
       @table.clear
       Config.merge(self, _defaults)
-      #update_to_values!(_defaults)
+      # update_to_values!(_defaults)
       _rc_paths.clear
       _rc_paths << BRIX11RC_GLOBAL
       _loaded_rc_paths.clear

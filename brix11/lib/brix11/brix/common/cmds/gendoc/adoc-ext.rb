@@ -34,7 +34,7 @@ module BRIX11
           recurse = (attrs['recurse'] || (attrs.values.include?('recurse'))) ? true : false
           glob = File.expand_path(File.join(docdir, target))
           adoc = collect_dirlist(glob, recurse)
-          create_listing_block parent, adoc, attrs #, subs: nil
+          create_listing_block parent, adoc, attrs # , subs: nil
         end
       end
 

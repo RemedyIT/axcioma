@@ -23,7 +23,7 @@ module BRIX11
                            "       PROJECT := Path to project folder or name of subproject. If both PROJECT and SUBPRJ\n" +
                            "                  are specified, PROJECT should be path and SUBPRJ subproject name.\n\n"
 
-        #optparser.on('-r', '--recurse', 'Recurse directories.') { options[:genbuild][:recurse] = true }
+        # optparser.on('-r', '--recurse', 'Recurse directories.') { options[:genbuild][:recurse] = true }
         optparser.on('-S', '--static', 'Generate for static build.') { options[:genbuild][:static] = true }
         optparser.on('-e', '--enable', '=FEATURE',
                      'Enable feature(s). If specifying more than 1 separate by \',\'') { |v|
@@ -57,7 +57,7 @@ module BRIX11
         if !argv.empty? && argv.first == '--'
           argv.shift
         end
-        #only argumnets after PROJECT or after '--' are remaining, now gather unless arg is new brix command
+        # only argumnets after PROJECT or after '--' are remaining, now gather unless arg is new brix command
         while !argv.empty?
           break if Command.is_command_arg?(argv.first, options)
           cmdargv << argv.shift
