@@ -18,24 +18,31 @@ module BRIX11
       def entry
         table[id]
       end
+
       def aliases
         entry.aliases
       end
+
       def scoped_id
         entry.scoped_id
       end
+
       def desc
         entry.desc
       end
+
       def klass
         entry.klass
       end
+
       def collection
         entry.collection
       end
+
       def super
         entry.super
       end
+
       def override
         entry.override
       end
@@ -56,12 +63,15 @@ module BRIX11
       def commands
         @cmds ||= {}
       end
+
       def scoped_commands
         @scoped_cmds ||= {}
       end
+
       def cur_collection_scope
         @cur_scope
       end
+
       def set_cur_collection(scope)
         @cur_scope = scope
       end

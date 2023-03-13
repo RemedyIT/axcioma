@@ -124,9 +124,11 @@ module BRIX11
         responses[:ambiguous_completion] = 'Ambiguous entry'
         responses[:no_completion] = 'Unknown entry'
       end
+
       def choices
         @choices ||= []
       end
+
       def choice(sel, name, &action)
         choices << [sel, name, action]
       end

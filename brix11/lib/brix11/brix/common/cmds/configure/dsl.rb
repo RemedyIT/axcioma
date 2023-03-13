@@ -20,6 +20,7 @@ module BRIX11
               @rclist = rclist
               @rcfile = rcfile
             end
+
             def configure(mod_id, &block)
               BRIX11.log_fatal("Duplicate module configuration for [#{mod_id}].") if @rclist.has_key?(mod_id.to_sym)
               rc = RCSpec.new(mod_id.to_sym, @rcfile, &block)
@@ -309,6 +310,7 @@ module BRIX11
               @base = base
               @arr = arr
             end
+
             def include(*args)
               # add include paths; expand relative paths (not based on env var) based on @base
               @arr.concat(args.flatten.collect { |p| p.start_with?('$') ? p : File.expand_path(p, @base) })
@@ -325,6 +327,7 @@ module BRIX11
               def initialize(hash)
                 @hash = hash
               end
+
               def extends(*args)
                 @hash[:bases].concat(args.flatten.collect { |arg| arg.to_sym })
               end
@@ -341,13 +344,16 @@ module BRIX11
               super(base, rc.mpc_include)
               @rc = rc
             end
+
             def base(path)
               # expand specified path relative to rcfile folder
               @rc.mpc_base = File.expand_path(path.to_s, @base)
             end
+
             def dynamic_type(*args)
               @rc.mpc_dynamic_type.concat(args.flatten.collect { |p| p.start_with?('$') ? p : File.expand_path(p, @base) })
             end
+
             def mwc_include(*args)
               args.each do |arg|
                 case arg

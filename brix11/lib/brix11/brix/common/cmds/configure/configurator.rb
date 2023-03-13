@@ -47,6 +47,7 @@ module BRIX11
           def prerequisites
             []
           end
+
           def exclusives
             []
           end
@@ -58,6 +59,7 @@ module BRIX11
               def initialize(rcdep)
                 @rcdep = rcdep
               end
+
               def getenv(varname)
                 @rcdep.get_var(varname)
               end

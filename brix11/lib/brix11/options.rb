@@ -133,6 +133,7 @@ module BRIX11
     def _rc_paths
       @rc_paths ||= []
     end
+
     def _loaded_rc_paths
       @loaded_rc_paths ||= []
     end

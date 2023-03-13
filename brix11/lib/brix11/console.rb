@@ -56,6 +56,7 @@ module BRIX11
           fmt_or_proc
         end
       end
+
       def self.label_format=(fmt)
         on_label_format(fmt)
       end
@@ -298,6 +299,7 @@ module BRIX11
             def set_menu_def(menudef)
               @_menudef = menudef
             end
+
             def update_responses
               super
               @responses[:ambiguous_completion] = @_menudef.help
