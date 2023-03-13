@@ -8,11 +8,8 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
       module Filter
-
         class Makefile
           include Formatter::Filter::FilterMethods
 
@@ -21,7 +18,7 @@ module BRIX11
             /.*nmake\.exe.*\/f\s+(?<desc>Makefile.*)\Z/
           ]
           OUTPUT_PATTERNS = [
-            [:warning,     /(?<name>.*)\s+(?<desc>will not be built due to the following missing library: .*)/]
+            [:warning, /(?<name>.*)\s+(?<desc>will not be built due to the following missing library: .*)/]
           ]
 
           def initialize(verbosity)
@@ -49,7 +46,6 @@ module BRIX11
           def output_patterns
             OUTPUT_PATTERNS
           end
-
         end # Makefile
 
         class NMake
@@ -73,7 +69,6 @@ module BRIX11
             @verbosity = verbosity
           end
 
-
           def match(s)
             @last_output_category = nil
             filter_output(s)
@@ -83,13 +78,7 @@ module BRIX11
           def output_patterns
             OUTPUT_PATTERNS
           end
-
         end # NMake
-
       end # Filter
-
   end # Project
-
 end # BRIX11
-
-

@@ -11,15 +11,10 @@ require 'json'
 require 'brix11/log'
 
 module BRIX11
-
   module Common
-
-    class Configure  < Command::Base
-
+    class Configure < Command::Base
       module Platform
-
         class << self
-
           include BRIX11::LogMethods
 
           private
@@ -44,7 +39,7 @@ module BRIX11
                                                   test_configs: %w{LINUX Linux},
                                                   prj_type: BRIX11::Project.handler('gnumake').default_prj_type
                                                 },
-                                                project_type: lambda { |opts_, pt=nil, cc=nil|
+                                                project_type: lambda { |opts_, pt = nil, cc = nil|
                                                   opts_def = opts_[:platform][:defaults]
                                                   prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
                                                   [prjh.class::ID, prjh.compiler]
@@ -78,7 +73,7 @@ module BRIX11
                                               test_configs: %w{Win32},
                                               prj_type: 'vs2019'
                                             },
-                                            project_type: lambda { |opts_, pt=nil, cc=nil|
+                                            project_type: lambda { |opts_, pt = nil, cc = nil|
                                               bits = opts_[:bitsize] || opts_[:platform][:bits]
                                               opts_def = opts_[:platform][:defaults]
                                               prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
@@ -106,7 +101,7 @@ module BRIX11
                                             test_configs: %w{LINUX Linux},
                                             prj_type: BRIX11::Project.handler('gnumake').default_prj_type
                                           },
-                                          project_type: lambda { |opts_, pt=nil, cc=nil|
+                                          project_type: lambda { |opts_, pt = nil, cc = nil|
                                             opts_def = opts_[:platform][:defaults]
                                             prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
                                             [prjh.class::ID, prjh.compiler]
@@ -128,11 +123,11 @@ module BRIX11
 
         def self.determin(opts)
           build_target = (opts[:target] || platform_os)
-          _, ph = platform_helpers.detect {|re, _| re =~ build_target }
+          _, ph = platform_helpers.detect { |re, _| re =~ build_target }
           opts[:platform] ||= {}
           (ph || platform_helpers.default).call(platform_os, opts)
           # see if there is a <build_target>.json to supplement/customize the defaults
-          target_json = File.join(Exec.get_run_environment('X11_BASE_ROOT'), 'etc', build_target+'.json')
+          target_json = File.join(Exec.get_run_environment('X11_BASE_ROOT'), 'etc', build_target + '.json')
           if File.file?(target_json)
             begin
               tgt_spec = JSON.parse(IO.read(target_json))
@@ -158,11 +153,7 @@ module BRIX11
           opts[:platform][:defaults][:test_configs] << build_target.upcase unless ph
           opts[:platform]
         end
-
       end # Platform
-
     end # Configure
-
   end # Common
-
 end # BRIX11

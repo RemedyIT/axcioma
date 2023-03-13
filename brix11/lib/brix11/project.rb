@@ -10,9 +10,7 @@ require 'brix11/system'
 require 'brix11/process'
 
 module BRIX11
-
   module Project
-
     BASEDIR = 'projects'
 
     MWC_CMD = 'mwc.pl'
@@ -58,20 +56,20 @@ module BRIX11
       registry.has_key?(type.to_sym)
     end
 
-    def self.handler(type, compiler=nil)
+    def self.handler(type, compiler = nil)
       BRIX11.log_fatal("Unknown project type [#{type}]") unless registry.has_key?(type.to_sym)
       registry[type.to_sym].new(type, compiler)
     end
 
     def self.describe_each
       if block_given?
-        registry.sort {|(t1,h1),(t2,h2)|
+        registry.sort { |(t1, h1), (t2, h2)|
           t1.to_s <=> t2.to_s
-        }.each {|type,handler|
+        }.each { |type, handler|
           compilers = if handler.const_defined?(:COMPILERS)
-                        handler::COMPILERS.sort {|(t1,h1),(t2,h2)|
+                        handler::COMPILERS.sort { |(t1, h1), (t2, h2)|
                           t1.to_s <=> t2.to_s
-                        }.collect {|k,v|
+                        }.collect { |k, v|
                           v == handler::COMPILERS.default ? "#{k}*" : k.to_s
                         }
                       else
@@ -83,7 +81,6 @@ module BRIX11
     end
 
     class Compiler
-
       attr_reader :id
 
       def initialize(id)
@@ -101,11 +98,9 @@ module BRIX11
       def build_args
         []
       end
-
     end
 
     class Handler
-
       attr_reader :type
 
       def self.compiler(id)
@@ -147,7 +142,7 @@ module BRIX11
         raise Command::CmdError, "#{self.class.name}\#make_files not implemented"
       end
 
-      def generate(opts={}, cmdargv=[])
+      def generate(opts = {}, cmdargv = [])
         runopts = {}
         return false unless argv = base_mpc_args(opts, runopts, cmdargv)
         runopts[:capture] = :all if block_given?
@@ -238,7 +233,7 @@ module BRIX11
           n_workers = (Exec.max_cpu_cores == 0 ? Exec.cpu_cores : Exec.max_cpu_cores)
           argv << '-workers' << n_workers unless cmdargv.any? { |arg| arg == '-workers' }
           if mpc_wrkdir_ix = cmdargv.find_index('-workers_dir')
-            mpc_wrkdir = cmdargv[mpc_wrkdir_ix+1] || '.'
+            mpc_wrkdir = cmdargv[mpc_wrkdir_ix + 1] || '.'
           else
             mpc_wrkdir = (ENV['MPC_WORKERS_DIR'] || Sys.tempdir)
             argv << '-workers_dir' << mpc_wrkdir
@@ -262,10 +257,10 @@ module BRIX11
           when String
             argv << "-#{opt}" << val
           when Array
-            val.each {|ve| argv << "-#{opt}" << ve }
+            val.each { |ve| argv << "-#{opt}" << ve }
           when Hash
             unless val.empty?
-              argv << "-#{opt}" << %Q{#{val.collect {|k,v| "#{k}=#{v}"}.join(',')}}
+              argv << "-#{opt}" << %Q{#{val.collect { |k, v| "#{k}=#{v}" }.join(',')}}
             end
           end
         end
@@ -289,7 +284,7 @@ module BRIX11
       def list_mpc_projects(path)
         (File.file?(path) ? [path] : Dir[File.join(path, '*.mpc')]).collect do |fmpc|
           parse_mpc_file(fmpc)
-        end.inject({}) {|reg, subreg| reg.merge!(subreg); reg }
+        end.inject({}) { |reg, subreg| reg.merge!(subreg); reg }
       end
 
       def parse_mpc_file(file)
@@ -299,20 +294,17 @@ module BRIX11
           if /\A\s*project\s*\((.*)\)/ =~ ln
             convert = !ln.index('*').nil?
             prj = $1.strip.sub(/\A\*\Z/, base_name)
-            prj.sub!(/\A\*/) { |_| base_name+'_' }
-            prj.sub!(/\*\Z/) { |_| '_'+base_name }
+            prj.sub!(/\A\*/) { |_| base_name + '_' }
+            prj.sub!(/\*\Z/) { |_| '_' + base_name }
             prj.sub!('*', "_#{base_name}_")
-            prj.gsub!(/(\A|[^a-zA-Z0-9])?([a-zA-Z0-9])([a-zA-Z0-9]*)/) { |_| $1+$2.upcase+$3 } if convert
+            prj.gsub!(/(\A|[^a-zA-Z0-9])?([a-zA-Z0-9])([a-zA-Z0-9]*)/) { |_| $1 + $2.upcase + $3 } if convert
             ptable[prj] = file
           end
         end
         ptable
       end
-
     end # Handler
-
   end # Project
-
 end # BRIX11
 
 require 'brix11/projects/filters/ridl'

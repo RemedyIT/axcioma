@@ -9,9 +9,7 @@
 require 'brix11/command'
 
 module BRIX11
-
   class Collection
-
     BASEDIR = 'brix'
 
     class << self
@@ -46,7 +44,7 @@ module BRIX11
 
     # search for collection in brix search paths
     # attempt to load first match found
-    def self.find(name, required=true)
+    def self.find(name, required = true)
       # iterate configured brix collection search paths
       BRIX11.options.config.brix_paths.each do |brixpath|
         # expand env vars if present (could be if added through command line)
@@ -59,7 +57,7 @@ module BRIX11
         if File.directory?(brixpath)
           BRIX11.log(3, "Examining brix collection path : #{brixpath}")
           if File.file?(File.join(brixpath, 'require.rb'))
-            bc = Collection.load(brixpath)  # handles recursive loading
+            bc = Collection.load(brixpath) # handles recursive loading
             bc.setup(BRIX11.options.optparser, BRIX11.options) # only actually executes setup once
             return bc
           else
@@ -75,7 +73,7 @@ module BRIX11
     # a full path like /path/to/brix/<name> (in which case the path
     # to the brix folder is added to the library search path)
     def self.load(path)
-      name = File.basename(path).to_sym                  # collection name
+      name = File.basename(path).to_sym # collection name
       if loaded?(name)
         if Sys.compare_path(collections[name.to_sym].root, path) != 0
           BRIX11.log_fatal("Duplicate Brix collection [:#{name}] @ #{path} (previously loaded from #{collections[name].root})")
@@ -105,7 +103,7 @@ module BRIX11
         BRIX11.log_error(ex.backtrace.join("\n")) if $VERBOSE
         exit 1
       ensure
-        Command.set_collection(_c)   # reset command loading scope
+        Command.set_collection(_c) # reset command loading scope
       end
     end
 
@@ -118,15 +116,15 @@ module BRIX11
     end
 
     def self.print_versions
-      collections.values.each {|c| c.print_version}
+      collections.values.each { |c| c.print_version }
     end
 
     def self.descriptions
       maxlen = collections.keys.collect { |cn| cn.to_s.size }.max
       maxlen = ((maxlen / 5) * 5) + 10
       desc = ["%-#{maxlen}s | %s" % ['Collection', 'Description']]
-      desc << ('-'*(maxlen+43))
-      collections.values.sort {|a,b| a.name.to_s <=> b.name.to_s }.each do |bc|
+      desc << ('-' * (maxlen + 43))
+      collections.values.sort { |a, b| a.name.to_s <=> b.name.to_s }.each do |bc|
         desc << "%-#{maxlen}s | %s" % [bc.name, bc.description]
       end
       desc
@@ -148,7 +146,7 @@ module BRIX11
       @title = ttl
       @description = desc
       @copyright = cpr
-      @version = (Hash === ver ? ver : { :major => ver.to_i, :minor => 0, :release => 0 })
+      @version = (Hash === ver ? ver : { major: ver.to_i, minor: 0, release: 0 })
       @base_collections = []
       @setup_done = false
     end
@@ -162,11 +160,11 @@ module BRIX11
     def print_version
       puts "#{title} #{version}"
       puts copyright
-      #@base_collections.each {|be| puts '---'; be.print_version }
+      # @base_collections.each {|be| puts '---'; be.print_version }
     end
 
     def lookup_path
-      @base_collections.inject([@root]) {|paths, bbc| paths.concat(bbc.lookup_path) }
+      @base_collections.inject([@root]) { |paths, bbc| paths.concat(bbc.lookup_path) }
     end
 
     def setup(optparser, options)
@@ -193,6 +191,5 @@ module BRIX11
         Command.set_collection(_c)
       end
     end
-
   end
 end

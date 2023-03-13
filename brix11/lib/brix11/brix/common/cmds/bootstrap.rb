@@ -10,22 +10,20 @@ require 'brix11/command'
 require 'fileutils'
 module BRIX11
   module Common
-
-    class BootStrap  < Command::Base
-
+    class BootStrap < Command::Base
       DESC = 'Bootstrap the project.'.freeze
 
       OPTIONS = {
-        :target => 'AXCIOMA',
-        :tags => {}
+        target: 'AXCIOMA',
+        tags: {}
       }
 
       def self.setup(optparser, options)
         options[:bootstrap] = OPTIONS.dup
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} bootstrap [TARGET] [options]\n\n"+
-                           "       TARGET := Target component collection to bootstrap. Supported:\n"+
-                           "                 taox11 \tBootstraps solely the TAOX11 framework components\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} bootstrap [TARGET] [options]\n\n" +
+                           "       TARGET := Target component collection to bootstrap. Supported:\n" +
+                           "                 taox11 \tBootstraps solely the TAOX11 framework components\n" +
                            "                 axcioma\tBootstraps the AXCIOMA framework components (default)\n\n"
 
         optparser.on('-t', '--tag', '=COMPONENT:TAG', String, 'Override default repository tags for framework components.',
@@ -65,7 +63,7 @@ module BRIX11
                 tag = bse['tag'] || options[:bootstrap][:tags][bse['id']] || 'master'
                 rc, _, _ = Exec.runcmd('git', 'clone', bse['repo'], '.')
                 BRIX11.log_fatal("Failed to clone #{bse['id']} repository : #{bse['repo']}") unless rc
-                rc,_, _ = Exec.runcmd('git', 'checkout', tag)
+                rc, _, _ = Exec.runcmd('git', 'checkout', tag)
                 BRIX11.log_fatal("Failed to checkout #{bse['id']} repository tag : #{tag}") unless rc
               end
             end
@@ -76,11 +74,8 @@ module BRIX11
         BRIX11.show_msg('Bootstrapping finished. Exiting BRIX11.')
         exit(0)
       end
-
     end # BootStrap
 
     Command.register('bootstrap', BootStrap::DESC, Common::BootStrap)
-
   end # Common
-
 end # BRIX11

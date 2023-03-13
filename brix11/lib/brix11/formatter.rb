@@ -9,11 +9,8 @@
 require 'brix11/console'
 
 module BRIX11
-
   module Formatter
-
     module Printing
-
       def output=(out)
         @output = out
       end
@@ -43,15 +40,12 @@ module BRIX11
       end
 
       include Screen::ColorizeMethods
-
     end # Printing
 
     class Filter
-
       include Printing
 
       module FilterMethods
-
         include Screen::ColorizeMethods
 
         def verbosity
@@ -126,7 +120,7 @@ module BRIX11
         end
 
         def filter_output(s)
-          matched_category,_ = output_patterns.detect do |cat, re|
+          matched_category, _ = output_patterns.detect do |cat, re|
             if rem = re.match(s)
               unless cat == :ignore
                 format_output(cat, rem)
@@ -150,7 +144,6 @@ module BRIX11
             end
           end
         end
-
       end # FilterMethods
 
       def initialize(filters, verbosity = 1)
@@ -167,7 +160,7 @@ module BRIX11
         lines = txt.split("\n")
         # cache last line if NOT ended by "\n"
         @cache = lines.pop unless /\n$/ =~ txt
-        lines.each {|ln| filter_line(ln) }
+        lines.each { |ln| filter_line(ln) }
       end
 
       # override
@@ -202,16 +195,14 @@ module BRIX11
             filtered = !@active_filter.nil?
           end
           # check if we should provide verbose output for non-filtered lines
-          output.println(s) unless filtered ||  @verbosity <= 1
+          output.println(s) unless filtered || @verbosity <= 1
           # reset active filter if the last line was not recognized by it
-          #@active_filter = nil unless filtered
+          # @active_filter = nil unless filtered
         end
       end
-
     end # Filter
 
     class Tee
-
       include Printing
 
       def initialize(logfile, out = nil)
@@ -242,9 +233,6 @@ module BRIX11
         @logfile.puts args.flatten.join
         super
       end
-
     end
-
   end # Formatter
-
 end # BRIX11

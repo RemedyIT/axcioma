@@ -9,7 +9,6 @@
 require 'brix11/formatter'
 
 module BRIX11
-
   #
   # Reporting/Logging
   #
@@ -24,8 +23,8 @@ module BRIX11
 
     include Screen::ColorizeMethods
 
-    def log_fatal(msg, rc=1)
-      output.error_println 'BRIX11 - ',red(bold 'ERROR'), ' : ', msg
+    def log_fatal(msg, rc = 1)
+      output.error_println 'BRIX11 - ', red(bold 'ERROR'), ' : ', msg
       exit rc
     end
 
@@ -67,7 +66,7 @@ module BRIX11
   end
 
   module LogMethods
-    def log_fatal(msg, rc=1)
+    def log_fatal(msg, rc = 1)
       BRIX11.reporter.log_fatal(msg, rc)
     end
 
@@ -119,5 +118,4 @@ module BRIX11
       verbosity < 1
     end
   end
-
 end # BRIX11

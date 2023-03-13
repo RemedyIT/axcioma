@@ -11,77 +11,58 @@ require 'brix11/projects/filters/nmake'
 require 'brix11/projects/compilers/msc'
 
 module BRIX11
-
   module Project
-
     # NMAKE specific MSC derivatives for use with MPC
 
     class MSCNMake64 < MSCCompiler
-
       def platform
         'x64'
       end
-
     end
 
     class MSCNMake64VC14 < MSCNMake64
-
       def version
         'vc14nmake'
       end
-
     end
 
     class MSCNMake64VC141 < MSCNMake64
-
       def version
         'vs2017nmake'
       end
-
     end
 
     class MSCNMake64VC142 < MSCNMake64
-
       def version
         'vs2019nmake'
       end
-
     end
 
     class MSCNMake32 < MSCCompiler
-
       def platform
         'Win32'
       end
-
     end
 
     class MSCNMake32VC14 < MSCNMake32
-
       def version
         'vc14nmake'
       end
-
     end
 
     class MSCNMake32VC141 < MSCNMake32
-
       def version
         'vs2017nmake'
       end
-
     end
 
     class MSCNMake32VC142 < MSCNMake32
-
       def version
         'vs2019nmake'
       end
-
     end
 
     class NMake < Handler
-
       ID = 'nmake'
       DESCRIPTION = 'Microsoft NMAKE Makefiles'
       BUILDTOOL = 'nmake'
@@ -129,7 +110,7 @@ module BRIX11
         runopts[:capture] = :all if block_given?
         runopts[:filter] = init_filter(options[:verbose] || 1, options[:logfile]) unless options[:make][:noredirect]
         runopts[:debug] = options[:make][:debug]
-        argv = base_build_arg(project, path,cmdargv, runopts) << 'realclean' << runopts
+        argv = base_build_arg(project, path, cmdargv, runopts) << 'realclean' << runopts
         argv << Proc.new if block_given?
         ok, rc = Exec.runcmd(*argv)
         BRIX11.log_warning("#{self.type}\#clean failed with exitcode #{rc}") unless ok
@@ -216,11 +197,8 @@ module BRIX11
         argv.concat(@compiler.build_args)
         argv
       end
-
     end # Handler
 
     register(NMake::ID, NMake)
-
   end # Project
-
 end # BRIX11

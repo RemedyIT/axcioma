@@ -9,9 +9,7 @@
 require 'fileutils'
 
 module BRIX11
-
   module Sys
-
     def self.mswin?
       /mingw/ =~ RUBY_PLATFORM ? true : false
     end
@@ -41,7 +39,7 @@ module BRIX11
       @max_cpu_cores
     end
 
-    def self.expand(cmd, default='', redirect_err=true)
+    def self.expand(cmd, default = '', redirect_err = true)
       excmd = cmd
       if redirect_err
         excmd << ' 2>' << (mswin? ? 'NUL' : '/dev/null')
@@ -97,28 +95,26 @@ module BRIX11
     end
 
     def self.mkdir(path)
-      FileUtils.makedirs(path, :verbose => BRIX11.verbose?, :noop => BRIX11.dryrun?) rescue nil
+      FileUtils.makedirs(path, verbose: BRIX11.verbose?, noop: BRIX11.dryrun?) rescue nil
       BRIX11.dryrun? ? true : File.directory?(path)
     end
 
     def self.mv(src, tgt)
-      FileUtils.move(src, tgt, :verbose => BRIX11.verbose?, :noop => BRIX11.dryrun?)
+      FileUtils.move(src, tgt, verbose: BRIX11.verbose?, noop: BRIX11.dryrun?)
     end
 
     def self.cp(src, tgt)
-      FileUtils.copy(src, tgt, :verbose => BRIX11.verbose?, :noop => BRIX11.dryrun?)
+      FileUtils.copy(src, tgt, verbose: BRIX11.verbose?, noop: BRIX11.dryrun?)
     end
 
     def self.chmod(mode, path)
-      FileUtils.chmod(mode, path, :verbose => BRIX11.verbose?, :noop => BRIX11.dryrun?)
+      FileUtils.chmod(mode, path, verbose: BRIX11.verbose?, noop: BRIX11.dryrun?)
     end
 
     def self.rm(path)
-      FileUtils.rm(path, :verbose => BRIX11.verbose?, :noop => BRIX11.dryrun?)
+      FileUtils.rm(path, verbose: BRIX11.verbose?, noop: BRIX11.dryrun?)
     end
-
   end
 
   include Sys
-
 end

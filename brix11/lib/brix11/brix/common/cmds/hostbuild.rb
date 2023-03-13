@@ -10,9 +10,7 @@ require 'brix11/command'
 require 'fileutils'
 module BRIX11
   module Common
-
-    class HostBuild  < Command::Base
-
+    class HostBuild < Command::Base
       DESC = 'Build crossbuild host tools.'.freeze
 
       OPTIONS = {
@@ -22,7 +20,7 @@ module BRIX11
 
       def self.setup(optparser, options)
         options[:hostbuild] = OPTIONS.dup
-        optparser.banner = "#{DESC}\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
                            "Usage: #{options[:script_name]} host build [options] [-- make-options]\n\n"
 
         optparser.on('-c', '--clean', 'Clean only.') { options[:hostbuild][:clean] = true; options[:hostbuild][:build] = false }
@@ -33,7 +31,7 @@ module BRIX11
         end
         optparser.on('-N', '--no-redirect',
                      'Do not redirect output from child process..',
-                     'Default: redirect and filter output.')  do
+                     'Default: redirect and filter output.') do
           options[:hostbuild][:noredirect] = true
         end
       end
@@ -92,7 +90,7 @@ module BRIX11
                   })
           prjargv << opts
           rc = prj.clean(options[:hostbuild][:make_opts].dup, *prjargv) if options[:hostbuild][:clean]
-          rc = prj.build(options[:hostbuild][:make_opts].dup,*prjargv ) if rc && options[:hostbuild][:build]
+          rc = prj.build(options[:hostbuild][:make_opts].dup, *prjargv ) if rc && options[:hostbuild][:build]
           log_error('Failed to make host tools') unless rc
         end
 
@@ -107,9 +105,6 @@ module BRIX11
           end
         end
       end
-
     end # BootStrap
-
   end # Common
-
 end # BRIX11

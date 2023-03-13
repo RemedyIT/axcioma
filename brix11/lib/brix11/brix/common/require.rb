@@ -8,14 +8,12 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Common
-
     ROOT = File.dirname(__FILE__)
     TITLE = 'Common'.freeze
     DESC = 'BRIX11 Common brix collection'.freeze
     COPYRIGHT = "Copyright (c) 2014-#{Time.now.year} Remedy IT Expertise BV, The Netherlands".freeze
-    VERSION = {major: 1, minor: 1, release: 0}
+    VERSION = { major: 1, minor: 1, release: 0 }
 
     Collection.configure(:common, ROOT, TITLE, DESC, COPYRIGHT, VERSION) do |cfg|
 
@@ -62,8 +60,6 @@ module BRIX11
 
     end
 
-    Dir.glob(File.join(ROOT, 'cmds', '*.rb')).each { |p| require "brix/common/cmds/#{File.basename(p)}"}
-
+    Dir.glob(File.join(ROOT, 'cmds', '*.rb')).each { |p| require "brix/common/cmds/#{File.basename(p)}" }
   end
-
 end

@@ -8,15 +8,10 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Common
-
-    class Configure  < Command::Base
-
+    class Configure < Command::Base
       class RCSpec
-
         class << self
-
           private
 
           # DSL handler for rc file toplevel block
@@ -25,6 +20,7 @@ module BRIX11
               @rclist = rclist
               @rcfile = rcfile
             end
+
             def configure(mod_id, &block)
               BRIX11.log_fatal("Duplicate module configuration for [#{mod_id}].") if @rclist.has_key?(mod_id.to_sym)
               rc = RCSpec.new(mod_id.to_sym, @rcfile, &block)
@@ -87,7 +83,7 @@ module BRIX11
               rcpath = File.join(curdir, 'etc', 'configurerc')
               # We must compare paths in the array whether it is already there, when it is not there
               # yet and it exists we load the rc file
-              if (!loaded_rcs.any?{ |rcs| BRIX11::Sys.compare_path(rcs,rcpath) == 0 }) && File.file?(rcpath)
+              if (!loaded_rcs.any?{ |rcs| BRIX11::Sys.compare_path(rcs, rcpath) == 0 }) && File.file?(rcpath)
                 # load rc file
                 rc_load(rclist, rcpath)
                 loaded_rcs << rcpath
@@ -95,19 +91,16 @@ module BRIX11
                 BRIX11.log(5, "Skipping [#{curdir}], already loaded or doesn't exist")
               end
               # get a list of paths to all subdirs
-              dirlist = Dir[File.join(curdir, '*')].select {|p| File.directory?(p) }
+              dirlist = Dir[File.join(curdir, '*')].select { |p| File.directory?(p) }
               # filter out any excluded folders and prepend rest of subdirs to include list
-              includes.unshift(*dirlist.select {|p| !excludes.include?(p) })
+              includes.unshift(*dirlist.select { |p| !excludes.include?(p) })
             end until includes.empty?
             rclist
           end
-
         end
 
         class Dependency
-
           class << self
-
             # DSL handler for dependencies block
             class DSLHandler
               def initialize(rc)
@@ -130,13 +123,10 @@ module BRIX11
             def load(rc, &block)
               DSLHandler.new(rc).instance_eval(&block)
             end
-
           end
 
           class Environment
-
             class << self
-
               # DSL handler for environment block
               class DSLHandler
                 def initialize(env)
@@ -159,7 +149,6 @@ module BRIX11
               def load(env, &block)
                 DSLHandler.new(env).instance_eval(&block)
               end
-
             end
 
             def initialize(varid, &block)
@@ -178,7 +167,6 @@ module BRIX11
             def validate
               raise "Missing name for environment spec [#{@variable}]" unless @name
             end
-
           end # Environment
 
           # DSL handler for dependency specification block
@@ -214,10 +202,9 @@ module BRIX11
             end
 
             def library_path(*args)
-              @dep.library_paths.concat(args.flatten.collect {|arg| arg.to_s })
+              @dep.library_paths.concat(args.flatten.collect { |arg| arg.to_s })
             end
           end # DSLHandler
-
 
           def initialize(kind, featureid, &block)
             @kind = kind
@@ -243,13 +230,10 @@ module BRIX11
           def optional?
             @kind == :optional
           end
-
         end # Dependency
 
         class Feature
-
           class << self
-
             # DSL handler for features blocks
             class DSLHandler
               def initialize(rc)
@@ -274,7 +258,6 @@ module BRIX11
             def load(rc, &block)
               DSLHandler.new(rc).instance_eval(&block)
             end
-
           end
 
           # DSL handler for feature dependency blocks
@@ -284,7 +267,7 @@ module BRIX11
             end
 
             def depends_on(*args)
-              @feature.prerequisites.concat(args.flatten.collect {|a| a.to_sym})
+              @feature.prerequisites.concat(args.flatten.collect { |a| a.to_sym })
             end
 
             def depends_exclusively_on(arg)
@@ -301,7 +284,6 @@ module BRIX11
           end
 
           attr_reader :state, :featureid, :prerequisites, :exclusives
-
         end # Feature
 
         # DSL handler for configure blocks
@@ -311,7 +293,7 @@ module BRIX11
           end
 
           def depends_on(*mod_id)
-            @rc.prerequisites.concat(mod_id.flatten.collect {|mid| mid.to_sym})
+            @rc.prerequisites.concat(mod_id.flatten.collect { |mid| mid.to_sym })
           end
 
           def dependencies(&block)
@@ -328,9 +310,10 @@ module BRIX11
               @base = base
               @arr = arr
             end
+
             def include(*args)
               # add include paths; expand relative paths (not based on env var) based on @base
-              @arr.concat(args.flatten.collect {|p| p.start_with?('$') ? p : File.expand_path(p, @base)})
+              @arr.concat(args.flatten.collect { |p| p.start_with?('$') ? p : File.expand_path(p, @base) })
             end
           end # IncludeDSL
 
@@ -344,8 +327,9 @@ module BRIX11
               def initialize(hash)
                 @hash = hash
               end
+
               def extends(*args)
-                @hash[:bases].concat(args.flatten.collect {|arg| arg.to_sym })
+                @hash[:bases].concat(args.flatten.collect { |arg| arg.to_sym })
               end
             end # BackendDSL
 
@@ -360,13 +344,16 @@ module BRIX11
               super(base, rc.mpc_include)
               @rc = rc
             end
+
             def base(path)
               # expand specified path relative to rcfile folder
               @rc.mpc_base = File.expand_path(path.to_s, @base)
             end
+
             def dynamic_type(*args)
-              @rc.mpc_dynamic_type.concat(args.flatten.collect {|p| p.start_with?('$') ? p : File.expand_path(p, @base)})
+              @rc.mpc_dynamic_type.concat(args.flatten.collect { |p| p.start_with?('$') ? p : File.expand_path(p, @base) })
             end
+
             def mwc_include(*args)
               args.each do |arg|
                 case arg
@@ -405,7 +392,7 @@ module BRIX11
           @prerequisites = []
           @dependencies = {}
           @features = {}
-          @ridl_backend = {backend: nil, bases: []}
+          @ridl_backend = { backend: nil, bases: [] }
           @ridl_be_path = []
           @brix_path = []
           @mpc_base = nil
@@ -431,9 +418,9 @@ module BRIX11
 
         def enabled?(allrc)
           # do all our own dependencies check out?
-          if dependencies.values.all? {|dep| dep.optional? || dep.state }
+          if dependencies.values.all? { |dep| dep.optional? || dep.state }
             # are all our prerequisite modules available and enabled?
-            return prerequisites.all? {|mod_id| allrc.has_key?(mod_id) && allrc[mod_id].enabled?(allrc) }
+            return prerequisites.all? { |mod_id| allrc.has_key?(mod_id) && allrc[mod_id].enabled?(allrc) }
           end
           false
         end
@@ -441,11 +428,7 @@ module BRIX11
         def disabled?(allrc)
           !enabled?(allrc)
         end
-
       end # RCSpec
-
     end
-
   end
-
 end

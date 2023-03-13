@@ -11,14 +11,12 @@ require 'ostruct'
 require 'brix11/log'
 
 module BRIX11
-
   BRIX11RC = '.brix11rc'
   BRIX11RC_GLOBAL = File.expand_path(File.join(ENV['HOME'] || ENV['HOMEPATH'] || '~', BRIX11RC))
 
   OPTIONS = OpenStruct.new
 
   class << OPTIONS
-
     include BRIX11::LogMethods
 
     def options
@@ -26,11 +24,10 @@ module BRIX11
     end
 
     class Config < OpenStruct
-
       include BRIX11::LogMethods
 
       def self.merge(to, from)
-        from.each_pair do |(k,v)|
+        from.each_pair do |(k, v)|
           k = k.to_sym
           if to.has_key?(k)
             case to[k]
@@ -50,7 +47,7 @@ module BRIX11
         to
       end
 
-      def initialize(hash=nil)
+      def initialize(hash = nil)
         super(Config.merge(_defaults, hash || {}))
       end
 
@@ -95,7 +92,7 @@ module BRIX11
       end
 
       def save(rcpath)
-        File.open(rcpath, 'w') {|f| f << JSON.pretty_generate(@table) }
+        File.open(rcpath, 'w') { |f| f << JSON.pretty_generate(@table) }
       end
 
       def to_s
@@ -106,18 +103,17 @@ module BRIX11
 
       def _defaults
         {
-          :brix_paths => []
+          brix_paths: []
         }
       end
-
     end
 
     protected
 
     def _defaults
       {
-        :verbose => (ENV['BRIX11_VERBOSE'] || 1).to_i,
-        :help_proc => lambda {
+        verbose: (ENV['BRIX11_VERBOSE'] || 1).to_i,
+        help_proc: lambda {
           options.load_config
           load_brix
           puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
@@ -127,9 +123,9 @@ module BRIX11
           puts
           exit
         },
-        :config => Config.new({
-          :project_type => 'gnuace',
-          :use_environment => false
+        config: Config.new({
+          project_type: 'gnuace',
+          use_environment: false
         })
       }
     end
@@ -137,6 +133,7 @@ module BRIX11
     def _rc_paths
       @rc_paths ||= []
     end
+
     def _loaded_rc_paths
       @loaded_rc_paths ||= []
     end
@@ -160,7 +157,7 @@ module BRIX11
     def reset
       @table.clear
       Config.merge(self, _defaults)
-      #update_to_values!(_defaults)
+      # update_to_values!(_defaults)
       _rc_paths.clear
       _rc_paths << BRIX11RC_GLOBAL
       _loaded_rc_paths.clear
@@ -171,7 +168,7 @@ module BRIX11
 
     def load_config
       # first collect config from known (standard and configured) locations
-      _rc_paths.collect {|path| File.expand_path(path) }.each do |rcp|
+      _rc_paths.collect { |path| File.expand_path(path) }.each do |rcp|
         log(3, "Testing rc path #{rcp}")
         if File.readable?(rcp) && !_loaded_rc_paths.include?(rcp)
           _cfg = Config.new.load(rcp)
@@ -238,9 +235,7 @@ module BRIX11
             end
       cfg.to_s
     end
-
   end # OPTIONS class
 
   OPTIONS.reset # initialize
-
 end # BRIX11

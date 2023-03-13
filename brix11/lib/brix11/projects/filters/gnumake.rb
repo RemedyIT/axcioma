@@ -8,13 +8,9 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
       module Filter
-
         class GNUMakefile
-
           include Formatter::Filter::FilterMethods
 
           TOOL_PATTERNS = [
@@ -22,7 +18,7 @@ module BRIX11
               /.*make.*\[\d+\]: (?<desc>(Leaving|Entering) directory .*)/
           ]
           OUTPUT_PATTERNS = [
-            [:warning,     /(?<name>.*)\s+(?<desc>will not be built due to the following missing library: .*)/]
+            [:warning, /(?<name>.*)\s+(?<desc>will not be built due to the following missing library: .*)/]
           ]
 
           def initialize(verbosity)
@@ -49,11 +45,9 @@ module BRIX11
           def output_patterns
             OUTPUT_PATTERNS
           end
-
         end # GNUMakefile
 
         class GMake
-
           include Formatter::Filter::FilterMethods
 
           OUTPUT_PATTERNS = [
@@ -77,7 +71,6 @@ module BRIX11
             @verbosity = verbosity
           end
 
-
           def match(s)
             @last_output_category = nil
             filter_output(s)
@@ -87,11 +80,7 @@ module BRIX11
           def output_patterns
             OUTPUT_PATTERNS
           end
-
         end # GMake
-
       end # Filter
-
   end # Project
-
 end # BRIX11

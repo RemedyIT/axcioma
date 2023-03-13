@@ -9,26 +9,24 @@
 require 'brix11/command'
 module BRIX11
   module Common
-
-    class Configure  < Command::Base
-
+    class Configure < Command::Base
       DESC = 'Configure the project.'.freeze
 
       OPTIONS = {
-        :includes => [],
-        :excludes => [],
-        :variables => {},
-        :features => {}
+        includes: [],
+        excludes: [],
+        variables: {},
+        features: {}
       }
 
       def self.setup(optparser, options)
         options[:configure] = OPTIONS.dup
-        optparser.banner = "#{DESC}\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
                            "Usage: #{options[:script_name]} configure [options]\n\n"
 
         optparser.on('-b', '--bits', '=BITSIZE', Integer, 'Override platform default bitsize (0, 32 or 64).',
                                                           'Specifying 0 disables explicit bitsize setting.') do |v|
-          BRIX11.log_fatal("Invalid bitsize specified [#{v}]. Supported sizes are 0, 32 or 64.") unless [0, 32,64].include?(v.to_i)
+          BRIX11.log_fatal("Invalid bitsize specified [#{v}]. Supported sizes are 0, 32 or 64.") unless [0, 32, 64].include?(v.to_i)
           options[:configure][:bitsize] = v.to_i
         end
 
@@ -66,17 +64,17 @@ module BRIX11
 
         optparser.on('-V', '--show-var', 'Display the list of configuration variables.') do
           # load all rc files
-          rclist  = RCSpec.load_all_rc(options[:configure][:includes], options[:configure][:excludes])
+          rclist = RCSpec.load_all_rc(options[:configure][:includes], options[:configure][:excludes])
           # Show list of variables available to set through '--with'
           STDOUT.puts
           STDOUT.puts 'BRIX11 configure configuration variables'
           STDOUT.puts '----------------------------------------'
-          vars = rclist.values.collect {|rc| rc.dependencies.values.collect {|dep| dep.environment.values}}.flatten
+          vars = rclist.values.collect { |rc| rc.dependencies.values.collect { |dep| dep.environment.values } }.flatten
           vars.prepend(Common::Configure::RCSpec::Dependency::Environment.new(:path) do
             name 'PATH'
             description 'Executable searchpath addition (prepended).'
           end)
-          vars.each {|v| STDOUT.puts('%-15s  %s' % [v.variable.to_s, v.description]) }
+          vars.each { |v| STDOUT.puts('%-15s  %s' % [v.variable.to_s, v.description]) }
           STDOUT.puts
           exit
         end
@@ -110,8 +108,6 @@ module BRIX11
       Command.register('configure', DESC, Common::Configure)
     end # Configure
 
-    Dir.glob(File.join(ROOT, 'cmds', 'configure', '*.rb')).each { |p| require "brix/common/cmds/configure/#{File.basename(p)}"}
-
+    Dir.glob(File.join(ROOT, 'cmds', 'configure', '*.rb')).each { |p| require "brix/common/cmds/configure/#{File.basename(p)}" }
   end # Common
-
 end # BRIX11

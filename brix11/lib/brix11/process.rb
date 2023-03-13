@@ -8,16 +8,14 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Exec
-
     self.singleton_class.class_eval do
     private
       def run_env
         unless @run_env
           @run_env = {}
           # add all user environment vars
-          (BRIX11.options.config.user_environment || {}).each_pair do |k,v|
+          (BRIX11.options.config.user_environment || {}).each_pair do |k, v|
             # expand embedded var references
             @run_env[k] = v.gsub(/\$\{?([^\s\/\}:;]+)\}?/) { |m| ENV[$1] }
           end
@@ -49,7 +47,7 @@ module BRIX11
             ENV['PATH'] = _oldpath
           end
 
-          def wait(noblock=false)
+          def wait(noblock = false)
             begin
               rc, @status = Process.waitpid2(@pid, noblock ? Process::WNOHANG : 0)
             end until noblock || (rc == @pid && @status)
@@ -119,7 +117,7 @@ module BRIX11
           when IO
             spawn_opts[:in] = opts[:input]
           else
-            input_str = true  # input opts[:input] as string
+            input_str = true # input opts[:input] as string
             inputrd, inputwr = IO.pipe
             spawn_opts[:in] = inputrd
           end
@@ -225,7 +223,7 @@ module BRIX11
       run_env[env]
     end
 
-    def self.get_run_environment(env, force_use_env=false)
+    def self.get_run_environment(env, force_use_env = false)
       run_env[env] || ((BRIX11.use_environment? || force_use_env) ? ENV[env] : nil)
     end
 
@@ -303,7 +301,6 @@ module BRIX11
         end
       end
     end
-
   end # Exec
 
   ::Signal.trap(:INT) do
@@ -312,5 +309,4 @@ module BRIX11
     BRIX11.log_error ('interrupted')
     ::Kernel.exit(-1)
   end
-
 end # BRIX11

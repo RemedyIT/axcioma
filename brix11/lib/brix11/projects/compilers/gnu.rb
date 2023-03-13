@@ -8,11 +8,8 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
       class GNUCompiler < Compiler
-
         class Filter
           include Formatter::Filter::FilterMethods
 
@@ -74,16 +71,12 @@ module BRIX11
               end
             end
           end
-
         end # Filter
 
         # override
         def filter(verbosity)
           Filter.new(verbosity)
         end
-
       end # GNUCompiler
-
   end # Project
-
 end # BRIX11

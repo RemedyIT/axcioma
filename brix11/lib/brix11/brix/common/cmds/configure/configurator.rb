@@ -8,13 +8,9 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Common
-
-    class Configure  < Command::Base
-
+    class Configure < Command::Base
       class Configurator
-
         ROOT = File.dirname(BRIX11_BASE_ROOT)
 
         class DerivedFeature
@@ -33,7 +29,7 @@ module BRIX11
             if @rcfeature.prerequisites.empty?
               other_state || @rcfeature.state
             else
-              other_state || (@rcfeature.prerequisites.any? {|freq| @cfg.features[freq] ? @cfg.features[freq].state : false } ? @rcfeature.state : !@rcfeature.state)
+              other_state || (@rcfeature.prerequisites.any? { |freq| @cfg.features[freq] ? @cfg.features[freq].state : false } ? @rcfeature.state : !@rcfeature.state)
             end
           end
 
@@ -51,19 +47,19 @@ module BRIX11
           def prerequisites
             []
           end
+
           def exclusives
             []
           end
         end # StaticFeature
 
         class CfgModule
-
           class CfgDependency
-
             Evaluator = Class.new do
               def initialize(rcdep)
                 @rcdep = rcdep
               end
+
               def getenv(varname)
                 @rcdep.get_var(varname)
               end
@@ -196,7 +192,7 @@ module BRIX11
               # keep environment additions if dependency fulfilled
               if @rcdep.state
                 # keep in current runtime env
-                @env_additions.each {|k,v| Exec.update_run_environment(k, v) }
+                @env_additions.each { |k, v| Exec.update_run_environment(k, v) }
                 # keep for user env additions
                 @mod.env_additions.merge!(@env_additions)
               end
@@ -272,7 +268,7 @@ module BRIX11
             # evaluate our dependency specs
             BRIX11.show_msg("Processing dependencies for [#{mod_id}]")
             @rcspec.dependencies.each do |featureid, rcdep|
-              dep =  CfgDependency.new(self, rcdep)
+              dep = CfgDependency.new(self, rcdep)
               dep.process
               @deplist << dep
               # set the resulting feature state
@@ -329,7 +325,7 @@ module BRIX11
               mod.features.each do |featureid, rcfeature|
                 # chain (OR-ed) previous encountered feature specs
                 other_feature = features[featureid]
-                features[featureid] =  DerivedFeature.new(rcfeature, self, other_feature)
+                features[featureid] = DerivedFeature.new(rcfeature, self, other_feature)
               end
               # add this module to active list
               @cfglist[mod_id] = mod
@@ -339,18 +335,18 @@ module BRIX11
                 # chain (OR-ed) previous encountered feature specs
                 other_feature = features[featureid]
                 # fix this feature to it's negated state
-                features[featureid] =  DerivedFeature.new(StaticFeature.new(featureid, !rcfeature.state), self, other_feature)
+                features[featureid] = DerivedFeature.new(StaticFeature.new(featureid, !rcfeature.state), self, other_feature)
               end
             end
           end
           # collect all unique library path additions of all active module dependencies
           lib_paths = @cfglist.values.collect do |mod|
-            mod.dependencies.select {|dep| dep.state }.collect do |dep|
+            mod.dependencies.select { |dep| dep.state }.collect do |dep|
               dep.library_paths.collect do |str|
                 # expand any env var references in string
                 path = str.gsub(/\$\{([^\s\/\}:;]+)\}/) { |m| Exec.get_run_environment($1).to_s }
                 # expand any special vars (currently only '${:DDL_DIR}')
-                path.gsub(/\$\{:DLL_DIR\}/) {|m| options[:platform][:defaults][:dll_dir] }
+                path.gsub(/\$\{:DLL_DIR\}/) { |m| options[:platform][:defaults][:dll_dir] }
               end
             end
           end.flatten.uniq
@@ -373,7 +369,7 @@ module BRIX11
           end
           # check any exclusive feature dependencies
           features.each do |featureid, feature|
-            if feature.exclusives.count {|excl_fid| features.has_key?(excl_fid) && features[excl_fid].state } > 1
+            if feature.exclusives.count { |excl_fid| features.has_key?(excl_fid) && features[excl_fid].state } > 1
               BRIX11.log_fatal("Feature :#{featureid} allows only one of it's prerequisite features [:#{feature.exclusives.join(', :')}] to be enabled.")
             end
           end
@@ -423,19 +419,19 @@ module BRIX11
             features = File.readlines(features_cfg_file).collect do |ln|
               feature = nil
               if /\A\s*\w+\s*=\s*(0|1)\s*\Z/ =~ ln
-                feature, val = ln.split('=').collect {|s| s.strip }
+                feature, val = ln.split('=').collect { |s| s.strip }
                 feature = nil if val.to_i == 0
               end
               feature
             end.compact
             # upcase each active feature to provide it's test config
-            test_configs.concat(features.collect {|ftr| ftr.upcase })
+            test_configs.concat(features.collect { |ftr| ftr.upcase })
           end
         end
 
         def self.print_config(workspace)
           # printing the configuration requires an existing ACE_ROOT and config files
-          if Exec.get_run_environment('ACE_ROOT') && File.exist?(File.join(Exec.get_run_environment('ACE_ROOT'),'ace', 'config.h'))
+          if Exec.get_run_environment('ACE_ROOT') && File.exist?(File.join(Exec.get_run_environment('ACE_ROOT'), 'ace', 'config.h'))
             _test_configs = nil
             _ace_root = Exec.get_run_environment('ACE_ROOT')
             print_file(File.join(_ace_root, 'ace', 'config.h'), 'config.h')
@@ -454,8 +450,8 @@ module BRIX11
             print_file(_cfg_file, '.ridlrc') if File.exist?(_cfg_file)
             _cfg_file = File.join(Configurator::ROOT, '.brix11rc')
             print_file(_cfg_file, '.brix11rc') if File.exist?(_cfg_file)
-            _cfg_file = File.join(Configurator::ROOT, (workspace || 'workspace')+'.mwc')
-            print_file(_cfg_file, (workspace || 'workspace')+'.mwc') if File.exist?(_cfg_file)
+            _cfg_file = File.join(Configurator::ROOT, (workspace || 'workspace') + '.mwc')
+            print_file(_cfg_file, (workspace || 'workspace') + '.mwc') if File.exist?(_cfg_file)
             STDOUT.puts('=' * 60)
             STDOUT.puts("Test config: #{_test_configs.join(' ')}") if _test_configs
             STDOUT.puts
@@ -469,11 +465,7 @@ module BRIX11
           _cfg_file = File.join(_ace_root, 'bin', 'MakeProjectCreator', 'config', 'default.features')
           File.exist?(_cfg_file) ? get_test_config_from(_cfg_file) : []
         end
-
       end # Configurator
-
     end # Configure
-
   end # Common
-
 end # BRIX11

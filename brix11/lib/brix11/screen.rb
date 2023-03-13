@@ -9,9 +9,7 @@
 require 'brix11/system'
 
 module BRIX11
-
   class Screen
-
     class Color
       def initialize(code)
         @code = code
@@ -38,7 +36,7 @@ module BRIX11
     module ColorizeMethods
       def self.included(mod)
         Screen::COLORS.keys.each do |color|
-          mod.module_eval <<-EOT, __FILE__, __LINE__+1
+          mod.module_eval <<-EOT, __FILE__, __LINE__ + 1
             def #{color}(s)
               [BRIX11::Screen::COLORS[:#{color}].first, s, BRIX11::Screen::COLORS[:#{color}].last]
             end
@@ -73,21 +71,20 @@ module BRIX11
     # end
 
     def print(*args)
-      output.print args.flatten.collect {|a| (colorize? && Color === a) ? a.code : a }.join
+      output.print args.flatten.collect { |a| (colorize? && Color === a) ? a.code : a }.join
     end
 
     def println(*args)
-      output.puts args.flatten.collect {|a| (colorize? && Color === a) ? a.code : a }.join
+      output.puts args.flatten.collect { |a| (colorize? && Color === a) ? a.code : a }.join
     end
 
     def error_print(*args)
-      errout.print args.flatten.collect {|a| (colorize? && Color === a) ? a.code : a }.join
+      errout.print args.flatten.collect { |a| (colorize? && Color === a) ? a.code : a }.join
     end
 
     def error_println(*args)
-      errout.puts args.flatten.collect {|a| (colorize? && Color === a) ? a.code : a }.join
+      errout.puts args.flatten.collect { |a| (colorize? && Color === a) ? a.code : a }.join
     end
-
 
     def list(lst, mode = :rows, *rest)
       lst.collect { |li| [li, "\n"] }
@@ -127,9 +124,11 @@ module BRIX11
         responses[:ambiguous_completion] = 'Ambiguous entry'
         responses[:no_completion] = 'Unknown entry'
       end
+
       def choices
         @choices ||= []
       end
+
       def choice(sel, name, &action)
         choices << [sel, name, action]
       end
@@ -141,7 +140,7 @@ module BRIX11
       yield(m) if block_given?
       m.update_responses
       println(m.header)
-      println(list(m.choices.collect {|c| c[1] }))
+      println(list(m.choices.collect { |c| c[1] }))
       println(m.prompt)
       begin
         ans = input.gets.strip
@@ -161,7 +160,5 @@ module BRIX11
         end
       end while true
     end
-
   end
-
 end

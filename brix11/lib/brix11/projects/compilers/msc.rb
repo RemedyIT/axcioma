@@ -8,11 +8,8 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
     class MSCCompiler < Compiler
-
       class Filter
         include Formatter::Filter::FilterMethods
 
@@ -76,18 +73,12 @@ module BRIX11
           end
           return super
         end
-
       end # Filter
 
       # override
       def filter(verbosity)
         Filter.new(verbosity)
       end
-
     end # MSCCompiler
-
   end # Project
-
 end # BRIX11
-
-

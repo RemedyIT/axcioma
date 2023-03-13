@@ -10,9 +10,7 @@ require 'brix11/command'
 
 module BRIX11
   module Common
-
-    class Make  < Command::Base
-
+    class Make < Command::Base
       DESC = 'Make (build) the project.'.freeze
 
       OPTIONS = {
@@ -26,18 +24,18 @@ module BRIX11
       def self.setup(optparser, options)
         options[:make] = OPTIONS.dup
         options[:make][:lists] = []
-        optparser.banner = "#{DESC}\n\n"+
-                           "Usage: #{options[:script_name]} make [options] [PROJECT [make-options]]|[-- make-options]\n\n"+
-                           "       PROJECT := Path to project folder or name of subproject. If both PROJECT and SUBPRJ\n"+
+        optparser.banner = "#{DESC}\n\n" +
+                           "Usage: #{options[:script_name]} make [options] [PROJECT [make-options]]|[-- make-options]\n\n" +
+                           "       PROJECT := Path to project folder or name of subproject. If both PROJECT and SUBPRJ\n" +
                            "                  are specified, PROJECT should be path and SUBPRJ subproject name.\n\n"
 
         optparser.on('-c', '--clean', 'Clean project only.') { options[:make][:clean] = true; options[:make][:build] = false }
         optparser.on('-r', '--rebuild', 'Clean and than build project.') { options[:make][:clean] = true; options[:make][:build] = true }
         optparser.on('-p', '--project', '=SUBPRJ',
-                     'Specifies path to or name of (sub-)project to build.') {|v| options[:make][:subprj] = v }
+                     'Specifies path to or name of (sub-)project to build.') { |v| options[:make][:subprj] = v }
         optparser.on('--no-gen-build', 'Do not automatically generate build files using MPC if they do not exist yet.') { options[:make][:genbuild] = false }
         optparser.on('--debug', 'Debug build.', 'Default: Off') { options[:make][:debug] = true }
-        optparser.on('--release', 'Release build.', 'Default: On') { options[:make][:debug] = false}
+        optparser.on('--release', 'Release build.', 'Default: On') { options[:make][:debug] = false }
         optparser.on('-L', '--build-list', '=BUILDLIST', 'Build the list of projects specified by BUILDLIST.',
                                                          'BUILDLIST specifies a buildlist file and optional root as: [<root>=]<listfile>.',
                                                          'If no root is specified it defaults to the location of the listfile.') do |v|
@@ -82,7 +80,7 @@ module BRIX11
           prjargv = []
           prjargv << options[:make][:subprj] if options[:make][:subprj]
           prjargv << options[:make][:project] if options[:make][:project]
-          log(2, "checking for #{options[:config][:project_type]} type project #{options[:make][:subprj] || options[:make][:project]}#{options[:make][:subprj] ? ' in '+(options[:make][:project] || '.') : ''}")
+          log(2, "checking for #{options[:config][:project_type]} type project #{options[:make][:subprj] || options[:make][:project]}#{options[:make][:subprj] ? ' in ' + (options[:make][:project] || '.') : ''}")
           unless prj.project_exists?(*prjargv) || ( options[:make][:clean] && !options[:make][:build])
             unless (options[:make][:genbuild])
               log_error('Nothing to build')
@@ -95,7 +93,7 @@ module BRIX11
           end
           prjargv << options
           rc = prj.clean(options[:make][:make_opts].dup, *prjargv) if options[:make][:clean]
-          rc = prj.build(options[:make][:make_opts].dup,*prjargv ) if rc && options[:make][:build]
+          rc = prj.build(options[:make][:make_opts].dup, *prjargv ) if rc && options[:make][:build]
           log_error("Executing #{current_cmd} failed.") unless rc
           rc
         end
@@ -111,7 +109,6 @@ module BRIX11
       Command.register('make|build', DESC, Common::Make)
     end # Make
 
-    Dir.glob(File.join(ROOT, 'cmds', 'make', '*.rb')).each { |p| require "brix/common/cmds/make/#{File.basename(p)}"}
-
+    Dir.glob(File.join(ROOT, 'cmds', 'make', '*.rb')).each { |p| require "brix/common/cmds/make/#{File.basename(p)}" }
   end # Common
 end # BRIX11

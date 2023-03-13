@@ -7,25 +7,20 @@
 # @copyright Copyright (c) Remedy IT Expertise BV
 #--------------------------------------------------------------------
 
-
 require 'fileutils'
 
 module BRIX11
-
   module Common
-
-    class Configure  < Command::Base
-
+    class Configure < Command::Base
       module HostSetup
-
         FOLDER = 'HOST'
 
         MWC = 'host'
 
         SOURCE_CONFIG = {
             'ACE' => {
-              :module_folder => 'ACE',
-              :folders => {
+              module_folder: 'ACE',
+              folders: {
                 'ace' => :norecurse,
                 'ace/os_include' => :recurse,
                 'bin' => :norecurse,
@@ -36,8 +31,8 @@ module BRIX11
               }
             },
             'TAO' => {
-              :module_folder => 'TAO',
-              :folders => {
+              module_folder: 'TAO',
+              folders: {
                 '.' => :norecurse,
                 'TAO_IDL' => :recurse,
                 'MPC' => :recurse,
@@ -45,7 +40,7 @@ module BRIX11
               }
             },
             'OpenDDS' => {
-              :folders => {
+              folders: {
                 '.' => :norecurse,
                 'dds' => :norecurse,
                 'dds/idl' => :norecurse,
@@ -83,7 +78,7 @@ module BRIX11
                 Dir.glob(File.join(dir, '*')).each do |p|
                     unless File.basename(p).start_with?('.')
                         if !File.directory?(p)
-                            unless EXCLUDES.any? {|pat| pat.is_a?(String) ? (pat == p) : (pat =~ p) }
+                            unless EXCLUDES.any? { |pat| pat.is_a?(String) ? (pat == p) : (pat =~ p) }
                                 File.link(p, File.join(dst, p))
                             end
                         elsif recurse
@@ -193,9 +188,6 @@ module BRIX11
           end
         end
       end
-
     end
-
   end
-
 end

@@ -8,11 +8,8 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
     module Filter
-
       class RIDLCompiler
         include Formatter::Filter::FilterMethods
 
@@ -36,7 +33,7 @@ module BRIX11
 
         # override
         def filter_output(s)
-          matched_category,_ = output_patterns.detect do |cat, re|
+          matched_category, _ = output_patterns.detect do |cat, re|
             if rem = re.match(s)
               unless cat == :ignore
                 @last_error_desc = rem.names.include?('desc') ? rem[:desc] : rem[0]
@@ -83,11 +80,7 @@ module BRIX11
           end
           output.println(plist)
         end
-
       end # RIDLCompiler
-
     end # Filter
-
   end # Project
-
 end # BRIX11

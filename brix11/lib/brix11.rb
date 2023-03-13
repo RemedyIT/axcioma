@@ -11,7 +11,7 @@ module BRIX11
   VERSION = '1.1.0'
   VERSION_MAJOR,
       VERSION_MINOR,
-      VERSION_RELEASE, = VERSION.split('.').collect {|e| e.to_i}
+      VERSION_RELEASE, = VERSION.split('.').collect { |e| e.to_i }
   COPYRIGHT = "Copyright (c) 2014-#{Time.now.year} Remedy IT Expertise BV, The Netherlands".freeze
 
   def self.root_path

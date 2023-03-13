@@ -12,7 +12,6 @@ require 'brix11/log'
 require 'brix11/project'
 
 module BRIX11
-
   BRIX11_ROOT = File.dirname(__FILE__)
 
   class << self
@@ -37,7 +36,6 @@ module BRIX11
     def loaded_brix_paths
       @loaded_brix_paths ||= []
     end
-
   end
 
   def self.use_environment?
@@ -52,7 +50,7 @@ module BRIX11
     options.force || false
   end
 
-  Console::Text.label_format=('%-18s')
+  Console::Text.label_format = ('%-18s')
   Console::Text.indent = 1
 
   def self.console
@@ -78,7 +76,7 @@ module BRIX11
       brixpath = File.expand_path(brixpath)
       unless loaded_brix_paths.include?(brixpath)
         log(3, "Examining brix search path : #{brixpath}")
-        Dir.glob(File.join(brixpath, 'brix', '*')).select {|p| File.directory?(p) }.each do |brixdir|
+        Dir.glob(File.join(brixpath, 'brix', '*')).select { |p| File.directory?(p) }.each do |brixdir|
           log(4, "#load_brix - inspecting possible Brix collection @ #{brixdir}")
           if File.file?(File.join(brixdir, 'require.rb'))
             bc = Collection.load(brixdir)
@@ -98,7 +96,7 @@ module BRIX11
   def self.init_optparser
     script_name = File.basename($0)
     if not script_name =~ /brix11/
-      script_name = 'ruby '+$0
+      script_name = 'ruby ' + $0
     end
     options.script_name = script_name
 
@@ -126,8 +124,8 @@ module BRIX11
       puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
       puts COPYRIGHT
       puts
-      puts '  %-45s | %-35s' % ['Project type [compilers]','Description']
-      puts '  '+('-' * 83)
+      puts '  %-45s | %-35s' % ['Project type [compilers]', 'Description']
+      puts '  ' + ('-' * 83)
       Project.describe_each do |type, compilers, desc|
         type_s = type.to_s
         type_s += ' (*)' if type_s == options.config.project_type
@@ -142,11 +140,11 @@ module BRIX11
           desc = ''
         end while !compilers.empty?
       end
-      puts "#{' '*18} (*) = default"
+      puts "#{' ' * 18} (*) = default"
       puts
     }
     opts.on('--add-templates', '=PATH',
-            'Add a template library basepath to be evaluated before standard brix templates.') {|v|
+            'Add a template library basepath to be evaluated before standard brix templates.') { |v|
       (options.user_config.user_templates ||= []) << v
     }
     opts.on('-E', '--environment',
@@ -206,7 +204,7 @@ module BRIX11
     opts.on('-L', '--list', '=[all]',
             'List available brix (for selected collection) and exit.',
             'Also list collections of overridden entries if \'all\' specified.') { |v|
-      BRIX11.log_fatal("Invalid switch -L#{v}") unless v == true || v=='all'
+      BRIX11.log_fatal("Invalid switch -L#{v}") unless v == true || v == 'all'
       options.load_config
       load_brix
       puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
@@ -223,7 +221,7 @@ module BRIX11
     }
     opts.on('--scope', '=COLLECTION',
             'Defines collection scope for filtering commands.',
-            'Default: no scope') {|v|
+            'Default: no scope') { |v|
       options.scope = v
     }
 
@@ -300,7 +298,7 @@ module BRIX11
         rc = execute(argv)
       end
     rescue
-      verbosity>1 ? log_fatal("#{$!}\n#{$!.backtrace.join("\n")}") : log_fatal("#{$!}\n(run with '-v' to see more information)\n")
+      verbosity > 1 ? log_fatal("#{$!}\n#{$!.backtrace.join("\n")}") : log_fatal("#{$!}\n(run with '-v' to see more information)\n")
     ensure
       options.logfile.close if options.logfile
     end
@@ -318,9 +316,8 @@ module BRIX11
     end
     rc
   end
-
 end # BRIX11
-#Need to require this files AFTER the base is setup
+# Need to require this files AFTER the base is setup
 require 'brix11/options'
 require 'brix11/system'
 require 'brix11/console'

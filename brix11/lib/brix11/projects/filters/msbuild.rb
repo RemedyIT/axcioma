@@ -8,19 +8,16 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
       module Filter
-
         class MSBuildFile
           include Formatter::Filter::FilterMethods
 
           TOOL_PATTERN = /\d+\>((Project\s+"(?<name>.*\.sln)"\s+on\s+node\s.*)|(Project\s+".*"\s+\(\d+\)\s+is\s+building\s+"(?<name>.*\.vcxproj)"\s.*))\Z/
           OUTPUT_PATTERNS = [
-              [:warning,     /(?<name>.*)\s+(?<desc>will not be built due to the following missing library: .*)/],
+              [:warning, /(?<name>.*)\s+(?<desc>will not be built due to the following missing library: .*)/],
               # msbuild messages
-              [:error,      /MSBUILD\s+:\s+[Ee]rror MSB\d+:\s.*\s:\s+(?<desc>.*)\Z/],
+              [:error, /MSBUILD\s+:\s+[Ee]rror MSB\d+:\s.*\s:\s+(?<desc>.*)\Z/],
           ]
           IGNORE_PATTERNS = [
               [:ignore,       /ValidateSolutionConfiguration:.*\Z/],
@@ -47,10 +44,9 @@ module BRIX11
 
           # override
           def output_patterns
-            OUTPUT_PATTERNS+IGNORE_PATTERNS
+            OUTPUT_PATTERNS + IGNORE_PATTERNS
           end
-
-        end  # MSBuildFile
+        end # MSBuildFile
 
         class MSBuild
           include Formatter::Filter::FilterMethods
@@ -74,7 +70,6 @@ module BRIX11
             @verbosity = verbosity
           end
 
-
           def match(s)
             @last_output_category = nil
             filter_output(s)
@@ -82,14 +77,9 @@ module BRIX11
 
           # override
           def output_patterns
-            OUTPUT_PATTERNS+MSBuildFile::IGNORE_PATTERNS
+            OUTPUT_PATTERNS + MSBuildFile::IGNORE_PATTERNS
           end
-
         end # MSBuild
-
       end # Filter
-
   end # Project
-
 end # BRIX11
-

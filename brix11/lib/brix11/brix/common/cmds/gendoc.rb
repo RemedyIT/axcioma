@@ -10,18 +10,16 @@ require 'brix11/command'
 
 module BRIX11
   module Common
-
     class GenerateDocumentation < Command::Base
-
       DESC = 'Generate documentation from ASCIIDoctor sources.'.freeze
 
       OPTIONS = {
-        :docsources => {
+        docsources: {
             'brix11' => ["#{File.join(BRIX11_BASE_ROOT, 'docs')}"]
           },
-        :adoc_attribs => {},
-        :doxygen => false,
-        :doxygen_config => nil
+        adoc_attribs: {},
+        doxygen: false,
+        doxygen_config: nil
       }
 
       X11_DOC_ROOT = File.expand_path(File.join(File.dirname(BRIX11_BASE_ROOT), 'docs'))
@@ -35,10 +33,10 @@ module BRIX11
           BRIX11.log_fatal("This command requires the installation of the Asciidoctor gem!")
         end
         # load document generator(s)
-        Dir.glob(File.join(ROOT, 'cmds', 'gendoc', '*.rb')).each { |p| require "brix/common/cmds/gendoc/#{File.basename(p)}"}
+        Dir.glob(File.join(ROOT, 'cmds', 'gendoc', '*.rb')).each { |p| require "brix/common/cmds/gendoc/#{File.basename(p)}" }
         # initialize options and option parser
         options[:gendoc] = OPTIONS.dup
-        optparser.banner = "#{DESC}\n\n"+
+        optparser.banner = "#{DESC}\n\n" +
                            "Usage: #{options[:script_name]} gen[erate] doc[umentation] [options]\n\n"
 
         # only support doxygen generation if a configuration has been set
@@ -48,7 +46,7 @@ module BRIX11
           }
         optparser.on('-N', '--no-redirect',
                      'Do not redirect output from doxygen process..',
-                     'Default: run silent and hide output.') {|v|
+                     'Default: run silent and hide output.') { |v|
           options[:gendoc][:noredirect] = true
         }
         end
@@ -64,6 +62,5 @@ module BRIX11
 
       Command.register('generate:documentation', DESC, Common::GenerateDocumentation)
     end # GenerateDocumentation
-
   end # Common
 end # BRIX11

@@ -12,19 +12,15 @@ require 'brix11/projects/filters/msbuild'
 require 'brix11/projects/compilers/msc'
 
 module BRIX11
-
   module Project
-
     # MSBuild solution specific IDL compiler filter
 
     module Filter
-
       class MSBuildIDL
         include Formatter::Filter::FilterMethods
 
         TOOL_PATTERN = /(\d+\>)?CustomBuild:.*\Z/
         COMPILE_PATTERN = /Invoking\s+".*(?<tool>(ridlc|tao_idl))\s+on\s+(?<name>(\S+))".*\Z/
-
 
         # override
         def initialize(verbosity)
@@ -66,17 +62,13 @@ module BRIX11
           # filter other output
           @ridl_filter.filter_output(s) || @taoidl_filter.filter_output(s)
         end
-
       end # MSBuildIDL
-
     end # Filter
 
     # MSBuild solution specific MSC derivatives
 
     class MSBuildCompiler < MSCCompiler
-
       class Filter < MSCCompiler::Filter
-
         TOOL_PATTERN = /(\d+\>)?((ClCompile:)|(Link:)).*\Z/
         CMD_PATTERN = /(((?<tool>([Cc][Ll]\.exe))\s((?<cmdarg>(.*))\s+([\S]+\.)(c|C|cc|CC|cxx|CXX|cpp|CPP|S|asm)\s+.*))|((?<tool>([Ll][Ii][Nn][Kk]\.exe))\s.*))\Z/
         COMPILE_PATTERN = /\A\s+(?<name>(\S+\.(c|C|cc|CC|cxx|CXX|cpp|CPP|S|asm)))\Z/
@@ -139,84 +131,65 @@ module BRIX11
 
         # override
         def output_patterns
-          OUTPUT_PATTERNS+Project::Filter::MSBuildFile::IGNORE_PATTERNS
+          OUTPUT_PATTERNS + Project::Filter::MSBuildFile::IGNORE_PATTERNS
         end
-
       end # Filter
 
       # override
       def filter(verbosity)
         Filter.new(verbosity)
       end
-
     end # MSBuildCompiler
 
     class MSBuildCompiler64 < MSBuildCompiler
-
       def platform
         'x64'
       end
-
     end # MSBuildCompiler64
 
     class MSBuildVC14x64 < MSBuildCompiler64
-
       def version
         'v140'
       end
-
     end # MSBuildVC14x64
 
     class MSBuildVC141x64 < MSBuildCompiler64
-
       def version
         'v141'
       end
-
     end # MSBuildVC141x64
 
     class MSBuildVC142x64 < MSBuildCompiler64
-
       def version
         'v142'
       end
-
     end # MSBuildVC142x64
 
     class MSBuildCompiler32 < MSBuildCompiler
-
       def platform
         'Win32'
       end
-
     end # MSBuildCompiler32
 
     class MSBuildVC14x32 < MSBuildCompiler32
-
       def version
         'v140'
       end
-
     end # MSBuildVC14x32
 
     class MSBuildVC141x32 < MSBuildCompiler32
-
       def version
         'v141'
       end
-
     end # MSBuildVC141x32
 
     class MSBuildVC142x32 < MSBuildCompiler32
-
       def version
         'v142'
       end
-
     end # MSBuildVC142x32
 
     class MSBuildSolution < Handler
-
       BUILDTOOL = 'msbuild'
       PROJECTEXT = '.sln'
 
@@ -244,7 +217,7 @@ module BRIX11
         runopts[:capture] = :all if block_given?
         runopts[:filter] = init_filter(options[:verbose] || 1, options[:logfile]) unless options[:make][:noredirect]
         runopts[:debug] = options[:make][:debug]
-        argv = base_build_arg(project, path,cmdargv, runopts) << '/t:Clean' << runopts
+        argv = base_build_arg(project, path, cmdargv, runopts) << '/t:Clean' << runopts
         argv << Proc.new if block_given?
         ok, rc = Exec.runcmd(*argv)
         BRIX11.log_warning("#{self.type}\#clean failed with exitcode #{rc}") unless ok
@@ -309,7 +282,7 @@ module BRIX11
       def sln_for_dir(path)
         dir_name = Pathname.new(path).basename()
         # mpc creates sln files with name of dir, but replaces '-' with '_'
-        sln_name = dir_name.to_s.gsub('-','_')
+        sln_name = dir_name.to_s.gsub('-', '_')
         sln_name << PROJECTEXT
         unless File.exist?(File.join(path, sln_name))
           # incase file does not exist look for a single .sln file in path
@@ -340,7 +313,7 @@ module BRIX11
         argv = [BUILDTOOL]
         argv << "/maxcpucount#{(Exec.max_cpu_cores > 0) ? ":#{Exec.max_cpu_cores}" : ''}" if Exec.cpu_cores > 1
         argv.concat(cmdargv)
-        #argv << '--always-make' if opts[:force]
+        # argv << '--always-make' if opts[:force]
 
         opts[:chdir] = path if path && (project || File.directory?(path))
         if opts[:chdir]
@@ -360,11 +333,9 @@ module BRIX11
         argv << "/p:Configuration=#{opts[:debug] ? 'Debug' : 'Release'}"
         argv
       end
-
     end # MSBuildSolution
 
     class MSBuildVS2015 < MSBuildSolution
-
       ID = 'vs2015'
       DESCRIPTION = 'Microsoft Visual Studio 2015 solutions'
       COMPILERS = Hash[
@@ -385,13 +356,11 @@ module BRIX11
       def base_build_arg(project, path, cmdargv, opts)
         super << "/p:PlatformTarget=#{@compiler.platform}"
       end
-
     end
 
     register(MSBuildVS2015::ID, MSBuildVS2015)
 
     class MSBuildVS2017 < MSBuildSolution
-
       ID = 'vs2017'
       DESCRIPTION = 'Microsoft Visual Studio 2017 solutions'
       COMPILERS = Hash[
@@ -412,13 +381,11 @@ module BRIX11
       def base_build_arg(project, path, cmdargv, opts)
         super << "/p:Platform=#{@compiler.platform}"
       end
-
     end
 
     register(MSBuildVS2017::ID, MSBuildVS2017)
 
     class MSBuildVS2019 < MSBuildSolution
-
       ID = 'vs2019'
       DESCRIPTION = 'Microsoft Visual Studio 2019 solutions'
       COMPILERS = Hash[
@@ -439,11 +406,8 @@ module BRIX11
       def base_build_arg(project, path, cmdargv, opts)
         super << "/p:Platform=#{@compiler.platform}"
       end
-
     end
 
     register(MSBuildVS2019::ID, MSBuildVS2019)
-
   end # Project
-
 end # BRIX11

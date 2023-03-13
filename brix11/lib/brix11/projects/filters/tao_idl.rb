@@ -8,11 +8,8 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-
   module Project
-
     module Filter
-
       class TAO_IDLCompiler
         include Formatter::Filter::FilterMethods
 
@@ -34,11 +31,7 @@ module BRIX11
         def output_patterns
           OUTPUT_PATTERNS
         end
-
       end # TAO_IDLCompiler
-
     end # Filter
-
   end # Project
-
 end # Filter

@@ -11,13 +11,10 @@ require 'rdoc'
 
 module BRIX11
   module Common
-
-    class Help  < Command::Base
-
+    class Help < Command::Base
       DESC = 'Show help (documentation) for brix11 (command).'.freeze
 
-      OPTIONS = {
-      }
+      OPTIONS = {}
 
       MAIN_HELP = File.join(BRIX11_BASE_ROOT, 'lib', 'brix11', 'docs', 'brix.rd')
 
@@ -55,7 +52,7 @@ module BRIX11
         end
         formatter = Sys.has_ansi? ? RDoc::Markup::ToAnsi.new() : RDoc::Markup::ToRdoc.new()
         text = RDoc::RD.parse(data).accept(formatter)
-        text = text.split("\n").collect {|l| "  #{l}" }.join("\n")
+        text = text.split("\n").collect { |l| "  #{l}" }.join("\n")
         text << "\n\n"
         Exec.runcmd(Sys.pager, input: text, silent: true)
         true
@@ -63,6 +60,5 @@ module BRIX11
 
       Command.register('help', DESC, Common::Help)
     end # Help
-
   end # Common
 end # BRIX11

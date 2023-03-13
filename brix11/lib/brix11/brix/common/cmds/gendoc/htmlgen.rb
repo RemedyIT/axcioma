@@ -11,31 +11,26 @@ require 'optparse'
 require 'pathname'
 
 module BRIX11
-
   module Common
-
     class GenerateDocumentation < Command::Base
-
       module HTMLGenerator
-
         OPTIONS = {
-          :resourcefolders => {
+          resourcefolders: {
               'images' => '*.{ico,png,jpg,gif,bmp}',
               'code' => nil,
               'html/stylesheets' => '*.css',
               'html/javascript' => '*.js'
           },
-          :resourcepaths => [],
-          :adoc_opts => {
-            :base_dir => File.join(File.dirname(BRIX11_BASE_ROOT), 'etc', 'docs', 'config'),
-            :backend => :html5,
-            :mkdirs => true,
-            :safe => Asciidoctor::SafeMode::UNSAFE
+          resourcepaths: [],
+          adoc_opts: {
+            base_dir: File.join(File.dirname(BRIX11_BASE_ROOT), 'etc', 'docs', 'config'),
+            backend: :html5,
+            mkdirs: true,
+            safe: Asciidoctor::SafeMode::UNSAFE
           }
         }
 
         class << self
-
           private
           def resolve_path_var(v)
             Exec.get_run_environment(v) || v
@@ -48,9 +43,9 @@ module BRIX11
             BRIX11.log(2, "docgen> Collecting resources from #{respath}")
             Dir.glob(File.join(respath, mask || '*')).each do |res|
               unless File.directory?(res)
-                FileUtils.mkdir_p(tgtdir, :verbose => BRIX11.verbose?) unless File.exist?(tgtdir)
+                FileUtils.mkdir_p(tgtdir, verbose: BRIX11.verbose?) unless File.exist?(tgtdir)
                 target = File.join(tgtdir, File.basename(res))
-                FileUtils.cp(res, target, :verbose => BRIX11.verbose?)
+                FileUtils.cp(res, target, verbose: BRIX11.verbose?)
               end
             end
             Dir.glob(File.join(respath, '*')).each do |p|
@@ -60,7 +55,7 @@ module BRIX11
             end
           end
 
-          def generate_html_from_folder(srcroot, tgtbase, opts, srcdir=nil)
+          def generate_html_from_folder(srcroot, tgtbase, opts, srcdir = nil)
             srcpath = srcdir ? File.join(srcroot, srcdir) : srcroot.dup
             tgtdir = srcdir ? File.join(X11_DOC_ROOT, 'html', srcdir) : X11_DOC_ROOT.dup
             BRIX11.log(2, "gendoc> Generating HTML from #{srcpath}")
@@ -69,7 +64,7 @@ module BRIX11
                 # setup target file name
                 target = [X11_DOC_ROOT, 'html', tgtbase]
                 target << srcdir if srcdir
-                target << File.basename(src, '.adoc')+'.html'
+                target << File.basename(src, '.adoc') + '.html'
                 target = File.absolute_path(File.join(*target))
                 # setup relative resource path attributes
                 targetdir = Pathname.new(File.dirname(target))
@@ -82,7 +77,7 @@ module BRIX11
                 # add common 'docs' root
                 attribs.merge!({ 'docs_root' => Pathname.new(File.join(X11_DOC_ROOT, 'html')).relative_path_from(targetdir).to_s })
                 BRIX11.log(2, "gendoc> Rendering HTML from #{src} to #{target}")
-                Asciidoctor.render_file(src, opts[:adoc_opts].merge(:to_file => target, :attributes => attribs))
+                Asciidoctor.render_file(src, opts[:adoc_opts].merge(to_file: target, attributes: attribs))
               end
             end
             Dir.glob(srcdir ? File.join(srcdir, '*') : '*').each do |p|
@@ -127,7 +122,6 @@ module BRIX11
               end
             end
           end
-
         end
 
         def self.run(opts)
@@ -141,11 +135,7 @@ module BRIX11
 
           generate_html(opts)
         end
-
       end # HTMLGenerator
-
     end # GenerateDocumentation
-
   end # Common
-
 end # BRIX11
