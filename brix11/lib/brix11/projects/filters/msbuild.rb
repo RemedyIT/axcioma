@@ -86,4 +86,3 @@ module BRIX11
       end # Filter
   end # Project
 end # BRIX11
-

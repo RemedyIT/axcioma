@@ -85,5 +85,3 @@ module BRIX11
     end # MSCCompiler
   end # Project
 end # BRIX11
-
-
