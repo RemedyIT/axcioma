@@ -35,7 +35,7 @@ jobs:
         ruby-version: '2.7'
     - name: install fuzzr gem
       run: |
-        gem install fuzzr
+        gem install rite-fuzzr
     - name: Run fuzzr
       run: |
         fuzz
