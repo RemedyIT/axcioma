@@ -120,6 +120,37 @@ module BRIX11
                                         })
                                         opts[:platform][:bits] = (opts[:platform][:arch] == 'x86_64' ? 64 : 32)
                                       }
+        platform_helpers[/darwin/i] = ->(_s, opts) {
+                                          opts[:platform].merge!({
+                                            os: :darwin,
+                                            arch: `uname -m`.chomp,
+                                            defaults: {
+                                              libroot: '/usr',
+                                              dll_dir: 'lib',
+                                              library_path_var: 'DYLD_LIBRARY_PATH',
+                                              test_configs: %w{MACOSX},
+                                              prj_type: BRIX11::Project.handler('gnumake').default_prj_type
+                                            },
+                                            project_type: lambda { |opts_, pt = nil, cc = nil|
+                                              opts_def = opts_[:platform][:defaults]
+                                              prjh = BRIX11::Project.handler(pt || opts_def[:prj_type], cc || opts_def[:prj_cc])
+                                              [prjh.class::ID, prjh.compiler]
+                                            },
+                                            config_include: 'config-macosx.h',
+                                            config_prelude: %Q{
+                                                #define ACE_HAS_VERSIONED_NAMESPACE 1
+                                                #define ACE_MONITOR_FRAMEWORK 0
+                                              }.gsub(/^\s+/, ''),
+                                            gnumake_include: 'platform_macosx.GNU',
+                                            gnumake_prelude: %Q{
+                                                debug=0
+                                                inline=1
+                                                optimize=1
+                                              }.gsub(/^\s+/, '')
+                                          })
+                                          opts[:platform][:bits] = 64
+                                        }
+            
 
         def self.determin(opts)
           build_target = (opts[:target] || platform_os)
