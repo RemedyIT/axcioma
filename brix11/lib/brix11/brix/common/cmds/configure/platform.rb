@@ -150,7 +150,6 @@ module BRIX11
                                           })
                                           opts[:platform][:bits] = 64
                                         }
-            
 
         def self.determin(opts)
           build_target = (opts[:target] || platform_os)
