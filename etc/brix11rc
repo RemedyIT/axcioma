@@ -2,9 +2,9 @@
   "bootstrap": [
     { "id": "ACE", "collections": ["TAOX11", "AXCIOMA"], "dir": "ACE", "repo": "https://github.com/DOCGroup/ACE_TAO.git", "tag": "ACE+TAO-7_1_0" },
     { "id": "MPC", "collections": ["TAOX11", "AXCIOMA"], "dir": "ACE/MPC", "repo": "https://github.com/DOCGroup/MPC.git", "tag": "ACE+TAO-7_1_0" },
-    { "id": "ridl", "collections": ["TAOX11", "AXCIOMA"], "dir": "ridl", "repo": "https://github.com/RemedyIT/ridl.git", "tag": "v2.4.0_dev" },
-    { "id": "taox11", "collections": ["TAOX11", "AXCIOMA"], "dir": "taox11", "repo": "https://github.com/RemedyIT/taox11.git", "tag": "v2.4.0_dev" },
-    { "id": "ciaox11", "collections": ["AXCIOMA"], "dir": "ciaox11", "repo": "https://github.com/RemedyIT/ciaox11.git", "tag": "v2.4.0_dev" },
-    { "id": "dancex11", "collections": ["AXCIOMA"], "dir": "dancex11", "repo": "https://github.com/RemedyIT/dancex11.git", "tag": "v2.4.0_dev" }
+    { "id": "ridl", "collections": ["TAOX11", "AXCIOMA"], "dir": "ridl", "repo": "https://github.com/RemedyIT/ridl.git", "tag": "v2.4.1_dev" },
+    { "id": "taox11", "collections": ["TAOX11", "AXCIOMA"], "dir": "taox11", "repo": "https://github.com/RemedyIT/taox11.git", "tag": "v2.4.1_dev" },
+    { "id": "ciaox11", "collections": ["AXCIOMA"], "dir": "ciaox11", "repo": "https://github.com/RemedyIT/ciaox11.git", "tag": "v2.4.1_dev" },
+    { "id": "dancex11", "collections": ["AXCIOMA"], "dir": "dancex11", "repo": "https://github.com/RemedyIT/dancex11.git", "tag": "v2.4.1_dev" }
   ]
 }
