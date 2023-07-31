@@ -276,7 +276,7 @@ module BRIX11
     protected
 
       def extra_mpc_args
-        super.concat(%W(-value_template platforms="#{@compiler.platform}" -value_template PlatformToolset=#{@compiler.version} -value_template MultiProcessorCompilation=true))
+        super.concat(%W(-value_template platforms="#{@compiler.platform}" -value_template PlatformToolset=#{@compiler.version}))
       end
 
       def sln_for_dir(path)
