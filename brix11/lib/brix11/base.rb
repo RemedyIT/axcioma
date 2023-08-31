@@ -156,7 +156,7 @@ module BRIX11
             'Define an additional environment variable for BRIX11 commands.',
             'Separate (optional) value by \'=\' like VAR=VAL. By default value will be \'1\'.',
             'Supports \$VAR and \${VAR}-form variable expansion.') { |v|
-      _var, _val = v.split('=')
+      _var, _val = v.split('=', 2)
       (options.user_config.user_environment ||= {})[_var] = _val || '1'
     }
     opts.on('-x', '--crossbuild',
