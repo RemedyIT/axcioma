@@ -34,8 +34,8 @@ env:
   DANCEX11_ROOT: ${{ github.workspace }}/dancex11
   DDS_ROOT: ${{ github.workspace }}/OpenDDS
   X11_BRANCH: master
-  ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
-  OPENDDS_BRANCH: latest-release
+  ACETAOMPC_BRANCH: ACE+TAO-7_1_2
+  OPENDDS_BRANCH: DDS-3.26
 
 jobs:
   build:
