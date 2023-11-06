@@ -29,6 +29,10 @@ module BRIX11
       @reporter = rep
     end
 
+    def version
+      "#{VERSION[:major]}.#{VERSION[:minor]}.#{VERSION[:release]}"
+    end
+
     private
     #
     # Configuration handling
@@ -121,7 +125,7 @@ module BRIX11
              'List available project types (with compiler options) and active default') {
       options.load_config
       load_brix
-      puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
+      puts "BRIX11 pluggable scaffolding tool #{version}"
       puts COPYRIGHT
       puts
       puts '  %-45s | %-35s' % ['Project type [compilers]', 'Description']
@@ -181,7 +185,7 @@ module BRIX11
             'Print specified or active config and exit.',
             "Default: active configuration") { |v|
       options.load_config unless String === v
-      puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
+      puts "BRIX11 pluggable scaffolding tool #{version}"
       puts COPYRIGHT
       puts
       puts options.print_config(String === v ? v : nil)
@@ -193,7 +197,7 @@ module BRIX11
             'List available brix collections and exit.') {
       options.load_config
       load_brix
-      puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
+      puts "BRIX11 pluggable scaffolding tool #{version}"
       puts COPYRIGHT
       puts
       print '  '
@@ -207,7 +211,7 @@ module BRIX11
       BRIX11.log_fatal("Invalid switch -L#{v}") unless v == true || v == 'all'
       options.load_config
       load_brix
-      puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
+      puts "BRIX11 pluggable scaffolding tool #{version}"
       puts COPYRIGHT
       puts
       print '  '
@@ -230,7 +234,7 @@ module BRIX11
             'Show version information and exit.') {
       options.load_config
       load_brix
-      puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
+      puts "BRIX11 pluggable scaffolding tool #{version}"
       puts COPYRIGHT
       puts
       puts '--- [Brix collections] ---'
