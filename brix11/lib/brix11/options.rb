@@ -116,7 +116,7 @@ module BRIX11
         help_proc: lambda {
           options.load_config
           load_brix
-          puts "BRIX11 pluggable scaffolding tool #{VERSION_MAJOR}.#{VERSION_MINOR}.#{VERSION_RELEASE}"
+          puts "BRIX11 pluggable scaffolding tool #{version}"
           puts COPYRIGHT
           puts
           puts BRIX11.options.optparser
