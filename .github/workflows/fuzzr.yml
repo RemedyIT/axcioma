@@ -29,13 +29,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: '2.7'
     - name: install fuzzr gem
       run: |
-        gem install rite-fuzzr
+        gem install fuzzr
     - name: Run fuzzr
       run: |
         fuzz
