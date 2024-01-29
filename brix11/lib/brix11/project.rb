@@ -290,13 +290,13 @@ module BRIX11
       def parse_mpc_file(file)
         base_name = File.basename(file, '.*')
         ptable = {}
-        IO.foreach(file) do |ln|
+        File.foreach(file) do |ln|
           if /\A\s*project\s*\((.*)\)/ =~ ln
             convert = !ln.index('*').nil?
             prj = $1.strip.sub(/\A\*\Z/, base_name)
             prj.sub!(/\A\*/) { |_| base_name + '_' }
             prj.sub!(/\*\Z/) { |_| '_' + base_name }
-            prj.sub!('*', "_#{base_name}_")
+            prj.gsub!('*', "_#{base_name}_")
             prj.gsub!(/(\A|[^a-zA-Z0-9])?([a-zA-Z0-9])([a-zA-Z0-9]*)/) { |_| $1 + $2.upcase + $3 } if convert
             ptable[prj] = file
           end
