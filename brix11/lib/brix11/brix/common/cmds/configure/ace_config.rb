@@ -49,6 +49,9 @@ module BRIX11
           begin
             config_h_io = cfg.dryrun? ? STDOUT : File.new(config_h, 'w')
             config_h_io.puts("//----- #{CONFIG_H} -----") if cfg.dryrun?
+            if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
+              config_h_io << "#define OPENDDS_IGNORE_OPENDDSCONFIG_H_FILE\n"
+            end
             config_h_io << (cfg.options[:platform][:config_prelude] || '')
             config_h_io.puts(%Q{#include "ace/#{config_include(cfg.options)}"})
             config_h_io << (cfg.options[:platform][:config_post] || '')
