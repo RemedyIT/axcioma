@@ -107,6 +107,9 @@ module BRIX11
               begin
                 config_h_io = cfg.dryrun? ? STDOUT : File.new(ace_config, 'w')
                 config_h_io.puts("//----- HOST #{ACE_Config::CONFIG_H} -----") if cfg.dryrun?
+                if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
+                  config_h_io << "#define OPENDDS_IGNORE_OPENDDSCONFIG_H_FILE\n"
+                end
                 config_h_io << "#define ACE_MONITOR_FRAMEWORK 0\n"
                 config_h_io.puts('#include "ace/config-linux.h"')
               ensure
