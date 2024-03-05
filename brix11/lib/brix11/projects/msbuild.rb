@@ -408,6 +408,6 @@ module BRIX11
       end
     end
 
-    register(MSBuildVS2019::ID, MSBuildVS2019)
+    #register(MSBuildVS2019::ID, MSBuildVS2019)
   end # Project
 end # BRIX11
