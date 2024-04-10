@@ -44,24 +44,19 @@ jobs:
       matrix:
         include:
           - os: ubuntu-20.04
-            CC: gcc-7
-            CXX: g++-7
-            ruby: '2.6'
-            PackageDeps: g++-7
-          - os: ubuntu-20.04
             CC: gcc-8
             CXX: g++-8
-            ruby: '2.7'
+            ruby: '2.5'
             PackageDeps: g++-8
           - os: ubuntu-20.04
             CC: gcc-9
             CXX: g++-9
-            ruby: '2.7'
+            ruby: '2.6'
             PackageDeps: g++-9
           - os: ubuntu-22.04
             CC: gcc-10
             CXX: g++-10
-            ruby: '3.0'
+            ruby: '2.7'
             PackageDeps: g++-10
           - os: ubuntu-22.04
             CC: gcc-11
