@@ -73,6 +73,7 @@ jobs:
             CXX: g++-13
             ruby: '3.2'
             PackageDeps: g++-13
+            Repo: ppa:ubuntu-toolchain-r/test
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} ${{ matrix.CXX }} ruby-${{ matrix.ruby }}
     env:
