@@ -139,7 +139,7 @@ jobs:
     - name: Add packages
       run: |
         sudo apt-get --yes update
-        sudo apt-get --yes install libxerces-c-dev libssl-dev libzmq3-dev ${{ matrix.PackageDeps }}
+        sudo apt-get --yes install --no-upgrade libxerces-c-dev libssl-dev libzmq3-dev ${{ matrix.PackageDeps }}
     - name: Run brix11 configure
       run: |
         $X11_BASE_ROOT/bin/brix11 configure -W aceroot=$ACE_ROOT -W taoroot=$TAO_ROOT -W mpcroot=$MPC_ROOT -W openddsroot=$DDS_ROOT
