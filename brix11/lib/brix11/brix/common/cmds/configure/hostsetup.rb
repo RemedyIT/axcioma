@@ -58,6 +58,7 @@ module BRIX11
             'ace/config.h',
             'bin/MakeProjectCreator/config/default.features',
             'include/makeinclude/platform_macros.GNU',
+            'dds/OpenDDSConfig.h',
             /.*\.so.*/,
         ]
 
@@ -104,6 +105,8 @@ module BRIX11
               ace_config = File.join(x11_host_root, 'ACE', ACE_Config::CONFIG_H)
               platform_macros = File.join(x11_host_root, 'ACE', ACE_Config::PLATFORM_MACROS)
               default_features = File.join(x11_host_root, 'ACE', ACE_Config::DEFAULT_FEATURES)
+              openddsconfig_h = File.join(x11_host_root, 'DDS', ACE_Config::OPENDDSCONFIG_H)
+
               begin
                 config_h_io = cfg.dryrun? ? STDOUT : File.new(ace_config, 'w')
                 config_h_io.puts("//----- HOST #{ACE_Config::CONFIG_H} -----") if cfg.dryrun?
@@ -142,6 +145,16 @@ module BRIX11
                 }.gsub(/^\s+/, '')
               ensure
                 default_features_io.close unless cfg.dryrun?
+              end
+
+              if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
+                # generate OpenDDS dds/OpenDDSConfig.h OpenDDS enabled
+                begin
+                  openddsconfig_h_io = cfg.dryrun? ? STDOUT : File.new(openddsconfig_h, 'w')
+                  openddsconfig_h_io.puts("#----- HOST #{ACE_Config::OPENDDSCONFIG_H} -----") if cfg.dryrun?
+                ensure
+                  openddsconfig_h_io.close unless cfg.dryrun?
+                end
               end
             end
 

@@ -430,9 +430,9 @@ module BRIX11
         end
 
         def self.print_config(workspace)
-          # printing the configuration requires an existing ACE_ROOT and config files
+          # printing the configuration as available on disk
+          _test_configs = nil
           if Exec.get_run_environment('ACE_ROOT') && File.exist?(File.join(Exec.get_run_environment('ACE_ROOT'), 'ace', 'config.h'))
-            _test_configs = nil
             _ace_root = Exec.get_run_environment('ACE_ROOT')
             print_file(File.join(_ace_root, 'ace', 'config.h'), 'config.h')
             _cfg_file = File.join(_ace_root, 'include', 'makeinclude', 'platform_macros.GNU')
@@ -442,22 +442,26 @@ module BRIX11
               print_file(_cfg_file, 'default.features')
               _test_configs = get_test_config_from(_cfg_file)
             end
-            if Exec.get_run_environment('TAOX11_ROOT')
-              _cfg_file = File.join(Exec.get_run_environment('TAOX11_ROOT'), 'bin', 'MPC', 'config', 'MPC.cfg')
-              print_file(_cfg_file, 'MPC.cfg') if File.exist?(_cfg_file)
-            end
-            _cfg_file = File.join(Configurator::ROOT, '.ridlrc')
-            print_file(_cfg_file, '.ridlrc') if File.exist?(_cfg_file)
-            _cfg_file = File.join(Configurator::ROOT, '.brix11rc')
-            print_file(_cfg_file, '.brix11rc') if File.exist?(_cfg_file)
-            _cfg_file = File.join(Configurator::ROOT, (workspace || 'workspace') + '.mwc')
-            print_file(_cfg_file, (workspace || 'workspace') + '.mwc') if File.exist?(_cfg_file)
-            STDOUT.puts('=' * 60)
-            STDOUT.puts("Test config: #{_test_configs.join(' ')}") if _test_configs
-            STDOUT.puts
           else
-            BRIX11.log_fatal("Cannot find an existing configuration.")
+            BRIX11.log_error("ACE_ROOT has not been defined.")
           end
+          if Exec.get_run_environment('TAOX11_ROOT')
+            _cfg_file = File.join(Exec.get_run_environment('TAOX11_ROOT'), 'bin', 'MPC', 'config', 'MPC.cfg')
+            print_file(_cfg_file, 'MPC.cfg') if File.exist?(_cfg_file)
+          end
+          if Exec.get_run_environment('DDS_ROOT')
+            _cfg_file = File.join(Exec.get_run_environment('DDS_ROOT'), 'dds', 'OpenDDSConfig.h')
+            print_file(_cfg_file, 'OpenDDSConfig.h') if File.exist?(_cfg_file)
+          end
+          _cfg_file = File.join(Configurator::ROOT, '.ridlrc')
+          print_file(_cfg_file, '.ridlrc') if File.exist?(_cfg_file)
+          _cfg_file = File.join(Configurator::ROOT, '.brix11rc')
+          print_file(_cfg_file, '.brix11rc') if File.exist?(_cfg_file)
+          _cfg_file = File.join(Configurator::ROOT, (workspace || 'workspace') + '.mwc')
+          print_file(_cfg_file, (workspace || 'workspace') + '.mwc') if File.exist?(_cfg_file)
+          STDOUT.puts('=' * 60)
+          STDOUT.puts("Test config: #{_test_configs.join(' ')}") if _test_configs
+          STDOUT.puts
         end
 
         def self.get_test_config
