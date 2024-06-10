@@ -17,6 +17,8 @@ module BRIX11
 
         DEFAULT_FEATURES = File.join('bin', 'MakeProjectCreator', 'config', 'default.features')
 
+        OPENDDSCONFIG_H = File.join('dds', 'OpenDDSConfig.h')
+
         def self.config_include(opts)
           opts[:platform][:config_include] || "config-#{opts[:platform][:os]}.h"
         end
@@ -91,9 +93,10 @@ module BRIX11
           end
           if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
             # generate OpenDDS dds/OpenDDSConfig.h OpenDDS enabled
-            openddsconfig_h = File.join(Exec.get_run_environment('DDS_ROOT'), 'dds', 'OpenDDSConfig.h')
             begin
+              openddsconfig_h = File.join(Exec.get_run_environment('DDS_ROOT'), OPENDDSCONFIG_H)
               openddsconfig_h_io = cfg.dryrun? ? STDOUT : File.new(openddsconfig_h, 'w')
+              openddsconfig_h_io.puts("#----- #{OPENDDSCONFIG_H} -----") if cfg.dryrun?
             ensure
               openddsconfig_h_io.close unless cfg.dryrun?
             end
