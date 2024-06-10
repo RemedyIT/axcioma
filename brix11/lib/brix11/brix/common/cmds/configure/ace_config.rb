@@ -89,6 +89,15 @@ module BRIX11
               platform_macros_io.close unless cfg.dryrun?
             end
           end
+          if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
+            # generate OpenDDS dds/OpenDDSConfig.h OpenDDS enabled
+            openddsconfig_h = File.join(Exec.get_run_environment('DDS_ROOT'), 'dds', 'OpenDDSConfig.h')
+            begin
+              openddsconfig_h_io = cfg.dryrun? ? STDOUT : File.new(openddsconfig_h, 'w')
+            ensure
+              openddsconfig_h_io.close unless cfg.dryrun?
+            end
+          end
           BRIX11.show_msg("Creating #{default_features}")
           begin
             default_features_io = cfg.dryrun? ? STDOUT : File.new(default_features, 'w')
