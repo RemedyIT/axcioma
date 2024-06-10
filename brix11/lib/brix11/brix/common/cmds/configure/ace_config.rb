@@ -93,10 +93,12 @@ module BRIX11
           end
           if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
             # generate OpenDDS dds/OpenDDSConfig.h OpenDDS enabled
+            opendds_folder = Exec.get_run_environment('DDS_ROOT')
+            openddsconfig_h = File.join(opendds_folder, OPENDDSCONFIG_H)
+            BRIX11.show_msg("Creating #{openddsconfig_h}")
             begin
-              openddsconfig_h = File.join(Exec.get_run_environment('DDS_ROOT'), OPENDDSCONFIG_H)
-              openddsconfig_h_io = cfg.dryrun? ? STDOUT : File.new(openddsconfig_h, 'w')
               openddsconfig_h_io.puts("#----- #{OPENDDSCONFIG_H} -----") if cfg.dryrun?
+              openddsconfig_h_io = cfg.dryrun? ? STDOUT : File.new(openddsconfig_h, 'w')
             ensure
               openddsconfig_h_io.close unless cfg.dryrun?
             end
