@@ -102,17 +102,14 @@ module BRIX11
             end
 
             def create_build_config(x11_host_root, cfg)
-              ace_config = File.join(x11_host_root, 'ACE', ACE_Config::CONFIG_H)
-              platform_macros = File.join(x11_host_root, 'ACE', ACE_Config::PLATFORM_MACROS)
-              default_features = File.join(x11_host_root, 'ACE', ACE_Config::DEFAULT_FEATURES)
+              ace_config = File.join(x11_host_root, 'ACE', 'ACE', ACE_Config::CONFIG_H)
+              platform_macros = File.join(x11_host_root, 'ACE', 'ACE', ACE_Config::PLATFORM_MACROS)
+              default_features = File.join(x11_host_root, 'ACE', 'ACE', ACE_Config::DEFAULT_FEATURES)
               openddsconfig_h = File.join(x11_host_root, 'DDS', ACE_Config::OPENDDSCONFIG_H)
 
               begin
                 config_h_io = cfg.dryrun? ? STDOUT : File.new(ace_config, 'w')
                 config_h_io.puts("//----- HOST #{ACE_Config::CONFIG_H} -----") if cfg.dryrun?
-                if cfg.features.has_key?(:opendds) && cfg.features[:opendds].state
-                  config_h_io << "#define OPENDDS_IGNORE_OPENDDSCONFIG_H_FILE\n"
-                end
                 config_h_io << "#define ACE_MONITOR_FRAMEWORK 0\n"
                 config_h_io.puts('#include "ace/config-linux.h"')
               ensure
@@ -159,7 +156,7 @@ module BRIX11
             end
 
             def create_mwc_config(x11_host_root, cfg)
-              mwc_config = File.join(x11_host_root, "#{MWC}.mwc")
+              mwc_config = File.join(x11_host_root, 'ACE', "#{MWC}.mwc")
               begin
                 mwc_config_io = cfg.dryrun? ? STDOUT : File.new(mwc_config, 'w')
                 mwc_config_io.puts("#----- HOST MWC config -----") if cfg.dryrun?
@@ -198,9 +195,9 @@ module BRIX11
               setup(dds_root, x11_host_opendds_root, 'OpenDDS') unless cfg.dryrun?
             end
             # create build configuration
-            create_build_config(x11_host_acetao_root, cfg)
+            create_build_config(x11_host_root, cfg)
             # create MWC config
-            create_mwc_config(x11_host_acetao_root, cfg)
+            create_mwc_config(x11_host_root, cfg)
           end
         end
       end
