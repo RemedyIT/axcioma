@@ -34,7 +34,7 @@ env:
   DANCEX11_ROOT: ${{ github.workspace }}/dancex11
   DDS_ROOT: ${{ github.workspace }}/OpenDDS
   X11_BRANCH: master
-  ACETAOMPC_BRANCH: Latest_ACE7TAO3_Micro
+  ACETAOMPC_BRANCH: Latest_ACE8TAO4_Micro
   OPENDDS_BRANCH: latest-release
 
 jobs:
@@ -44,24 +44,19 @@ jobs:
       matrix:
         include:
           - os: ubuntu-20.04
-            CC: gcc-7
-            CXX: g++-7
-            ruby: '2.6'
-            PackageDeps: g++-7
-          - os: ubuntu-20.04
             CC: gcc-8
             CXX: g++-8
-            ruby: '2.7'
+            ruby: '2.5'
             PackageDeps: g++-8
           - os: ubuntu-20.04
             CC: gcc-9
             CXX: g++-9
-            ruby: '2.7'
+            ruby: '2.6'
             PackageDeps: g++-9
           - os: ubuntu-22.04
             CC: gcc-10
             CXX: g++-10
-            ruby: '3.0'
+            ruby: '2.7'
             PackageDeps: g++-10
           - os: ubuntu-22.04
             CC: gcc-11
@@ -73,7 +68,7 @@ jobs:
             CXX: g++-12
             ruby: '3.1'
             PackageDeps: g++-12
-          - os: ubuntu-22.04
+          - os: ubuntu-24.04
             CC: gcc-13
             CXX: g++-13
             ruby: '3.2'
@@ -165,7 +160,7 @@ jobs:
         $X11_BASE_ROOT/bin/brix11 generate documentation
     - name: Check documentation file existence
       id: check_files
-      uses: andstor/file-existence-action@v2
+      uses: andstor/file-existence-action@v3
       with:
         files: "docs/html/taox11/getting_started.html"
     - name: File exists
