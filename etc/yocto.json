@@ -5,7 +5,7 @@
   "dll_dir": "lib",
   "library_path_var": "LD_LIBRARY_PATH",
   "test_configs": ["LINUX", "Linux"],
-  "project_type": "gnuautobuild",
+  "project_type": "gnuace",
   "project_cc": "gnu",
   "config_include": "config-linux.h",
   "config_prelude": [
