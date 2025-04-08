@@ -5,9 +5,9 @@ image:https://github.com/RemedyIT/axcioma/workflows/fuzzr/badge.svg[Fuzzr CI, li
 
 = Building AXCIOMA or TAOX11
 
-This is the main repository for https://www.axcioma.org[AXCIOMA] and https://www.taox11.org[TAOX11].
+This is the main repository for https://www.taox11.org[TAOX11] and https://www.axcioma.org[AXCIOMA].
 AXCIOMA and TAOX11 are created and maintained by https://www.remedy.nl[Remedy IT].
-This repository contains the bootstrap tooling to obtain AXCIOMA or TAOX11 and to generate the necessary
+This repository contains the bootstrap tooling to obtain TAOX11 or AXCIOMA and to generate the necessary
 configuration using link:brix11/docs/src/brix11.adoc[BRIX11].
 
 == Prerequisites
@@ -47,13 +47,13 @@ For all commands additional help is available by executing `bin/brix11 help _com
 
 === Bootstrap
 
-AXCIOMA is the default target for bootstrapping. The bootstrap command will clone all dependent git repositories to their expected location. This can be done by executing
+TAOX11 is the default target for bootstrapping. The bootstrap command will clone all dependent git repositories to their expected location. This can be done by executing
 
  bin/brix11 bootstrap
 
-TAOX11 can be specified as optional target, which is done using
+AXCIOMA can be specified as optional target, which is done using
 
- bin/brix11 bootstrap taox11
+ bin/brix11 bootstrap axcioma
 
 === Configure
 
@@ -89,7 +89,7 @@ User documentation can be generated after the `brix11 configure` command using h
  bin/brix11 generate documentation
 
 After generation the documentation can be found under `docs/html`. A good place to start reading is the `getting_started.html`
-document (either under `docs/html/ciaox11` for AXCIOMA or `docs/html/taox11` for TAOX11).
+document (either under `docs/html/taox11` for TAOX11 or `docs/html/ciaox11` for AXCIOMA).
 
 == Building formal releases
 

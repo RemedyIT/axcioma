@@ -10,8 +10,8 @@ common
   brix11 bootstrap [TARGET] [options]
 
   TARGET := Target component collection to bootstrap. Supported:
-            taox11         Bootstraps solely the TAOX11 framework components
-            axcioma        Bootstraps the AXCIOMA framework components (default)
+            taox11         Bootstraps solely the TAOX11 framework components (default)
+            axcioma        Bootstraps the AXCIOMA framework components
 
 === options
 
