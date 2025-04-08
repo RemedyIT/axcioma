@@ -14,7 +14,7 @@ module BRIX11
       DESC = 'Bootstrap the project.'.freeze
 
       OPTIONS = {
-        target: 'AXCIOMA',
+        target: 'TAOX11',
         tags: {}
       }
 
@@ -23,8 +23,8 @@ module BRIX11
         optparser.banner = "#{DESC}\n\n" +
                            "Usage: #{options[:script_name]} bootstrap [TARGET] [options]\n\n" +
                            "       TARGET := Target component collection to bootstrap. Supported:\n" +
-                           "                 taox11 \tBootstraps solely the TAOX11 framework components\n" +
-                           "                 axcioma\tBootstraps the AXCIOMA framework components (default)\n\n"
+                           "                 taox11\tBootstraps solely the TAOX11 framework components (default)\n" +
+                           "                 axcioma\tBootstraps the AXCIOMA framework components\n\n"
 
         optparser.on('-t', '--tag', '=COMPONENT:TAG', String, 'Override default repository tags for framework components.',
                                                               'Specify as <component id>:<tag>. Supported components:',
