@@ -3,16 +3,16 @@ image:https://www.codefactor.io/repository/github/remedyit/axcioma/badge[CodeFac
 image:https://github.com/RemedyIT/axcioma/workflows/linux/badge.svg[Linux CI, link=https://github.com/RemedyIT/axcioma/actions?query=workflow%3Alinux]
 image:https://github.com/RemedyIT/axcioma/workflows/fuzzr/badge.svg[Fuzzr CI, link=https://github.com/RemedyIT/axcioma/actions?query=workflow%3Afuzzr]
 
-= Building AXCIOMA or TAOX11
+= Building TAOX11
 
-This is the main repository for https://www.taox11.org[TAOX11] and https://www.axcioma.org[AXCIOMA].
-AXCIOMA and TAOX11 are created and maintained by https://www.remedy.nl[Remedy IT].
-This repository contains the bootstrap tooling to obtain TAOX11 or AXCIOMA and to generate the necessary
+This is the main repository for https://www.taox11.org[TAOX11].
+TAOX11 is created and maintained by https://www.remedy.nl[Remedy IT].
+This repository contains the bootstrap tooling to obtain TAOX11 and to generate the necessary
 configuration using link:brix11/docs/src/brix11.adoc[BRIX11].
 
 == Prerequisites
 
-Before bootstrapping AXCIOMA make sure you have installed the following prerequisites
+Before bootstrapping TAOX11 make sure you have installed the following prerequisites
 
 [cols="<,<",options="header",]
 |=========================================
@@ -51,10 +51,6 @@ TAOX11 is the default target for bootstrapping. The bootstrap command will clone
 
  bin/brix11 bootstrap
 
-AXCIOMA can be specified as optional target, which is done using
-
- bin/brix11 bootstrap axcioma
-
 === Configure
 
 The configure step generates the necessary configuration files for the specified target (execute `bin/brix11 help configure` for more details). The configure step is performed by executing
@@ -63,11 +59,7 @@ The configure step generates the necessary configuration files for the specified
 
 NOTE: Configure doesn't use your current environment, when you want configure to use your current environment
 use `bin/brix11 -E configure`. When using the `-E` switch you have to keep in mind you will have to keep using
-that switch when building project files, running make and running tests. +
-As alternative you can specify configuration variables as argument to configure,
-for example `-W nddshome=<dir> -W nddsarch=<arch>` to specify the
-RTI Connext DDS home and architecture or `-W openddsroot=<dir>` to specify the location of the OpenDDS sources.
-This will cause the settings to be stored in the BRIX11 configuration.
+that switch when building project files, running make and running tests.
 The `bin/brix11 env` command will show you all environment variables set up by BRIX11.
 
 === Generate build artifacts
@@ -89,7 +81,7 @@ User documentation can be generated after the `brix11 configure` command using h
  bin/brix11 generate documentation
 
 After generation the documentation can be found under `docs/html`. A good place to start reading is the `getting_started.html`
-document (either under `docs/html/taox11` for TAOX11 or `docs/html/ciaox11` for AXCIOMA).
+document (under `docs/html/taox11` for TAOX11).
 
 == Building formal releases
 
