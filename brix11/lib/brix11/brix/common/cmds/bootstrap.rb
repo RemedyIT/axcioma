@@ -23,17 +23,14 @@ module BRIX11
         optparser.banner = "#{DESC}\n\n" +
                            "Usage: #{options[:script_name]} bootstrap [TARGET] [options]\n\n" +
                            "       TARGET := Target component collection to bootstrap. Supported:\n" +
-                           "                 taox11\tBootstraps solely the TAOX11 framework components (default)\n" +
-                           "                 axcioma\tBootstraps the AXCIOMA framework components\n\n"
+                           "                 taox11\tBootstraps solely the TAOX11 framework components (default)\n\n"
 
         optparser.on('-t', '--tag', '=COMPONENT:TAG', String, 'Override default repository tags for framework components.',
                                                               'Specify as <component id>:<tag>. Supported components:',
                                                               "ACE\tDOC Group ACE + TAO repository",
                                                               "MPC\tDOC Group MPC repository",
                                                               "ridl\tRIDL IDL compiler frontend",
-                                                              "taox11\tTAOX11 C++11 CORBA ORB repository",
-                                                              "ciaox11\tCIAOX11 C++11 LwCCM repository",
-                                                              "dancex11\tDANCEX11 C++11 D&C repository") do |v|
+                                                              "taox11\tTAOX11 C++11 CORBA ORB repository") do |v|
           id, tag = v.split(':')
           BRIX11.log_fatal("Missing required tag for component in [--tag #{v}].") unless tag
           options[:bootstrap][:tags][id] = tag

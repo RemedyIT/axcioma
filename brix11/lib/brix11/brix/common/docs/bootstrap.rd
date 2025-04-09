@@ -11,7 +11,6 @@ common
 
   TARGET := Target component collection to bootstrap. Supported:
             taox11         Bootstraps solely the TAOX11 framework components (default)
-            axcioma        Bootstraps the AXCIOMA framework components
 
 === options
 
@@ -21,8 +20,6 @@ common
                                    MPC        DOC Group MPC repository
                                    ridl       RIDL IDL compiler frontend
                                    taox11     TAOX11 C++11 CORBA ORB repository
-                                   ciaox11    CIAOX11 C++11 LwCCM repository
-                                   dancex11   DAnCEX11 C++11 D&C repository
 
   -f, --force                      Force all tasks to run even if their dependencies do not require them to.
                                    Default: off
