@@ -336,7 +336,7 @@ module BRIX11
     end # MSBuildSolution
 
     class MSBuildVS2022 < MSBuildSolution
-      ID = 'vs2019'
+      ID = 'vs2022'
       DESCRIPTION = 'Microsoft Visual Studio 2022 solutions'
       COMPILERS = Hash[
         vc143: MSBuildVC143x64,
@@ -365,7 +365,5 @@ module BRIX11
         super << "/p:Platform=#{@compiler.platform}"
       end
     end
-
-    #register(MSBuildVS2019::ID, MSBuildVS2019)
   end # Project
 end # BRIX11
