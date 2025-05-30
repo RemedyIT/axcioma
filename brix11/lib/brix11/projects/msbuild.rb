@@ -335,44 +335,19 @@ module BRIX11
       end
     end # MSBuildSolution
 
-    class MSBuildVS2015 < MSBuildSolution
-      ID = 'vs2015'
-      DESCRIPTION = 'Microsoft Visual Studio 2015 solutions'
+    class MSBuildVS2022 < MSBuildSolution
+      ID = 'vs2019'
+      DESCRIPTION = 'Microsoft Visual Studio 2022 solutions'
       COMPILERS = Hash[
-        vc14: MSBuildVC14x64,
-        vc14x64: MSBuildVC14x64,
-        vc14x32: MSBuildVC14x32
+        vc143: MSBuildVC143x64,
+        vc143x64: MSBuildVC143x64,
+        vc143x32: MSBuildVC143x32
       ]
-      COMPILERS.default = MSBuildVC14x64
+      COMPILERS.default = MSBuildVC143x64
 
       def initialize(type, compiler_id)
         super
-        @type = 'vc14'
-      end
-
-    protected
-
-      # override
-      def base_build_arg(project, path, cmdargv, opts)
-        super << "/p:PlatformTarget=#{@compiler.platform}"
-      end
-    end
-
-    register(MSBuildVS2015::ID, MSBuildVS2015)
-
-    class MSBuildVS2017 < MSBuildSolution
-      ID = 'vs2017'
-      DESCRIPTION = 'Microsoft Visual Studio 2017 solutions'
-      COMPILERS = Hash[
-        vc141: MSBuildVC141x64,
-        vc141x64: MSBuildVC141x64,
-        vc141x32: MSBuildVC141x32
-      ]
-      COMPILERS.default = MSBuildVC141x64
-
-      def initialize(type, compiler_id)
-        super
-        @type = 'vs2017'
+        @type = 'vs2022'
       end
 
     protected
@@ -382,23 +357,6 @@ module BRIX11
         super << "/p:Platform=#{@compiler.platform}"
       end
     end
-
-    register(MSBuildVS2017::ID, MSBuildVS2017)
-
-    class MSBuildVS2019 < MSBuildSolution
-      ID = 'vs2019'
-      DESCRIPTION = 'Microsoft Visual Studio 2019 solutions'
-      COMPILERS = Hash[
-        vc142: MSBuildVC142x64,
-        vc142x64: MSBuildVC142x64,
-        vc142x32: MSBuildVC142x32
-      ]
-      COMPILERS.default = MSBuildVC142x64
-
-      def initialize(type, compiler_id)
-        super
-        @type = 'vs2019'
-      end
 
     protected
 
