@@ -49,7 +49,7 @@ module BRIX11
         vc143x64: MSCNMake64VC143,
         vc143x32: MSCNMake32VC143
       ]
-      COMPILERS.default = MSCNMake64VC142
+      COMPILERS.default = MSCNMake64VC143
 
       def initialize(type, compiler_id)
         super
