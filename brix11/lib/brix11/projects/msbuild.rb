@@ -358,14 +358,6 @@ module BRIX11
       end
     end
 
-    protected
-
-      # override
-      def base_build_arg(project, path, cmdargv, opts)
-        super << "/p:Platform=#{@compiler.platform}"
-      end
-    end
-
     register(MSBuildVS2022::ID, MSBuildVS2022)
   end # Project
 end # BRIX11
