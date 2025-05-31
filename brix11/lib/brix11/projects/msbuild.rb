@@ -365,5 +365,7 @@ module BRIX11
         super << "/p:Platform=#{@compiler.platform}"
       end
     end
+
+    register(MSBuildVS2022::ID, MSBuildVS2022)
   end # Project
 end # BRIX11
