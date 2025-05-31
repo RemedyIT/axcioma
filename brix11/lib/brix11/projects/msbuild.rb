@@ -147,23 +147,11 @@ module BRIX11
       end
     end # MSBuildCompiler64
 
-    class MSBuildVC14x64 < MSBuildCompiler64
+    class MSBuildVC143x64 < MSBuildCompiler64
       def version
-        'v140'
+        'v143'
       end
-    end # MSBuildVC14x64
-
-    class MSBuildVC141x64 < MSBuildCompiler64
-      def version
-        'v141'
-      end
-    end # MSBuildVC141x64
-
-    class MSBuildVC142x64 < MSBuildCompiler64
-      def version
-        'v142'
-      end
-    end # MSBuildVC142x64
+    end # MSBuildVC143x64
 
     class MSBuildCompiler32 < MSBuildCompiler
       def platform
@@ -171,23 +159,11 @@ module BRIX11
       end
     end # MSBuildCompiler32
 
-    class MSBuildVC14x32 < MSBuildCompiler32
+    class MSBuildVC143x32 < MSBuildCompiler32
       def version
-        'v140'
+        'v143'
       end
-    end # MSBuildVC14x32
-
-    class MSBuildVC141x32 < MSBuildCompiler32
-      def version
-        'v141'
-      end
-    end # MSBuildVC141x32
-
-    class MSBuildVC142x32 < MSBuildCompiler32
-      def version
-        'v142'
-      end
-    end # MSBuildVC142x32
+    end # MSBuildVC143x32
 
     class MSBuildSolution < Handler
       BUILDTOOL = 'msbuild'
