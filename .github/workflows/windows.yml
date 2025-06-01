@@ -76,9 +76,9 @@ jobs:
     - name: checkout axcioma
       uses: actions/checkout@v4
       with:
-        repository: RemedyIT/taox11
+        repository: RemedyIT/taox11_vs2022
         path: ${{ env.TAOX11_ROOT }}
-        ref: ${{ env.X11_BRANCH }}
+        ref: jwi-vs2022
     - uses: ilammy/msvc-dev-cmd@v1
     - uses: ruby/setup-ruby@v1
       with:
