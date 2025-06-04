@@ -105,6 +105,7 @@ module BRIX11
             default_features_io = cfg.dryrun? ? STDOUT : File.new(default_features, 'w')
             default_features_io.puts("#----- #{DEFAULT_FEATURES} -----") if cfg.dryrun?
             # generate all feature definitions
+            default_features_io.puts(cfg.options[:platform][:defaults][:features])
             cfg.features.each { |featureid, feature| default_features_io.puts("#{featureid}=#{feature.state ? '1' : '0'}") }
           ensure
             default_features_io.close unless cfg.dryrun?
