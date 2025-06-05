@@ -169,6 +169,6 @@ module BRIX11
       end
     end # Handler
 
-    #register(NMake::ID, NMake)
+    register(NMake::ID, NMake)
   end # Project
 end # BRIX11
