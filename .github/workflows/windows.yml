@@ -40,6 +40,9 @@ jobs:
       matrix:
         include:
           - os: windows-2025
+            ruby: '2.6'
+            project_type: vs2022
+          - os: windows-2025
             ruby: '3.0'
             project_type: vs2022
             make_flags: '--debug'
