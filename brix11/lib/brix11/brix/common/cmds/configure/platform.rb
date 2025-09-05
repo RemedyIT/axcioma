@@ -84,7 +84,6 @@ module BRIX11
                                             config_prelude: %Q{
                                                 #define ACE_HAS_VERSIONED_NAMESPACE 1
                                                 #define ACE_MONITOR_FRAMEWORK 0
-                                                #define __ACE_INLINE__ 1
                                                 #define ACE_DISABLE_WIN32_INCREASE_PRIORITY
                                                 #define ACE_DISABLE_WIN32_ERROR_WINDOWS
                                               }.gsub(/^\s+/, '')
