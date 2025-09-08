@@ -94,8 +94,8 @@ module BRIX11
             openddsconfig_h = File.join(opendds_folder, OPENDDSCONFIG_H)
             BRIX11.show_msg("Creating #{openddsconfig_h}")
             begin
-              openddsconfig_h_io.puts("#----- #{OPENDDSCONFIG_H} -----") if cfg.dryrun?
               openddsconfig_h_io = cfg.dryrun? ? STDOUT : File.new(openddsconfig_h, 'w')
+              openddsconfig_h_io.puts("#----- #{OPENDDSCONFIG_H} -----") if cfg.dryrun?
             ensure
               openddsconfig_h_io.close unless cfg.dryrun?
             end

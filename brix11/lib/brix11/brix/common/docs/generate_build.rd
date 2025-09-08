@@ -63,11 +63,11 @@ $ brix11 gen build -p hello test/hello
 Generates all (sub-)projects defined in the 'hello.mpc' file in the ./test/hello directory. In this case no
 workspace file is generated.
 
-$ brix11 -t nmake:vc14x64 gen build -- -version
+$ brix11 -t nmake:vc143x64 gen build -- -version
 
-Generates project files for 'nmake' projects and subprojects using the Visual C++ 14.0 64bit compiler, in a workspace
+Generates project files for 'nmake' projects and subprojects using the Visual Studio 2022 64bit compiler, in a workspace
 starting in the current directory and recursively in it's subdirectories, using the mwc options
-'-type nmake -value_template platforms=x64 -base vc14nmake'.
+'-type nmake -value_template platforms=x64 -base vc143nmake'.
 Also shows the MPC version by adding the mwc-option '-version'.
 
 

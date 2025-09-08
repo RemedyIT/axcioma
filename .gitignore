@@ -33,5 +33,5 @@ taox11/html
 taox11/latex
 *.gcno
 workspace.mwc*
-taox11/
-ridl/
+/taox11/
+/ridl/

@@ -70,7 +70,7 @@ $ brix11 make -p Hello_X11_Idl test/hello
 Makes the 'Hello_X11_Idl' subproject in the ./test/hello subdirectory (f.i. runs 'GNUmakefile.Hello_X11_Idl' in the
 ./test/hello subdirectory for the 'gnuace' or 'gnuautobuild' project types).
 
-$ brix11 -t nmake:vc14x64 make --debug hello
+$ brix11 -t nmake:vc143x64 make --debug hello
 
 Makes the hello project, runs nmake for the 'Makefile.hello.mak' in the
 current directory for the 'nmake' project types  with configuration settings  NO_EXTERNAL_DEPS=1 and CFG=x64 Debug
