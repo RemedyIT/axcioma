@@ -20,21 +20,9 @@ module BRIX11
       end
     end
 
-    class MSCNMake64VC14 < MSCNMake64
+    class MSCNMake64VC143 < MSCNMake64
       def version
-        'vc14nmake'
-      end
-    end
-
-    class MSCNMake64VC141 < MSCNMake64
-      def version
-        'vs2017nmake'
-      end
-    end
-
-    class MSCNMake64VC142 < MSCNMake64
-      def version
-        'vs2019nmake'
+        'vs2022nmake'
       end
     end
 
@@ -44,21 +32,9 @@ module BRIX11
       end
     end
 
-    class MSCNMake32VC14 < MSCNMake32
+    class MSCNMake32VC143 < MSCNMake32
       def version
-        'vc14nmake'
-      end
-    end
-
-    class MSCNMake32VC141 < MSCNMake32
-      def version
-        'vs2017nmake'
-      end
-    end
-
-    class MSCNMake32VC142 < MSCNMake32
-      def version
-        'vs2019nmake'
+        'vs2022nmake'
       end
     end
 
@@ -69,17 +45,11 @@ module BRIX11
       PROJECTNAME = 'Makefile'
       PROJECTEXT = '.mak'
       COMPILERS = Hash[
-        vc14: MSCNMake64VC14,
-        vc14x64: MSCNMake64VC14,
-        vc14x32: MSCNMake32VC14,
-        vc141: MSCNMake64VC141,
-        vc141x64: MSCNMake64VC141,
-        vc141x32: MSCNMake32VC141,
-        vc142: MSCNMake64VC142,
-        vc142x64: MSCNMake64VC142,
-        vc142x32: MSCNMake32VC142
+        vc143: MSCNMake64VC143,
+        vc143x64: MSCNMake64VC143,
+        vc143x32: MSCNMake32VC143
       ]
-      COMPILERS.default = MSCNMake64VC142
+      COMPILERS.default = MSCNMake64VC143
 
       def initialize(type, compiler_id)
         super
@@ -199,6 +169,6 @@ module BRIX11
       end
     end # Handler
 
-    #register(NMake::ID, NMake)
+    register(NMake::ID, NMake)
   end # Project
 end # BRIX11

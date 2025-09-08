@@ -42,7 +42,7 @@ multicore (or parallel) building using all cpu cores available.
 When BRIX11_NUMBER_OF_PROCESSORS is set to a number less then the system defined number of cpu cores, BRIX11 will at
 most use the number of cpu cores specified by BRIX11_NUMBER_OF_PROCESSORS to run the build.
 Multicore building is supported for:
-  - msbuild based project types ('vs2015', 'vs2017', 'vs2019')
+  - msbuild based project types ('vs2022')
   - 'gnuautobuild' project type
   - 'gnuace' project type when GNU make 4.0 or newer is used
 
@@ -70,7 +70,7 @@ $ brix11 make -p Hello_X11_Idl test/hello
 Makes the 'Hello_X11_Idl' subproject in the ./test/hello subdirectory (f.i. runs 'GNUmakefile.Hello_X11_Idl' in the
 ./test/hello subdirectory for the 'gnuace' or 'gnuautobuild' project types).
 
-$ brix11 -t nmake:vc14x64 make --debug hello
+$ brix11 -t nmake:vc143x64 make --debug hello
 
 Makes the hello project, runs nmake for the 'Makefile.hello.mak' in the
 current directory for the 'nmake' project types  with configuration settings  NO_EXTERNAL_DEPS=1 and CFG=x64 Debug
@@ -82,7 +82,7 @@ print the version of make
 
 > set BRIX11_NUMBER_OF_PROCESSORS=3
 
-> brix11 -t vs2015 make hello
+> brix11 -t vs2022 make hello
 
 Makes the hello project, runs msbuild for the 'hello.sln' in the current directory with /maxcpucount:3 (assuming
 BRIX11_NUMBER_OF_PROCESSORS <= number of cpu cores in computer).

@@ -39,14 +39,20 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: windows-2019
+          - os: windows-2025
             ruby: '2.6'
-            project_type: vs2019
-          - os: windows-2019
-            ruby: '3.0'
-            project_type: vs2019
+            project_type: vs2022
+            make_flags: '--release'
+          - os: windows-2025
+            ruby: '3.1'
+            project_type: vs2022
+            make_flags: '--debug'
+          - os: windows-2025
+            ruby: '3.1'
+            project_type: vs2022
+            make_flags: '--release'
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }}
+    name: ${{ matrix.os }} ruby-${{ matrix.ruby }} ${{ matrix.project_type }} ${{ matrix.make_flags }}
     steps:
     - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) && github.repository_owner == 'RemedyIT'
       run: |
@@ -54,32 +60,34 @@ jobs:
     - if: contains(fromJson('["pull_request", "pull_request_target"]'), github.event_name) == false && github.repository_owner == 'RemedyIT'
       run: |
         echo "X11_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: checkout ACE_TAO
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: DOCGroup/ACE_TAO
         path: ${{ env.DOC_ROOT }}
         ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout MPC
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: DOCGroup/MPC
         path: ${{ env.MPC_ROOT }}
         ref: ${{ env.ACETAOMPC_BRANCH }}
     - name: checkout ridl
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: RemedyIT/ridl
         path: ${{ env.RIDL_ROOT }}
         ref: ${{ env.X11_BRANCH }}
     - name: checkout axcioma
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: RemedyIT/taox11
         path: ${{ env.TAOX11_ROOT }}
         ref: ${{ env.X11_BRANCH }}
     - uses: ilammy/msvc-dev-cmd@v1
+      with:
+        vsversion: 2022
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
@@ -100,5 +108,5 @@ jobs:
       shell: cmd
     - name: Run brix11 make
       run: |
-        %X11_BASE_ROOT%/bin/brix11 make -N -d %X11_BASE_ROOT% -- make -N -d %TAOX11_ROOT%/examples -- make -N -d %TAOX11_ROOT%/orbsvcs/tests -- make -N -d %TAOX11_ROOT%/tests
+        %X11_BASE_ROOT%/bin/brix11 make ${{ matrix.make_flags }} -N -d %X11_BASE_ROOT% -- make ${{ matrix.make_flags }} -N -d %TAOX11_ROOT%/examples -- make ${{ matrix.make_flags }} -N -d %TAOX11_ROOT%/orbsvcs/tests -- make ${{ matrix.make_flags }} -N -d %TAOX11_ROOT%/tests
       shell: cmd

@@ -71,7 +71,8 @@ module BRIX11
                                               dll_dir: 'bin',
                                               library_path_var: 'PATH',
                                               test_configs: %w{Win32},
-                                              prj_type: 'vs2019'
+                                              prj_type: 'vs2022',
+                                              features: 'winnt=1'
                                             },
                                             project_type: lambda { |opts_, pt = nil, cc = nil|
                                               bits = opts_[:bitsize] || opts_[:platform][:bits]
@@ -98,7 +99,8 @@ module BRIX11
                                             dll_dir: 'lib',
                                             library_path_var: 'LD_LIBRARY_PATH',
                                             test_configs: %w{LINUX Linux},
-                                            prj_type: BRIX11::Project.handler('gnumake').default_prj_type
+                                            prj_type: BRIX11::Project.handler('gnumake').default_prj_type,
+                                            features: 'winnt=0'
                                           },
                                           project_type: lambda { |opts_, pt = nil, cc = nil|
                                             opts_def = opts_[:platform][:defaults]
@@ -141,6 +143,7 @@ module BRIX11
             opts[:platform][:defaults][:test_configs] = tgt_spec['test_configs'] if tgt_spec.has_key?('test_configs')
             opts[:platform][:defaults][:prj_type] = tgt_spec['project_type'] if tgt_spec.has_key?('project_type')
             opts[:platform][:defaults][:prj_cc] = tgt_spec['project_cc'] if tgt_spec.has_key?('project_cc')
+            opts[:platform][:defaults][:features] = tgt_spec['features'] if tgt_spec.has_key?('features')
             opts[:platform][:config_include] = tgt_spec['config_include'] if tgt_spec.has_key?('config_include')
             opts[:platform][:config_prelude] = (tgt_spec['config_prelude'].join("\n") << "\n") if tgt_spec.has_key?('config_prelude')
             opts[:platform][:config_post] = (tgt_spec['config_post'].join("\n") << "\n") if tgt_spec.has_key?('config_post')
