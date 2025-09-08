@@ -6,7 +6,7 @@ image:https://github.com/RemedyIT/axcioma/workflows/fuzzr/badge.svg[Fuzzr CI, li
 = Building TAOX11
 
 This is the main repository for https://www.taox11.org[TAOX11].
-TAOX11 is created and maintained by https://www.remedy.nl[Remedy IT].
+TAOX11 is created, maintained, and supported by https://www.remedy.nl[Remedy IT].
 This repository contains the bootstrap tooling to obtain TAOX11 and to generate the necessary
 configuration using link:brix11/docs/src/brix11.adoc[BRIX11].
 
