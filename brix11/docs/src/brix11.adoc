@@ -58,8 +58,8 @@ to resolve if not all of your questions.
 Executing `brix11 -h` will display the following information:
 
 ----------------------------------------------------------------------------------------------------------------------------
-BRIX11 pluggable scaffolding tool 1.1.0
-Copyright (c) 2014-2022 Remedy IT Expertise BV, The Netherlands
+BRIX11 pluggable scaffolding tool 2.6.0
+Copyright (c) 2014-2025 Remedy IT Expertise BV, The Netherlands
 
 Usage: brix11 [general options] command [options] [command [options] [...]
 
@@ -115,8 +115,8 @@ Usage: brix11 [general options] command [options] [command [options] [...]
 Executing `brix11 -L` will display the list of available commands:
 
 ---------------------------------------------------------------------------------------------------------------
-BRIX11 pluggable scaffolding tool 1.1.0
-Copyright (c) 2014-2022 Remedy IT Expertise BV, The Netherlands
+BRIX11 pluggable scaffolding tool 2.6.0
+Copyright (c) 2014-2025 Remedy IT Expertise BV, The Netherlands
 
 
   Command                                            | Description
@@ -150,8 +150,8 @@ Executing `brix11 -l` will display the list of available command
 collections:
 
 ---------------------------------------------------------------
-BRIX11 pluggable scaffolding tool 1.1.0
-Copyright (c) 2014-2022 Remedy IT Expertise BV, The Netherlands
+BRIX11 pluggable scaffolding tool 2.6.0
+Copyright (c) 2014-2025 Remedy IT Expertise BV, The Netherlands
 
   Collection      | Description
   ----------------------------------------------------------
