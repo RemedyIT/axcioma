@@ -8,7 +8,7 @@
 #--------------------------------------------------------------------
 
 module BRIX11
-  VERSION = { major: 2, minor: 6, release: 0 }
+  VERSION = { major: 2, minor: 7, release: 0 }
   COPYRIGHT = "Copyright (c) 2014-#{Time.now.year} Remedy IT Expertise BV, The Netherlands".freeze
 
   def self.root_path
