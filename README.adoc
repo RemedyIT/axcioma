@@ -21,9 +21,15 @@ Before bootstrapping TAOX11 make sure you have installed the following prerequis
 |ruby 2.5 or newer|ruby
 |perl version 5.10 or newer |perl
 |git |git
+|=========================================
+
+On Linux make sure you have installed the following additional prerequisites
+
+[cols="<,<",options="header",]
+|=========================================
+|Prerequisite |Package name
 |gcc version 11 or newer |gcc
 |g++ version 11 or newer |gcc-c++
-|xerces-c++ version 3.0 or newer |xerces-c
 |GNU make version 3.81 or newer |make
 |GNU Bash|bash
 |=========================================
