@@ -86,5 +86,5 @@ document (under `docs/html/taox11` for TAOX11).
 
 == Building formal releases
 
-To get and build a formal release either checkout a formal release tag after cloning this repository or download and install a formal release source package of this repository.
+To obtain and build a formal release either checkout a formal release tag after cloning this repository or download and install a formal release source package of this repository.
 From there just follow the regular build steps outlined above. The bootstrap procedure will automatically pull in the right versions of the dependent git repositories.
