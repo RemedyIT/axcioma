@@ -136,7 +136,6 @@ module BRIX11
                 default_features_io << %Q{
                   bzip2=0
                   zlib=0
-                  stl=1
                   xerces3=0
                   ssl=0
                 }.gsub(/^\s+/, '')
