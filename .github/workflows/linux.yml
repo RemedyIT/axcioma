@@ -129,7 +129,7 @@ jobs:
         $X11_BASE_ROOT/bin/brix11 gen build workspace.mwc -- gen build $TAOX11_ROOT/examples -- gen build $TAOX11_ROOT/orbsvcs/tests -- gen build $TAOX11_ROOT/tests
     - name: Run brix11 make
       run: |
-        $X11_BASE_ROOT/bin/brix11 make ${{ matrix.make_flags }} -N $X11_BASE_ROOT -- make ${{ matrix.make_flags }} -N $TAOX11_ROOT/examples -- ${{ matrix.make_flags }} make -N $TAOX11_ROOT/orbsvcs/tests -- ${{ matrix.make_flags }} make -N $TAOX11_ROOT/tests
+        $X11_BASE_ROOT/bin/brix11 make ${{ matrix.make_flags }} -N $X11_BASE_ROOT -- make ${{ matrix.make_flags }} -N $TAOX11_ROOT/examples -- make ${{ matrix.make_flags }} -N $TAOX11_ROOT/orbsvcs/tests -- make ${{ matrix.make_flags }} -N $TAOX11_ROOT/tests
     - name: Install necessary ruby gems
       run: |
         gem install asciidoctor:2.0.15 coderay
