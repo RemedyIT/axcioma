@@ -24,6 +24,8 @@ module BRIX11
       unless @cpu_cores
         if mswin?
           @cpu_cores = (ENV['NUMBER_OF_PROCESSORS'] || 1).to_i
+        elsif File.exist?('/usr/sbin/sysctl')
+          @cpu_cores = (`/usr/sbin/sysctl -n hw.ncpu` rescue '1').strip.to_i
         else
           @cpu_cores = (`cat /proc/cpuinfo | grep processor | wc -l` rescue '1').strip.to_i
         end
